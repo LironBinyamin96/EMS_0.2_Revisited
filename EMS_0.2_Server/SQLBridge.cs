@@ -50,7 +50,7 @@ namespace EMS_Server
                     stringBuilder.Append('|');
                 }
                 Connection.Close();
-                return stringBuilder.ToString();
+                return stringBuilder.Length>0?stringBuilder.ToString():"-1";
             }
             catch (SqlException ex){ return ex.Message; }
         }

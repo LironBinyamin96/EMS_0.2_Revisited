@@ -25,5 +25,9 @@
         public static byte ServerNamesIterator = 0;
         public static string SQLConnectionString = default;
         #endregion
+
+        #region Employee_config
+        public static string EmployeeFilesDir = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\EMS_Root";
+        #endregion
     }
 }

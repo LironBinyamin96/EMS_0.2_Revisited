@@ -8,8 +8,8 @@ namespace EMS_Client
 
         #region Variables
         public static Stack<Form> PrimaryForms = new Stack<Form>();
-        public static string CurEmployee;
-
+        public static EMS_Library.MyEmployee.Employee CurEmployee;
+        private Form activeForm; // משתנה עזר ששומר את החלון הנוכחי
         #endregion
         #region Drag Window
         /// <summary>
@@ -29,16 +29,14 @@ namespace EMS_Client
         public static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
         [DllImportAttribute("user32.dll")]
         public static extern bool ReleaseCapture();
+        private void panelForUser_MouseDown(object sender, MouseEventArgs e) => Drag(e);
+        private void panelDesktop_MouseDown(object sender, MouseEventArgs e) => Drag(e);
 
         #endregion
 
-        // משתנה עזר ששומר את החלון הנוכחי
-        private Form activeForm;
         // סימון הכפתורים
         [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
         private static extern IntPtr CreateRoundRectRgn(int nLeftRect, int nTopRect, int nRightRect, int nBottomRect, int nWidthEllipse, int nHeightEllipse);
-
-
         public EMS_ClientMainScreen()
         {
             InitializeComponent();
@@ -62,81 +60,38 @@ namespace EMS_Client
         }
         private void EMS_ClientMainScreen_Load(object sender, EventArgs e)
         {
-
             Login login = new Login();
             login.ShowDialog();
-        }
+        } 
 
-        private void btnExit_Click_1(object sender, EventArgs e) => Close();
-
-        private void changeButton(Button x,Form form, object sender)
+        #region Buttons
+        private void changeButton(Button x, Form form, object sender)
         {
             panelStyle.Height = x.Height;
             panelStyle.Top = x.Top;
             x.BackColor = Color.FromArgb(46, 51, 73);
-            openChildForm(form , sender);
+            openChildForm(form, sender);
             x.BackColor = Color.FromArgb(46, 51, 73);
             if (panelDesktop.BackgroundImage != null)
             {
                 panelDesktop.BackgroundImage = null;
             }
         }
+        private void btnEditingEmployee_Click(object sender, EventArgs e) => changeButton(btnEditingEmployee, new EditingEmployee(), sender);
 
-        private void btnEditingEmployee_Click(object sender, EventArgs e)
-        {
-            changeButton(btnEditingEmployee, new EditingEmployee(), sender);
-        }
+        private void btnMail_Click(object sender, EventArgs e) => changeButton(btnMail, new Mail(), sender);
+        private void btnData_Click(object sender, EventArgs e) => changeButton(btnData, new GeneralData(), sender);
+        private void btnAttendence_Click(object sender, EventArgs e) => changeButton(btnAttendence, new AttendanceTable(), sender);
+        private void btnEditingEmployee_Leave(object sender, EventArgs e) => btnEditingEmployee.BackColor = Color.FromArgb(24, 30, 54);
+        private void btnMail_Leave(object sender, EventArgs e) => btnMail.BackColor = Color.FromArgb(24, 30, 54);
+        private void btnData_Leave(object sender, EventArgs e) => btnData.BackColor = Color.FromArgb(24, 30, 54);
+        private void btnAttendence_Leave(object sender, EventArgs e) => btnAttendence.BackColor = Color.FromArgb(24, 30, 54);
 
-        private void btnMail_Click(object sender, EventArgs e)
-        {
-            changeButton(btnMail, new Mail(), sender);
+        #endregion
 
-        }
+        private void btnExit_Click_1(object sender, EventArgs e) => Close();
 
-        private void btnData_Click(object sender, EventArgs e)
-        {
-            changeButton(btnData, new GeneralData(), sender);
 
-        }
 
-        private void btnAttendence_Click(object sender, EventArgs e)
-        {
-            changeButton(btnAttendence, new AttendanceTable(), sender);
-
-        }
-
-        private void btnEditingEmployee_Leave(object sender, EventArgs e)
-        {
-            btnEditingEmployee.BackColor = Color.FromArgb(24, 30, 54);
-        }
-
-        private void btnMail_Leave(object sender, EventArgs e)
-        {
-            btnMail.BackColor = Color.FromArgb(24, 30, 54);
-
-        }
-
-        private void btnData_Leave(object sender, EventArgs e)
-        {
-            btnData.BackColor = Color.FromArgb(24, 30, 54);
-
-        }
-
-        private void btnAttendence_Leave(object sender, EventArgs e)
-        {
-            btnAttendence.BackColor = Color.FromArgb(24, 30, 54);
-
-        }
-
-        private void panelForUser_MouseDown(object sender, MouseEventArgs e)
-        {
-            Drag(e);
-        }
-
-        private void panelDesktop_MouseDown(object sender, MouseEventArgs e)
-        {
-            Drag(e);
-
-        }
     }
 }

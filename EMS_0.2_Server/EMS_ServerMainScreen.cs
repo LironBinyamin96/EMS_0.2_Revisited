@@ -141,13 +141,13 @@ namespace EMS_Server
 
         private void Testing()
         {
-            TcpClient tcpClient = new TcpClient(EMS_Library.Config.ServerIP, EMS_Library.Config.ServerPort);
-            NetworkStream stream = tcpClient.GetStream();
-            DataPacket data = new DataPacket($"select * from Employees", 254);
-            stream.Write(data.Write(), 0, data.GetTotalSize());
-            WriteToServerConsole("Client made a request!");
-            DataPacket response = new DataPacket(stream);
-            WriteToServerConsole($"Client recieved response [{response}]");
+            //TcpClient tcpClient = new TcpClient(EMS_Library.Config.ServerIP, EMS_Library.Config.ServerPort);
+            //NetworkStream stream = tcpClient.GetStream();
+            //DataPacket data = new DataPacket($"select * from Employees", 254);
+            //stream.Write(data.Write(), 0, data.GetTotalSize());
+            //WriteToServerConsole("Client made a request!");
+            //DataPacket response = new DataPacket(stream);
+            //WriteToServerConsole($"Client recieved response [{response}]");
         }
 
     }
