@@ -1,0 +1,56 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace EMS_Client.Forms
+{
+    public partial class StandbyScreen : Form
+    {
+        #region Drag Window
+        /// <summary>
+        /// Controlls form movement during drag.
+        /// </summary>
+        void Drag(MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                ReleaseCapture();
+                SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
+            }
+        }
+        public const int WM_NCLBUTTONDOWN = 0xA1;
+        public const int HT_CAPTION = 0x2;
+        [System.Runtime.InteropServices.DllImportAttribute("user32.dll")]
+        public static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
+        [System.Runtime.InteropServices.DllImportAttribute("user32.dll")]
+        public static extern bool ReleaseCapture();
+        private void picStandbySphere_MouseDown(object sender, MouseEventArgs e) => Drag(e);
+        private void lblStandby_MouseDown(object sender, MouseEventArgs e) => Drag(e);
+        #endregion
+
+        Action action;
+        /// <summary>
+        /// Action passed must handle it's own termination as well as form closure! 
+        /// </summary>
+        /// <param name="act"></param>
+        public StandbyScreen(Action act)
+        {
+            InitializeComponent();
+            action = act;
+            EMS_ClientMainScreen.PrimaryForms.Push(this);
+        }
+
+        private void StandbyScreen_Load(object sender, EventArgs e)
+        {
+            CancellationTokenSource CXL_src = new CancellationTokenSource();
+            CancellationToken CXL = CXL_src.Token;
+            Task.Run(action, CXL);
+        }
+    }
+}

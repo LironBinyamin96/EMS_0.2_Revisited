@@ -1,0 +1,21 @@
+{
+  "version": 2,
+  "dgSpecHash": "hRb7RyF1kGljB4MLh0oyrG64vSGjJ1FUL8giQ1PKHR8YS15hepPxUJdJ4aXcFv/W2ZFS7voKvFtxaxGtanHuzQ==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\liron\\Desktop\\EMS_0.2_Revisited\\EMS_0.2_Client\\EMS_0.2_Client.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\liron\\.nuget\\packages\\s22.imap\\3.6.0\\s22.imap.3.6.0.nupkg.sha512"
+  ],
+  "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'S22.Imap 3.6.0' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework 'net6.0-windows7.0'. This package may not be fully compatible with your project.",
+      "libraryId": "S22.Imap",
+      "targetGraphs": [
+        "net6.0-windows7.0"
+      ]
+    }
+  ]
+}

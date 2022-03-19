@@ -1,0 +1,28 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v6.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v6.0": {
+      "S22.Imap/3.6.0": {
+        "runtime": {
+          "lib/net40/S22.Imap.dll": {
+            "assemblyVersion": "3.6.0.0",
+            "fileVersion": "3.6.0.0"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "S22.Imap/3.6.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-QtSnxLwbqjcN2AXKXBPlSBpGXWhtnyuXqoOcRjRlAduwgeHidgNI/527gcS6/x6JLHtGrySn1do0ADxgCdqAjg==",
+      "path": "s22.imap/3.6.0",
+      "hashPath": "s22.imap.3.6.0.nupkg.sha512"
+    }
+  }
+}
