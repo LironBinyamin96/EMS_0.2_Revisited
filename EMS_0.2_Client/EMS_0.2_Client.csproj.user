@@ -4,6 +4,9 @@
     <Compile Update="EMS_ClientMainScreen.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Forms\addEmployee.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Forms\AttendanceTable.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -20,6 +23,9 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Forms\StandbyScreen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\UpdatePersonalDetails.cs">
       <SubType>Form</SubType>
     </Compile>
   </ItemGroup>

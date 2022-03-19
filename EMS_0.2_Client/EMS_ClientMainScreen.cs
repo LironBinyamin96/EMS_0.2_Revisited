@@ -69,56 +69,74 @@ namespace EMS_Client
 
         private void btnExit_Click_1(object sender, EventArgs e) => Close();
 
-        private void btnEditingEmployee_Click(object sender, EventArgs e)
+        private void changeButton(Button x,Form form, object sender)
         {
-            panelStyle.Height = btnEditingEmployee.Height;
-            panelStyle.Top = btnEditingEmployee.Top;
-            btnEditingEmployee.BackColor = Color.FromArgb(46, 51, 73);
-            openChildForm(new EditingEmployee(), sender);
-            btnEditingEmployee.BackColor = Color.FromArgb(24, 30, 54);
+            panelStyle.Height = x.Height;
+            panelStyle.Top = x.Top;
+            x.BackColor = Color.FromArgb(46, 51, 73);
+            openChildForm(form , sender);
+            x.BackColor = Color.FromArgb(46, 51, 73);
             if (panelDesktop.BackgroundImage != null)
             {
                 panelDesktop.BackgroundImage = null;
             }
+        }
+
+        private void btnEditingEmployee_Click(object sender, EventArgs e)
+        {
+            changeButton(btnEditingEmployee, new EditingEmployee(), sender);
         }
 
         private void btnMail_Click(object sender, EventArgs e)
         {
-            panelStyle.Height = btnMail.Height;
-            panelStyle.Top = btnMail.Top;
-            btnMail.BackColor = Color.FromArgb(46, 51, 73);
-            openChildForm(new Mail(), sender);
-            btnMail.BackColor = Color.FromArgb(24, 30, 54);
-            if (panelDesktop.BackgroundImage != null)
-            {
-                panelDesktop.BackgroundImage = null;
-            }
+            changeButton(btnMail, new Mail(), sender);
+
         }
 
         private void btnData_Click(object sender, EventArgs e)
         {
-            panelStyle.Height = btnData.Height;
-            panelStyle.Top = btnData.Top;
-            btnData.BackColor = Color.FromArgb(46, 51, 73);
-            openChildForm(new GeneralData(), sender);
-            btnData.BackColor = Color.FromArgb(24, 30, 54);
-            if (panelDesktop.BackgroundImage != null)
-            {
-                panelDesktop.BackgroundImage = null;
-            }
+            changeButton(btnData, new GeneralData(), sender);
+
         }
 
         private void btnAttendence_Click(object sender, EventArgs e)
         {
-            panelStyle.Height = btnAttendence.Height;
-            panelStyle.Top = btnAttendence.Top;
-            btnAttendence.BackColor = Color.FromArgb(46, 51, 73);
-            openChildForm(new AttendanceTable(), sender);
+            changeButton(btnAttendence, new AttendanceTable(), sender);
+
+        }
+
+        private void btnEditingEmployee_Leave(object sender, EventArgs e)
+        {
+            btnEditingEmployee.BackColor = Color.FromArgb(24, 30, 54);
+        }
+
+        private void btnMail_Leave(object sender, EventArgs e)
+        {
+            btnMail.BackColor = Color.FromArgb(24, 30, 54);
+
+        }
+
+        private void btnData_Leave(object sender, EventArgs e)
+        {
+            btnData.BackColor = Color.FromArgb(24, 30, 54);
+
+        }
+
+        private void btnAttendence_Leave(object sender, EventArgs e)
+        {
             btnAttendence.BackColor = Color.FromArgb(24, 30, 54);
-            if (panelDesktop.BackgroundImage != null)
-            {
-                panelDesktop.BackgroundImage = null;
-            }
+
+        }
+
+        private void panelForUser_MouseDown(object sender, MouseEventArgs e)
+        {
+            Drag(e);
+        }
+
+        private void panelDesktop_MouseDown(object sender, MouseEventArgs e)
+        {
+            Drag(e);
+
         }
     }
 }

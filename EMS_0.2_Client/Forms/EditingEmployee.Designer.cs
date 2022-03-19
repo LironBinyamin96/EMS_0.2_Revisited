@@ -68,6 +68,7 @@
             this.btnAddWorker.TabIndex = 1;
             this.btnAddWorker.Text = "Add New Worker";
             this.btnAddWorker.UseVisualStyleBackColor = true;
+            this.btnAddWorker.Click += new System.EventHandler(this.btnAddWorker_Click);
             // 
             // btnUpdatePersonalDetails
             // 
@@ -81,6 +82,7 @@
             this.btnUpdatePersonalDetails.TabIndex = 2;
             this.btnUpdatePersonalDetails.Text = "Update Personal Details";
             this.btnUpdatePersonalDetails.UseVisualStyleBackColor = true;
+            this.btnUpdatePersonalDetails.Click += new System.EventHandler(this.btnUpdatePersonalDetails_Click);
             // 
             // EditingEmployee
             // 

@@ -59,7 +59,7 @@
             // panelStyle
             // 
             this.panelStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
-            this.panelStyle.Location = new System.Drawing.Point(0, 181);
+            this.panelStyle.Location = new System.Drawing.Point(0, 167);
             this.panelStyle.Name = "panelStyle";
             this.panelStyle.Size = new System.Drawing.Size(3, 112);
             this.panelStyle.TabIndex = 1;
@@ -97,6 +97,7 @@
             this.btnAttendence.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnAttendence.UseVisualStyleBackColor = true;
             this.btnAttendence.Click += new System.EventHandler(this.btnAttendence_Click);
+            this.btnAttendence.Leave += new System.EventHandler(this.btnAttendence_Leave);
             // 
             // btnData
             // 
@@ -115,6 +116,7 @@
             this.btnData.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnData.UseVisualStyleBackColor = true;
             this.btnData.Click += new System.EventHandler(this.btnData_Click);
+            this.btnData.Leave += new System.EventHandler(this.btnData_Leave);
             // 
             // btnMail
             // 
@@ -133,6 +135,7 @@
             this.btnMail.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnMail.UseVisualStyleBackColor = true;
             this.btnMail.Click += new System.EventHandler(this.btnMail_Click);
+            this.btnMail.Leave += new System.EventHandler(this.btnMail_Leave);
             // 
             // btnEditingEmployee
             // 
@@ -151,6 +154,7 @@
             this.btnEditingEmployee.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnEditingEmployee.UseVisualStyleBackColor = true;
             this.btnEditingEmployee.Click += new System.EventHandler(this.btnEditingEmployee_Click);
+            this.btnEditingEmployee.Leave += new System.EventHandler(this.btnEditingEmployee_Leave);
             // 
             // panelForUser
             // 
@@ -161,6 +165,7 @@
             this.panelForUser.Name = "panelForUser";
             this.panelForUser.Size = new System.Drawing.Size(178, 122);
             this.panelForUser.TabIndex = 1;
+            this.panelForUser.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panelForUser_MouseDown);
             // 
             // panelDesktop
             // 
@@ -171,6 +176,7 @@
             this.panelDesktop.Name = "panelDesktop";
             this.panelDesktop.Size = new System.Drawing.Size(759, 594);
             this.panelDesktop.TabIndex = 1;
+            this.panelDesktop.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panelDesktop_MouseDown);
             // 
             // EMS_ClientMainScreen
             // 

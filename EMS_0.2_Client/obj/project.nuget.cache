@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "hRb7RyF1kGljB4MLh0oyrG64vSGjJ1FUL8giQ1PKHR8YS15hepPxUJdJ4aXcFv/W2ZFS7voKvFtxaxGtanHuzQ==",
+  "dgSpecHash": "6yX0l6nKiyIS7AIXXGq9FIcGueOq5xTvjOcWgsTkSTqxaF5pQZE8UTaiyMQIKCOfgjp5DqWjDVLUZMqZEfAisg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\liron\\Desktop\\EMS_0.2_Revisited\\EMS_0.2_Client\\EMS_0.2_Client.csproj",
+  "projectFilePath": "C:\\Users\\liron\\Desktop\\EMS\\EMS_0.2_Client\\EMS_0.2_Client.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\liron\\.nuget\\packages\\s22.imap\\3.6.0\\s22.imap.3.6.0.nupkg.sha512"
   ],
