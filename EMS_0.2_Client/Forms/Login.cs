@@ -27,8 +27,6 @@ namespace EMS_Client.Forms
             //Debug
             txtIntId.Text = EMS_Library.Config.DefaultId;
             txtPassword.Text = EMS_Library.Config.DefaultPassword;
-
-
             Action action = () =>
             {
             try {

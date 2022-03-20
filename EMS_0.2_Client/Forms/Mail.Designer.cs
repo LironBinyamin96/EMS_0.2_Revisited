@@ -74,6 +74,7 @@
             this.btnNewEmail.TabIndex = 2;
             this.btnNewEmail.Text = "New Email";
             this.btnNewEmail.UseVisualStyleBackColor = true;
+            this.btnNewEmail.Click += new System.EventHandler(this.btnNewEmail_Click);
             // 
             // inbox
             // 
@@ -106,27 +107,32 @@
             this.inbox.GridColor = System.Drawing.SystemColors.Control;
             this.inbox.Location = new System.Drawing.Point(0, 137);
             this.inbox.Name = "inbox";
+            this.inbox.ReadOnly = true;
             this.inbox.RowHeadersVisible = false;
             this.inbox.RowTemplate.Height = 25;
             this.inbox.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.inbox.Size = new System.Drawing.Size(800, 315);
             this.inbox.TabIndex = 5;
             this.inbox.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.inbox_CellContentClick);
+            this.inbox.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.inbox_MouseDoubleClick);
             // 
             // Form
             // 
             this.Form.HeaderText = "Form";
             this.Form.Name = "Form";
+            this.Form.ReadOnly = true;
             // 
             // Subject
             // 
             this.Subject.HeaderText = "Subject";
             this.Subject.Name = "Subject";
+            this.Subject.ReadOnly = true;
             // 
             // Body
             // 
             this.Body.HeaderText = "Body";
             this.Body.Name = "Body";
+            this.Body.ReadOnly = true;
             // 
             // Mail
             // 

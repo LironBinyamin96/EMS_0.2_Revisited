@@ -77,6 +77,7 @@
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.panelUpdatePersonalDetails.SuspendLayout();
             this.gUpdatePersonalDetails.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -207,6 +208,7 @@
             this.btnUpload.TabIndex = 37;
             this.btnUpload.Text = "Upload";
             this.btnUpload.UseVisualStyleBackColor = true;
+            this.btnUpload.Click += new System.EventHandler(this.btnUpload_Click);
             // 
             // lblUploading
             // 
@@ -592,6 +594,11 @@
             this.btnDelete.TabIndex = 42;
             this.btnDelete.Text = "Delete Employee";
             this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
             // 
             // UpdatePersonalDetails
             // 
@@ -668,5 +675,6 @@
         private Button btnCancel;
         private Button btnSave;
         private Button btnDelete;
+        private OpenFileDialog openFileDialog1;
     }
 }
