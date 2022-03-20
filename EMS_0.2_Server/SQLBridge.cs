@@ -31,8 +31,8 @@ namespace EMS_Server
         /// <returns> Responce from the server (Listof objects or an object depending on the querry). </returns>
         public static string TwoWayCommand(string IncomingCommand)
         {
-            try 
-            { 
+            try
+            {
                 SqlConnection Connection = new SqlConnection(EMS_Library.Config.SQLConnectionString);
                 SqlCommand Command = Connection.CreateCommand();
                 Command.CommandText = IncomingCommand;
@@ -45,15 +45,27 @@ namespace EMS_Server
                     object[] temp = new object[DataReader.FieldCount];
                     DataReader.GetValues(temp);
                     foreach (object s in temp)
-                        stringBuilder.Append(s.ToString().Trim()+',');
+                        stringBuilder.Append(s.ToString().Trim() + ',');
                     stringBuilder.Remove(stringBuilder.Length - 1, 1);
                     stringBuilder.Append('|');
                 }
                 Connection.Close();
-                return stringBuilder.Length>0?stringBuilder.ToString():"-1";
+                return stringBuilder.Length > 0 ? stringBuilder.ToString() : "-1";
             }
-            catch (SqlException ex){ return ex.Message; }
+            catch (SqlException ex) { return ex.Message; }
         }
 
+        public static string Select(string clientQuerry)
+        {
+            string[] clause = clientQuerry.Substring(clientQuerry.IndexOf('#') + 1).Split(',');
+            string final = "select * from Employees";
+            if (clause.Length > 0)
+            {
+                final += " where";
+                foreach (string item in clause)
+                    final += " " + item;
+            }
+            return final;
+        }
     }
 }

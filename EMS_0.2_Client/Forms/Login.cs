@@ -8,7 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Net.Sockets;
+using EMS_Library;
 using EMS_Library.Network;
+using EMS_Library.MyEmployee;
 
 namespace EMS_Client.Forms
 {
@@ -18,8 +20,8 @@ namespace EMS_Client.Forms
         {
             InitializeComponent();
             //Debug
-            txtIntId.Text = EMS_Library.Config.DefaultId;
-            txtPassword.Text = EMS_Library.Config.DefaultPassword;
+            txtIntId.Text = Config.DefaultId;
+            txtPassword.Text = Config.DefaultPassword;
         }
 
         private void btnLogin_Click(object sender, EventArgs e)
@@ -28,38 +30,20 @@ namespace EMS_Client.Forms
             CancellationToken CXL = CXL_Src.Token;
 
             //Debug
-            txtIntId.Text = EMS_Library.Config.DefaultId;
-            txtPassword.Text = EMS_Library.Config.DefaultPassword;
-            Action action = () =>
-            {
-                try
-                {
-                    TcpClient tcpClient = new TcpClient(EMS_Library.Config.ServerIP, EMS_Library.Config.ServerPort);
-                    NetworkStream stream = tcpClient.GetStream();
-                    DataPacket packet = new DataPacket($"" +
-                        $"Select * from Employees" +
-                        $" where " +
-                        $"_intId={txtIntId.Text} and _password = '{txtPassword.Text}'",
-                        254);
-                    stream.Write(packet.Write(), 0, packet.GetTotalSize());
-                    DataPacket responce = new DataPacket(stream);
-                    string[] processed = responce.StringData.Remove(responce.StringData.Length-1).Split('|');
-
-
-                    if (processed.Length != 1) throw new Exception("Found more than 1 employee with this credentials!");
-                    processed = processed[0].Split(',');
-
-
-                    EMS_ClientMainScreen.CurEmployee = EMS_Library.MyEmployee.Employee.ActivateEmployee(processed);
-                }
-                catch (Exception ex) { Invoke(() => { MessageBox.Show(ex.Message); }); }
-                Invoke(() => { EMS_ClientMainScreen.PrimaryForms.Pop().Close(); });
-            };
-            StandbyScreen standby = new StandbyScreen(action);
+            txtIntId.Text = Config.DefaultId;
+            txtPassword.Text = Config.DefaultPassword;
+            string querry = Requests.SelectEmployee(new Dictionary<string, string> 
+            { 
+                {"_intId", txtIntId.Text},
+                {"_password",txtPassword.Text }
+            });
+            List<string> buffer = new List<string>();
+            StandbyScreen standby = new StandbyScreen(Requests.BuildAction(this, 1 ,querry, buffer, true));
             standby.ShowDialog();
-
+            EMS_ClientMainScreen.CurEmployee = Employee.ActivateEmployee(buffer[0].Split(','));
             MessageBox.Show("Hello\n"+EMS_ClientMainScreen.CurEmployee.FName);
             Close();
         }
     }
+
 }

@@ -13,10 +13,10 @@ namespace EMS_Server
             switch (data._header.Act)
             {
                 default: { throw new Exception($"Requested action was not found! Check DataPacket._header.Act!\n_header={data._header}\nAct={data._header.Act}"); }
-                case 20: { return null; }
-                case 253: { return SQLBridge.OneWayCommand(data.StringData); }
-                case 254: { return SQLBridge.TwoWayCommand(data.StringData); }
-                case 255: { return data.StringData; }
+                /*Select employee*/case 1: { return SQLBridge.TwoWayCommand(SQLBridge.Select(data.StringData)); }
+                /*Direct querry*/  case 253: { return SQLBridge.OneWayCommand(data.StringData); }
+                /*Direct querry*/  case 254: { return SQLBridge.TwoWayCommand(data.StringData); }
+                /*Ping*/           case 255: { return data.StringData; }
             }
         }
     }

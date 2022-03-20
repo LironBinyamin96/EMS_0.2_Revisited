@@ -55,19 +55,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\levkh\\.nuget\\packages\\": {}
+    "C:\\Users\\Lev's_Laptop\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\levkh\\Documents\\GitHub\\EMS_0.2_Revisited\\EMS_0.2_Client\\EMS_0.2_Client.csproj",
+      "projectUniqueName": "C:\\Users\\Lev's_Laptop\\Desktop\\Git\\EMS_0.2_Revisited\\EMS_0.2_Client\\EMS_0.2_Client.csproj",
       "projectName": "EMS_0.2_Client",
-      "projectPath": "C:\\Users\\levkh\\Documents\\GitHub\\EMS_0.2_Revisited\\EMS_0.2_Client\\EMS_0.2_Client.csproj",
-      "packagesPath": "C:\\Users\\levkh\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\levkh\\Documents\\GitHub\\EMS_0.2_Revisited\\EMS_0.2_Client\\obj\\",
+      "projectPath": "C:\\Users\\Lev's_Laptop\\Desktop\\Git\\EMS_0.2_Revisited\\EMS_0.2_Client\\EMS_0.2_Client.csproj",
+      "packagesPath": "C:\\Users\\Lev's_Laptop\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Lev's_Laptop\\Desktop\\Git\\EMS_0.2_Revisited\\EMS_0.2_Client\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\levkh\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Lev's_Laptop\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -81,8 +81,8 @@
         "net6.0-windows7.0": {
           "targetAlias": "net6.0-windows",
           "projectReferences": {
-            "C:\\Users\\levkh\\Documents\\GitHub\\EMS_0.2_Revisited\\EMS_0.2_Library\\EMS_0.2_Library.csproj": {
-              "projectPath": "C:\\Users\\levkh\\Documents\\GitHub\\EMS_0.2_Revisited\\EMS_0.2_Library\\EMS_0.2_Library.csproj"
+            "C:\\Users\\Lev's_Laptop\\Desktop\\Git\\EMS_0.2_Revisited\\EMS_0.2_Library\\EMS_0.2_Library.csproj": {
+              "projectPath": "C:\\Users\\Lev's_Laptop\\Desktop\\Git\\EMS_0.2_Revisited\\EMS_0.2_Library\\EMS_0.2_Library.csproj"
             }
           }
         }
@@ -120,7 +120,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.101\\RuntimeIdentifierGraph.json"
       }
     }
   },

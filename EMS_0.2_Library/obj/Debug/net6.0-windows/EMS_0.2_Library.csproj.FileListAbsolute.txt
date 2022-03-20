@@ -46,3 +46,15 @@ C:\Users\liron\Desktop\EMS\EMS_0.2_Library\obj\Debug\net6.0-windows\EMS_0.2_Libr
 C:\Users\liron\Desktop\EMS\EMS_0.2_Library\obj\Debug\net6.0-windows\refint\EMS_0.2_Library.dll
 C:\Users\liron\Desktop\EMS\EMS_0.2_Library\obj\Debug\net6.0-windows\EMS_0.2_Library.pdb
 C:\Users\liron\Desktop\EMS\EMS_0.2_Library\obj\Debug\net6.0-windows\ref\EMS_0.2_Library.dll
+C:\Users\Lev's_Laptop\Desktop\Git\EMS_0.2_Revisited\EMS_0.2_Library\bin\Debug\net6.0-windows\EMS_0.2_Library.deps.json
+C:\Users\Lev's_Laptop\Desktop\Git\EMS_0.2_Revisited\EMS_0.2_Library\bin\Debug\net6.0-windows\EMS_0.2_Library.dll
+C:\Users\Lev's_Laptop\Desktop\Git\EMS_0.2_Revisited\EMS_0.2_Library\bin\Debug\net6.0-windows\ref\EMS_0.2_Library.dll
+C:\Users\Lev's_Laptop\Desktop\Git\EMS_0.2_Revisited\EMS_0.2_Library\bin\Debug\net6.0-windows\EMS_0.2_Library.pdb
+C:\Users\Lev's_Laptop\Desktop\Git\EMS_0.2_Revisited\EMS_0.2_Library\obj\Debug\net6.0-windows\EMS_0.2_Library.csproj.AssemblyReference.cache
+C:\Users\Lev's_Laptop\Desktop\Git\EMS_0.2_Revisited\EMS_0.2_Library\obj\Debug\net6.0-windows\EMS_0.2_Library.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Lev's_Laptop\Desktop\Git\EMS_0.2_Revisited\EMS_0.2_Library\obj\Debug\net6.0-windows\EMS_0.2_Library.AssemblyInfoInputs.cache
+C:\Users\Lev's_Laptop\Desktop\Git\EMS_0.2_Revisited\EMS_0.2_Library\obj\Debug\net6.0-windows\EMS_0.2_Library.AssemblyInfo.cs
+C:\Users\Lev's_Laptop\Desktop\Git\EMS_0.2_Revisited\EMS_0.2_Library\obj\Debug\net6.0-windows\EMS_0.2_Library.csproj.CoreCompileInputs.cache
+C:\Users\Lev's_Laptop\Desktop\Git\EMS_0.2_Revisited\EMS_0.2_Library\obj\Debug\net6.0-windows\EMS_0.2_Library.dll
+C:\Users\Lev's_Laptop\Desktop\Git\EMS_0.2_Revisited\EMS_0.2_Library\obj\Debug\net6.0-windows\ref\EMS_0.2_Library.dll
+C:\Users\Lev's_Laptop\Desktop\Git\EMS_0.2_Revisited\EMS_0.2_Library\obj\Debug\net6.0-windows\EMS_0.2_Library.pdb

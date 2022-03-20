@@ -93,6 +93,7 @@ namespace EMS_Server
                     { 
                         NetworkStream stream = client.GetStream();
                         DataPacket data = new DataPacket(stream);
+                        WriteToServerConsole("Request:\n"+data.StringData);
                         string responseStr = new MyRouter().Router(data);
                         DataPacket response = new DataPacket(responseStr, 255);
                         WriteToServerConsole(responseStr);
