@@ -27,6 +27,9 @@ namespace EMS_Client.Forms
             CancellationTokenSource CXL_Src = new CancellationTokenSource();
             CancellationToken CXL = CXL_Src.Token;
 
+            //Debug
+            txtIntId.Text = EMS_Library.Config.DefaultId;
+            txtPassword.Text = EMS_Library.Config.DefaultPassword;
             Action action = () =>
             {
                 try
