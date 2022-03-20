@@ -38,8 +38,19 @@ namespace EMS_Client.Forms
                 {"_password",txtPassword.Text }
             });
             List<string> buffer = new List<string>();
-            StandbyScreen standby = new StandbyScreen(Requests.BuildAction(this, 1 ,querry, buffer, true));
+
+            Action action = Requests.BuildAction(this, new DataPacket(querry, 1), buffer, false);
+            action.Invoke();
+
+            
+
+            string addQuerry = Requests.AddEmployee(Employee.GetStockEmployee());
+            List<string> buffer2 = new List<string>();   
+            Action add = Requests.BuildAction(this, new DataPacket(addQuerry, 2), buffer2, true);
+            StandbyScreen standby = new StandbyScreen(add);
             standby.ShowDialog();
+
+
             EMS_ClientMainScreen.CurEmployee = Employee.ActivateEmployee(buffer[0].Split(','));
             MessageBox.Show("Hello\n"+EMS_ClientMainScreen.CurEmployee.FName);
             Close();

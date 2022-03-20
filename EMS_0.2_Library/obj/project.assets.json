@@ -8,19 +8,19 @@
     "net6.0-windows7.0": []
   },
   "packageFolders": {
-    "C:\\Users\\Lev's_Laptop\\.nuget\\packages\\": {}
+    "C:\\Users\\levkh\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Lev's_Laptop\\Desktop\\Git\\EMS_0.2_Revisited\\EMS_0.2_Library\\EMS_0.2_Library.csproj",
+      "projectUniqueName": "C:\\Users\\levkh\\Documents\\GitHub\\EMS_0.2_Revisited\\EMS_0.2_Library\\EMS_0.2_Library.csproj",
       "projectName": "EMS_0.2_Library",
-      "projectPath": "C:\\Users\\Lev's_Laptop\\Desktop\\Git\\EMS_0.2_Revisited\\EMS_0.2_Library\\EMS_0.2_Library.csproj",
-      "packagesPath": "C:\\Users\\Lev's_Laptop\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Lev's_Laptop\\Desktop\\Git\\EMS_0.2_Revisited\\EMS_0.2_Library\\obj\\",
+      "projectPath": "C:\\Users\\levkh\\Documents\\GitHub\\EMS_0.2_Revisited\\EMS_0.2_Library\\EMS_0.2_Library.csproj",
+      "packagesPath": "C:\\Users\\levkh\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\levkh\\Documents\\GitHub\\EMS_0.2_Revisited\\EMS_0.2_Library\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Lev's_Laptop\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\levkh\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -63,7 +63,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.101\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
       }
     }
   }

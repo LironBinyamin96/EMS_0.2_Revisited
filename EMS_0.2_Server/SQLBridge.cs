@@ -67,5 +67,14 @@ namespace EMS_Server
             }
             return final;
         }
+        public static string Add(string clientQuerry) => $"insert into Employees values ({clientQuerry.Substring(clientQuerry.IndexOf('#')+1)});";
+        public static string Update(string clientQuerry) 
+        {
+            string final = "update Employees set ";
+            final += clientQuerry.Substring(clientQuerry.IndexOf('#'));
+            final += clientQuerry.Substring(clientQuerry.IndexOf("where"), clientQuerry.Length-clientQuerry.IndexOf('#'))+';';
+            return final;
+        }
+        public static string Delete(string clientQuerry) => throw new NotImplementedException();
     }
 }

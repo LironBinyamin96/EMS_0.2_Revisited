@@ -19,11 +19,24 @@ namespace EMS_Client
                     querry += $"{kvp.Key}={kvp.Value} and ";
             return querry.Remove(querry.Length-5)+';';
         }
+
+        public static string UpdateEmployee(Dictionary<string,string> data, Dictionary<string, string> clause)
+        {
+            string querry = $"update employee where ";
+            foreach (KeyValuePair<string, string> kvp in clause)
+                querry += $"{kvp.Key}={kvp.Value}";
+            querry += '#';
+            foreach (KeyValuePair<string, string> kvp in data)
+                querry += $"{kvp.Key}={kvp.Value}";
+            return querry;
+        }
+        public static string DeleteEmployee(Dictionary<string, string> clause)
+        { throw new NotImplementedException("WIP"); }
         public static string AddEmployee(EMS_Library.MyEmployee.Employee employee) => "add employee #" + employee.ToString();
         public static string UpdateEmployee(EMS_Library.MyEmployee.Employee employee) => "update employee #" + employee.ToString();
         public static string Delete(int _intId) => "delete employee #" + _intId;
 
-        public static Action BuildAction(Form parentForm, byte routeCase, string querry, List<string> buffer, bool loading = false)
+        public static Action BuildAction(Form parentForm, DataPacket data, List<string> buffer, bool closeForm = false)
         {
             Action action = new Action(() =>
                 {
@@ -31,15 +44,15 @@ namespace EMS_Client
                     {
                         TcpClient tcpClient = new TcpClient(EMS_Library.Config.ServerIP, EMS_Library.Config.ServerPort);
                         NetworkStream stream = tcpClient.GetStream();
-                        DataPacket packet = new DataPacket(querry, routeCase);
-                        stream.Write(packet.Write(), 0, packet.GetTotalSize());
+                        stream.Write(data.Write(), 0, data.GetTotalSize());
                         DataPacket responce = new DataPacket(stream);
+                        Console.WriteLine(responce.StringData);
                         string[] processed = responce.StringData.Remove(responce.StringData.Length - 1).Split('|');
                         foreach (string a in processed)
                             buffer.Add(a);
                     }
                     catch (Exception ex) { parentForm.Invoke(() => { MessageBox.Show(ex.Message); }); }
-                    if (loading) parentForm.Invoke(() => { EMS_ClientMainScreen.PrimaryForms.Pop().Close(); });
+                    if (closeForm) parentForm.Invoke(() => { EMS_ClientMainScreen.PrimaryForms.Pop().Close(); });
                 });
             return action;
         }

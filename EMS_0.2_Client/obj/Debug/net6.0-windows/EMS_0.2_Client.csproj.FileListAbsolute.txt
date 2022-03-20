@@ -136,3 +136,5 @@ C:\Users\Lev's_Laptop\Desktop\Git\EMS_0.2_Revisited\EMS_0.2_Client\obj\Debug\net
 C:\Users\Lev's_Laptop\Desktop\Git\EMS_0.2_Revisited\EMS_0.2_Client\obj\Debug\net6.0-windows\ref\EMS_0.2_Client.dll
 C:\Users\Lev's_Laptop\Desktop\Git\EMS_0.2_Revisited\EMS_0.2_Client\obj\Debug\net6.0-windows\EMS_0.2_Client.pdb
 C:\Users\Lev's_Laptop\Desktop\Git\EMS_0.2_Revisited\EMS_0.2_Client\obj\Debug\net6.0-windows\EMS_0.2_Client.genruntimeconfig.cache
+C:\Users\levkh\Documents\GitHub\EMS_0.2_Revisited\EMS_0.2_Client\obj\Debug\net6.0-windows\EMS_Client.Forms.newEmail.resources
+C:\Users\levkh\Documents\GitHub\EMS_0.2_Revisited\EMS_0.2_Client\obj\Debug\net6.0-windows\EMS_Client.Forms.showMail.resources

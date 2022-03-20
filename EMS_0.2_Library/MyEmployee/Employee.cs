@@ -127,22 +127,22 @@ namespace EMS_Library.MyEmployee
         public override string ToString()
         {
             return $"" +
-               $"{this.GetType().Name}," +
+               $"'{this.GetType().Name}'," +
                $"{_intId}," +
-               $"{_stateId}," +
-               $"{_fName}," +
-               $"{_lName}," +
-               $"{_mName}," +
-               $"{_password}," +
-               $"{_email}," +
-               $"{_gender}," +
-               $"{_birthDate}," +
-               $"{_created}," +
-               $"{_employmentStatus}," +
+               $"'{_stateId}'," +
+               $"'{_fName}'," +
+               $"'{_lName}'," +
+               $"'{_mName}'," +
+               $"'{_password}'," +
+               $"'{_email}'," +
+               $"'{_gender}'," +
+               $"'{_birthDate}'," +
+               $"'{_created}'," +
+               $"'{_employmentStatus}'," +
                $"{_baseSalary}," +
                $"{_salaryModifire}," +
-               $"{_phoneNumber}," +
-               $"{_address}";
+               $"'{_phoneNumber}'," +
+               $"'{_address}'";
         }
         public static Employee ActivateEmployee(object[] data)
         {
