@@ -42,6 +42,8 @@ namespace EMS_Client.Forms
             Action action = Requests.BuildAction(this, new DataPacket(querry, 1), buffer, false);
             action.Invoke();
 
+            
+
             string addQuerry = Requests.AddEmployee(Employee.GetStockEmployee());
             List<string> buffer2 = new List<string>();   
             Action add = Requests.BuildAction(this, new DataPacket(addQuerry, 2), buffer2, true);
