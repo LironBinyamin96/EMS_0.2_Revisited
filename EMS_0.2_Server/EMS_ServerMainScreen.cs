@@ -101,7 +101,7 @@ namespace EMS_Server
                         client.Close();
                         client.Dispose();
                     }
-                    catch { }
+                    catch (Exception ex) { Console.WriteLine(ex); }
                     WriteToServerConsole("Connection closed.");
                 }
             }, listner_CXL);

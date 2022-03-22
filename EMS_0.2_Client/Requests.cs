@@ -20,12 +20,12 @@ namespace EMS_Client
             return querry.Remove(querry.Length-5)+';';
         }
 
-        public static string UpdateEmployee(Dictionary<string,string> data, Dictionary<string, string> clause)
+        public static string UpdateEmployee(Dictionary<string, string> data, Dictionary<string, string> clause)
         {
             string querry = $"update employee where ";
             foreach (KeyValuePair<string, string> kvp in clause)
                 querry += $"{kvp.Key}={kvp.Value}";
-            querry += '#';
+            querry += " #";
             foreach (KeyValuePair<string, string> kvp in data)
                 querry += $"{kvp.Key}={kvp.Value}";
             return querry;

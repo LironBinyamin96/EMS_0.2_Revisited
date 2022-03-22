@@ -42,17 +42,21 @@ namespace EMS_Client.Forms
             Action action = Requests.BuildAction(this, new DataPacket(querry, 1), buffer, false);
             action.Invoke();
 
-            
 
-            string addQuerry = Requests.AddEmployee(Employee.GetStockEmployee());
-            List<string> buffer2 = new List<string>();   
-            Action add = Requests.BuildAction(this, new DataPacket(addQuerry, 2), buffer2, true);
-            StandbyScreen standby = new StandbyScreen(add);
-            standby.ShowDialog();
+            string querry2 = Requests.UpdateEmployee(
+                new Dictionary<string, string> { { "_intId", 111111112.ToString() } },
+                new Dictionary<string, string> { { "_intId", 111111111.ToString() } }
+                );
+            List<string> list = new List<string>();
+            Action delete = Requests.BuildAction(this, new DataPacket(querry2, 3), list, false);
+            delete.Invoke();
+
 
             EMS_ClientMainScreen.CurEmployee = Employee.ActivateEmployee(buffer[0].Split(','));
             MessageBox.Show("Hello\n"+EMS_ClientMainScreen.CurEmployee.FName);
             Close();
+
+
         }
     }
 
