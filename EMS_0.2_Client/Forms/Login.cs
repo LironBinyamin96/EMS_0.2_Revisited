@@ -43,14 +43,6 @@ namespace EMS_Client.Forms
             action.Invoke();
 
 
-            string querry2 = Requests.UpdateEmployee(
-                new Dictionary<string, string> { { "_intId", 111111112.ToString() } },
-                new Dictionary<string, string> { { "_intId", 111111111.ToString() } }
-                );
-            List<string> list = new List<string>();
-            Action delete = Requests.BuildAction(this, new DataPacket(querry2, 3), list, false);
-            delete.Invoke();
-
 
             EMS_ClientMainScreen.CurEmployee = Employee.ActivateEmployee(buffer[0].Split(','));
             MessageBox.Show("Hello\n"+EMS_ClientMainScreen.CurEmployee.FName);

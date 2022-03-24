@@ -2,6 +2,12 @@ using System.Net.Sockets;
 using EMS_Library.Network;
 using System.Data.SqlClient;
 using System.Data.Sql;
+using Emgu.CV;
+using Emgu.CV.Structure;
+using Emgu.CV.CvEnum;
+using Emgu.CV.Face;
+using System.Text.RegularExpressions;
+using System.Drawing;
 namespace EMS_Server
 {
     public partial class EMS_ServerMainScreen : Form
@@ -10,6 +16,10 @@ namespace EMS_Server
         #region Variables
         TcpListener listener = new TcpListener(System.Net.IPAddress.Parse(EMS_Library.Config.ServerIP), EMS_Library.Config.ServerPort);
         TcpClient client = null;
+
+        private VideoCapture vc = null;
+        private Image<Bgr, Byte> curFrame = null;
+        Mat frame = new Mat();
         #endregion
 
         #region Tasks&Tokens
@@ -151,5 +161,18 @@ namespace EMS_Server
             //WriteToServerConsole($"Client recieved response [{response}]");
         }
 
+        private void btnCapture_Click(object sender, EventArgs e)
+        {
+            vc = new VideoCapture();
+            vc.ImageGrabbed += ProcessFrame;
+            vc.Start();
+        }
+
+        private void ProcessFrame(object? sender, EventArgs e)
+        {
+            vc.Retrieve(frame, 0);
+            curFrame = frame.ToImage<Bgr,byte>().Resize(videoFeed.Width, videoFeed.Height, Inter.Cubic);
+            videoFeed.Image = curFrame.ToBitmap();
+        }
     }
 }

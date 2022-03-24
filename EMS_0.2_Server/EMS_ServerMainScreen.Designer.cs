@@ -31,12 +31,16 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EMS_ServerMainScreen));
             this.panelLeft = new System.Windows.Forms.Panel();
+            this.videoFeed = new System.Windows.Forms.PictureBox();
             this.panelRight = new System.Windows.Forms.Panel();
             this.btnExit = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.txtServerConsole = new System.Windows.Forms.TextBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.listnerTimer = new System.Windows.Forms.Timer(this.components);
+            this.btnCapture = new System.Windows.Forms.Button();
+            this.panelLeft.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.videoFeed)).BeginInit();
             this.panelRight.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -44,11 +48,21 @@
             // 
             // panelLeft
             // 
+            this.panelLeft.Controls.Add(this.btnCapture);
+            this.panelLeft.Controls.Add(this.videoFeed);
             this.panelLeft.Dock = System.Windows.Forms.DockStyle.Left;
             this.panelLeft.Location = new System.Drawing.Point(0, 0);
             this.panelLeft.Name = "panelLeft";
             this.panelLeft.Size = new System.Drawing.Size(157, 450);
             this.panelLeft.TabIndex = 0;
+            // 
+            // videoFeed
+            // 
+            this.videoFeed.Location = new System.Drawing.Point(3, 326);
+            this.videoFeed.Name = "videoFeed";
+            this.videoFeed.Size = new System.Drawing.Size(151, 121);
+            this.videoFeed.TabIndex = 2;
+            this.videoFeed.TabStop = false;
             // 
             // panelRight
             // 
@@ -115,6 +129,16 @@
             this.listnerTimer.Interval = 2000;
             this.listnerTimer.Tick += new System.EventHandler(this.listnerTimer_Tick);
             // 
+            // btnCapture
+            // 
+            this.btnCapture.Location = new System.Drawing.Point(0, 297);
+            this.btnCapture.Name = "btnCapture";
+            this.btnCapture.Size = new System.Drawing.Size(75, 23);
+            this.btnCapture.TabIndex = 2;
+            this.btnCapture.Text = "btnCapture";
+            this.btnCapture.UseVisualStyleBackColor = true;
+            this.btnCapture.Click += new System.EventHandler(this.btnCapture_Click);
+            // 
             // EMS_ServerMainScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -131,6 +155,8 @@
             this.Text = "Form1";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.EMS_ServerMainScreen_Load);
+            this.panelLeft.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.videoFeed)).EndInit();
             this.panelRight.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
@@ -148,5 +174,7 @@
         private PictureBox pictureBox1;
         private Button btnExit;
         private System.Windows.Forms.Timer listnerTimer;
+        private PictureBox videoFeed;
+        private Button btnCapture;
     }
 }
