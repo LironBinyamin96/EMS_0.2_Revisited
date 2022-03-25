@@ -42,12 +42,9 @@ namespace EMS_Client.Forms
             Action action = Requests.BuildAction(this, new DataPacket(querry, 1), buffer, false);
             action.Invoke();
 
-
-
             EMS_ClientMainScreen.CurEmployee = Employee.ActivateEmployee(buffer[0].Split(','));
             MessageBox.Show("Hello\n"+EMS_ClientMainScreen.CurEmployee.FName);
             Close();
-
 
         }
     }

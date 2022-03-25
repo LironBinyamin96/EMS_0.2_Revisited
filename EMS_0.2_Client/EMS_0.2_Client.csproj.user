@@ -25,6 +25,9 @@
     <Compile Update="Forms\newEmail.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Forms\selectEmployee.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Forms\showMail.cs">
       <SubType>Form</SubType>
     </Compile>

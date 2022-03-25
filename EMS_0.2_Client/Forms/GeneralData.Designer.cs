@@ -48,7 +48,7 @@
             this.panelGeneralData.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelGeneralData.Location = new System.Drawing.Point(0, 0);
             this.panelGeneralData.Name = "panelGeneralData";
-            this.panelGeneralData.Size = new System.Drawing.Size(818, 85);
+            this.panelGeneralData.Size = new System.Drawing.Size(844, 85);
             this.panelGeneralData.TabIndex = 2;
             // 
             // lblGeneralData
@@ -74,6 +74,7 @@
             this.btnSelect.TabIndex = 3;
             this.btnSelect.Text = "Select an employee";
             this.btnSelect.UseVisualStyleBackColor = true;
+            this.btnSelect.Click += new System.EventHandler(this.btnSelect_Click);
             // 
             // panelWorkerData
             // 
@@ -81,9 +82,9 @@
             this.panelWorkerData.Controls.Add(this.lblAvg);
             this.panelWorkerData.Controls.Add(this.lblHours);
             this.panelWorkerData.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelWorkerData.Location = new System.Drawing.Point(0, -56);
+            this.panelWorkerData.Location = new System.Drawing.Point(0, 186);
             this.panelWorkerData.Name = "panelWorkerData";
-            this.panelWorkerData.Size = new System.Drawing.Size(818, 451);
+            this.panelWorkerData.Size = new System.Drawing.Size(844, 451);
             this.panelWorkerData.TabIndex = 4;
             // 
             // panelData
@@ -93,7 +94,7 @@
             this.panelData.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panelData.Location = new System.Drawing.Point(0, 185);
             this.panelData.Name = "panelData";
-            this.panelData.Size = new System.Drawing.Size(818, 266);
+            this.panelData.Size = new System.Drawing.Size(844, 266);
             this.panelData.TabIndex = 3;
             // 
             // lblgraph

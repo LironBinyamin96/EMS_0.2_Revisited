@@ -1,10 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "IOABgufQEfsstNpgVN73We0vkbyTprMzeWV7v8k2B3k89GePvBr8ds4ynRSuGrG9es9auBDXDQXIHShIX0oZsg==",
+  "dgSpecHash": "6yX0l6nKiyIS7AIXXGq9FIcGueOq5xTvjOcWgsTkSTqxaF5pQZE8UTaiyMQIKCOfgjp5DqWjDVLUZMqZEfAisg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\levkh\\Documents\\GitHub\\EMS_0.2_Revisited\\EMS_0.2_Client\\EMS_0.2_Client.csproj",
+  "projectFilePath": "C:\\Users\\liron\\Desktop\\EMS\\EMS_0.2_Client\\EMS_0.2_Client.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\levkh\\.nuget\\packages\\s22.imap\\3.6.0\\s22.imap.3.6.0.nupkg.sha512"
+    "C:\\Users\\liron\\.nuget\\packages\\s22.imap\\3.6.0\\s22.imap.3.6.0.nupkg.sha512"
   ],
   "logs": [
     {
