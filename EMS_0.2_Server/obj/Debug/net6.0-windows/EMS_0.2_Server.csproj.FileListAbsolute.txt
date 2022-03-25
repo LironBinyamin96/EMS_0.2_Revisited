@@ -154,3 +154,4 @@ C:\Users\levkh\Documents\GitHub\EMS_0.2_Revisited\EMS_0.2_Server\bin\Debug\net6.
 C:\Users\levkh\Documents\GitHub\EMS_0.2_Revisited\EMS_0.2_Server\bin\Debug\net6.0-windows\runtimes\win-x86\native\msvcp140_atomic_wait.dll
 C:\Users\levkh\Documents\GitHub\EMS_0.2_Revisited\EMS_0.2_Server\bin\Debug\net6.0-windows\runtimes\win-x86\native\msvcp140_codecvt_ids.dll
 C:\Users\levkh\Documents\GitHub\EMS_0.2_Revisited\EMS_0.2_Server\bin\Debug\net6.0-windows\runtimes\win-x86\native\vcruntime140.dll
+C:\Users\levkh\Documents\GitHub\EMS_0.2_Revisited\EMS_0.2_Server\bin\Debug\net6.0-windows\haarcascade_frontalface_alt.xml

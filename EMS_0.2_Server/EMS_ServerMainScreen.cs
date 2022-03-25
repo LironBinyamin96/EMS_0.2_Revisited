@@ -20,6 +20,8 @@ namespace EMS_Server
         private VideoCapture vc = null;
         private Image<Bgr, Byte> curFrame = null;
         Mat frame = new Mat();
+        bool faceDetectionEnabled = false;
+        CascadeClassifier faceCascadeClassifire = new CascadeClassifier("haarcascade_frontalface_alt.xml");
         #endregion
 
         #region Tasks&Tokens
@@ -51,10 +53,6 @@ namespace EMS_Server
             listeningTask.Start();
             SQLServerLookup.Start();
         }
-        private void btnExit_Click(object sender, EventArgs e)
-        {
-            Close();
-        }
         private void listnerTimer_Tick(object sender, EventArgs e)
         {
             client.Close();
@@ -78,6 +76,7 @@ namespace EMS_Server
                 case "shutdown": { Close(); break; }
             }
         }
+        private void btnExit_Click_1(object sender, EventArgs e) => Close();
         #endregion
 
         #region NonEvent Methods
@@ -85,13 +84,14 @@ namespace EMS_Server
         {
             this.Invoke((MethodInvoker)delegate
             {
-                txtServerConsole.AppendText(text+Environment.NewLine);
+                txtServerConsole.AppendText(text + Environment.NewLine);
                 Console.WriteLine(text + "\n");
             });
         }
         public Task BuildServerTask()
         {
-            return new Task(() => {
+            return new Task(() =>
+            {
                 WriteToServerConsole("Server started");
                 while (true)
                 {
@@ -99,15 +99,15 @@ namespace EMS_Server
                     client = listener.AcceptTcpClient();
                     WriteToServerConsole($"client: " + client.Client.RemoteEndPoint);
                     listnerTimer.Start();
-                    try 
-                    { 
+                    try
+                    {
                         NetworkStream stream = client.GetStream();
                         DataPacket data = new DataPacket(stream);
-                        WriteToServerConsole("Request:\n"+data.StringData);
+                        WriteToServerConsole("Request:\n" + data.StringData);
                         string responseStr = new MyRouter().Router(data);
                         DataPacket response = new DataPacket(responseStr, 255);
                         WriteToServerConsole(responseStr);
-                        stream.Write(response.Write(),0,response.GetTotalSize());
+                        stream.Write(response.Write(), 0, response.GetTotalSize());
                         client.Close();
                         client.Dispose();
                     }
@@ -145,7 +145,7 @@ namespace EMS_Server
                         break;
                     }
                 }
-            },SQLLookup_CXL);
+            }, SQLLookup_CXL);
         }
 
         #endregion
@@ -171,8 +171,34 @@ namespace EMS_Server
         private void ProcessFrame(object? sender, EventArgs e)
         {
             vc.Retrieve(frame, 0);
-            curFrame = frame.ToImage<Bgr,byte>().Resize(videoFeed.Width, videoFeed.Height, Inter.Cubic);
+            curFrame = frame.ToImage<Bgr, byte>().Resize(videoFeed.Width, videoFeed.Height, Inter.Cubic);
             videoFeed.Image = curFrame.ToBitmap();
+
+            if(faceDetectionEnabled)
+            {
+                Mat gray = new Mat();
+                CvInvoke.CvtColor(curFrame, gray, ColorConversion.Bgr2Gray);
+                CvInvoke.EqualizeHist(gray, gray);
+                Rectangle[] faces = faceCascadeClassifire.DetectMultiScale(gray, 1.1,3,Size.Empty,Size.Empty); //change
+                if(faces.Length > 0) //if detected face
+                {
+                    foreach(Rectangle face in faces)
+                    {
+                        //Draw square around each face
+                        CvInvoke.Rectangle(curFrame, face, new Bgr(Color.LightSkyBlue).MCvScalar, 2);
+
+                    }
+                }
+            }
+
         }
+
+        private void btnCaptureFace_Click(object sender, EventArgs e)
+        {
+            faceDetectionEnabled = true;
+
+        }
+
+
     }
 }
