@@ -24,8 +24,7 @@ namespace EMS_Client.Forms
         {
             if (txtSaerch.Text == "")
             {
-                string querry = Requests.SelectEmployee(new Dictionary<string, string>());
-                MessageBox.Show(querry);
+                string querry = Requests.SelectEmployee();
                 List<string> buffer = new List<string>();
                 Action action = Requests.BuildAction(this, new DataPacket(querry, 1), buffer, false);
                 action.Invoke();
