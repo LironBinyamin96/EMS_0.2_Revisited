@@ -85,6 +85,7 @@
             this.btnSelect.TabIndex = 4;
             this.btnSelect.Text = "Select an employee";
             this.btnSelect.UseVisualStyleBackColor = true;
+            this.btnSelect.Click += new System.EventHandler(this.btnSelect_Click);
             // 
             // GridViewAttrndance
             // 
@@ -264,6 +265,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "AttendanceTable";
             this.Text = "AttendanceTable";
+            this.Activated += new System.EventHandler(this.AttendanceTable_Activated);
             this.panelAttendance.ResumeLayout(false);
             this.panelAttendance.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GridViewAttrndance)).EndInit();

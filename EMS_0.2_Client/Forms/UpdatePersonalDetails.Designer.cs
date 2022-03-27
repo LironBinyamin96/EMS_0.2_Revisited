@@ -555,6 +555,7 @@
             this.btnSelect.TabIndex = 6;
             this.btnSelect.Text = "Select an employee";
             this.btnSelect.UseVisualStyleBackColor = true;
+            this.btnSelect.Click += new System.EventHandler(this.btnSelect_Click);
             // 
             // btnCancel
             // 
@@ -615,6 +616,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "UpdatePersonalDetails";
             this.Text = "UpdatePersonalDetails";
+            this.Activated += new System.EventHandler(this.UpdatePersonalDetails_Activated);
             this.panelUpdatePersonalDetails.ResumeLayout(false);
             this.panelUpdatePersonalDetails.PerformLayout();
             this.gUpdatePersonalDetails.ResumeLayout(false);

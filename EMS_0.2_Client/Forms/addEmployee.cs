@@ -16,6 +16,10 @@ namespace EMS_Client.Forms
         {
             InitializeComponent();
         }
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+          
+        }
         public void Clear()
         {
             txtID.Text = "";
@@ -41,5 +45,7 @@ namespace EMS_Client.Forms
         {
             Clear();
         }
+
+
     }
 }

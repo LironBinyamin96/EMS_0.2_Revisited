@@ -29,5 +29,7 @@
         #region Employee_config
         public static string EmployeeFilesDir = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\EMS_Root";
         #endregion
+
+        public const bool flag = true;
     }
 }

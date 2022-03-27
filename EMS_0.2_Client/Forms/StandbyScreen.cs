@@ -43,7 +43,7 @@ namespace EMS_Client.Forms
         {
             InitializeComponent();
             action = act;
-            EMS_ClientMainScreen.PrimaryForms.Push(this);
+           // EMS_ClientMainScreen.PrimaryForms.Push(this);
         }
 
         private void StandbyScreen_Load(object sender, EventArgs e)

@@ -59,7 +59,7 @@ namespace EMS_Server
         {
             string[] clause = clientQuerry.Substring(clientQuerry.IndexOf('#') + 1).Split(',');
             string final = "select * from Employees";
-            if (clause.Length > 0)
+            if (clause.Length > 0 && clause[0] != "")
             {
                 final += " where";
                 foreach (string item in clause)

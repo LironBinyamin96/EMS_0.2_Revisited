@@ -1,13 +1,14 @@
 ﻿using EMS_Client.Forms;
 using System.Runtime.InteropServices;
-
+using EMS_Library.MyEmployee;
 namespace EMS_Client
 {
     public partial class EMS_ClientMainScreen : Form
     {
+        public static Employee employee;
 
         #region Variables
-        public static Stack<Form> PrimaryForms = new Stack<Form>();
+        //public static Stack<Form> PrimaryForms = new Stack<Form>();
         public static EMS_Library.MyEmployee.Employee CurEmployee;
         private Form activeForm; // משתנה עזר ששומר את החלון הנוכחי
         #endregion
@@ -40,7 +41,7 @@ namespace EMS_Client
         public EMS_ClientMainScreen()
         {
             InitializeComponent();
-            PrimaryForms.Push(this);
+            //PrimaryForms.Push(this);
             // סימון הכפתורים
             Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 25, 25));
         }
@@ -90,8 +91,6 @@ namespace EMS_Client
         #endregion
 
         private void btnExit_Click_1(object sender, EventArgs e) => Close();
-
-
 
     }
 }

@@ -15,9 +15,12 @@ namespace EMS_Client
         {
             string querry = $"get employee #";
             if (data != null)
+            {
                 foreach (KeyValuePair<string, string> kvp in data)
                     querry += $"{kvp.Key}={kvp.Value} and ";
-            return querry.Remove(querry.Length-5)+';';
+                return querry.Remove(querry.Length - 5) + ';';
+            }
+            return querry;
         }
 
         public static string UpdateEmployee(Dictionary<string, string> data, Dictionary<string, string> clause)
@@ -52,7 +55,7 @@ namespace EMS_Client
                             buffer.Add(a);
                     }
                     catch (Exception ex) { parentForm.Invoke(() => { MessageBox.Show(ex.Message); }); }
-                    if (closeForm) parentForm.Invoke(() => { EMS_ClientMainScreen.PrimaryForms.Pop().Close(); });
+                  //  if (closeForm) parentForm.Invoke(() => { EMS_ClientMainScreen.PrimaryForms.Pop().Close(); });
                 });
             return action;
         }
