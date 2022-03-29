@@ -2025,24 +2025,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\liron\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\levkh\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\liron\\Desktop\\EMS\\EMS_0.2_Server\\EMS_0.2_Server.csproj",
+      "projectUniqueName": "C:\\Users\\levkh\\Documents\\GitHub\\EMS_0.2_Revisited\\EMS_0.2_Server\\EMS_0.2_Server.csproj",
       "projectName": "EMS_0.2_Server",
-      "projectPath": "C:\\Users\\liron\\Desktop\\EMS\\EMS_0.2_Server\\EMS_0.2_Server.csproj",
-      "packagesPath": "C:\\Users\\liron\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\liron\\Desktop\\EMS\\EMS_0.2_Server\\obj\\",
+      "projectPath": "C:\\Users\\levkh\\Documents\\GitHub\\EMS_0.2_Revisited\\EMS_0.2_Server\\EMS_0.2_Server.csproj",
+      "packagesPath": "C:\\Users\\levkh\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\levkh\\Documents\\GitHub\\EMS_0.2_Revisited\\EMS_0.2_Server\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
-        "C:\\Users\\liron\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Users\\levkh\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -2056,8 +2051,8 @@
         "net6.0-windows7.0": {
           "targetAlias": "net6.0-windows",
           "projectReferences": {
-            "C:\\Users\\liron\\Desktop\\EMS\\EMS_0.2_Library\\EMS_0.2_Library.csproj": {
-              "projectPath": "C:\\Users\\liron\\Desktop\\EMS\\EMS_0.2_Library\\EMS_0.2_Library.csproj"
+            "C:\\Users\\levkh\\Documents\\GitHub\\EMS_0.2_Revisited\\EMS_0.2_Library\\EMS_0.2_Library.csproj": {
+              "projectPath": "C:\\Users\\levkh\\Documents\\GitHub\\EMS_0.2_Revisited\\EMS_0.2_Library\\EMS_0.2_Library.csproj"
             }
           }
         }

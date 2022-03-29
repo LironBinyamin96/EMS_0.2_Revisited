@@ -17,7 +17,7 @@ namespace EMS_Server
         TcpListener listener = new TcpListener(System.Net.IPAddress.Parse(EMS_Library.Config.ServerIP), EMS_Library.Config.ServerPort);
         TcpClient client = null;
 
-        private VideoCapture vc = null;
+        private VideoCapture videoCapture = null;
         private Image<Bgr, Byte> curFrame = null;
         Mat frame = new Mat();
         bool faceDetectionEnabled = false;
@@ -163,15 +163,15 @@ namespace EMS_Server
 
         private void btnCapture_Click(object sender, EventArgs e)
         {
-            vc = new VideoCapture();
-            vc.ImageGrabbed += ProcessFrame;
-            vc.Start();
+            videoCapture = new VideoCapture();
+            videoCapture.ImageGrabbed += ProcessFrame;
+            videoCapture.Start();
         }
 
-        private void ProcessFrame(object? sender, EventArgs e)
+        private void ProcessFrame(object sender, EventArgs e)
         {
-            vc.Retrieve(frame, 0);
-            curFrame = frame.ToImage<Bgr, byte>().Resize(videoFeed.Width, videoFeed.Height, Inter.Cubic);
+            videoCapture.Retrieve(frame, 0);
+            curFrame = frame.ToImage<Bgr, Byte>().Resize(videoFeed.Width, videoFeed.Height, Inter.Cubic);
             videoFeed.Image = curFrame.ToBitmap();
 
             if(faceDetectionEnabled)
@@ -179,13 +179,14 @@ namespace EMS_Server
                 Mat gray = new Mat();
                 CvInvoke.CvtColor(curFrame, gray, ColorConversion.Bgr2Gray);
                 CvInvoke.EqualizeHist(gray, gray);
-                Rectangle[] faces = faceCascadeClassifire.DetectMultiScale(gray, 1.1,3,Size.Empty,Size.Empty); //change
+                Rectangle[] faces = faceCascadeClassifire.DetectMultiScale(gray, 1.1,3,Size.Empty,Size.Empty);
                 if(faces.Length > 0) //if detected face
                 {
                     foreach(Rectangle face in faces)
                     {
                         //Draw square around each face
-                        CvInvoke.Rectangle(curFrame, face, new Bgr(Color.LightSkyBlue).MCvScalar, 2);
+                        CvInvoke.Rectangle(curFrame, face, new Bgr(Color.Red).MCvScalar, 2, LineType.Filled);
+                        faceDetected.Image = curFrame.ToBitmap();
 
                     }
                 }

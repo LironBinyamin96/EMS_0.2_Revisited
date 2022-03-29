@@ -38,13 +38,15 @@
             this.txtServerConsole = new System.Windows.Forms.TextBox();
             this.listnerTimer = new System.Windows.Forms.Timer(this.components);
             this.panelRight = new System.Windows.Forms.Panel();
-            this.videoFeed = new System.Windows.Forms.PictureBox();
             this.btnExit = new System.Windows.Forms.Button();
+            this.videoFeed = new System.Windows.Forms.PictureBox();
+            this.faceDetected = new System.Windows.Forms.PictureBox();
             this.panelLeft.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
             this.panelRight.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.videoFeed)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.faceDetected)).BeginInit();
             this.SuspendLayout();
             // 
             // panelLeft
@@ -131,14 +133,6 @@
             this.panelRight.Size = new System.Drawing.Size(136, 450);
             this.panelRight.TabIndex = 0;
             // 
-            // videoFeed
-            // 
-            this.videoFeed.Location = new System.Drawing.Point(190, 50);
-            this.videoFeed.Name = "videoFeed";
-            this.videoFeed.Size = new System.Drawing.Size(468, 388);
-            this.videoFeed.TabIndex = 2;
-            this.videoFeed.TabStop = false;
-            // 
             // btnExit
             // 
             this.btnExit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -151,12 +145,29 @@
             this.btnExit.UseVisualStyleBackColor = true;
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click_1);
             // 
+            // videoFeed
+            // 
+            this.videoFeed.Location = new System.Drawing.Point(190, 105);
+            this.videoFeed.Name = "videoFeed";
+            this.videoFeed.Size = new System.Drawing.Size(288, 245);
+            this.videoFeed.TabIndex = 2;
+            this.videoFeed.TabStop = false;
+            // 
+            // faceDetected
+            // 
+            this.faceDetected.Location = new System.Drawing.Point(484, 105);
+            this.faceDetected.Name = "faceDetected";
+            this.faceDetected.Size = new System.Drawing.Size(174, 114);
+            this.faceDetected.TabIndex = 3;
+            this.faceDetected.TabStop = false;
+            // 
             // EMS_ServerMainScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.faceDetected);
             this.Controls.Add(this.videoFeed);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panelRight);
@@ -173,6 +184,7 @@
             this.panel1.PerformLayout();
             this.panelRight.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.videoFeed)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.faceDetected)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -189,5 +201,6 @@
         private Panel panelRight;
         private PictureBox videoFeed;
         private Button btnExit;
+        private PictureBox faceDetected;
     }
 }
