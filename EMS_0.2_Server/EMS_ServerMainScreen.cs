@@ -22,6 +22,11 @@ namespace EMS_Server
         Mat frame = new Mat();
         bool faceDetectionEnabled = false;
         CascadeClassifier faceCascadeClassifire = new CascadeClassifier("haarcascade_frontalface_alt.xml");
+        bool enableSaveImages = false;
+        static bool IsTrained = false;
+        List<Image<Gray, Byte>> trainedFaces = new List<Image<Gray, Byte>>();
+        List<int> personsLabes = new List<int>();
+        EigenFaceRecognizer recognizer;
         #endregion
 
         #region Tasks&Tokens
@@ -166,6 +171,7 @@ namespace EMS_Server
             videoCapture = new VideoCapture();
             videoCapture.ImageGrabbed += ProcessFrame;
             videoCapture.Start();
+            bool EnableSaveImages = false;
         }
 
         private void ProcessFrame(object sender, EventArgs e)
@@ -174,19 +180,58 @@ namespace EMS_Server
             curFrame = frame.ToImage<Bgr, Byte>().Resize(videoFeed.Width, videoFeed.Height, Inter.Cubic);
             videoFeed.Image = curFrame.ToBitmap();
 
-            if(faceDetectionEnabled)
+            if (faceDetectionEnabled)
             {
                 Mat gray = new Mat();
                 CvInvoke.CvtColor(curFrame, gray, ColorConversion.Bgr2Gray);
                 CvInvoke.EqualizeHist(gray, gray);
-                Rectangle[] faces = faceCascadeClassifire.DetectMultiScale(gray, 1.1,3,Size.Empty,Size.Empty);
-                if(faces.Length > 0) //if detected face
+                Rectangle[] faces = faceCascadeClassifire.DetectMultiScale(gray, 1.1, 3, Size.Empty, Size.Empty);
+                if (faces.Length > 0) //if detected face
                 {
-                    foreach(Rectangle face in faces)
+                    foreach (Rectangle face in faces)
                     {
                         //Draw square around each face
                         CvInvoke.Rectangle(curFrame, face, new Bgr(Color.Red).MCvScalar, 2, LineType.Filled);
                         faceDetected.Image = curFrame.ToBitmap();
+
+                        //Add person
+                        Image<Bgr, Byte> resultImage = curFrame.Convert<Bgr, byte>();
+                        resultImage.ROI = face;
+                        picDetected.SizeMode = PictureBoxSizeMode.StretchImage;
+                        picDetected.Image = resultImage.ToBitmap();
+
+                        if(enableSaveImages)
+                        {
+                            //Create a dir
+                            string path = EMS_Library.Config.EmployeeFilesDir+"\\Training_Images";
+                            if(!Directory.Exists(path))
+                                Directory.CreateDirectory(path);
+                            for (int i = 0; i < 50; i++)
+                            {
+                                resultImage.Resize(200, 200, Inter.Cubic).Save($"{path}\\test{i}.png");
+                            }
+                            enableSaveImages = false;
+                        }
+                        if(btnAddPerson.InvokeRequired)
+                        {
+                            btnAddPerson.Invoke(new Action(() => { btnAddPerson.Enabled = true; }));
+                        }
+
+                        if(IsTrained)
+                        {
+                            Image<Gray, Byte> grayFace = resultImage.Convert<Gray, byte>().Resize(200, 200, Inter.Cubic);
+                            grayFaceBox.Image = grayFace.ToBitmap();
+                            var result = recognizer.Predict(grayFace);
+                            
+                            if (result.Label > 0) //Found known face
+                            {
+                                WriteToServerConsole("Known");
+                            }
+                            else //Didn't find known face
+                            { 
+                                WriteToServerConsole("UnKnown");
+                            }
+                        }
 
                     }
                 }
@@ -200,6 +245,64 @@ namespace EMS_Server
 
         }
 
+        private void btnAddPerson_Click(object sender, EventArgs e)
+        {
+            btnAddPerson.Enabled = false;
+            btnSave.Enabled = true;
+            enableSaveImages = true;
+        }
 
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            btnSave.Enabled = false;
+            btnAddPerson.Enabled = true;
+            enableSaveImages = false;
+        }
+
+        private void btnTrain_Click(object sender, EventArgs e)
+        {
+            TrainModelFromDir();
+        }
+        bool TrainModelFromDir()
+        {
+            int imagesCount = 0;
+            double threshold = 7000;
+            trainedFaces.Clear();
+            personsLabes.Clear();
+            try
+            {
+                string path = EMS_Library.Config.EmployeeFilesDir + "\\Training_Images";
+                string[] images = Directory.GetFiles(path);
+                List<Mat> matList = new List<Mat>();
+                foreach (string file in images)
+                {
+                    personsLabes.Add(imagesCount++);
+                    matList.Add(new Mat(file));
+                }
+                foreach (Mat mat in matList)
+                    boxTest.Image = mat.ToBitmap();
+
+                recognizer = new EigenFaceRecognizer(imagesCount,threshold);
+                recognizer.Train(matList.ToArray(), personsLabes.ToArray());
+                IsTrained = true;
+                WriteToServerConsole($"Training finished. IsTrained: {IsTrained}");
+                return true; ;
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("Training failed!\n"+ex.Message);
+                return IsTrained = false;
+            }
+        }
+
+        private void faceDetected_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnRecognize_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
