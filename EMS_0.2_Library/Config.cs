@@ -5,6 +5,7 @@
         #region Server_Config
         public const string ServerIP = "127.0.0.1";
         public const int ServerPort = 13000;
+        public static string RootDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\EMS_Root";
         #endregion
 
         #region SQL_server_config
@@ -24,10 +25,6 @@
         //Variables
         public static byte ServerNamesIterator = 0;
         public static string SQLConnectionString = default;
-        #endregion
-
-        #region Employee_config
-        public static string EmployeeFilesDir = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\EMS_Root";
         #endregion
 
         public const bool flag = true;

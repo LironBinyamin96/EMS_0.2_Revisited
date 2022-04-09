@@ -23,7 +23,6 @@ namespace EMS_Server
             }
             catch (SqlException ex) { return ex.Message; }
         }
-
         /// <summary>
         /// שאילתה דו כיווני
         /// Sends provided querry to the server.
@@ -54,7 +53,6 @@ namespace EMS_Server
             }
             catch (SqlException ex) { return ex.Message; }
         }
-
         public static string Select(string clientQuerry)
         {
             string[] clause = clientQuerry.Substring(clientQuerry.IndexOf('#') + 1).Split(',');
@@ -76,5 +74,15 @@ namespace EMS_Server
             return final;
         }
         public static string Delete(string clientQuerry) => $"delete from Employees where _intId={clientQuerry.Substring(clientQuerry.IndexOf('#') + 1)}";
+        
+
+
+
+
+        public static string Left(string clientQuerry)
+        {
+            throw new NotImplementedException();
+        }
+        
     }
 }

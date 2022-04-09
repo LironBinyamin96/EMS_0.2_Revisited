@@ -28,7 +28,7 @@ namespace EMS_Library.MyEmployee.HoursLog
         {
             _intId = emp.IntId;
             _month = date.Month;
-            DirectoryInfo dir = emp.GetDirectory.GetLogDirectory;
+            DirectoryInfo dir = /*emp.GetDirectory.GetLogDirectory*/new DirectoryInfo(" ");
             Directory.CreateDirectory($"{ dir.FullName}\\{ date.Year}");
             string temp = ($"{dir.FullName}\\{date.Year}\\{date.Month}.txt");
 

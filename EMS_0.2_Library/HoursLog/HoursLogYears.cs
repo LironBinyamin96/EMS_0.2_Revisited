@@ -18,7 +18,7 @@ namespace EMS_Library.MyEmployee.HoursLog
 
         public HoursLogYears(Employee emp)
         {
-            _directoryInfo = Directory.CreateDirectory(emp.GetDirectory.GetLogDirectory.FullName + $"\\{DateTime.Now.Year}");
+            _directoryInfo = Directory.CreateDirectory(/*emp.GetDirectory.GetLogDirectory.FullName*/" " + $"\\{DateTime.Now.Year}");
             _intId = emp.IntId;
             string[] files = Directory.GetFiles(_directoryInfo.FullName);
             foreach (string file in files)
