@@ -1,14 +1,17 @@
 using System.Net.Sockets;
-using EMS_Library.Network;
+using System.Diagnostics;
 using System.Data.SqlClient;
 using System.Data.Sql;
+using System.Text.RegularExpressions;
+using System.Drawing;
 using Emgu.CV;
 using Emgu.CV.Structure;
 using Emgu.CV.CvEnum;
 using Emgu.CV.Face;
-using System.Text.RegularExpressions;
-using System.Drawing;
 using EMS_Library.MyEmployee;
+using EMS_Library.MyEmployee.Divisions;
+using EMS_Library.Network;
+
 namespace EMS_Server
 {
     public partial class EMS_ServerMainScreen : Form
@@ -26,6 +29,9 @@ namespace EMS_Server
         EigenFaceRecognizer recognizer;
         List<int> personsLabels = new List<int>();
         List<int> employeeIds = new List<int>();
+        Process FR_Process = new Process();
+
+
         #endregion
 
         #region Tasks&Tokens
@@ -41,7 +47,7 @@ namespace EMS_Server
         public CancellationTokenSource FRTrainer_CXL_Src = new CancellationTokenSource();
         CancellationToken FRTrainer_CXL;
 
-        //public Task SQLServerLookup;
+        public Task TestingTask;
 
         #endregion
 
@@ -54,15 +60,21 @@ namespace EMS_Server
             SQLLookup_CXL = SQLLookup_CXL_Src.Token;
             FRTrainer = BuildFRTrainer();
             FRTrainer_CXL = FRTrainer_CXL_Src.Token;
+            FR_Process.StartInfo.FileName = EMS_Library.Config.FR_Location;
+
+            TestingTask = TestingTaskBuilder();
         }
 
         #region Event Methods
         private void EMS_ServerMainScreen_Load(object sender, EventArgs e)
         {
+            
             listener.Start();
             listeningTask.Start();
             SQLServerLookup.Start();
-            FRTrainer.Start();
+            TestingTask.Start();
+
+            //FRTrainer.Start();
 
             cam = new VideoCapture();
             cam.ImageGrabbed += ProcessFrame;
@@ -77,7 +89,6 @@ namespace EMS_Server
         }
         private void pictureBox1_Click(object sender, EventArgs e)
         {
-            Testing();
         }
         private void txtServerConsole_TextChanged(object sender, EventArgs e)
         {
@@ -89,6 +100,8 @@ namespace EMS_Server
                 case "terminate": { Close(); break; }
                 case "exit": { Close(); break; }
                 case "shutdown": { Close(); break; }
+                case "fr powerup": { FR_Process.Start(); break; }
+                case "fr Shotdown": { FR_Process.Close(); break; }
             }
         }
         private void btnExit_Click_1(object sender, EventArgs e) => Close();
@@ -224,133 +237,51 @@ namespace EMS_Server
 
         #endregion
 
-        #region OldFeceRecog
-        /*
-        private void ProcessFrame1(object sender, EventArgs e)
+        private Task TestingTaskBuilder()
         {
-            videoCapture.Retrieve(frame, 0);
-            curFrame = frame.ToImage<Bgr, Byte>().Resize(videoFeed.Width, videoFeed.Height, Inter.Cubic);
-            videoFeed.Image = curFrame.ToBitmap();
+            return new Task(() => {
+                while (SQLServerLookup.Status == TaskStatus.Running) { }
 
-            if (faceDetectionEnabled)
-            {
-                Mat gray = new Mat();
-                CvInvoke.CvtColor(curFrame, gray, ColorConversion.Bgr2Gray);
-                CvInvoke.EqualizeHist(gray, gray);
-                Rectangle[] faces = faceCascadeClassifire.DetectMultiScale(gray, 1.1, 3, Size.Empty, Size.Empty);
-                if (faces.Length > 0) //if detected face
                 {
-                    foreach (Rectangle face in faces)
+                    /*
+                    for (int i = 0; i < 20; i++)
                     {
-                        //Draw square around each face
-                        CvInvoke.Rectangle(curFrame, face, new Bgr(Color.Red).MCvScalar, 2, LineType.Filled);
-                        faceDetected.Image = curFrame.ToBitmap();
-
-                        //Add person
-                        Image<Bgr, Byte> resultImage = curFrame.Convert<Bgr, byte>();
-                        resultImage.ROI = face;
-                        picDetected.SizeMode = PictureBoxSizeMode.StretchImage;
-                        picDetected.Image = resultImage.ToBitmap();
-
-                        if (enableSaveImages)
-                        {
-                            //Create a dir
-                            string path = EMS_Library.Config.EmployeeFilesDir + "\\Training_Images";
-                            if (!Directory.Exists(path))
-                                Directory.CreateDirectory(path);
-                            for (int i = 0; i < 50; i++)
-                            {
-                                resultImage.Resize(200, 200, Inter.Cubic).Save($"{path}\\test{i}.png");
-                            }
-                            enableSaveImages = false;
-                        }
-                        if (btnAddPerson.InvokeRequired)
-                        {
-                            btnAddPerson.Invoke(new Action(() => { btnAddPerson.Enabled = true; }));
-                        }
-
-                        if (IsTrained)
-                        {
-                            Image<Gray, Byte> grayFace = resultImage.Convert<Gray, byte>().Resize(200, 200, Inter.Cubic);
-                            grayFaceBox.Image = grayFace.ToBitmap();
-                            var result = recognizer.Predict(grayFace);
-
-                            if (result.Label > 0) //Found known face
-                            {
-                                WriteToServerConsole("Known");
-                            }
-                            else //Didn't find known face
-                            {
-                                WriteToServerConsole("UnKnown");
-                            }
-                        }
-
+                        string response = SQLBridge.OneWayCommand(SQLBridge.Add("#" + Employee.RandomEmployeeGenerator(int.Parse(SQLBridge.GetFreeID())).ToString()));
+                        WriteToServerConsole(response);
+                        Thread.Sleep(1000);
                     }
-                }
-            }
+                    */
+                } //Add 20 random eployees to DB
 
-        }
-        private void btnTrain_Click(object sender, EventArgs e)
-        {
-            TrainModelFromDir();
-        }
-        bool TrainModelFromDir()
-        {
-            int imagesCount = 0;
-            double threshold = 7000;
-            trainedFaces.Clear();
-            personsLabes.Clear();
-            try
-            {
-                string path = EMS_Library.Config.RootDirectory + "\\Training_Images";
-                string[] images = Directory.GetFiles(path);
-                List<Mat> matList = new List<Mat>();
-                foreach (string file in images)
                 {
-                    personsLabes.Add(imagesCount++);
-                    matList.Add(new Mat(file));
-                }
-                foreach (Mat mat in matList)
-                    boxTest.Image = mat.ToBitmap();
+                    /*
+                    string[] ids = SQLBridge.TwoWayCommand("select _intId from Employees").Split('|');
+                    foreach (string id in ids)
+                    {
+                        DateTime time = EMS_Library.Utility.RandomDateTime();
+                        WriteToServerConsole(SQLBridge.OneWayCommand($"insert into HourLogs (_intId) values ({id});"));
+                        string x = $"update HorLogs set _entry={time.ToString()} where _intId={id.ToString()};";
+                        WriteToServerConsole(SQLBridge.OneWayCommand($"update HourLogs set _entry={time.ToString("yyyyMMdd")} where _intId={id};"));
+                        WriteToServerConsole(SQLBridge.OneWayCommand($"" +
+                                $"update HourLogs " +
+                                $"set _entry={(time + new TimeSpan(8, 0, 0)).ToString("yyyyMMdd")}" +
+                                $"where _intId={id};"));
+                    }
+                    */
+                }//Auto logs attempt
 
-                recognizer = new EigenFaceRecognizer(imagesCount, threshold);
-                recognizer.Train(matList.ToArray(), personsLabes.ToArray());
-                IsTrained = true;
-                WriteToServerConsole($"Training finished. IsTrained: {IsTrained}");
-                return true; ;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Training failed!\n" + ex.Message);
-                return IsTrained = false;
-            }
+
+            });
         }
 
-        private void faceDetected_Click(object sender, EventArgs e)
+        private void btnSimExit_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void btnRecognize_Click(object sender, EventArgs e)
+        private void btnSimEnter_Click(object sender, EventArgs e)
         {
 
         }
-        */
-        #endregion
-
-        private void Testing()
-        {
-            //TcpClient tcpClient = new TcpClient(EMS_Library.Config.ServerIP, EMS_Library.Config.ServerPort);
-            //NetworkStream stream = tcpClient.GetStream();
-            //DataPacket data = new DataPacket($"select * from Employees", 254);
-            //stream.Write(data.Write(), 0, data.GetTotalSize());
-            //WriteToServerConsole("Client made a request!");
-            //DataPacket response = new DataPacket(stream);
-            //WriteToServerConsole($"Client recieved response [{response}]");
-        }
-
-
-
-
     }
 }

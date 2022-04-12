@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using EMS_Library;
+using EMS_Library.MyEmployee.Divisions;
 
 
 namespace EMS_Library.MyEmployee
@@ -48,9 +50,8 @@ namespace EMS_Library.MyEmployee
         public double SalaryModifire { get => _salaryModifire; set => _salaryModifire = value; }
         public string PhoneNumber { get => _phoneNumber; set => _phoneNumber = value; }
         public string Address { get => _address; set => _address = value; }
+        public EmployeeDirectory GetDirectory => new EmployeeDirectory(_intId);
         #endregion
-
-
         public Employee(Type type, int intId, string stateID, string fName, string lName, string mName, string password, string email, string gender, DateTime birthDate, DateTime created, string employmentStatus, double baseSalary, double salaryModifire, string phoneNumber, string address)
         {
             _type = type;
@@ -124,26 +125,6 @@ namespace EMS_Library.MyEmployee
         /// Gets string representing Enployee
         /// </summary>
         /// <returns>type name, internal id, first name, last name.</returns>
-        public override string ToString()
-        {
-            return $"" +
-               $"'{this.GetType().Name}'," +
-               $"{_intId}," +
-               $"'{_stateId}'," +
-               $"'{_fName}'," +
-               $"'{_lName}'," +
-               $"'{_mName}'," +
-               $"'{_password}'," +
-               $"'{_email}'," +
-               $"'{_gender}'," +
-               $"'{_birthDate}'," +
-               $"'{_created}'," +
-               $"'{_employmentStatus}'," +
-               $"{_baseSalary}," +
-               $"{_salaryModifire}," +
-               $"'{_phoneNumber}'," +
-               $"'{_address}'";
-        }
         public static Employee ActivateEmployee(object[] data)
         {
             string[] hold = Array.ConvertAll(data, x => x.ToString());
@@ -173,6 +154,66 @@ namespace EMS_Library.MyEmployee
                 "Lala Land"
                 );
         }
-        public EmployeeDirectory GetDirectory => new EmployeeDirectory(_intId);
+        public static Employee RandomEmployeeGenerator(int _intId)
+        {
+
+            string RandomEmployeeType()
+            {
+                int num = Utility.RandomInt(1);
+                switch (num)
+                {
+                    default: return typeof(IT_Boss).Name;
+                    case 0: return typeof(HR_Boss).Name;
+                    case 1: return typeof(HR_Grunt).Name;
+                    case 2: return typeof(Worker).Name;
+                    case 3: return typeof(Mechanic).Name;
+                    case 4: return typeof(Supplementary).Name;
+                    case 5: return typeof(IT_Boss).Name;
+                    case 6: return typeof(IT_Grunt).Name;
+                    case 7: return typeof(HR_Boss).Name;
+                    case 8: return typeof(Worker).Name;
+                    case 9: return typeof(Mechanic).Name;
+                }
+            }
+            return ActivateEmployee(new object[]
+            {
+                RandomEmployeeType(),                           //Type
+                _intId,                                         //IntID must be send from outside
+                Utility.RandomInt(9),                           //StatedID
+                Utility.RandomString(Utility.RandomInt(5,15)),  //fName
+                Utility.RandomString(Utility.RandomInt(5,15)),  //lName
+                Utility.RandomString(Utility.RandomInt(5,15)),  //mName
+                "1234",                                         //Password
+                Utility.RandomString(Utility.RandomInt(5,10))+'@'+Utility.RandomString(Utility.RandomInt(3,7))+".com", //email
+                Utility.RandomBool()?"male":"female",           //Gender
+                DateTime.Parse("01/02/0003"),                   //BirthDate
+                DateTime.Now,                                   //Created At
+                "1",                                            //Employee status
+                Utility.RandomInt(2),                           //Salary
+                1,                                              //Salary modifire
+                Utility.RandomNumericString(10),                //Phone Number
+                Utility.RandomString(Utility.RandomInt(15,50)), //Address
+            });
+        }
+        public override string ToString()
+        {
+            return $"" +
+               $"'{this.GetType().Name}'," +
+               $"{_intId}," +
+               $"'{_stateId}'," +
+               $"'{_fName}'," +
+               $"'{_lName}'," +
+               $"'{_mName}'," +
+               $"'{_password}'," +
+               $"'{_email}'," +
+               $"'{_gender}'," +
+               $"'{_birthDate}'," +
+               $"'{_created}'," +
+               $"'{_employmentStatus}'," +
+               $"{_baseSalary}," +
+               $"{_salaryModifire}," +
+               $"'{_phoneNumber}'," +
+               $"'{_address}'";
+        }
     }
 }

@@ -6,6 +6,7 @@
         public const string ServerIP = "127.0.0.1";
         public const int ServerPort = 13000;
         public static string RootDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\EMS_Root";
+        public static string FR_Location = RootDirectory + "//FR_Boot.cmd";
         #endregion
 
         #region SQL_server_config

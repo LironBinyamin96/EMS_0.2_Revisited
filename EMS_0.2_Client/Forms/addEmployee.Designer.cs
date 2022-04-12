@@ -43,7 +43,6 @@
             this.txtBaseSalary = new System.Windows.Forms.TextBox();
             this.panel8 = new System.Windows.Forms.Panel();
             this.lblBaseSalary = new System.Windows.Forms.Label();
-            this.txtPosition = new System.Windows.Forms.TextBox();
             this.panel9 = new System.Windows.Forms.Panel();
             this.lblPosition = new System.Windows.Forms.Label();
             this.txtPhone = new System.Windows.Forms.TextBox();
@@ -75,6 +74,7 @@
             this.lblID = new System.Windows.Forms.Label();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnClear = new System.Windows.Forms.Button();
+            this.positionBox = new System.Windows.Forms.ComboBox();
             this.panelAddEmployee.SuspendLayout();
             this.gBoxRegistration.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -118,6 +118,7 @@
             // 
             // gBoxRegistration
             // 
+            this.gBoxRegistration.Controls.Add(this.positionBox);
             this.gBoxRegistration.Controls.Add(this.txtFile);
             this.gBoxRegistration.Controls.Add(this.lblUpload);
             this.gBoxRegistration.Controls.Add(this.pictureBox1);
@@ -129,7 +130,6 @@
             this.gBoxRegistration.Controls.Add(this.txtBaseSalary);
             this.gBoxRegistration.Controls.Add(this.panel8);
             this.gBoxRegistration.Controls.Add(this.lblBaseSalary);
-            this.gBoxRegistration.Controls.Add(this.txtPosition);
             this.gBoxRegistration.Controls.Add(this.panel9);
             this.gBoxRegistration.Controls.Add(this.lblPosition);
             this.gBoxRegistration.Controls.Add(this.txtPhone);
@@ -269,16 +269,6 @@
             this.lblBaseSalary.Size = new System.Drawing.Size(88, 17);
             this.lblBaseSalary.TabIndex = 30;
             this.lblBaseSalary.Text = "Base salary :";
-            // 
-            // txtPosition
-            // 
-            this.txtPosition.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
-            this.txtPosition.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtPosition.ForeColor = System.Drawing.SystemColors.Menu;
-            this.txtPosition.Location = new System.Drawing.Point(269, 136);
-            this.txtPosition.Name = "txtPosition";
-            this.txtPosition.Size = new System.Drawing.Size(100, 17);
-            this.txtPosition.TabIndex = 29;
             // 
             // panel9
             // 
@@ -568,6 +558,23 @@
             this.btnClear.UseVisualStyleBackColor = true;
             this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
+            // positionBox
+            // 
+            this.positionBox.FormattingEnabled = true;
+            this.positionBox.Items.AddRange(new object[] {
+            "HR_Boss",
+            "HR_Grunt",
+            "IT_Boss",
+            "IT_Grunt",
+            "Maintenance_Boss",
+            "Mechanic",
+            "Worker",
+            "Suplementary"});
+            this.positionBox.Location = new System.Drawing.Point(275, 133);
+            this.positionBox.Name = "positionBox";
+            this.positionBox.Size = new System.Drawing.Size(102, 24);
+            this.positionBox.TabIndex = 41;
+            // 
             // addEmployee
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -620,7 +627,6 @@
         private TextBox txtBaseSalary;
         private Panel panel8;
         private Label lblBaseSalary;
-        private TextBox txtPosition;
         private Panel panel9;
         private Label lblPosition;
         private TextBox txtPhone;
@@ -639,5 +645,6 @@
         private Button btnUpload;
         private Button btnSave;
         private Button btnClear;
+        private ComboBox positionBox;
     }
 }
