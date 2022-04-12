@@ -31,16 +31,16 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EMS_ServerMainScreen));
             this.panelLeft = new System.Windows.Forms.Panel();
-            this.boxTest = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.txtServerConsole = new System.Windows.Forms.TextBox();
             this.listnerTimer = new System.Windows.Forms.Timer(this.components);
             this.panelRight = new System.Windows.Forms.Panel();
-            this.btnExit = new System.Windows.Forms.Button();
             this.cam1Feed = new System.Windows.Forms.PictureBox();
+            this.btnExit = new System.Windows.Forms.Button();
+            this.btnSimEnter = new System.Windows.Forms.Button();
+            this.btnSimExit = new System.Windows.Forms.Button();
             this.panelLeft.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.boxTest)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
             this.panelRight.SuspendLayout();
@@ -49,28 +49,19 @@
             // 
             // panelLeft
             // 
-            this.panelLeft.Controls.Add(this.boxTest);
-            this.panelLeft.Controls.Add(this.pictureBox1);
+            this.panelLeft.Controls.Add(this.btnSimExit);
+            this.panelLeft.Controls.Add(this.btnSimEnter);
             this.panelLeft.Dock = System.Windows.Forms.DockStyle.Left;
             this.panelLeft.Location = new System.Drawing.Point(0, 0);
             this.panelLeft.Name = "panelLeft";
             this.panelLeft.Size = new System.Drawing.Size(184, 715);
             this.panelLeft.TabIndex = 0;
             // 
-            // boxTest
-            // 
-            this.boxTest.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.boxTest.Location = new System.Drawing.Point(29, 429);
-            this.boxTest.Name = "boxTest";
-            this.boxTest.Size = new System.Drawing.Size(119, 108);
-            this.boxTest.TabIndex = 10;
-            this.boxTest.TabStop = false;
-            // 
             // pictureBox1
             // 
             this.pictureBox1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(3, 543);
+            this.pictureBox1.Location = new System.Drawing.Point(582, 279);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(178, 169);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -120,6 +111,15 @@
             this.panelRight.Size = new System.Drawing.Size(130, 715);
             this.panelRight.TabIndex = 0;
             // 
+            // cam1Feed
+            // 
+            this.cam1Feed.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.cam1Feed.Location = new System.Drawing.Point(0, 585);
+            this.cam1Feed.Name = "cam1Feed";
+            this.cam1Feed.Size = new System.Drawing.Size(130, 130);
+            this.cam1Feed.TabIndex = 4;
+            this.cam1Feed.TabStop = false;
+            // 
             // btnExit
             // 
             this.btnExit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -132,14 +132,27 @@
             this.btnExit.UseVisualStyleBackColor = true;
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click_1);
             // 
-            // cam1Feed
+            // btnSimEnter
             // 
-            this.cam1Feed.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.cam1Feed.Location = new System.Drawing.Point(0, 585);
-            this.cam1Feed.Name = "cam1Feed";
-            this.cam1Feed.Size = new System.Drawing.Size(130, 130);
-            this.cam1Feed.TabIndex = 4;
-            this.cam1Feed.TabStop = false;
+            this.btnSimEnter.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.btnSimEnter.Location = new System.Drawing.Point(0, 692);
+            this.btnSimEnter.Name = "btnSimEnter";
+            this.btnSimEnter.Size = new System.Drawing.Size(184, 23);
+            this.btnSimEnter.TabIndex = 0;
+            this.btnSimEnter.Text = "Simulate Enter";
+            this.btnSimEnter.UseVisualStyleBackColor = true;
+            this.btnSimEnter.Click += new System.EventHandler(this.btnSimEnter_Click);
+            // 
+            // btnSimExit
+            // 
+            this.btnSimExit.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.btnSimExit.Location = new System.Drawing.Point(0, 669);
+            this.btnSimExit.Name = "btnSimExit";
+            this.btnSimExit.Size = new System.Drawing.Size(184, 23);
+            this.btnSimExit.TabIndex = 1;
+            this.btnSimExit.Text = "Simulate Exit";
+            this.btnSimExit.UseVisualStyleBackColor = true;
+            this.btnSimExit.Click += new System.EventHandler(this.btnSimExit_Click);
             // 
             // EMS_ServerMainScreen
             // 
@@ -148,6 +161,7 @@
             this.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.ClientSize = new System.Drawing.Size(1318, 715);
             this.Controls.Add(this.panel1);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.panelRight);
             this.Controls.Add(this.panelLeft);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -157,7 +171,6 @@
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.EMS_ServerMainScreen_Load);
             this.panelLeft.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.boxTest)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
@@ -176,7 +189,8 @@
         private System.Windows.Forms.Timer listnerTimer;
         private Panel panelRight;
         private Button btnExit;
-        private PictureBox boxTest;
         private PictureBox cam1Feed;
+        private Button btnSimExit;
+        private Button btnSimEnter;
     }
 }

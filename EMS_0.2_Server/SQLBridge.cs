@@ -37,7 +37,6 @@ namespace EMS_Server
                 Command.CommandText = IncomingCommand;
                 if (Connection.State != System.Data.ConnectionState.Open) Connection.Open();
                 SqlDataReader DataReader = Command.ExecuteReader();
-
                 StringBuilder stringBuilder = new StringBuilder();
                 while (DataReader.Read())
                 {
@@ -49,9 +48,18 @@ namespace EMS_Server
                     stringBuilder.Append('|');
                 }
                 Connection.Close();
+                Thread.Sleep(50);
                 return stringBuilder.Length > 0 ? stringBuilder.ToString() : "-1";
             }
             catch (SqlException ex) { return ex.Message; }
+        }
+        public static string GetFreeID() 
+        {
+            Random random = new Random();
+            int id = random.Next(100000000, 1000000000);
+            while (TwoWayCommand($"select _intId from Employees where _intId={id};")[0] == -1)
+                id = random.Next(100000000, 1000000000);
+            return id.ToString(); 
         }
         public static string Select(string clientQuerry)
         {
@@ -74,11 +82,11 @@ namespace EMS_Server
             return final;
         }
         public static string Delete(string clientQuerry) => $"delete from Employees where _intId={clientQuerry.Substring(clientQuerry.IndexOf('#') + 1)}";
-        
-
-
-
-
+        public static string GetMonthLog(string clientQuerry)
+        {
+            Exception ex = new NotImplementedException("Not implemented yet");
+            return $"{ex.Source + "=>" + ex.Message}";
+        }
         public static string Left(string clientQuerry)
         {
             throw new NotImplementedException();
