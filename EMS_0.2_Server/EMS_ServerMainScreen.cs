@@ -273,6 +273,7 @@ namespace EMS_Server
         private void btnSimExit_Click(object sender, EventArgs e)
         {
 
+            });
         }
 
         private void btnSimEnter_Click(object sender, EventArgs e)
