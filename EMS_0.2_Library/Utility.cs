@@ -29,7 +29,7 @@ namespace EMS_Library
             return str;
 
         }
-        public static DateTime RandomDateTime() => new DateTime(RandomInt(1, 2022), RandomInt(1, 13), RandomInt(1, 29));
+        public static DateTime RandomDateTime() => new DateTime(RandomInt(1800, 2022), RandomInt(1, 13), RandomInt(1, 29), RandomInt(0,24), RandomInt(0, 60), RandomInt(0, 60));
         
     }
 }

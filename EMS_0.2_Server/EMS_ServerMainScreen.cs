@@ -9,6 +9,7 @@ using Emgu.CV.Structure;
 using Emgu.CV.CvEnum;
 using Emgu.CV.Face;
 using EMS_Library.MyEmployee;
+using EMS_Library.MyEmployee.HoursLog;
 using EMS_Library.MyEmployee.Divisions;
 using EMS_Library.Network;
 
@@ -68,17 +69,17 @@ namespace EMS_Server
         #region Event Methods
         private void EMS_ServerMainScreen_Load(object sender, EventArgs e)
         {
-            
+            SQLServerLookup.Start();
             listener.Start();
             listeningTask.Start();
-            SQLServerLookup.Start();
             TestingTask.Start();
 
+            #region Deprecated FR
             //FRTrainer.Start();
-
-            cam = new VideoCapture();
-            cam.ImageGrabbed += ProcessFrame;
-            cam.Start();
+            //cam = new VideoCapture();
+            //cam.ImageGrabbed += ProcessFrame;
+            //cam.Start();
+            #endregion
         }
         private void listnerTimer_Tick(object sender, EventArgs e)
         {
@@ -101,7 +102,7 @@ namespace EMS_Server
                 case "exit": { Close(); break; }
                 case "shutdown": { Close(); break; }
                 case "fr powerup": { FR_Process.Start(); break; }
-                case "fr Shotdown": { FR_Process.Close(); break; }
+                case "fr shutdown": { FR_Process.Close(); break; }
             }
         }
         private void btnExit_Click_1(object sender, EventArgs e) => Close();
@@ -133,6 +134,16 @@ namespace EMS_Server
                 }
             }
         }
+        private void btnSimExit_Click(object sender, EventArgs e)
+        {
+            WriteToServerConsole(SQLBridge.Departure("111111111"));
+            WriteToServerConsole(SQLBridge.OneWayCommand(SQLBridge.Departure("111111111")));
+        }
+        private void btnSimEnter_Click(object sender, EventArgs e)
+        {
+            WriteToServerConsole(SQLBridge.Arrival("111111111"));
+            WriteToServerConsole(SQLBridge.OneWayCommand(SQLBridge.Arrival("111111111")));
+        }
 
         #endregion
 
@@ -149,6 +160,7 @@ namespace EMS_Server
         {
             return new Task(() =>
             {
+                if (!SQLServerLookup.IsCompleted) SQLServerLookup.Wait();
                 WriteToServerConsole("Server started");
                 while (true)
                 {
@@ -208,9 +220,10 @@ namespace EMS_Server
         {
             return new Task(() =>
             {
+                if (!SQLServerLookup.IsCompleted) SQLServerLookup.Wait();
                 while (!SQLServerLookup.IsCompleted) { }
                 if (!Directory.Exists(EMS_Library.Config.RootDirectory)) throw new Exception("Root directory doesn't exist!");
-                string[] _intIdsString = SQLBridge.TwoWayCommand("select _intId from Employees").Split('|');
+                string[] _intIdsString = SQLBridge.TwoWayCommand("select _intId from "+EMS_Library.Config.EmployeeDataTable).Split('|');
                 List<EmployeeDirectory> empDirs = new List<EmployeeDirectory>();
                 foreach (string _intId in _intIdsString)
                     if (_intId.Length == 9)
@@ -232,53 +245,52 @@ namespace EMS_Server
                 }
             }, FRTrainer_CXL);
         }
-
-        
-
-        #endregion
-
         private Task TestingTaskBuilder()
         {
-            return new Task(() => {
-                while (SQLServerLookup.Status == TaskStatus.Running) { }
-                {
-                    /*
+            return new Task(() =>
+            {
+                if (!SQLServerLookup.IsCompleted) SQLServerLookup.Wait();
+                #region Add 20 random eployees to DB
+                /*
                     for (int i = 0; i < 20; i++)
                     {
                         string response = SQLBridge.OneWayCommand(SQLBridge.Add("#" + Employee.RandomEmployeeGenerator(int.Parse(SQLBridge.GetFreeID())).ToString()));
                         WriteToServerConsole(response);
                         Thread.Sleep(1000);
                     }
-                    */
-                } //Add 20 random eployees to DB
+                 */
+                #endregion
+                #region Auto logs
+                /*
                 {
-                    /*
-                    string[] ids = SQLBridge.TwoWayCommand("select _intId from Employees").Split('|');
+                    string[] ids = SQLBridge.TwoWayCommand("select _intId from " + EMS_Library.Config.EmployeeDataTable).Split('|');
                     foreach (string id in ids)
                     {
                         DateTime time = EMS_Library.Utility.RandomDateTime();
+                        WriteToServerConsole(time.ToString());
                         WriteToServerConsole(SQLBridge.OneWayCommand($"insert into HourLogs (_intId) values ({id});"));
                         string x = $"update HorLogs set _entry={time.ToString()} where _intId={id.ToString()};";
-                        WriteToServerConsole(SQLBridge.OneWayCommand($"update HourLogs set _entry={time.ToString("yyyyMMdd")} where _intId={id};"));
+                        WriteToServerConsole(SQLBridge.OneWayCommand($"update HourLogs set _entry='{time.ToString("yyyy-MM-dd HH:mm:ss")}' where _intId={id};"));
                         WriteToServerConsole(SQLBridge.OneWayCommand($"" +
                                 $"update HourLogs " +
-                                $"set _entry={(time + new TimeSpan(8, 0, 0)).ToString("yyyyMMdd")}" +
+                                $"set _exit='{(time + new TimeSpan(8, 0, 0)).ToString("yyyy-MM-dd HH:mm:ss")}'" +
                                 $"where _intId={id};"));
                     }
-                    */
-                } //Auto logs attempt
+                }
+                */
+                #endregion
+                #region Get me some logs
+                string responce = SQLBridge.TwoWayCommand(SQLBridge.GetMonthLog($"get log #111111111, 2022, 04"));
+                WriteToServerConsole(responce);
+                HoursLogMonth log = new HoursLogMonth( responce);
+                foreach(var a in log.GetDays)
+                {
+                    WriteToServerConsole(a.ToString());
+                }
+                #endregion
+
             });
         }
-
-        private void btnSimExit_Click(object sender, EventArgs e)
-        {
-
-            });
-        }
-
-        private void btnSimEnter_Click(object sender, EventArgs e)
-        {
-
-        }
+        #endregion
     }
 }

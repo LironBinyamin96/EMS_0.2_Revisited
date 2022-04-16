@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using EMS_Library.MyEmployee.HoursLog;
 
 namespace EMS_Client.Forms
 {
@@ -21,7 +22,9 @@ namespace EMS_Client.Forms
         {
             txtName.Text = EMS_ClientMainScreen.employee.LName.ToString() + " " + EMS_ClientMainScreen.employee.FName.ToString();
             txtID.Text = EMS_ClientMainScreen.employee.IntId.ToString();
-
+            
+            
+            
         }
 
         private void btnSelect_Click(object sender, EventArgs e)
@@ -34,7 +37,7 @@ namespace EMS_Client.Forms
 
         private void AttendanceTable_Activated(object sender, EventArgs e)
         {
-
+            MessageBox.Show("Activated");
             if (EMS_ClientMainScreen.employee != null)
             {
                 MessageBox.Show("Fill");

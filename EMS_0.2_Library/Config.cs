@@ -18,7 +18,7 @@
             "DESKTOP-A6E5597\\SQLEXPRESS",
             "DESKTOP-LL8D68S",
         };
-        public const string SQLDatabaseName = "EmployeeManagmentDataBase";
+        
         public const string DefaultId = "111111111";
         public const string DefaultPassword = "111111111";
 
@@ -26,6 +26,12 @@
         //Variables
         public static byte ServerNamesIterator = 0;
         public static string SQLConnectionString = default;
+        #endregion
+
+        #region SQL_DB_config
+        public const string SQLDatabaseName = "EmployeeManagmentDataBase";
+        public const string EmployeeDataTable = "Employees";
+        public const string EmployeeHourLogsTable = "HourLogs";
         #endregion
 
         public const bool flag = true;

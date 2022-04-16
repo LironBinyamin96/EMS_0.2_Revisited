@@ -22,7 +22,6 @@ namespace EMS_Client
             }
             return querry;
         }
-
         public static string UpdateEmployee(Dictionary<string, string> data, Dictionary<string, string> clause)
         {
             string querry = $"update employee where ";
@@ -38,6 +37,7 @@ namespace EMS_Client
         public static string AddEmployee(EMS_Library.MyEmployee.Employee employee) => "add employee #" + employee.ToString();
         public static string UpdateEmployee(EMS_Library.MyEmployee.Employee employee) => "update employee #" + employee.ToString();
         public static string Delete(int _intId) => "delete employee #" + _intId;
+        public static string GetHourLogs(int _intId, int year, int month) => $"get log #{_intId}, {year}, {month}";
 
         public static Action BuildAction(Form parentForm, DataPacket data, List<string> buffer, bool closeForm = false)
         {
@@ -50,12 +50,12 @@ namespace EMS_Client
                         stream.Write(data.Write(), 0, data.GetTotalSize());
                         DataPacket responce = new DataPacket(stream);
                         Console.WriteLine(responce.StringData);
-                        string[] processed = responce.StringData.Remove(responce.StringData.Length - 1).Split('|');
+                        string[] processed = responce.StringData.Split('|'); //Removed removal of last char
                         foreach (string a in processed)
                             buffer.Add(a);
                     }
                     catch (Exception ex) { parentForm.Invoke(() => { MessageBox.Show(ex.Message); }); }
-                  //  if (closeForm) parentForm.Invoke(() => { EMS_ClientMainScreen.PrimaryForms.Pop().Close(); });
+                    if (closeForm) parentForm.Invoke(() => { EMS_ClientMainScreen.PrimaryForms.Pop().Close(); });
                 });
             return action;
         }

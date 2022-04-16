@@ -4,24 +4,30 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
+using EMS_Library;
 
 namespace EMS_Server
 {
     internal class SQLBridge
     {
+        public static bool SQLConnected = false;
+        private static object LOCK = new object();
         public static string OneWayCommand(string IncomingCommand)
         {
-            SqlConnection Connection = new SqlConnection(EMS_Library.Config.SQLConnectionString);
-            SqlCommand Command = Connection.CreateCommand();
-            Command.CommandText = IncomingCommand;
-            try
+            lock (LOCK)
             {
-                if (Connection.State != System.Data.ConnectionState.Open) Connection.Open();
-                int responce = Command.ExecuteNonQuery();
-                Connection.Close();
-                return responce.ToString();
+                SqlConnection Connection = new SqlConnection(EMS_Library.Config.SQLConnectionString);
+                SqlCommand Command = Connection.CreateCommand();
+                Command.CommandText = IncomingCommand;
+                try
+                {
+                    if (Connection.State != System.Data.ConnectionState.Open) Connection.Open();
+                    int responce = Command.ExecuteNonQuery();
+                    Connection.Close();
+                    return responce.ToString();
+                }
+                catch (SqlException ex) { return ex.Message + Environment.NewLine + IncomingCommand; }
             }
-            catch (SqlException ex) { return ex.Message; }
         }
         /// <summary>
         /// שאילתה דו כיווני
@@ -30,41 +36,46 @@ namespace EMS_Server
         /// <returns> Responce from the server (Listof objects or an object depending on the querry). </returns>
         public static string TwoWayCommand(string IncomingCommand)
         {
-            try
+            lock (LOCK)
             {
-                SqlConnection Connection = new SqlConnection(EMS_Library.Config.SQLConnectionString);
-                SqlCommand Command = Connection.CreateCommand();
-                Command.CommandText = IncomingCommand;
-                if (Connection.State != System.Data.ConnectionState.Open) Connection.Open();
-                SqlDataReader DataReader = Command.ExecuteReader();
-                StringBuilder stringBuilder = new StringBuilder();
-                while (DataReader.Read())
+                try
                 {
-                    object[] temp = new object[DataReader.FieldCount];
-                    DataReader.GetValues(temp);
-                    foreach (object s in temp)
-                        stringBuilder.Append(s.ToString().Trim() + ',');
-                    stringBuilder.Remove(stringBuilder.Length - 1, 1);
-                    stringBuilder.Append('|');
+                    SqlConnection Connection = new SqlConnection(EMS_Library.Config.SQLConnectionString);
+                    SqlCommand Command = Connection.CreateCommand();
+                    Command.CommandText = IncomingCommand;
+                    if (Connection.State != System.Data.ConnectionState.Open) Connection.Open();
+                    SqlDataReader DataReader = Command.ExecuteReader();
+                    StringBuilder stringBuilder = new StringBuilder();
+                    while (DataReader.Read())
+                    {
+                        object[] temp = new object[DataReader.FieldCount];
+                        DataReader.GetValues(temp);
+                        foreach (object s in temp)
+                        {
+                            if (s is DBNull) stringBuilder.Append("NULL,");
+                            else stringBuilder.Append(s.ToString().Trim() + ',');
+                        }
+                        stringBuilder.Remove(stringBuilder.Length - 1, 1);
+                        stringBuilder.Append('|');
+                    }
+                    Connection.Close();
+                    return stringBuilder.Length > 0 ? stringBuilder.ToString().Remove(stringBuilder.Length-1) : "-1";
                 }
-                Connection.Close();
-                Thread.Sleep(50);
-                return stringBuilder.Length > 0 ? stringBuilder.ToString() : "-1";
+                catch (SqlException ex) { return ex.Message + Environment.NewLine + IncomingCommand; }
             }
-            catch (SqlException ex) { return ex.Message; }
         }
-        public static string GetFreeID() 
+        public static string GetFreeID()
         {
             Random random = new Random();
             int id = random.Next(100000000, 1000000000);
-            while (TwoWayCommand($"select _intId from Employees where _intId={id};")[0] == -1)
+            while (TwoWayCommand($"select _intId from {Config.EmployeeDataTable} where _intId={id};")[0] == -1)
                 id = random.Next(100000000, 1000000000);
-            return id.ToString(); 
+            return id.ToString();
         }
         public static string Select(string clientQuerry)
         {
             string[] clause = clientQuerry.Substring(clientQuerry.IndexOf('#') + 1).Split(',');
-            string final = "select * from Employees";
+            string final = "select * from " + Config.EmployeeDataTable;
             if (clause.Length > 0 && clause[0] != "")
             {
                 final += " where";
@@ -73,24 +84,43 @@ namespace EMS_Server
             }
             return final;
         }
-        public static string Add(string clientQuerry) => $"insert into Employees values ({clientQuerry.Substring(clientQuerry.IndexOf('#') + 1)});";
+        public static string Add(string clientQuerry) => $"insert into {Config.EmployeeDataTable} values ({clientQuerry.Substring(clientQuerry.IndexOf('#') + 1)});";
         public static string Update(string clientQuerry)
         {
-            string final = "update Employees set ";
+            string final = $"update {Config.EmployeeDataTable} set ";
             final += clientQuerry.Substring(clientQuerry.IndexOf('#') + 1) + ' ';
             final += clientQuerry.Substring(clientQuerry.IndexOf("where"), clientQuerry.IndexOf('#') - clientQuerry.IndexOf("where")) + ';';
             return final;
         }
-        public static string Delete(string clientQuerry) => $"delete from Employees where _intId={clientQuerry.Substring(clientQuerry.IndexOf('#') + 1)}";
-        public static string GetMonthLog(string clientQuerry)
+        public static string Delete(string clientQuerry) => $"delete from {Config.EmployeeDataTable} where _intId={clientQuerry.Substring(clientQuerry.IndexOf('#') + 1)}";
+        public static string GetMonthLog(string clientQuerry) //get log #_intId, year, month
         {
-            Exception ex = new NotImplementedException("Not implemented yet");
-            return $"{ex.Source + "=>" + ex.Message}";
+            string[] data = clientQuerry.Substring(clientQuerry.IndexOf('#') + 1).Split(',');
+            DateTime time = DateTime.Parse($"{data[1].Trim()}-{data[2].Trim()}-01");
+            return 
+                $"select * from HourLogs" +
+                $" where " +
+                $"((_entry between '{data[1]}-{data[2]}-01' and '{data[1]}-{data[2]}-{DateTime.DaysInMonth(int.Parse(data[1]),int.Parse(data[2]))}') or" +
+                $"(_exit between '{data[1]}-{data[2]}-01' and '{data[1]}-{data[2]}-{DateTime.DaysInMonth(int.Parse(data[1]), int.Parse(data[2]))}'))" +
+                $" and _intId = {data[0]}; ";
         }
-        public static string Left(string clientQuerry)
+        public static string Departure(string _intId)
         {
-            throw new NotImplementedException();
+            string lastArrival = TwoWayCommand($"select top (1) _entry from HourLogs where _intId = {_intId} and _entry is not NULL order by _entry DESC");
+            DateTime lastArrTime = DateTime.Parse(lastArrival);
+            try
+            {
+                DateTime arrivalDate = DateTime.Parse(lastArrival);
+                if(arrivalDate.Day==DateTime.Now.Day)
+                    return $"update HourLogs" +
+                           $" set _exit='{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}' " +
+                           $"where _intId={_intId} and _entry = '{lastArrTime.ToString("yyyy-MM-dd HH:mm:ss")}';";
+                else
+                    return $"insert into HourLogs (_intId, _exit)" +
+                           $" values ({_intId}, '{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}');";
+            }
+            catch (Exception ex) { return ex.Source + Environment.NewLine + ex.Message; }
         }
-        
+        public static string Arrival(string _intId) => $"insert into HourLogs (_intId ,_entry) values ({_intId},'{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}');";
     }
 }
