@@ -73,6 +73,26 @@ namespace EMS_Client.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Black_circle {
+            get {
+                object obj = ResourceManager.GetObject("Black circle", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap global_data_and_hand {
+            get {
+                object obj = ResourceManager.GetObject("global_data_and_hand", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap gmail_logo {
             get {
                 object obj = ResourceManager.GetObject("gmail_logo", resourceCulture);

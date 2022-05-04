@@ -28,82 +28,59 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.lblStandby = new System.Windows.Forms.Label();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StandbyScreen));
             this.picStandbySphere = new System.Windows.Forms.PictureBox();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.panel2 = new System.Windows.Forms.Panel();
+            this.lblStandBy = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.picStandbySphere)).BeginInit();
-            this.panel1.SuspendLayout();
-            this.panel2.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // lblStandby
-            // 
-            this.lblStandby.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblStandby.Font = new System.Drawing.Font("Segoe UI Semibold", 15.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
-            this.lblStandby.ForeColor = System.Drawing.Color.LightSkyBlue;
-            this.lblStandby.Location = new System.Drawing.Point(0, 0);
-            this.lblStandby.Name = "lblStandby";
-            this.lblStandby.Size = new System.Drawing.Size(145, 36);
-            this.lblStandby.TabIndex = 0;
-            this.lblStandby.Text = "Stand by";
-            this.lblStandby.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lblStandby.MouseDown += new System.Windows.Forms.MouseEventHandler(this.lblStandby_MouseDown);
             // 
             // picStandbySphere
             // 
-            this.picStandbySphere.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.picStandbySphere.Image = global::EMS_Client.Properties.Resources.AntiMatterSphere;
-            this.picStandbySphere.Location = new System.Drawing.Point(0, 0);
+            this.picStandbySphere.Image = ((System.Drawing.Image)(resources.GetObject("picStandbySphere.Image")));
+            this.picStandbySphere.Location = new System.Drawing.Point(42, 83);
             this.picStandbySphere.Name = "picStandbySphere";
-            this.picStandbySphere.Size = new System.Drawing.Size(145, 139);
+            this.picStandbySphere.Size = new System.Drawing.Size(175, 175);
             this.picStandbySphere.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.picStandbySphere.TabIndex = 1;
             this.picStandbySphere.TabStop = false;
             this.picStandbySphere.MouseDown += new System.Windows.Forms.MouseEventHandler(this.picStandbySphere_MouseDown);
             // 
-            // panel1
+            // lblStandBy
             // 
-            this.panel1.Controls.Add(this.lblStandby);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(145, 36);
-            this.panel1.TabIndex = 2;
-            // 
-            // panel2
-            // 
-            this.panel2.Controls.Add(this.picStandbySphere);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel2.Location = new System.Drawing.Point(0, 42);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(145, 139);
-            this.panel2.TabIndex = 0;
+            this.lblStandBy.AutoSize = true;
+            this.lblStandBy.BackColor = System.Drawing.Color.Transparent;
+            this.lblStandBy.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblStandBy.ForeColor = System.Drawing.SystemColors.ControlLight;
+            this.lblStandBy.Location = new System.Drawing.Point(82, 32);
+            this.lblStandBy.Name = "lblStandBy";
+            this.lblStandBy.Size = new System.Drawing.Size(95, 28);
+            this.lblStandBy.TabIndex = 2;
+            this.lblStandBy.Text = "Stand by";
             // 
             // StandbyScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.ClientSize = new System.Drawing.Size(145, 181);
-            this.Controls.Add(this.panel2);
-            this.Controls.Add(this.panel1);
+            this.BackgroundImage = global::EMS_Client.Properties.Resources.Black_circle;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.ClientSize = new System.Drawing.Size(263, 270);
+            this.Controls.Add(this.lblStandBy);
+            this.Controls.Add(this.picStandbySphere);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "StandbyScreen";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "StandbyScreen";
             this.Load += new System.EventHandler(this.StandbyScreen_Load);
             ((System.ComponentModel.ISupportInitialize)(this.picStandbySphere)).EndInit();
-            this.panel1.ResumeLayout(false);
-            this.panel2.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
-        private Label lblStandby;
         private PictureBox picStandbySphere;
-        private Panel panel1;
-        private Panel panel2;
+        private Label lblStandBy;
     }
 }

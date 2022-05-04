@@ -44,7 +44,7 @@ namespace EMS_Client
         public EMS_ClientMainScreen()
         {
             InitializeComponent();
-            //PrimaryForms.Push(this);
+            PrimaryForms.Push(this);
             // סימון הכפתורים
             Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 25, 25));
         }
@@ -65,7 +65,10 @@ namespace EMS_Client
         private void EMS_ClientMainScreen_Load(object sender, EventArgs e)
         {
             Login login = new Login();
+            PrimaryForms.Push(login);
             login.ShowDialog();
+            #region Logs Test
+            /*
             string querry = Requests.GetHourLogs(EMS_ClientMainScreen.CurEmployee.IntId, DateTime.Now.Year, DateTime.Now.Month);
             List<string> buffer = new List<string>();
             Action action = Requests.BuildAction(this, new EMS_Library.Network.DataPacket(querry, 5), buffer, true);
@@ -75,7 +78,9 @@ namespace EMS_Client
             Console.WriteLine();
             foreach (var a in log.GetDays)
                 Console.WriteLine(a);
-        } 
+            */
+            #endregion
+        }
 
         #region Buttons
         private void changeButton(Button x, Form form, object sender)

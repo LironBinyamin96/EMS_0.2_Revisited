@@ -44,6 +44,9 @@ namespace EMS_Client.Forms
             InitializeComponent();
             action = act;
             EMS_ClientMainScreen.PrimaryForms.Push(this);
+            System.Drawing.Drawing2D.GraphicsPath shape = new System.Drawing.Drawing2D.GraphicsPath();
+            shape.AddEllipse(5, 5, this.Width-15, this.Height-15);
+            this.Region = new Region(shape);
         }
 
         private void StandbyScreen_Load(object sender, EventArgs e)

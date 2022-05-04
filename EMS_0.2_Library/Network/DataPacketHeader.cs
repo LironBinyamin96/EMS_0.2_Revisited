@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace EMS_Library.Network
 {
-    public class DataPacketHeader
+    public struct DataPacketHeader
     {
         public readonly int HeaderSize = 5;
         public readonly int DataIntLength = 0;
@@ -15,7 +15,7 @@ namespace EMS_Library.Network
         public DataPacketHeader(int length, byte act)
         {
             DataIntLength = length;
-            BitConverter.GetBytes(DataIntLength).CopyTo(DataByteLength, 0);
+            DataByteLength = BitConverter.GetBytes(DataIntLength);
             Act = act;
         }
         public byte[] GetHeader() => BitConverter.GetBytes(DataIntLength).Concat(new byte[] { Act }).ToArray();

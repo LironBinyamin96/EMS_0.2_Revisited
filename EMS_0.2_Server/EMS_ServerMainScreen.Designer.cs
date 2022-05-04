@@ -31,6 +31,8 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EMS_ServerMainScreen));
             this.panelLeft = new System.Windows.Forms.Panel();
+            this.btnSimExit = new System.Windows.Forms.Button();
+            this.btnSimEnter = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.txtServerConsole = new System.Windows.Forms.TextBox();
@@ -38,8 +40,6 @@
             this.panelRight = new System.Windows.Forms.Panel();
             this.cam1Feed = new System.Windows.Forms.PictureBox();
             this.btnExit = new System.Windows.Forms.Button();
-            this.btnSimEnter = new System.Windows.Forms.Button();
-            this.btnSimExit = new System.Windows.Forms.Button();
             this.panelLeft.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
@@ -49,6 +49,7 @@
             // 
             // panelLeft
             // 
+            this.panelLeft.BackColor = System.Drawing.Color.Transparent;
             this.panelLeft.Controls.Add(this.btnSimExit);
             this.panelLeft.Controls.Add(this.btnSimEnter);
             this.panelLeft.Dock = System.Windows.Forms.DockStyle.Left;
@@ -57,13 +58,35 @@
             this.panelLeft.Size = new System.Drawing.Size(184, 715);
             this.panelLeft.TabIndex = 0;
             // 
+            // btnSimExit
+            // 
+            this.btnSimExit.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.btnSimExit.Location = new System.Drawing.Point(0, 669);
+            this.btnSimExit.Name = "btnSimExit";
+            this.btnSimExit.Size = new System.Drawing.Size(184, 23);
+            this.btnSimExit.TabIndex = 1;
+            this.btnSimExit.Text = "Simulate Exit";
+            this.btnSimExit.UseVisualStyleBackColor = true;
+            this.btnSimExit.Click += new System.EventHandler(this.btnSimExit_Click);
+            // 
+            // btnSimEnter
+            // 
+            this.btnSimEnter.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.btnSimEnter.Location = new System.Drawing.Point(0, 692);
+            this.btnSimEnter.Name = "btnSimEnter";
+            this.btnSimEnter.Size = new System.Drawing.Size(184, 23);
+            this.btnSimEnter.TabIndex = 0;
+            this.btnSimEnter.Text = "Simulate Enter";
+            this.btnSimEnter.UseVisualStyleBackColor = true;
+            this.btnSimEnter.Click += new System.EventHandler(this.btnSimEnter_Click);
+            // 
             // pictureBox1
             // 
-            this.pictureBox1.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(582, 279);
+            this.pictureBox1.Location = new System.Drawing.Point(190, 345);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(178, 169);
+            this.pictureBox1.Size = new System.Drawing.Size(699, 370);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
@@ -132,28 +155,6 @@
             this.btnExit.UseVisualStyleBackColor = true;
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click_1);
             // 
-            // btnSimEnter
-            // 
-            this.btnSimEnter.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.btnSimEnter.Location = new System.Drawing.Point(0, 692);
-            this.btnSimEnter.Name = "btnSimEnter";
-            this.btnSimEnter.Size = new System.Drawing.Size(184, 23);
-            this.btnSimEnter.TabIndex = 0;
-            this.btnSimEnter.Text = "Simulate Enter";
-            this.btnSimEnter.UseVisualStyleBackColor = true;
-            this.btnSimEnter.Click += new System.EventHandler(this.btnSimEnter_Click);
-            // 
-            // btnSimExit
-            // 
-            this.btnSimExit.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.btnSimExit.Location = new System.Drawing.Point(0, 669);
-            this.btnSimExit.Name = "btnSimExit";
-            this.btnSimExit.Size = new System.Drawing.Size(184, 23);
-            this.btnSimExit.TabIndex = 1;
-            this.btnSimExit.Text = "Simulate Exit";
-            this.btnSimExit.UseVisualStyleBackColor = true;
-            this.btnSimExit.Click += new System.EventHandler(this.btnSimExit_Click);
-            // 
             // EMS_ServerMainScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -161,9 +162,9 @@
             this.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.ClientSize = new System.Drawing.Size(1318, 715);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.panelRight);
             this.Controls.Add(this.panelLeft);
+            this.Controls.Add(this.pictureBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "EMS_ServerMainScreen";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

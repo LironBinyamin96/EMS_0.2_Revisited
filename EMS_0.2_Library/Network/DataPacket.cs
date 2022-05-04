@@ -9,7 +9,7 @@ using System.Net.Sockets;
 
 namespace EMS_Library.Network
 {
-    public class DataPacket
+    public struct DataPacket
     {
         public readonly DataPacketHeader _header;
         public readonly string StringData;
@@ -37,8 +37,8 @@ namespace EMS_Library.Network
 
                 StringData = Encoding.ASCII.GetString(_byteData, 0, _header.DataIntLength);
             }
-            catch (Exception ex) {
-                Console.WriteLine(ex.ToString());
+            catch {
+                throw new Exception($"Failed to create data packet!");
             }
         }
         /// <summary>
