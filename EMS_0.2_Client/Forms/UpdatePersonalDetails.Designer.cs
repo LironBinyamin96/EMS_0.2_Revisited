@@ -93,6 +93,7 @@
             this.panelUpdatePersonalDetails.Name = "panelUpdatePersonalDetails";
             this.panelUpdatePersonalDetails.Size = new System.Drawing.Size(708, 85);
             this.panelUpdatePersonalDetails.TabIndex = 4;
+            this.panelUpdatePersonalDetails.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panelUpdatePersonalDetails_MouseDown);
             // 
             // btnX
             // 
@@ -118,6 +119,7 @@
             this.lblUpdatePersonalDetails.Size = new System.Drawing.Size(326, 35);
             this.lblUpdatePersonalDetails.TabIndex = 0;
             this.lblUpdatePersonalDetails.Text = "Update Personal Details";
+            this.lblUpdatePersonalDetails.MouseDown += new System.Windows.Forms.MouseEventHandler(this.lblUpdatePersonalDetails_MouseDown);
             // 
             // gUpdatePersonalDetails
             // 

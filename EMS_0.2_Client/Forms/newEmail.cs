@@ -14,8 +14,28 @@ namespace EMS_Client.Forms
 {
     public partial class newEmail : Form
     {
+        #region Drag Window
+        /// <summary>
+        /// Controlls form movement during drag.
+        /// </summary>
+        void Drag(MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                ReleaseCapture();
+                SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
+            }
+        }
+        public const int WM_NCLBUTTONDOWN = 0xA1;
+        public const int HT_CAPTION = 0x2;
+        [System.Runtime.InteropServices.DllImportAttribute("user32.dll")]
+        public static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
+        [System.Runtime.InteropServices.DllImportAttribute("user32.dll")]
+        public static extern bool ReleaseCapture();
+        private void panelNewMail_MouseDown(object sender, MouseEventArgs e) => Drag(e);
+        private void lblNewMail_MouseDown(object sender, MouseEventArgs e) => Drag(e);
+        #endregion
         // בנאי להודעה חדשה
-
         public newEmail()
         {
             InitializeComponent();
@@ -30,9 +50,7 @@ namespace EMS_Client.Forms
             this.to = to;
             this.subject = subject;
         }
-
         private void btnX_Click(object sender, EventArgs e) => Close();
-
         private void btnSend_Click(object sender, EventArgs e)
         {
             //user - "employee.management.system010@gmail.com", pass - "employee.management.system!!@"
@@ -52,7 +70,6 @@ namespace EMS_Client.Forms
             richTextBody.Clear();
             lblFile.Text = "";
         }
-
         private void btnAddFile_Click(object sender, EventArgs e)
         {
             OpenFileDialog opdFile = new OpenFileDialog();
@@ -62,7 +79,6 @@ namespace EMS_Client.Forms
                 lblFile.Text = opdFile.FileName;
             }
         }
-
         private void newEmail_Load(object sender, EventArgs e)
         {
             if (to != "" || subject != "")

@@ -22,7 +22,6 @@
         public const string DefaultId = "111111111";
         public const string DefaultPassword = "111111111";
 
-
         //Variables
         public static byte ServerNamesIterator = 0;
         public static string SQLConnectionString = default;
@@ -32,6 +31,8 @@
         public const string SQLDatabaseName = "EmployeeManagmentDataBase";
         public const string EmployeeDataTable = "Employees";
         public const string EmployeeHourLogsTable = "HourLogs";
+
+        public const string PythonDBConnection = "Driver={SQL Server Native Client 11.0};|Server=DESKTOP-BVFPCJ9\\SQLEXPRESS;|Database=EmployeeManagmentDataBase;|Trusted_Connection=yes;";
         #endregion
 
         public const bool flag = true;

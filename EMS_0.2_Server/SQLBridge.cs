@@ -92,7 +92,13 @@ namespace EMS_Server
             final += clientQuerry.Substring(clientQuerry.IndexOf("where"), clientQuerry.IndexOf('#') - clientQuerry.IndexOf("where")) + ';';
             return final;
         }
-        public static string Delete(string clientQuerry) => $"delete from {Config.EmployeeDataTable} where _intId={clientQuerry.Substring(clientQuerry.IndexOf('#') + 1)}";
+        public static string Delete(string clientQuerry)
+        {
+            string id = clientQuerry.Substring(clientQuerry.IndexOf('#') + 1);
+            return
+                $"delete from {Config.EmployeeHourLogsTable} where _intId={id};"+
+                $"delete from {Config.EmployeeDataTable} where _intId={id};";
+        }
         public static string GetMonthLog(string clientQuerry) //get log #_intId, year, month
         {
             string[] data = clientQuerry.Substring(clientQuerry.IndexOf('#') + 1).Split(',');
@@ -122,5 +128,16 @@ namespace EMS_Server
             catch (Exception ex) { return ex.Source + Environment.NewLine + ex.Message; }
         }
         public static string Arrival(string _intId) => $"insert into HourLogs (_intId ,_entry) values ({_intId},'{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}');";
+    
+        public static void TimestampCheck(KeyValuePair<EMS_Library.MyEmployee.Employee, DateTime> data)
+        {
+
+        }
+    
+    
+    
+    
+    
+    
     }
 }

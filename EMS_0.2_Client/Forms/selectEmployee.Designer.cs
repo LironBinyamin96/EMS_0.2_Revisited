@@ -37,7 +37,6 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.employeesTable = new System.Windows.Forms.DataGridView();
-            this.comboBoxSelect = new System.Windows.Forms.ComboBox();
             this.Type = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.intID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.StateID = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -52,6 +51,7 @@
             this.SalaryModifire = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Phone = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Address = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.comboBoxSelect = new System.Windows.Forms.ComboBox();
             this.panelSelectEmployee.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.employeesTable)).BeginInit();
             this.SuspendLayout();
@@ -66,6 +66,7 @@
             this.panelSelectEmployee.Name = "panelSelectEmployee";
             this.panelSelectEmployee.Size = new System.Drawing.Size(876, 85);
             this.panelSelectEmployee.TabIndex = 2;
+            this.panelSelectEmployee.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panelSelectEmployee_MouseDown);
             // 
             // btnX
             // 
@@ -91,6 +92,7 @@
             this.lblSelectEmployee.Size = new System.Drawing.Size(231, 35);
             this.lblSelectEmployee.TabIndex = 0;
             this.lblSelectEmployee.Text = "Select Employee";
+            this.lblSelectEmployee.MouseDown += new System.Windows.Forms.MouseEventHandler(this.lblSelectEmployee_MouseDown);
             // 
             // btnSaerch
             // 
@@ -168,24 +170,6 @@
             this.employeesTable.Size = new System.Drawing.Size(855, 402);
             this.employeesTable.TabIndex = 43;
             this.employeesTable.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.employeesTable_CellMouseDoubleClick);
-            // 
-            // comboBoxSelect
-            // 
-            this.comboBoxSelect.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
-            this.comboBoxSelect.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.comboBoxSelect.Font = new System.Drawing.Font("Bahnschrift", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.comboBoxSelect.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
-            this.comboBoxSelect.FormattingEnabled = true;
-            this.comboBoxSelect.Items.AddRange(new object[] {
-            "ID",
-            "First Name",
-            "Last Name",
-            "Type"});
-            this.comboBoxSelect.Location = new System.Drawing.Point(241, 92);
-            this.comboBoxSelect.Name = "comboBoxSelect";
-            this.comboBoxSelect.Size = new System.Drawing.Size(147, 24);
-            this.comboBoxSelect.TabIndex = 44;
-            this.comboBoxSelect.Text = "Selection by details";
             // 
             // Type
             // 
@@ -270,6 +254,24 @@
             this.Address.HeaderText = "Address";
             this.Address.Name = "Address";
             this.Address.ReadOnly = true;
+            // 
+            // comboBoxSelect
+            // 
+            this.comboBoxSelect.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
+            this.comboBoxSelect.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.comboBoxSelect.Font = new System.Drawing.Font("Bahnschrift", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.comboBoxSelect.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
+            this.comboBoxSelect.FormattingEnabled = true;
+            this.comboBoxSelect.Items.AddRange(new object[] {
+            "ID",
+            "First Name",
+            "Last Name",
+            "Type"});
+            this.comboBoxSelect.Location = new System.Drawing.Point(241, 92);
+            this.comboBoxSelect.Name = "comboBoxSelect";
+            this.comboBoxSelect.Size = new System.Drawing.Size(147, 24);
+            this.comboBoxSelect.TabIndex = 44;
+            this.comboBoxSelect.Text = "Selection by details";
             // 
             // selectEmployee
             // 

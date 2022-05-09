@@ -32,6 +32,7 @@
             this.btnX = new System.Windows.Forms.Button();
             this.lblAddEmployee = new System.Windows.Forms.Label();
             this.gBoxRegistration = new System.Windows.Forms.GroupBox();
+            this.positionBox = new System.Windows.Forms.ComboBox();
             this.txtFile = new System.Windows.Forms.TextBox();
             this.lblUpload = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -74,7 +75,6 @@
             this.lblID = new System.Windows.Forms.Label();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnClear = new System.Windows.Forms.Button();
-            this.positionBox = new System.Windows.Forms.ComboBox();
             this.panelAddEmployee.SuspendLayout();
             this.gBoxRegistration.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -90,6 +90,7 @@
             this.panelAddEmployee.Name = "panelAddEmployee";
             this.panelAddEmployee.Size = new System.Drawing.Size(708, 85);
             this.panelAddEmployee.TabIndex = 3;
+            this.panelAddEmployee.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panelAddEmployee_MouseDown);
             // 
             // btnX
             // 
@@ -115,6 +116,7 @@
             this.lblAddEmployee.Size = new System.Drawing.Size(266, 35);
             this.lblAddEmployee.TabIndex = 0;
             this.lblAddEmployee.Text = "Add New Employee";
+            this.lblAddEmployee.MouseDown += new System.Windows.Forms.MouseEventHandler(this.lblAddEmployee_MouseDown);
             // 
             // gBoxRegistration
             // 
@@ -167,6 +169,23 @@
             this.gBoxRegistration.TabIndex = 4;
             this.gBoxRegistration.TabStop = false;
             this.gBoxRegistration.Text = "Registration";
+            // 
+            // positionBox
+            // 
+            this.positionBox.FormattingEnabled = true;
+            this.positionBox.Items.AddRange(new object[] {
+            "HR_Boss",
+            "HR_Grunt",
+            "IT_Boss",
+            "IT_Grunt",
+            "Maintenance_Boss",
+            "Mechanic",
+            "Worker",
+            "Suplementary"});
+            this.positionBox.Location = new System.Drawing.Point(275, 133);
+            this.positionBox.Name = "positionBox";
+            this.positionBox.Size = new System.Drawing.Size(102, 24);
+            this.positionBox.TabIndex = 41;
             // 
             // txtFile
             // 
@@ -557,23 +576,6 @@
             this.btnClear.Text = "Clear";
             this.btnClear.UseVisualStyleBackColor = true;
             this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
-            // 
-            // positionBox
-            // 
-            this.positionBox.FormattingEnabled = true;
-            this.positionBox.Items.AddRange(new object[] {
-            "HR_Boss",
-            "HR_Grunt",
-            "IT_Boss",
-            "IT_Grunt",
-            "Maintenance_Boss",
-            "Mechanic",
-            "Worker",
-            "Suplementary"});
-            this.positionBox.Location = new System.Drawing.Point(275, 133);
-            this.positionBox.Name = "positionBox";
-            this.positionBox.Size = new System.Drawing.Size(102, 24);
-            this.positionBox.TabIndex = 41;
             // 
             // addEmployee
             // 

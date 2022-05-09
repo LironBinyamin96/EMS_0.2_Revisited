@@ -15,13 +15,35 @@ namespace EMS_Client.Forms
 {
     public partial class selectEmployee : Form
     {
+        #region Variables
+        List<string> buffer = new List<string>();
+        #endregion
+        #region Drag Window
+        /// <summary>
+        /// Controlls form movement during drag.
+        /// </summary>
+        void Drag(MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                ReleaseCapture();
+                SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
+            }
+        }
+        public const int WM_NCLBUTTONDOWN = 0xA1;
+        public const int HT_CAPTION = 0x2;
+        [System.Runtime.InteropServices.DllImportAttribute("user32.dll")]
+        public static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
+        [System.Runtime.InteropServices.DllImportAttribute("user32.dll")]
+        public static extern bool ReleaseCapture();
+        private void panelSelectEmployee_MouseDown(object sender, MouseEventArgs e) => Drag(e);
+        private void lblSelectEmployee_MouseDown(object sender, MouseEventArgs e) => Drag(e);
+
+        #endregion
         public selectEmployee()
         {
             InitializeComponent();
         }
-
-        List<string> buffer = new List<string>();
-
         private void btnSaerch_Click(object sender, EventArgs e)
         {
             MessageBox.Show(txtSaerch.Text.Length.ToString());
@@ -55,8 +77,6 @@ namespace EMS_Client.Forms
             MessageBox.Show(EMS_ClientMainScreen.employee.ToString());
             Close();
         }
-
-        private void btnX_Click(object sender, EventArgs e) => Close();
-
+        private void btnX_Click(object sender, EventArgs e) => Close();   
     }
 }

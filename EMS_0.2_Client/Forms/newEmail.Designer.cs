@@ -60,6 +60,7 @@
             this.panelNewMail.Name = "panelNewMail";
             this.panelNewMail.Size = new System.Drawing.Size(656, 85);
             this.panelNewMail.TabIndex = 2;
+            this.panelNewMail.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panelNewMail_MouseDown);
             // 
             // btnX
             // 
@@ -85,6 +86,7 @@
             this.lblNewMail.Size = new System.Drawing.Size(133, 35);
             this.lblNewMail.TabIndex = 0;
             this.lblNewMail.Text = "New Mail";
+            this.lblNewMail.MouseDown += new System.Windows.Forms.MouseEventHandler(this.lblNewMail_MouseDown);
             // 
             // txtTo
             // 

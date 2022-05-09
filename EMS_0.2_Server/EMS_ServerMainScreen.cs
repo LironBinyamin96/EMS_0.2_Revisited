@@ -21,18 +21,8 @@ namespace EMS_Server
         #region Variables
         TcpListener listener = new TcpListener(System.Net.IPAddress.Parse(EMS_Library.Config.ServerIP), EMS_Library.Config.ServerPort);
         TcpClient client = null;
-
-        private VideoCapture cam;
-        private Image<Bgr, Byte> curFrame;
-        Mat frame = new Mat();
-        CascadeClassifier faceCascadeClassifire = new CascadeClassifier("haarcascade_frontalface_alt.xml");
-        
-        EigenFaceRecognizer recognizer;
-        List<int> personsLabels = new List<int>();
-        List<int> employeeIds = new List<int>();
         Process FR_Process = new Process();
-
-
+        bool scheduleForceExits = true;
         #endregion
 
         #region Tasks&Tokens
@@ -59,10 +49,6 @@ namespace EMS_Server
             listner_CXL = listner_CXL_Src.Token;
             SQLServerLookup = BuildSQLServerLookup();
             SQLLookup_CXL = SQLLookup_CXL_Src.Token;
-            FRTrainer = BuildFRTrainer();
-            FRTrainer_CXL = FRTrainer_CXL_Src.Token;
-            FR_Process.StartInfo.FileName = EMS_Library.Config.FR_Location;
-
             TestingTask = TestingTaskBuilder();
         }
 
@@ -74,66 +60,36 @@ namespace EMS_Server
             listeningTask.Start();
             TestingTask.Start();
 
-            #region Deprecated FR
-            //FRTrainer.Start();
-            //cam = new VideoCapture();
-            //cam.ImageGrabbed += ProcessFrame;
-            //cam.Start();
-            #endregion
+            listnerTimer.Interval = 60000;
+            listnerTimer.Start();
+
         }
         private void listnerTimer_Tick(object sender, EventArgs e)
         {
+            /*
             client.Close();
             client.Dispose();
             WriteToServerConsole("Client aborted!");
             listnerTimer.Stop();
+            */
+            if (EMS_Library.Config.SQLConnectionString != default)
+            {
+                if ((DateTime.Now + new TimeSpan(300000000000)).Day >= DateTime.Now.Day + 1)
+                {
+                    if (scheduleForceExits)
+                    {
+                        scheduleForceExits = false;
+                        SQLBridge.TwoWayCommand("update HourLogs set _exit='01-01-0001 00:00:00' where _exit is null;");
+                    }
+                }
+                else scheduleForceExits = true;
+            }
         }
         private void pictureBox1_Click(object sender, EventArgs e)
         {
+
         }
-        private void txtServerConsole_TextChanged(object sender, EventArgs e)
-        {
-            string[] temp = txtServerConsole.Text.Split(Environment.NewLine);
-            switch (temp[temp.Length - 2].ToLower())
-            {
-                default: break;
-                case "close": { Close(); break; }
-                case "terminate": { Close(); break; }
-                case "exit": { Close(); break; }
-                case "shutdown": { Close(); break; }
-                case "fr powerup": { FR_Process.Start(); break; }
-                case "fr shutdown": { FR_Process.Close(); break; }
-            }
-        }
-        private void btnExit_Click_1(object sender, EventArgs e) => Close();
-        public void ProcessFrame(object sender, EventArgs e)
-        {
-            cam.Retrieve(frame, 0);
-            curFrame = frame.ToImage<Bgr, Byte>().Resize(cam1Feed.Width, cam1Feed.Height, Inter.Cubic);
-            cam1Feed.Image = curFrame.ToBitmap();
-            Mat gray = new Mat();
-            CvInvoke.CvtColor(curFrame, gray, ColorConversion.Bgr2Gray);
-            CvInvoke.EqualizeHist(gray, gray);
-            Rectangle[] faces = faceCascadeClassifire.DetectMultiScale(gray, 1.1, 3, Size.Empty, Size.Empty);
-            if (faces.Length > 0) //if detected face
-            {
-                foreach (Rectangle face in faces)
-                {
-                    
-                    CvInvoke.Rectangle(curFrame, face, new Bgr(Color.Red).MCvScalar, 2, LineType.Filled);
-                    if(FRTrainer.IsCompleted)
-                    {
-                        try { 
-                        var result = recognizer.Predict(curFrame);
-                        CvInvoke.PutText(curFrame, employeeIds[result.Label].ToString(), new Point(face.X - 2, face.Y - 2),
-                                        FontFace.HersheyComplex, 1.0, new Bgr(Color.Orange).MCvScalar);
-                        }catch (Exception ex) { WriteToServerConsole(ex.Message); }
-                    }
-                    
-                    cam1Feed.Image = curFrame.ToBitmap();
-                }
-            }
-        }
+        private void btnExit_Click_1(object sender, EventArgs e) => Close();      
         private void btnSimExit_Click(object sender, EventArgs e)
         {
             WriteToServerConsole(SQLBridge.Departure("111111111"));
@@ -144,7 +100,6 @@ namespace EMS_Server
             WriteToServerConsole(SQLBridge.Arrival("111111111"));
             WriteToServerConsole(SQLBridge.OneWayCommand(SQLBridge.Arrival("111111111")));
         }
-
         #endregion
 
         #region NonEvent Methods
@@ -215,36 +170,7 @@ namespace EMS_Server
                     }
                 }
             }, SQLLookup_CXL);
-        }
-        public Task BuildFRTrainer()
-        {
-            return new Task(() =>
-            {
-                if (!SQLServerLookup.IsCompleted) SQLServerLookup.Wait();
-                while (!SQLServerLookup.IsCompleted) { }
-                if (!Directory.Exists(EMS_Library.Config.RootDirectory)) throw new Exception("Root directory doesn't exist!");
-                string[] _intIdsString = SQLBridge.TwoWayCommand("select _intId from "+EMS_Library.Config.EmployeeDataTable).Split('|');
-                List<EmployeeDirectory> empDirs = new List<EmployeeDirectory>();
-                foreach (string _intId in _intIdsString)
-                    if (_intId.Length == 9)
-                        empDirs.Add(new EmployeeDirectory(int.Parse(_intId)));
-                foreach(EmployeeDirectory employeeDirectory in empDirs)
-                {
-                    List<Mat> matList = new List<Mat>();
-                    List<int> empImageCounter = new List<int>();
-                    int imagesCount = 0;
-                    foreach (var file in employeeDirectory.TrainingImmagesDir.GetFiles())
-                    {
-                        personsLabels.Add(imagesCount++);
-                        matList.Add(new Mat(file.FullName));
-                    };
-                    employeeIds.Add(employeeDirectory.IntId);
-                    recognizer = new EigenFaceRecognizer(imagesCount, 7000);
-                    recognizer.Train(matList.ToArray(), personsLabels.ToArray());
-                    WriteToServerConsole("FR Trained");
-                }
-            }, FRTrainer_CXL);
-        }
+        }  
         private Task TestingTaskBuilder()
         {
             return new Task(() =>
@@ -280,9 +206,9 @@ namespace EMS_Server
                 */
                 #endregion
                 #region Get me some logs
-                string responce = SQLBridge.TwoWayCommand(SQLBridge.GetMonthLog($"get log #111111111, 2022, 04"));
+                string responce = SQLBridge.TwoWayCommand(SQLBridge.GetMonthLog($"get log #111111111, 2022, 05"));
                 WriteToServerConsole(responce);
-                HoursLogMonth log = new HoursLogMonth( responce);
+                HoursLogMonth log = new HoursLogMonth(responce);
                 foreach(var a in log.GetDays)
                 {
                     WriteToServerConsole(a.ToString());
@@ -292,5 +218,23 @@ namespace EMS_Server
             });
         }
         #endregion
+
+        private void txtServerConsole_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if(e.KeyChar == 13)
+            {
+                string[] temp = txtServerConsole.Text.Split(Environment.NewLine);
+                switch (temp[temp.Length - 1].ToLower())
+                {
+                    default: break;
+                    case "close": { Close(); break; }
+                    case "terminate": { Close(); break; }
+                    case "exit": { Close(); break; }
+                    case "shutdown": { Close(); break; }
+                    case "fr powerup": { try { FR_Process.Start(); } catch { } break;  }
+                    case "fr shutdown": { try { FR_Process.Close(); } catch { } break; }
+                }
+            }
+        }
     }
 }
