@@ -66,12 +66,6 @@ namespace EMS_Server
         }
         private void listnerTimer_Tick(object sender, EventArgs e)
         {
-            /*
-            client.Close();
-            client.Dispose();
-            WriteToServerConsole("Client aborted!");
-            listnerTimer.Stop();
-            */
             if (EMS_Library.Config.SQLConnectionString != default)
             {
                 if ((DateTime.Now + new TimeSpan(300000000000)).Day >= DateTime.Now.Day + 1)
@@ -87,7 +81,7 @@ namespace EMS_Server
         }
         private void pictureBox1_Click(object sender, EventArgs e)
         {
-
+            TestingTask.Start();
         }
         private void btnExit_Click_1(object sender, EventArgs e) => Close();      
         private void btnSimExit_Click(object sender, EventArgs e)
@@ -213,6 +207,9 @@ namespace EMS_Server
                 {
                     WriteToServerConsole(a.ToString());
                 }
+                #endregion
+                #region Write Logs to file
+                System.IO.File.WriteAllText(EMS_Library.Config.RootDirectory+"\\log.json", log.JSON());
                 #endregion
 
             });

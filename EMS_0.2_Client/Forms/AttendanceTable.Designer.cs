@@ -28,14 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.panelAttendance = new System.Windows.Forms.Panel();
             this.lblAttendance = new System.Windows.Forms.Label();
+            this.btnPrint = new System.Windows.Forms.Button();
             this.btnSelect = new System.Windows.Forms.Button();
             this.GridViewAttrndance = new System.Windows.Forms.DataGridView();
-            this.Date = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Day = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Clock_data = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Amount_of_hours = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.txtName = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.lblEmployeename = new System.Windows.Forms.Label();
@@ -48,8 +46,10 @@
             this.txtID = new System.Windows.Forms.TextBox();
             this.panel4 = new System.Windows.Forms.Panel();
             this.lblID = new System.Windows.Forms.Label();
+            this.getDaysBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.panelAttendance.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GridViewAttrndance)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.getDaysBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // panelAttendance
@@ -73,6 +73,16 @@
             this.lblAttendance.TabIndex = 0;
             this.lblAttendance.Text = "Attendance";
             // 
+            // btnPrint
+            // 
+            this.btnPrint.Location = new System.Drawing.Point(671, 109);
+            this.btnPrint.Name = "btnPrint";
+            this.btnPrint.Size = new System.Drawing.Size(75, 23);
+            this.btnPrint.TabIndex = 1;
+            this.btnPrint.Text = "Print";
+            this.btnPrint.UseVisualStyleBackColor = true;
+            this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
+            // 
             // btnSelect
             // 
             this.btnSelect.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -89,45 +99,20 @@
             // 
             // GridViewAttrndance
             // 
+            this.GridViewAttrndance.AllowUserToAddRows = false;
+            this.GridViewAttrndance.AllowUserToDeleteRows = false;
+            this.GridViewAttrndance.AutoGenerateColumns = false;
             this.GridViewAttrndance.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.GridViewAttrndance.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
             this.GridViewAttrndance.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.GridViewAttrndance.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.GridViewAttrndance.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Date,
-            this.Day,
-            this.Clock_data,
-            this.Amount_of_hours});
+            this.GridViewAttrndance.DataSource = this.getDaysBindingSource;
             this.GridViewAttrndance.Location = new System.Drawing.Point(12, 185);
             this.GridViewAttrndance.Name = "GridViewAttrndance";
             this.GridViewAttrndance.ReadOnly = true;
             this.GridViewAttrndance.RowTemplate.Height = 25;
             this.GridViewAttrndance.Size = new System.Drawing.Size(734, 378);
             this.GridViewAttrndance.TabIndex = 5;
-            // 
-            // Date
-            // 
-            this.Date.HeaderText = "Date";
-            this.Date.Name = "Date";
-            this.Date.ReadOnly = true;
-            // 
-            // Day
-            // 
-            this.Day.HeaderText = "Day";
-            this.Day.Name = "Day";
-            this.Day.ReadOnly = true;
-            // 
-            // Clock_data
-            // 
-            this.Clock_data.HeaderText = "Clock data";
-            this.Clock_data.Name = "Clock_data";
-            this.Clock_data.ReadOnly = true;
-            // 
-            // Amount_of_hours
-            // 
-            this.Amount_of_hours.HeaderText = "Amount of hours";
-            this.Amount_of_hours.Name = "Amount_of_hours";
-            this.Amount_of_hours.ReadOnly = true;
             // 
             // txtName
             // 
@@ -241,12 +226,17 @@
             this.lblID.TabIndex = 15;
             this.lblID.Text = "ID :";
             // 
+            // getDaysBindingSource
+            // 
+            this.getDaysBindingSource.DataMember = "GetDays";
+            // 
             // AttendanceTable
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
             this.ClientSize = new System.Drawing.Size(758, 575);
+            this.Controls.Add(this.btnPrint);
             this.Controls.Add(this.txtID);
             this.Controls.Add(this.panel4);
             this.Controls.Add(this.lblID);
@@ -269,6 +259,7 @@
             this.panelAttendance.ResumeLayout(false);
             this.panelAttendance.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GridViewAttrndance)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.getDaysBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -280,10 +271,6 @@
         private Label lblAttendance;
         private Button btnSelect;
         private DataGridView GridViewAttrndance;
-        private DataGridViewTextBoxColumn Date;
-        private DataGridViewTextBoxColumn Day;
-        private DataGridViewTextBoxColumn Clock_data;
-        private DataGridViewTextBoxColumn Amount_of_hours;
         private TextBox txtName;
         private Panel panel1;
         private Label lblEmployeename;
@@ -296,5 +283,7 @@
         private TextBox txtID;
         private Panel panel4;
         private Label lblID;
+        private Button btnPrint;
+        private BindingSource getDaysBindingSource;
     }
 }

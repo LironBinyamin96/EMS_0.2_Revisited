@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Runtime.Serialization;
 
 namespace EMS_Library.MyEmployee.HoursLog
 {
@@ -15,9 +16,10 @@ namespace EMS_Library.MyEmployee.HoursLog
         int _intId;
         int _month;
         HoursLogDay[] _days;
-        public HoursLogDay[] GetDays => _days;
-        public int IntId => _intId;
-        public int Month => _month;
+
+        public HoursLogDay[] GetDays { get => _days; set => _days = value; }
+        public int IntId { get => _intId; set => _intId = value; }
+        public int Month { get => _month; set => _month = value; }
         public HoursLogMonth(string data)
         {
             string[] dataArr = data.Split('|');
@@ -28,7 +30,7 @@ namespace EMS_Library.MyEmployee.HoursLog
         }
         public HoursLogMonth(int _intId, string[] days)
         {
-            this._intId= _intId;
+            this._intId = _intId;
             _days = Array.ConvertAll(days, x => new HoursLogDay(x));
             _month = _days[0].Start.Month;
         }
@@ -39,6 +41,14 @@ namespace EMS_Library.MyEmployee.HoursLog
             Array.Copy(days, _days, days.Length);
             _month = _days[0].Start.Month;
         }
-        
+        public string JSON()
+        {
+            string json = $"{{\"ID\": \"{_intId}\", \"Month\": \"{_month}\", \"Days\": [";
+            foreach(HoursLogDay day in _days)
+                json+=day.JSON()+',';
+            json=json.Remove(json.Length - 1);
+            json += "]}";
+            return json;
+        }
     }
 }

@@ -49,7 +49,7 @@ namespace EMS_Client
                         NetworkStream stream = tcpClient.GetStream();
                         stream.Write(data.Write(), 0, data.GetTotalSize());
                         DataPacket responce = new DataPacket(stream);
-                        Console.WriteLine(responce.StringData);
+                        //Console.WriteLine(responce.StringData);
                         string[] processed = responce.StringData.Split('|'); //Removed removal of last char
                         foreach (string a in processed)
                             buffer.Add(a);

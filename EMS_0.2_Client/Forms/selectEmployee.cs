@@ -17,6 +17,7 @@ namespace EMS_Client.Forms
     {
         #region Variables
         List<string> buffer = new List<string>();
+        Form callerForm;
         #endregion
         #region Drag Window
         /// <summary>
@@ -40,9 +41,10 @@ namespace EMS_Client.Forms
         private void lblSelectEmployee_MouseDown(object sender, MouseEventArgs e) => Drag(e);
 
         #endregion
-        public selectEmployee()
+        public selectEmployee(Form caller)
         {
             InitializeComponent();
+            callerForm = caller;
         }
         private void btnSaerch_Click(object sender, EventArgs e)
         {
@@ -72,9 +74,12 @@ namespace EMS_Client.Forms
         private void employeesTable_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             int indexRow = employeesTable.CurrentCell.RowIndex;
-            MessageBox.Show(indexRow.ToString());
+            //MessageBox.Show(indexRow.ToString());
             EMS_ClientMainScreen.employee = Employee.ActivateEmployee(buffer[indexRow].Remove(buffer[indexRow].Length - 1).Split(','));
-            MessageBox.Show(EMS_ClientMainScreen.employee.ToString());
+            //MessageBox.Show(EMS_ClientMainScreen.employee.ToString());
+            
+            callerForm.Activate();
+            //callerForm.Focus();
             Close();
         }
         private void btnX_Click(object sender, EventArgs e) => Close();   

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Runtime.Serialization.Json;
 
 namespace EMS_Library
 {
@@ -30,6 +31,17 @@ namespace EMS_Library
 
         }
         public static DateTime RandomDateTime() => new DateTime(RandomInt(1800, 2022), RandomInt(1, 13), RandomInt(1, 29), RandomInt(0,24), RandomInt(0, 60), RandomInt(0, 60));
-        
+        public static string ToJson<T>(this T value, Encoding encoding)
+        {
+            var serializer = new DataContractJsonSerializer(typeof(T));
+            using (var stream = new MemoryStream())
+            {
+                using (var writer = JsonReaderWriterFactory.CreateJsonWriter(stream, encoding))
+                {
+                    serializer.WriteObject(writer, value);
+                }
+                return encoding.GetString(stream.ToArray());
+            }
+        }
     }
 }

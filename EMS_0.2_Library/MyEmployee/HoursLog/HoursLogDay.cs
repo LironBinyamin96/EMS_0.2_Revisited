@@ -32,9 +32,10 @@ namespace EMS_Library.MyEmployee.HoursLog
             }
             catch { return; }
         }
-        public DateTime Start => _start;
-        public DateTime End => _end;
-        public TimeSpan TotalHours => _totalHours;
+        public DateTime Start { get => _start; set => _start = value; }
+        public DateTime End { get => _end; set => _end = value; }
+        public TimeSpan TotalHours { get => _totalHours; set => _totalHours = value; }
         public override string ToString() => $"Start: {_start}, End: {_end}, Total: {_totalHours}.";
+        public string JSON() => '{' + $"\"Start\": \"{_start}\", \"End\": \"{_end}\", \"Total\": \"{_totalHours}\"" + '}'; 
     }
 }

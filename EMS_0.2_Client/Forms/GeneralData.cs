@@ -19,7 +19,7 @@ namespace EMS_Client.Forms
 
         private void btnSelect_Click(object sender, EventArgs e)
         {
-            selectEmployee select_Employee = new selectEmployee();
+            selectEmployee select_Employee = new selectEmployee(this);
             select_Employee.Show();
         }
     }

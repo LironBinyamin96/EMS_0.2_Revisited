@@ -67,19 +67,6 @@ namespace EMS_Client
             Login login = new Login();
             PrimaryForms.Push(login);
             login.ShowDialog();
-            #region Logs Test
-            /*
-            string querry = Requests.GetHourLogs(EMS_ClientMainScreen.CurEmployee.IntId, DateTime.Now.Year, DateTime.Now.Month);
-            List<string> buffer = new List<string>();
-            Action action = Requests.BuildAction(this, new EMS_Library.Network.DataPacket(querry, 5), buffer, true);
-            new StandbyScreen(action).ShowDialog();
-            HoursLogDay[] hoursLogDays = Array.ConvertAll(buffer.ToArray(), x=> new HoursLogDay(x));
-            HoursLogMonth log = new HoursLogMonth(CurEmployee.IntId, hoursLogDays);
-            Console.WriteLine();
-            foreach (var a in log.GetDays)
-                Console.WriteLine(a);
-            */
-            #endregion
         }
 
         #region Buttons
