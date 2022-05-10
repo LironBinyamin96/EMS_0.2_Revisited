@@ -200,6 +200,7 @@ namespace EMS_Server
                 */
                 #endregion
                 #region Get me some logs
+                /*
                 string responce = SQLBridge.TwoWayCommand(SQLBridge.GetMonthLog($"get log #111111111, 2022, 05"));
                 WriteToServerConsole(responce);
                 HoursLogMonth log = new HoursLogMonth(responce);
@@ -207,11 +208,13 @@ namespace EMS_Server
                 {
                     WriteToServerConsole(a.ToString());
                 }
+                */
                 #endregion
                 #region Write Logs to file
-                System.IO.File.WriteAllText(EMS_Library.Config.RootDirectory+"\\log.json", log.JSON());
+                //System.IO.File.WriteAllText(EMS_Library.Config.RootDirectory+"\\log.json", log.JSON());
                 #endregion
-
+                //Employee emp = Employee.ActivateEmployee(SQLBridge.TwoWayCommand("select * from Employees where _intId=111111111;").Split('|')[0].Split(','));
+                //WriteToServerConsole(emp.GetDirectory.ToString());
             });
         }
         #endregion
