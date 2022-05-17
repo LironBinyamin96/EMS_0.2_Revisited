@@ -50,7 +50,7 @@ namespace EMS_Library.Network
         /// <exception cref="Exception"></exception>
         public DataPacket(string data, byte func)
         {
-            if (data.Length > Math.Pow(255,4)-20) throw new Exception("Data is too long! 4294967296 max! Lenght was " + data.Length);
+            if (data.Length > Math.Pow(255,4)-20) throw new Exception("Data is too long! 4294967296 max! Length was " + data.Length);
             if (data.Length == 0) data = " ";
             _header = new DataPacketHeader(data.Length, func);
             StringData = data;

@@ -4,14 +4,11 @@ using System.Data.SqlClient;
 using System.Data.Sql;
 using System.Text.RegularExpressions;
 using System.Drawing;
-using Emgu.CV;
-using Emgu.CV.Structure;
-using Emgu.CV.CvEnum;
-using Emgu.CV.Face;
 using EMS_Library.MyEmployee;
 using EMS_Library.MyEmployee.HoursLog;
 using EMS_Library.MyEmployee.Divisions;
 using EMS_Library.Network;
+
 
 namespace EMS_Server
 {
@@ -34,10 +31,6 @@ namespace EMS_Server
         public CancellationTokenSource SQLLookup_CXL_Src = new CancellationTokenSource();
         CancellationToken SQLLookup_CXL;
 
-        public Task FRTrainer;
-        public CancellationTokenSource FRTrainer_CXL_Src = new CancellationTokenSource();
-        CancellationToken FRTrainer_CXL;
-
         public Task TestingTask;
 
         #endregion
@@ -50,6 +43,9 @@ namespace EMS_Server
             SQLServerLookup = BuildSQLServerLookup();
             SQLLookup_CXL = SQLLookup_CXL_Src.Token;
             TestingTask = TestingTaskBuilder();
+            WriteToConfigFile();
+
+
         }
 
         #region Event Methods
@@ -81,9 +77,8 @@ namespace EMS_Server
         }
         private void pictureBox1_Click(object sender, EventArgs e)
         {
-            TestingTask.Start();
         }
-        private void btnExit_Click_1(object sender, EventArgs e) => Close();      
+        private void btnExit_Click_1(object sender, EventArgs e) => Close();
         private void btnSimExit_Click(object sender, EventArgs e)
         {
             WriteToServerConsole(SQLBridge.Departure("111111111"));
@@ -104,6 +99,18 @@ namespace EMS_Server
                 txtServerConsole.AppendText(text + Environment.NewLine);
                 Console.WriteLine(text + "\n");
             });
+        }
+        private void WriteToConfigFile()
+        {
+            string str = $"" +
+                $"ServerIP#{EMS_Library.Config.ServerIP}" + Environment.NewLine +
+                $"ServerPort#{EMS_Library.Config.ServerPort}\n" + Environment.NewLine +
+                $"RootDirectory#{EMS_Library.Config.RootDirectory}\n" + Environment.NewLine +
+                $"FR_Location#{EMS_Library.Config.FR_Location}\n" + Environment.NewLine +
+                $"PythonDBConnection#{EMS_Library.Config.PythonDBConnection}\n" + Environment.NewLine +
+                $"NormalShiftLength#{EMS_Library.Config.NormalShiftLength}\n" + Environment.NewLine +
+                $"MaxShiftLength#{ EMS_Library.Config.MaxShiftLength}";
+            System.IO.File.WriteAllText(Directory.GetCurrentDirectory()+"\\Config.txt", str);
         }
         public Task BuildServerTask()
         {
@@ -164,7 +171,14 @@ namespace EMS_Server
                     }
                 }
             }, SQLLookup_CXL);
-        }  
+        }
+        public Task FR()
+        {
+            return new Task(() => {
+                var py = IronPython.Hosting.Python.CreateEngine();
+                py.ExecuteFile("IdentifyAndUpdateHours.py");
+            });
+        }
         private Task TestingTaskBuilder()
         {
             return new Task(() =>
@@ -201,13 +215,10 @@ namespace EMS_Server
                 #endregion
                 #region Get me some logs
                 /*
-                string responce = SQLBridge.TwoWayCommand(SQLBridge.GetMonthLog($"get log #111111111, 2022, 05"));
-                WriteToServerConsole(responce);
-                HoursLogMonth log = new HoursLogMonth(responce);
-                foreach(var a in log.GetDays)
-                {
-                    WriteToServerConsole(a.ToString());
-                }
+                string logData = SQLBridge.TwoWayCommand(SQLBridge.GetMonthLog($"get log #111111111, 2022, 05"));
+                string employee = SQLBridge.TwoWayCommand("select * from Employees where _intId=111111111");
+                HoursLogMonth log = new HoursLogMonth(logData, Employee.ActivateEmployee(employee.Split('|')[0].Split(',')));
+                WriteToServerConsole(log.JSON());
                 */
                 #endregion
                 #region Write Logs to file
@@ -215,13 +226,15 @@ namespace EMS_Server
                 #endregion
                 //Employee emp = Employee.ActivateEmployee(SQLBridge.TwoWayCommand("select * from Employees where _intId=111111111;").Split('|')[0].Split(','));
                 //WriteToServerConsole(emp.GetDirectory.ToString());
+
+                //FR().Start();
             });
         }
         #endregion
 
         private void txtServerConsole_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if(e.KeyChar == 13)
+            if (e.KeyChar == 13)
             {
                 string[] temp = txtServerConsole.Text.Split(Environment.NewLine);
                 switch (temp[temp.Length - 1].ToLower())
@@ -231,7 +244,7 @@ namespace EMS_Server
                     case "terminate": { Close(); break; }
                     case "exit": { Close(); break; }
                     case "shutdown": { Close(); break; }
-                    case "fr powerup": { try { FR_Process.Start(); } catch { } break;  }
+                    case "fr powerup": { try { FR_Process.Start(); } catch { } break; }
                     case "fr shutdown": { try { FR_Process.Close(); } catch { } break; }
                 }
             }

@@ -13,42 +13,66 @@ namespace EMS_Library.MyEmployee.HoursLog
     /// </summary>
     public class HoursLogMonth
     {
-        int _intId;
+        Employee _employee;
         int _month;
+        int _year;
         HoursLogDay[] _days;
 
-        public HoursLogDay[] GetDays { get => _days; set => _days = value; }
-        public int IntId { get => _intId; set => _intId = value; }
+        public HoursLogDay[] Days { get => _days; set => _days = value; }
         public int Month { get => _month; set => _month = value; }
-        public HoursLogMonth(string data)
+        public TimeSpan Total
         {
-            string[] dataArr = data.Split('|');
-            string[] day = dataArr[0].Split(',');
-            _intId = int.Parse(day[0]);
-            _month = DateTime.Parse(day[1]).Month;
-            _days = (Array.ConvertAll(dataArr, x => new HoursLogDay(x)));
+            get
+            {
+                TimeSpan sum = TimeSpan.Zero;
+                foreach (HoursLogDay day in Days)
+                    if(day!=null)
+                        sum+=day.Total;
+                return sum;
+            }
         }
-        public HoursLogMonth(int _intId, string[] days)
+        public TimeSpan TotalOvertime 
+        { 
+            get 
+            {
+                TimeSpan sum = TimeSpan.Zero;
+                foreach (HoursLogDay day in Days)
+                    if (day != null)
+                        sum += day.TotalOvertime;
+                return sum;
+            } 
+        }
+        
+        public HoursLogMonth(string data, Employee employee)
         {
-            this._intId = _intId;
-            _days = Array.ConvertAll(days, x => new HoursLogDay(x));
-            _month = _days[0].Start.Month;
+            _employee = employee;
+            HoursLogEntry[] entries = Array.ConvertAll(data.Split('|'), x => new HoursLogEntry(x));
+            DateTime tempDate = entries[0].Start;
+            _month = tempDate.Month;
+            _year = tempDate.Year;
+            int daysInMonth = DateTime.DaysInMonth(_year, _month);
+            _days = new HoursLogDay[daysInMonth];
+
+            for (int i = 0; i < daysInMonth; i++)
+                _days[i] = new HoursLogDay(Array.FindAll(entries, x => x.Start.Day==i));
         }
-        public HoursLogMonth(int _intId, HoursLogDay[] days)
-        {
-            this._intId = _intId;
-            _days = new HoursLogDay[days.Length];
-            Array.Copy(days, _days, days.Length);
-            _month = _days[0].Start.Month;
-        }
+
         public string JSON()
         {
-            string json = $"{{\"ID\": \"{_intId}\", \"Month\": \"{_month}\", \"Days\": [";
-            foreach(HoursLogDay day in _days)
-                json+=day.JSON()+',';
-            json=json.Remove(json.Length - 1);
-            json += "]}";
-            return json;
+            string hold = $"{{" +
+                $"\"InternalID\": \"{_employee.IntId}\"," +
+                $"\"StateID\": \"{_employee.StateId}\"," +
+                $"\"Full Name\":\"{_employee.FName} {_employee.LName}\"," +
+                $"\"Year\":\"{_year}\"," +
+                $"\"Month\":\"{_month}\"," +
+                $"\"MonthlyHours\":\"{Total}\"," +
+                $"\"TotalOvertime\":\"{Config.NormalShiftLength}\"," +
+                $"\"Days\":[";
+            foreach (HoursLogDay day in _days) 
+                hold+=(day!=null?day.JSON():"{}")+',';
+            hold=hold.Remove(hold.Length - 1);
+            hold += "]}";
+            return hold;
         }
     }
 }

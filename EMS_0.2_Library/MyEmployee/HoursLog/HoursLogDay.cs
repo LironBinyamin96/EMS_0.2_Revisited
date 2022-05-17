@@ -7,35 +7,54 @@ using System.Threading.Tasks;
 
 namespace EMS_Library.MyEmployee.HoursLog
 {
-    /// <summary>
-    /// Handling of daily entries in the log.
-    /// </summary>
     public class HoursLogDay
     {
-        DateTime _start;
-        DateTime _end;
-        TimeSpan _totalHours;
-        public HoursLogDay(DateTime entry, DateTime exit)
+        HoursLogEntry[] _entries;
+
+        public TimeSpan Total
         {
-            _start = entry;
-            _end = exit;
-            _totalHours = exit - entry;
-        }
-        public HoursLogDay(string data)
-        {
-            try
+            get
             {
-                string[] times = data.Split();
-                _start = DateTime.Parse(times[1]);
-                _end = DateTime.Parse(times[2]);
-                _totalHours = _end - _start;
+                TimeSpan sum = TimeSpan.Zero;
+                foreach (HoursLogEntry entry in _entries)
+                    sum += entry.Total;
+                return sum;
             }
-            catch { return; }
         }
-        public DateTime Start { get => _start; set => _start = value; }
-        public DateTime End { get => _end; set => _end = value; }
-        public TimeSpan TotalHours { get => _totalHours; set => _totalHours = value; }
-        public override string ToString() => $"Start: {_start}, End: {_end}, Total: {_totalHours}.";
-        public string JSON() => '{' + $"\"Start\": \"{_start}\", \"End\": \"{_end}\", \"Total\": \"{_totalHours}\"" + '}'; 
+        public TimeSpan TotalOvertime => Total - Config.NormalShiftLength > TimeSpan.Zero ? Total - Config.NormalShiftLength : TimeSpan.Zero;
+        public HoursLogEntry[] Entries { get => _entries; set => _entries = value; }
+
+
+        public HoursLogDay(HoursLogEntry[] entries)
+        {
+            _entries = entries;
+        }
+        public override string ToString()
+        {
+            if (_entries==null || _entries.Length==0) return "";
+            string hold = "";
+            foreach (HoursLogEntry entry in _entries)
+                hold+=entry.ToString()+'|';
+            return hold.Remove(hold.Length-1);
+        }
+        public string JSON()
+        {
+            TimeSpan overtime = Total - Config.NormalShiftLength > TimeSpan.Zero ? (Total - Config.NormalShiftLength) : TimeSpan.Zero;
+            string hold = $"{{\"Total\": \"{Total}\"," +
+                $" \"Overtime\": \"{overtime}\"," +
+                $" \"Entries\": [";
+            if (_entries.Length > 0)
+            {
+                foreach (HoursLogEntry entry in _entries)
+                    hold += entry.JSON() + ',';
+                Console.WriteLine(hold);
+                hold=hold.TrimEnd(',');
+                Console.WriteLine(hold);
+            }
+            
+            hold += "]}";
+            return hold;
+        }
+
     }
 }

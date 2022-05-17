@@ -24,16 +24,6 @@ namespace EMS_Client.Forms
 
         public void Fill()
         {
-            string querry = Requests.GetHourLogs(EMS_ClientMainScreen.CurEmployee.IntId, DateTime.Now.Year, DateTime.Now.Month);
-            List<string> buffer = new List<string>();
-            Action action = Requests.BuildAction(this, new EMS_Library.Network.DataPacket(querry, 5), buffer, true);
-            new StandbyScreen(action).ShowDialog();
-            HoursLogDay[] hoursLogDays = Array.ConvertAll(buffer.ToArray(), x => new HoursLogDay(x));
-            log = new HoursLogMonth(EMS_ClientMainScreen.CurEmployee.IntId, hoursLogDays);
-            Console.WriteLine();
-            foreach (var a in log.GetDays)
-                Console.WriteLine(a);
-            GridViewAttrndance.DataSource = log;
         }
 
         private void btnSelect_Click(object sender, EventArgs e)

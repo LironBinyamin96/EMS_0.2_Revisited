@@ -1,10 +1,25 @@
 {
   "version": 2,
-  "dgSpecHash": "HvvMksgLGwVb1hjg7EtU5S340sqSp6Vze8JKLKQr25y2FE2zZkuc14JYKXDx/nFED9e453ua1uoiRrjx+ySS/w==",
+  "dgSpecHash": "jsNLQSgY3fKYNa8fcJkQf12DtPJEwtjwpxbuur42lNIVkzjz4G+/pofC2heBZ0Su5Bo/Gqm7l9bfxTAYQhUjWA==",
   "success": true,
   "projectFilePath": "C:\\Users\\levkh\\Documents\\GitHub\\EMS_0.2_Revisited\\EMS_0.2_Client\\EMS_0.2_Client.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\levkh\\.nuget\\packages\\s22.imap\\3.6.0\\s22.imap.3.6.0.nupkg.sha512"
+    "C:\\Users\\levkh\\.nuget\\packages\\dynamiclanguageruntime\\1.3.1\\dynamiclanguageruntime.1.3.1.nupkg.sha512",
+    "C:\\Users\\levkh\\.nuget\\packages\\ironpython\\2.7.12\\ironpython.2.7.12.nupkg.sha512",
+    "C:\\Users\\levkh\\.nuget\\packages\\ironpython.stdlib\\2.7.12\\ironpython.stdlib.2.7.12.nupkg.sha512",
+    "C:\\Users\\levkh\\.nuget\\packages\\microsoft.netcore.platforms\\3.1.0\\microsoft.netcore.platforms.3.1.0.nupkg.sha512",
+    "C:\\Users\\levkh\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",
+    "C:\\Users\\levkh\\.nuget\\packages\\microsoft.win32.systemevents\\4.7.0\\microsoft.win32.systemevents.4.7.0.nupkg.sha512",
+    "C:\\Users\\levkh\\.nuget\\packages\\mono.unix\\7.1.0-final.1.21458.1\\mono.unix.7.1.0-final.1.21458.1.nupkg.sha512",
+    "C:\\Users\\levkh\\.nuget\\packages\\s22.imap\\3.6.0\\s22.imap.3.6.0.nupkg.sha512",
+    "C:\\Users\\levkh\\.nuget\\packages\\system.codedom\\4.7.0\\system.codedom.4.7.0.nupkg.sha512",
+    "C:\\Users\\levkh\\.nuget\\packages\\system.configuration.configurationmanager\\4.7.0\\system.configuration.configurationmanager.4.7.0.nupkg.sha512",
+    "C:\\Users\\levkh\\.nuget\\packages\\system.drawing.common\\4.7.0\\system.drawing.common.4.7.0.nupkg.sha512",
+    "C:\\Users\\levkh\\.nuget\\packages\\system.security.accesscontrol\\4.7.0\\system.security.accesscontrol.4.7.0.nupkg.sha512",
+    "C:\\Users\\levkh\\.nuget\\packages\\system.security.cryptography.protecteddata\\4.7.0\\system.security.cryptography.protecteddata.4.7.0.nupkg.sha512",
+    "C:\\Users\\levkh\\.nuget\\packages\\system.security.permissions\\4.7.0\\system.security.permissions.4.7.0.nupkg.sha512",
+    "C:\\Users\\levkh\\.nuget\\packages\\system.security.principal.windows\\4.7.0\\system.security.principal.windows.4.7.0.nupkg.sha512",
+    "C:\\Users\\levkh\\.nuget\\packages\\system.windows.extensions\\4.7.0\\system.windows.extensions.4.7.0.nupkg.sha512"
   ],
   "logs": [
     {
