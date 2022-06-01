@@ -59,7 +59,8 @@ namespace EMS_Server
             //FacialRecognition.Start();
             listnerTimer.Interval = 60000;
             listnerTimer.Start();
-            
+            if(!Directory.Exists(EMS_Library.Config.RootDirectory)) Directory.CreateDirectory(EMS_Library.Config.RootDirectory);
+            if(!Directory.Exists(EMS_Library.Config.FR_Images)) Directory.CreateDirectory(EMS_Library.Config.FR_Images);
 
         }
         private void listnerTimer_Tick(object sender, EventArgs e)

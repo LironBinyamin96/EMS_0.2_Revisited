@@ -20,16 +20,15 @@ def ParseConfig():
     return config
 
 config = ParseConfig()
-print(type(config))
 print(config)
 
 #------------------- SQL -------------------
 
 #חיבור לבסיס נתונים
 conn = pyodbc.connect(
-    "Driver={SQL Server Native Client 11.0};"
-    "Server=DESKTOP-BVFPCJ9\SQLEXPRESS;"
-    "Database=EmployeeManagmentDataBase;"
+    "Driver={SQL Server Native Client 11.0};"+
+    config["PythonDBConnection"].split('|')[1]+
+    "Database=EmployeeManagmentDataBase;"+
     "Trusted_Connection=yes;")
 
 # בדיקת מצב כניסה אחרונה של העובד

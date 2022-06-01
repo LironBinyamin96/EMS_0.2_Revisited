@@ -7,6 +7,7 @@
         public const int ServerPort = 13000;
         public static string RootDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\EMS_Root";
         public static string FR_Location = RootDirectory + "\\FR_Boot.cmd";
+        public static string FR_Images = RootDirectory + "\\Images";
         #endregion
 
         #region SQL_server_config

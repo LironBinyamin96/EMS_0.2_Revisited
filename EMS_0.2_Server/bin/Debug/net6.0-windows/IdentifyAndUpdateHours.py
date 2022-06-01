@@ -20,7 +20,6 @@ def ParseConfig():
     return config
 
 config = ParseConfig()
-print(config["PythonDBConnection"].split('|')[1])
 print(config)
 
 #------------------- SQL -------------------
