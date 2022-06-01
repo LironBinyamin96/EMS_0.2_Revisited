@@ -32,7 +32,7 @@
         public const string EmployeeDataTable = "Employees";
         public const string EmployeeHourLogsTable = "HourLogs";
 
-        public const string PythonDBConnection = "Driver={SQL Server Native Client 11.0};|Server=DESKTOP-BVFPCJ9\\SQLEXPRESS;|Database=EmployeeManagmentDataBase;|Trusted_Connection=yes;";
+        public static string PythonDBConnection="";
         #endregion
 
         #region Legal

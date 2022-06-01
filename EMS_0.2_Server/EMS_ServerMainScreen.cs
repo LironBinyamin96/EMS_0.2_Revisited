@@ -18,7 +18,7 @@ namespace EMS_Server
         #region Variables
         TcpListener listener = new TcpListener(System.Net.IPAddress.Parse(EMS_Library.Config.ServerIP), EMS_Library.Config.ServerPort);
         TcpClient client = null;
-        Process FR_Process = new Process();
+        Task FacialRecognition;
         bool scheduleForceExits = true;
         #endregion
 
@@ -42,8 +42,9 @@ namespace EMS_Server
             listner_CXL = listner_CXL_Src.Token;
             SQLServerLookup = BuildSQLServerLookup();
             SQLLookup_CXL = SQLLookup_CXL_Src.Token;
+            FacialRecognition = BuildFRTask();
             TestingTask = TestingTaskBuilder();
-            WriteToConfigFile();
+            
 
 
         }
@@ -55,9 +56,10 @@ namespace EMS_Server
             listener.Start();
             listeningTask.Start();
             TestingTask.Start();
-
+            //FacialRecognition.Start();
             listnerTimer.Interval = 60000;
             listnerTimer.Start();
+            
 
         }
         private void listnerTimer_Tick(object sender, EventArgs e)
@@ -102,6 +104,12 @@ namespace EMS_Server
         }
         private void WriteToConfigFile()
         {
+            EMS_Library.Config.PythonDBConnection = 
+                $"Driver={{SQL Server Native Client 11.0}};|" +
+                $"Server={EMS_Library.Config.SQLServerNames[EMS_Library.Config.ServerNamesIterator < 1 ? 0 : EMS_Library.Config.ServerNamesIterator - 1]};|" +
+                $"Database=EmployeeManagmentDataBase;|" +
+                $"Trusted_Connection=yes;";
+
             string str = $"" +
                 $"ServerIP#{EMS_Library.Config.ServerIP}" + Environment.NewLine +
                 $"ServerPort#{EMS_Library.Config.ServerPort}\n" + Environment.NewLine +
@@ -170,9 +178,10 @@ namespace EMS_Server
                         break;
                     }
                 }
+                WriteToConfigFile();
             }, SQLLookup_CXL);
         }
-        public Task FR()
+        public Task BuildFRTask()
         {
             return new Task(() => {
                 var py = IronPython.Hosting.Python.CreateEngine();
@@ -244,8 +253,10 @@ namespace EMS_Server
                     case "terminate": { Close(); break; }
                     case "exit": { Close(); break; }
                     case "shutdown": { Close(); break; }
+                        /*
                     case "fr powerup": { try { FR_Process.Start(); } catch { } break; }
                     case "fr shutdown": { try { FR_Process.Close(); } catch { } break; }
+                        */
                 }
             }
         }
