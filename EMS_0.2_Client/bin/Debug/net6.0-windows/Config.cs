@@ -7,6 +7,7 @@
         public const int ServerPort = 13000;
         public static string RootDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\EMS_Root";
         public static string FR_Location = RootDirectory + "\\FR_Boot.cmd";
+        public static string FR_Images = RootDirectory + "\\Images";
         #endregion
 
         #region SQL_server_config
@@ -32,7 +33,7 @@
         public const string EmployeeDataTable = "Employees";
         public const string EmployeeHourLogsTable = "HourLogs";
 
-        public const string PythonDBConnection = "Driver={SQL Server Native Client 11.0};|Server=DESKTOP-BVFPCJ9\\SQLEXPRESS;|Database=EmployeeManagmentDataBase;|Trusted_Connection=yes;";
+        public static string PythonDBConnection="";
         #endregion
 
         #region Legal

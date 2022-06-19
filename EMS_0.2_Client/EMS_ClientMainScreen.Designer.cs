@@ -37,12 +37,15 @@
             this.btnEditingEmployee = new System.Windows.Forms.Button();
             this.panelForUser = new System.Windows.Forms.Panel();
             this.panelDesktop = new System.Windows.Forms.Panel();
+            this.userPicture = new System.Windows.Forms.PictureBox();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.userPicture)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(30)))), ((int)(((byte)(54)))));
+            this.panel1.Controls.Add(this.userPicture);
             this.panel1.Controls.Add(this.panelStyle);
             this.panel1.Controls.Add(this.btnExit);
             this.panel1.Controls.Add(this.btnAttendence);
@@ -178,6 +181,14 @@
             this.panelDesktop.TabIndex = 1;
             this.panelDesktop.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panelDesktop_MouseDown);
             // 
+            // userPicture
+            // 
+            this.userPicture.Location = new System.Drawing.Point(29, 380);
+            this.userPicture.Name = "userPicture";
+            this.userPicture.Size = new System.Drawing.Size(114, 131);
+            this.userPicture.TabIndex = 6;
+            this.userPicture.TabStop = false;
+            // 
             // EMS_ClientMainScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -192,6 +203,7 @@
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.EMS_ClientMainScreen_Load);
             this.panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.userPicture)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -207,5 +219,6 @@
         private Panel panelDesktop;
         private Button btnExit;
         private Panel panelStyle;
+        private PictureBox userPicture;
     }
 }

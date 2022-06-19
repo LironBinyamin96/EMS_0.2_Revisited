@@ -49,14 +49,30 @@ namespace EMS_Client
                         NetworkStream stream = tcpClient.GetStream();
                         stream.Write(data.Write(), 0, data.GetTotalSize());
                         DataPacket responce = new DataPacket(stream);
-                        //Console.WriteLine(responce.StringData);
-                        string[] processed = responce.StringData.Split('|'); //Removed removal of last char
+
+                        string[] processed = responce.StringData.Split('|');
                         foreach (string a in processed)
                             buffer.Add(a);
                     }
                     catch (Exception ex) { parentForm.Invoke(() => { MessageBox.Show(ex.Message); }); }
                     if (closeForm) parentForm.Invoke(() => { EMS_ClientMainScreen.PrimaryForms.Pop().Close(); });
                 });
+            return action;
+        }
+        public static Action BuildAction(Form parentForm, DataPacket data, byte[] buffer, bool closeForm = false)
+        {
+            Action action = new Action(() =>
+            {
+                try
+                {
+                    TcpClient tcpClient = new TcpClient(EMS_Library.Config.ServerIP, EMS_Library.Config.ServerPort);
+                    NetworkStream stream = tcpClient.GetStream();
+                    stream.Write(data.Write(), 0, data.GetTotalSize());
+                    new DataPacket(stream).ByteData.CopyTo(buffer,0);
+                }
+                catch (Exception ex) { parentForm.Invoke(() => { MessageBox.Show(ex.Message); }); }
+                if (closeForm) parentForm.Invoke(() => { EMS_ClientMainScreen.PrimaryForms.Pop().Close(); });
+            });
             return action;
         }
     }

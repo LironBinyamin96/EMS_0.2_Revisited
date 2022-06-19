@@ -11,6 +11,7 @@ namespace EMS_Library.Network
 {
     public struct DataPacket
     {
+        private static int counter = 0;
         public readonly DataPacketHeader _header;
         public readonly string StringData;
         readonly byte[] _byteData;
@@ -19,9 +20,10 @@ namespace EMS_Library.Network
         /// Reconstructs recieved data as DataPacket
         /// </summary>
         /// <param name="stream"></param>
-        public DataPacket(NetworkStream stream)
+        public DataPacket(NetworkStream stream, [System.Runtime.CompilerServices.CallerMemberName] string memberName = "")
         {
-            try { 
+            try
+            {
                 byte[] temp = new byte[]{
                     (byte)stream.ReadByte(),
                     (byte)stream.ReadByte(),
@@ -35,9 +37,17 @@ namespace EMS_Library.Network
                 _byteData = new byte[_header.DataIntLength];
                 stream.Read(_byteData, 0, _header.DataIntLength);
 
-                StringData = Encoding.ASCII.GetString(_byteData, 0, _header.DataIntLength);
+                StringData = Encoding.UTF8.GetString(_byteData, 0, _header.DataIntLength);
+                /*
+                if (_header.Act == 255)
+                {
+                    File.WriteAllBytes(@"C:\Users\levkh\Desktop\EMS_Root\Images\" + $"test{counter}_{memberName}.txt", ByteData);
+                    File.WriteAllBytes(@"C:\Users\levkh\Desktop\EMS_Root\Images\" + $"test{counter++}_{memberName}.bmp", ByteData);
+                }
+                */
             }
-            catch {
+            catch
+            {
                 throw new Exception($"Failed to create data packet!");
             }
         }
@@ -48,19 +58,39 @@ namespace EMS_Library.Network
         /// <param name="header"></param>
         /// <param name="data"></param>
         /// <exception cref="Exception"></exception>
-        public DataPacket(string data, byte func)
+        public DataPacket(string data, byte func, [System.Runtime.CompilerServices.CallerMemberName] string memberName = "")
         {
-            if (data.Length > Math.Pow(255,4)-20) throw new Exception("Data is too long! 4294967296 max! Length was " + data.Length);
+            if (data.Length > Math.Pow(255, 4) - 20) throw new Exception("Data is too long! 4294967296 max! Length was " + data.Length);
             if (data.Length == 0) data = " ";
             _header = new DataPacketHeader(data.Length, func);
             StringData = data;
-            _byteData = Encoding.ASCII.GetBytes(data);
+            _byteData = Encoding.UTF8.GetBytes(data);
+            /*
+            if (_header.Act == 255)
+            {
+                File.WriteAllBytes(@"C:\Users\levkh\Desktop\EMS_Root\Images\" + $"test{counter}_{memberName}.txt", ByteData);
+                File.WriteAllBytes(@"C:\Users\levkh\Desktop\EMS_Root\Images\" + $"test{counter++}_{memberName}.bmp", ByteData);
+            }
+            */
         }
         public DataPacket(DataPacket data)
         {
             _header = data._header;
-            _byteData = data._byteData;
+            _byteData = data.ByteData;
             StringData = data.StringData;
+        }
+        public DataPacket(byte[] data, byte func, [System.Runtime.CompilerServices.CallerMemberName] string memberName = "")
+        {
+            _header = new DataPacketHeader(data.Length, func);
+            _byteData = data;
+            StringData = Encoding.UTF8.GetString(data);
+            /*
+            if (_header.Act == 255)
+            {
+                File.WriteAllBytes(@"C:\Users\levkh\Desktop\EMS_Root\Images\" + $"test{counter}_{memberName}.txt", ByteData);
+                File.WriteAllBytes(@"C:\Users\levkh\Desktop\EMS_Root\Images\" + $"test{counter++}_{memberName}.bmp", ByteData);
+            }
+            */
         }
         public byte[] Write() => _header.GetHeader().Concat(_byteData).ToArray();
         /// <summary>
@@ -80,6 +110,13 @@ namespace EMS_Library.Network
         public override string ToString()
         {
             return _header + " " + StringData;
+        }
+
+        private void PrintDebug()
+        {
+            foreach (byte a in _byteData)
+                Console.Write((char)a);
+            Console.WriteLine();
         }
     }
 }

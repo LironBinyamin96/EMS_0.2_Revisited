@@ -98,7 +98,7 @@ namespace EMS_Server
             return
                 $"delete from {Config.EmployeeHourLogsTable} where _intId={id};"+
                 $"delete from {Config.EmployeeDataTable} where _intId={id};";
-        }
+        } //delete #_intId
         public static string GetMonthLog(string clientQuerry) //get log #_intId, year, month
         {
             string[] data = clientQuerry.Substring(clientQuerry.IndexOf('#') + 1).Split(',');

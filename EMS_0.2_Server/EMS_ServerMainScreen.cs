@@ -44,9 +44,6 @@ namespace EMS_Server
             SQLLookup_CXL = SQLLookup_CXL_Src.Token;
             FacialRecognition = BuildFRTask();
             TestingTask = TestingTaskBuilder();
-            
-
-
         }
 
         #region Event Methods
@@ -123,7 +120,7 @@ namespace EMS_Server
         }
         public Task BuildServerTask()
         {
-            return new Task(() =>
+            return new Task(async () =>
             {
                 if (!SQLServerLookup.IsCompleted) SQLServerLookup.Wait();
                 WriteToServerConsole("Server started");
@@ -138,10 +135,11 @@ namespace EMS_Server
                         NetworkStream stream = client.GetStream();
                         DataPacket data = new DataPacket(stream);
                         WriteToServerConsole("Request:\n" + data.StringData);
-                        string responseStr = new MyRouter().Router(data);
-                        DataPacket response = new DataPacket(responseStr, 255);
-                        WriteToServerConsole(responseStr);
-                        stream.Write(response.Write(), 0, response.GetTotalSize());
+                        DataPacket responce = new MyRouter().Router(data);
+                        
+                        //WriteToServerConsole(responce.ToString());
+                        stream.Write(responce.Write(), 0, responce.GetTotalSize());
+                        Thread.Sleep(500);
                         client.Close();
                         client.Dispose();
                     }
@@ -198,8 +196,8 @@ namespace EMS_Server
                 /*
                     for (int i = 0; i < 20; i++)
                     {
-                        string response = SQLBridge.OneWayCommand(SQLBridge.Add("#" + Employee.RandomEmployeeGenerator(int.Parse(SQLBridge.GetFreeID())).ToString()));
-                        WriteToServerConsole(response);
+                        string responce = SQLBridge.OneWayCommand(SQLBridge.Add("#" + Employee.RandomEmployeeGenerator(int.Parse(SQLBridge.GetFreeID())).ToString()));
+                        WriteToServerConsole(responce);
                         Thread.Sleep(1000);
                     }
                  */

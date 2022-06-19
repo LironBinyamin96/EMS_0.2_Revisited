@@ -67,6 +67,14 @@ namespace EMS_Client
             Login login = new Login();
             PrimaryForms.Push(login);
             login.ShowDialog();
+            byte[] buffer = new byte[2000000];
+            Action action = Requests.BuildAction(this, new EMS_Library.Network.DataPacket("get image #111111111", 6), buffer, false);
+            action.Invoke();
+
+            File.WriteAllBytes(@"C:\Users\levkh\Desktop\EMS_Root\Images\" + $"111111111_copy.bmp", buffer);
+            File.WriteAllBytes(@"C:\Users\levkh\Desktop\EMS_Root\Images\" + $"111111111_copy.txt", buffer);
+            //userPicture.Image = Image.FromFile(@"C:\Users\levkh\Desktop\EMS_Root\Images\" + $"111111111_copy.bmp");
+            userPicture.Image = Image.FromStream(new MemoryStream(buffer));
         }
 
         #region Buttons
