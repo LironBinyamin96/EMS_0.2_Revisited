@@ -68,7 +68,8 @@ namespace EMS_Client
                     TcpClient tcpClient = new TcpClient(EMS_Library.Config.ServerIP, EMS_Library.Config.ServerPort);
                     NetworkStream stream = tcpClient.GetStream();
                     stream.Write(data.Write(), 0, data.GetTotalSize());
-                    new DataPacket(stream).ByteData.CopyTo(buffer,0);
+                    DataPacket packet = new DataPacket(stream);
+                    packet.ByteData.CopyTo(buffer, 0);
                 }
                 catch (Exception ex) { parentForm.Invoke(() => { MessageBox.Show(ex.Message); }); }
                 if (closeForm) parentForm.Invoke(() => { EMS_ClientMainScreen.PrimaryForms.Pop().Close(); });

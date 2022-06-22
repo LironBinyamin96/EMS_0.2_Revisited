@@ -36,10 +36,11 @@ namespace EMS_Server
                 //"get picture of #_intid"
                 if (int.TryParse(data.StringData.Substring(data.StringData.IndexOf('#') + 1), out int id))
                 {
-                    byte[] temp = File.ReadAllBytes(EMS_Library.Config.FR_Images + $"\\{id}.bmp");
-                    return temp;
+                    if (File.Exists(EMS_Library.Config.FR_Images + $"\\{id}.bmp"))
+                        return File.ReadAllBytes(EMS_Library.Config.FR_Images + $"\\{id}.bmp");
+                    else return new byte[0];
                 }
-                else return null;
+                else return new byte[0];
             }
         }
     }

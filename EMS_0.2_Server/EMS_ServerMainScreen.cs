@@ -136,7 +136,7 @@ namespace EMS_Server
                         DataPacket data = new DataPacket(stream);
                         WriteToServerConsole("Request:\n" + data.StringData);
                         DataPacket responce = new MyRouter().Router(data);
-                        
+                        Console.WriteLine($"sending: {responce}");
                         //WriteToServerConsole(responce.ToString());
                         stream.Write(responce.Write(), 0, responce.GetTotalSize());
                         Thread.Sleep(500);

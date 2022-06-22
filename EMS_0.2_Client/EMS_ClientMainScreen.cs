@@ -2,11 +2,12 @@
 using System.Runtime.InteropServices;
 using EMS_Library.MyEmployee;
 using EMS_Library.MyEmployee.HoursLog;
+using EMS_Library;
 namespace EMS_Client
 {
     public partial class EMS_ClientMainScreen : Form
     {
-        
+
 
         #region Variables
         public static Stack<Form> PrimaryForms = new Stack<Form>();
@@ -74,7 +75,8 @@ namespace EMS_Client
             File.WriteAllBytes(@"C:\Users\levkh\Desktop\EMS_Root\Images\" + $"111111111_copy.bmp", buffer);
             File.WriteAllBytes(@"C:\Users\levkh\Desktop\EMS_Root\Images\" + $"111111111_copy.txt", buffer);
             //userPicture.Image = Image.FromFile(@"C:\Users\levkh\Desktop\EMS_Root\Images\" + $"111111111_copy.bmp");
-            userPicture.Image = Image.FromStream(new MemoryStream(buffer));
+            if (!buffer.IsEmpty())
+                userPicture.Image = Image.FromStream(new MemoryStream(buffer));
         }
 
         #region Buttons

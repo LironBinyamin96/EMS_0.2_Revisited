@@ -28,7 +28,7 @@ namespace EMS_Client.Forms
         {
             Task getMail = new Task(() =>
             {
-                using (ImapClient client = new ImapClient("imap.gmail.com", 993, "employee.management.system010@gmail.com", "employee.management.system!!@", AuthMethod.Auto, true))
+                using (ImapClient client = new ImapClient("imap.gmail.com", 993, "employee.management.system010@gmail.com", "wcvyicyfscoiqfgr", AuthMethod.Auto, true))
                 {
                     var uids = client.Search(SearchCondition.All());
                     var messages = client.GetMessages(uids);
