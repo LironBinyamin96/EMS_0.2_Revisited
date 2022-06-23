@@ -44,25 +44,25 @@ namespace EMS_Client.Forms
 
         private void btnPrint_Click(object sender, EventArgs e)
         {
-            if(txtName.Text=="" || txtID.Text == "")
-                MessageBox.Show("Please select a employee");
-
-            //    string logJson = log.JSON();
-            //System.IO.File.WriteAllText(EMS_Library.Config.RootDirectory+"\\log.json", logJson);
-            
+            BuildLog();
+            string logJson = log.JSON();
+            File.WriteAllText(EMS_Library.Config.RootDirectory + "\\log.json", logJson);
         }
 
+        private void BuildLog()
+        {
+            if (EMS_ClientMainScreen.employee == null) { MessageBox.Show("Please select a employee"); return; }
+            List<string> buffer = new List<string>();
+            DateTime temp = DateTime.Parse( "01/"+dateTime.Text);
+            MessageBox.Show(temp.ToString());
+            string querry = Requests.GetHourLogs(EMS_ClientMainScreen.employee.IntId, temp.Year, temp.Month); //debug
+            Action action = Requests.BuildAction(this, new EMS_Library.Network.DataPacket(querry, 5), buffer, false);
+            action.Invoke();
+            if(buffer[0]!="-1") log = new HoursLogMonth(buffer[0], EMS_ClientMainScreen.employee);
+        }
         private void btnShowHours_Click(object sender, EventArgs e)
         {
-            if (txtName.Text == "" || txtID.Text == "")
-                MessageBox.Show("Please select a employee");
-            else
-            {
-                if (EMS_Library.Config.flag)
-                {
-
-                }
-            }
+            BuildLog();
         }
     }
 }

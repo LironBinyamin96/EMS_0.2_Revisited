@@ -16,7 +16,7 @@ namespace EMS_Library.MyEmployee.HoursLog
         Employee _employee;
         int _month;
         int _year;
-        HoursLogDay[] _days;
+        HoursLogDay[] _days=new HoursLogDay[0];
 
         public HoursLogDay[] Days { get => _days; set => _days = value; }
         public int Month { get => _month; set => _month = value; }
@@ -73,6 +73,15 @@ namespace EMS_Library.MyEmployee.HoursLog
             hold=hold.Remove(hold.Length - 1);
             hold += "]}";
             return hold;
+
+
+
         }
+
+        class Table
+        {
+
+        }
+
     }
 }

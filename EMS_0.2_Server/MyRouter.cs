@@ -18,7 +18,12 @@ namespace EMS_Server
                 /*Add employee*/    case 2: { return new DataPacket(SQLBridge.OneWayCommand(SQLBridge.Add(data.StringData)), 255); }
                 /*Update employee*/ case 3: { return new DataPacket(SQLBridge.OneWayCommand(SQLBridge.Update(data.StringData)), 255); }
                 /*Delete employee*/ case 4: { return new DataPacket(SQLBridge.OneWayCommand(SQLBridge.Delete(data.StringData)), 255); }
-                /*Get employee log*/case 5: { return new DataPacket(SQLBridge.TwoWayCommand(SQLBridge.GetMonthLog(data.StringData)), 255); }
+                /*Get employee log*/case 5: {
+                        string temp = SQLBridge.TwoWayCommand(SQLBridge.GetMonthLog(data.StringData));
+                        Console.WriteLine(temp);
+                        DataPacket debug = new DataPacket(temp, 255); 
+                        return debug;
+                    }
                 /*Get Picture*/     case 6: {
                         DataPacket packet = new DataPacket(GetPicture(), 255);
 

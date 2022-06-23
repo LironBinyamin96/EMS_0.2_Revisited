@@ -41,6 +41,7 @@
         public static TimeSpan MaxShiftLength = new TimeSpan(0, 12, 0, 0);
         #endregion
 
-        public const bool flag = true;
+        //Development Mode
+        public const bool DevelopmentMode = true;
     }
 }

@@ -45,6 +45,25 @@ namespace EMS_Server
             FacialRecognition = BuildFRTask();
             TestingTask = TestingTaskBuilder();
         }
+        private void txtServerConsole_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == 13)
+            {
+                string[] temp = txtServerConsole.Text.Split(Environment.NewLine);
+                switch (temp[temp.Length - 1].ToLower())
+                {
+                    default: break;
+                    case "close": { Close(); break; }
+                    case "terminate": { Close(); break; }
+                    case "exit": { Close(); break; }
+                    case "shutdown": { Close(); break; }
+                        /*
+                    case "fr powerup": { try { FR_Process.Start(); } catch { } break; }
+                    case "fr shutdown": { try { FR_Process.Close(); } catch { } break; }
+                        */
+                }
+            }
+        }
 
         #region Event Methods
         private void EMS_ServerMainScreen_Load(object sender, EventArgs e)
@@ -56,8 +75,8 @@ namespace EMS_Server
             //FacialRecognition.Start();
             listnerTimer.Interval = 60000;
             listnerTimer.Start();
-            if(!Directory.Exists(EMS_Library.Config.RootDirectory)) Directory.CreateDirectory(EMS_Library.Config.RootDirectory);
-            if(!Directory.Exists(EMS_Library.Config.FR_Images)) Directory.CreateDirectory(EMS_Library.Config.FR_Images);
+            if (!Directory.Exists(EMS_Library.Config.RootDirectory)) Directory.CreateDirectory(EMS_Library.Config.RootDirectory);
+            if (!Directory.Exists(EMS_Library.Config.FR_Images)) Directory.CreateDirectory(EMS_Library.Config.FR_Images);
 
         }
         private void listnerTimer_Tick(object sender, EventArgs e)
@@ -75,20 +94,8 @@ namespace EMS_Server
                 else scheduleForceExits = true;
             }
         }
-        private void pictureBox1_Click(object sender, EventArgs e)
-        {
-        }
         private void btnExit_Click_1(object sender, EventArgs e) => Close();
-        private void btnSimExit_Click(object sender, EventArgs e)
-        {
-            WriteToServerConsole(SQLBridge.Departure("111111111"));
-            WriteToServerConsole(SQLBridge.OneWayCommand(SQLBridge.Departure("111111111")));
-        }
-        private void btnSimEnter_Click(object sender, EventArgs e)
-        {
-            WriteToServerConsole(SQLBridge.Arrival("111111111"));
-            WriteToServerConsole(SQLBridge.OneWayCommand(SQLBridge.Arrival("111111111")));
-        }
+
         #endregion
 
         #region NonEvent Methods
@@ -102,7 +109,7 @@ namespace EMS_Server
         }
         private void WriteToConfigFile()
         {
-            EMS_Library.Config.PythonDBConnection = 
+            EMS_Library.Config.PythonDBConnection =
                 $"Driver={{SQL Server Native Client 11.0}};|" +
                 $"Server={EMS_Library.Config.SQLServerNames[EMS_Library.Config.ServerNamesIterator < 1 ? 0 : EMS_Library.Config.ServerNamesIterator - 1]};|" +
                 $"Database=EmployeeManagmentDataBase;|" +
@@ -116,7 +123,7 @@ namespace EMS_Server
                 $"PythonDBConnection#{EMS_Library.Config.PythonDBConnection}\n" + Environment.NewLine +
                 $"NormalShiftLength#{EMS_Library.Config.NormalShiftLength}\n" + Environment.NewLine +
                 $"MaxShiftLength#{ EMS_Library.Config.MaxShiftLength}";
-            System.IO.File.WriteAllText(Directory.GetCurrentDirectory()+"\\Config.txt", str);
+            System.IO.File.WriteAllText(Directory.GetCurrentDirectory() + "\\Config.txt", str);
         }
         public Task BuildServerTask()
         {
@@ -136,8 +143,7 @@ namespace EMS_Server
                         DataPacket data = new DataPacket(stream);
                         WriteToServerConsole("Request:\n" + data.StringData);
                         DataPacket responce = new MyRouter().Router(data);
-                        Console.WriteLine($"sending: {responce}");
-                        //WriteToServerConsole(responce.ToString());
+                        WriteToServerConsole(responce.ToString());
                         stream.Write(responce.Write(), 0, responce.GetTotalSize());
                         Thread.Sleep(500);
                         client.Close();
@@ -182,10 +188,27 @@ namespace EMS_Server
         }
         public Task BuildFRTask()
         {
-            return new Task(() => {
+            return new Task(() =>
+            {
                 var py = IronPython.Hosting.Python.CreateEngine();
                 py.ExecuteFile("IdentifyAndUpdateHours.py");
             });
+        }
+
+        #endregion
+
+       
+
+        #region Debug
+        private void btnSimExit_Click(object sender, EventArgs e)
+        {
+            WriteToServerConsole(SQLBridge.Departure("111111111"));
+            WriteToServerConsole(SQLBridge.OneWayCommand(SQLBridge.Departure("111111111")));
+        }
+        private void btnSimEnter_Click(object sender, EventArgs e)
+        {
+            WriteToServerConsole(SQLBridge.Arrival("111111111"));
+            WriteToServerConsole(SQLBridge.OneWayCommand(SQLBridge.Arrival("111111111")));
         }
         private Task TestingTaskBuilder()
         {
@@ -238,26 +261,7 @@ namespace EMS_Server
                 //FR().Start();
             });
         }
-        #endregion
 
-        private void txtServerConsole_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (e.KeyChar == 13)
-            {
-                string[] temp = txtServerConsole.Text.Split(Environment.NewLine);
-                switch (temp[temp.Length - 1].ToLower())
-                {
-                    default: break;
-                    case "close": { Close(); break; }
-                    case "terminate": { Close(); break; }
-                    case "exit": { Close(); break; }
-                    case "shutdown": { Close(); break; }
-                        /*
-                    case "fr powerup": { try { FR_Process.Start(); } catch { } break; }
-                    case "fr shutdown": { try { FR_Process.Close(); } catch { } break; }
-                        */
-                }
-            }
-        }
+        #endregion
     }
 }

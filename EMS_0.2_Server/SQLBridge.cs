@@ -103,12 +103,13 @@ namespace EMS_Server
         {
             string[] data = clientQuerry.Substring(clientQuerry.IndexOf('#') + 1).Split(',');
             DateTime time = DateTime.Parse($"{data[1].Trim()}-{data[2].Trim()}-01");
-            return 
+            string debug = 
                 $"select * from HourLogs" +
                 $" where " +
                 $"((_entry between '{data[1]}-{data[2]}-01' and '{data[1]}-{data[2]}-{DateTime.DaysInMonth(int.Parse(data[1]),int.Parse(data[2]))}') or" +
                 $"(_exit between '{data[1]}-{data[2]}-01' and '{data[1]}-{data[2]}-{DateTime.DaysInMonth(int.Parse(data[1]), int.Parse(data[2]))}'))" +
                 $" and _intId = {data[0]}; ";
+            return debug;
         }
         public static string Departure(string _intId)
         {

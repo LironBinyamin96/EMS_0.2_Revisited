@@ -67,7 +67,6 @@
             this.centerPic.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.centerPic.TabIndex = 1;
             this.centerPic.TabStop = false;
-            this.centerPic.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // btnSimExit
             // 

@@ -9,7 +9,7 @@ namespace EMS_Library.MyEmployee.HoursLog
 {
     public class HoursLogDay
     {
-        HoursLogEntry[] _entries;
+        HoursLogEntry[] _entries=new HoursLogEntry[0];
 
         public TimeSpan Total
         {

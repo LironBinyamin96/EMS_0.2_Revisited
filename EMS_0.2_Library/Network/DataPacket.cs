@@ -39,7 +39,7 @@ namespace EMS_Library.Network
                 stream.Read(_byteData, 0, _header.DataIntLength);
 
                 StringData = Encoding.UTF8.GetString(_byteData, 0, _header.DataIntLength);
-                Console.WriteLine(this + " Created");
+                //Console.WriteLine(this + " Created");
             }
             catch
             {
@@ -62,7 +62,7 @@ namespace EMS_Library.Network
             _header = new DataPacketHeader(data.Length, func);
             StringData = data;
             _byteData = Encoding.UTF8.GetBytes(data);
-            Console.WriteLine(this + " Created");
+            //Console.WriteLine(this + " Created");
         }
         public DataPacket(DataPacket data)
         {
@@ -76,7 +76,7 @@ namespace EMS_Library.Network
             _header = new DataPacketHeader(data.Length, func);
             _byteData = data;
             StringData = Encoding.UTF8.GetString(data);
-            Console.WriteLine(this + " Created");
+            //Console.WriteLine(this + " Created");
         }
         public byte[] Write() => _header.GetHeader().Concat(_byteData).ToArray();
         /// <summary>
