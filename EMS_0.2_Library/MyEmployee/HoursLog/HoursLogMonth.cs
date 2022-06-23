@@ -72,15 +72,24 @@ namespace EMS_Library.MyEmployee.HoursLog
                 hold+=(day!=null?day.JSON():"{}")+',';
             hold=hold.Remove(hold.Length - 1);
             hold += "]}";
+
             return hold;
-
-
-
         }
-
-        class Table
+        public string[][] getAttendanceTable
         {
-
+            get
+            {
+                string[][] daysForTable = new string[DateTime.DaysInMonth(_year, Month)][];
+                foreach (var day in _days)
+                    daysForTable[day.Day-1] = day.attendanceTable();
+                for (int i = 0; i < daysForTable.Length; i++)
+                    if (daysForTable[i] == default)
+                    {
+                        DateTime dt = DateTime.Parse($"{_year}/{Month}/{i + 1}");
+                        daysForTable[i] = new string[] {$"{dt}",$"{dt.DayOfWeek}","","",""};
+                    }
+                return daysForTable;
+            }
         }
 
     }

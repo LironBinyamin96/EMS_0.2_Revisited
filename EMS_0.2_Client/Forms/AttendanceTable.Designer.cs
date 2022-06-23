@@ -34,11 +34,6 @@
             this.btnPrint = new System.Windows.Forms.Button();
             this.btnSelect = new System.Windows.Forms.Button();
             this.GridViewAttrndance = new System.Windows.Forms.DataGridView();
-            this.date = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Day = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Entry = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Exit = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.total_hours = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.getDaysBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.txtName = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -54,7 +49,11 @@
             this.hoursLogMonthBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.hoursLogMonthBindingSource2 = new System.Windows.Forms.BindingSource(this.components);
             this.hoursLogMonthBindingSource3 = new System.Windows.Forms.BindingSource(this.components);
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.date = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Day = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Entry = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Exit = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.total_hours = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panelAttendance.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GridViewAttrndance)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.getDaysBindingSource)).BeginInit();
@@ -122,44 +121,13 @@
             this.Day,
             this.Entry,
             this.Exit,
-            this.total_hours,
-            this.Column1});
+            this.total_hours});
             this.GridViewAttrndance.Location = new System.Drawing.Point(12, 185);
             this.GridViewAttrndance.Name = "GridViewAttrndance";
             this.GridViewAttrndance.ReadOnly = true;
             this.GridViewAttrndance.RowTemplate.Height = 25;
             this.GridViewAttrndance.Size = new System.Drawing.Size(734, 378);
             this.GridViewAttrndance.TabIndex = 5;
-            // 
-            // date
-            // 
-            this.date.HeaderText = "Date";
-            this.date.Name = "date";
-            this.date.ReadOnly = true;
-            // 
-            // Day
-            // 
-            this.Day.HeaderText = "Day";
-            this.Day.Name = "Day";
-            this.Day.ReadOnly = true;
-            // 
-            // Entry
-            // 
-            this.Entry.HeaderText = "Entry";
-            this.Entry.Name = "Entry";
-            this.Entry.ReadOnly = true;
-            // 
-            // Exit
-            // 
-            this.Exit.HeaderText = "Exit";
-            this.Exit.Name = "Exit";
-            this.Exit.ReadOnly = true;
-            // 
-            // total_hours
-            // 
-            this.total_hours.HeaderText = "Total hours";
-            this.total_hours.Name = "total_hours";
-            this.total_hours.ReadOnly = true;
             // 
             // getDaysBindingSource
             // 
@@ -289,11 +257,35 @@
             // 
             this.hoursLogMonthBindingSource3.DataSource = typeof(EMS_Library.MyEmployee.HoursLog.HoursLogMonth);
             // 
-            // Column1
+            // date
             // 
-            this.Column1.HeaderText = "Column1";
-            this.Column1.Name = "Column1";
-            this.Column1.ReadOnly = true;
+            this.date.HeaderText = "Date";
+            this.date.Name = "date";
+            this.date.ReadOnly = true;
+            // 
+            // Day
+            // 
+            this.Day.HeaderText = "Day";
+            this.Day.Name = "Day";
+            this.Day.ReadOnly = true;
+            // 
+            // Entry
+            // 
+            this.Entry.HeaderText = "Entry";
+            this.Entry.Name = "Entry";
+            this.Entry.ReadOnly = true;
+            // 
+            // Exit
+            // 
+            this.Exit.HeaderText = "Exit";
+            this.Exit.Name = "Exit";
+            this.Exit.ReadOnly = true;
+            // 
+            // total_hours
+            // 
+            this.total_hours.HeaderText = "Total hours";
+            this.total_hours.Name = "total_hours";
+            this.total_hours.ReadOnly = true;
             // 
             // AttendanceTable
             // 
@@ -351,14 +343,13 @@
         private BindingSource hoursLogMonthBindingSource;
         public DateTimePicker dateTime;
         private Button btnShowHours;
+        private BindingSource hoursLogMonthBindingSource1;
+        private BindingSource hoursLogMonthBindingSource2;
+        private BindingSource hoursLogMonthBindingSource3;
         private DataGridViewTextBoxColumn date;
         private DataGridViewTextBoxColumn Day;
         private DataGridViewTextBoxColumn Entry;
         private DataGridViewTextBoxColumn Exit;
         private DataGridViewTextBoxColumn total_hours;
-        private BindingSource hoursLogMonthBindingSource1;
-        private BindingSource hoursLogMonthBindingSource2;
-        private DataGridViewTextBoxColumn Column1;
-        private BindingSource hoursLogMonthBindingSource3;
     }
 }

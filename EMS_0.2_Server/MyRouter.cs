@@ -20,7 +20,7 @@ namespace EMS_Server
                 /*Delete employee*/ case 4: { return new DataPacket(SQLBridge.OneWayCommand(SQLBridge.Delete(data.StringData)), 255); }
                 /*Get employee log*/case 5: {
                         string temp = SQLBridge.TwoWayCommand(SQLBridge.GetMonthLog(data.StringData));
-                        Console.WriteLine(temp);
+                        Console.WriteLine(temp + "aaaaaaaaaaaaaaaaaaaaaa");
                         DataPacket debug = new DataPacket(temp, 255); 
                         return debug;
                     }
