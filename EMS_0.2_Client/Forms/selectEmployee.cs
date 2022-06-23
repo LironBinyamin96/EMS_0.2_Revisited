@@ -74,14 +74,13 @@ namespace EMS_Client.Forms
         private void employeesTable_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             int indexRow = employeesTable.CurrentCell.RowIndex;
-            //MessageBox.Show(indexRow.ToString());
             EMS_ClientMainScreen.employee = Employee.ActivateEmployee(buffer[indexRow].Remove(buffer[indexRow].Length - 1).Split(','));
-            //MessageBox.Show(EMS_ClientMainScreen.employee.ToString());
             
             callerForm.Activate();
             //callerForm.Focus();
             Close();
         }
-        private void btnX_Click(object sender, EventArgs e) => Close();   
+        private void btnX_Click(object sender, EventArgs e) => Close();
+
     }
 }

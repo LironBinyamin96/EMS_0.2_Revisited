@@ -127,6 +127,7 @@ namespace EMS_Server
             }
             catch (Exception ex) { return ex.Source + Environment.NewLine + ex.Message; }
         }
+
         public static string Arrival(string _intId) => $"insert into HourLogs (_intId ,_entry) values ({_intId},'{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}');";
     
         public static void TimestampCheck(KeyValuePair<EMS_Library.MyEmployee.Employee, DateTime> data)

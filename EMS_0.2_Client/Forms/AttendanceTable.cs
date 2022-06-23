@@ -24,6 +24,9 @@ namespace EMS_Client.Forms
 
         public void Fill()
         {
+            txtName.Text = EMS_ClientMainScreen.employee.LName.ToString() +" "+ EMS_ClientMainScreen.employee.FName.ToString();
+            txtID.Text = EMS_ClientMainScreen.employee.IntId.ToString();
+
         }
 
         private void btnSelect_Click(object sender, EventArgs e)
@@ -36,16 +39,30 @@ namespace EMS_Client.Forms
 
         private void AttendanceTable_Activated(object sender, EventArgs e)
         {
-            //MessageBox.Show("Activated");
-            //Fill();
+            MessageBox.Show("Activated");
         }
 
         private void btnPrint_Click(object sender, EventArgs e)
         {
-                string logJson = log.JSON();
-            System.IO.File.WriteAllText(EMS_Library.Config.RootDirectory+"\\log.json", logJson);
+            if(txtName.Text=="" || txtID.Text == "")
+                MessageBox.Show("Please select a employee");
+
+            //    string logJson = log.JSON();
+            //System.IO.File.WriteAllText(EMS_Library.Config.RootDirectory+"\\log.json", logJson);
             
-            Fill();
+        }
+
+        private void btnShowHours_Click(object sender, EventArgs e)
+        {
+            if (txtName.Text == "" || txtID.Text == "")
+                MessageBox.Show("Please select a employee");
+            else
+            {
+                if (EMS_Library.Config.flag)
+                {
+
+                }
+            }
         }
     }
 }

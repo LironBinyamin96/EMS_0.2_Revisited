@@ -103,5 +103,10 @@ namespace EMS_Client.Forms
             txtBaseSalary.Text = EMS_ClientMainScreen.employee.BaseSalary.ToString();
             txtSalaryModifire.Text = EMS_ClientMainScreen.employee.SalaryModifire.ToString();
         }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

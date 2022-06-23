@@ -38,7 +38,6 @@ namespace EMS_Client
         public static string UpdateEmployee(EMS_Library.MyEmployee.Employee employee) => "update employee #" + employee.ToString();
         public static string Delete(int _intId) => "delete employee #" + _intId;
         public static string GetHourLogs(int _intId, int year, int month) => $"get log #{_intId}, {year}, {month}";
-
         public static Action BuildAction(Form parentForm, DataPacket data, List<string> buffer, bool closeForm = false)
         {
             Action action = new Action(() =>
