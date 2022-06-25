@@ -16,33 +16,34 @@ namespace EMS_Library.MyEmployee.HoursLog
         Employee _employee;
         int _month;
         int _year;
-        HoursLogDay[] _days=new HoursLogDay[0];
+        HoursLogDay[] _days;
 
         public HoursLogDay[] Days { get => _days; set => _days = value; }
-        public int Month { get => _month; set => _month = value; }
+        public int Month => _month;
+        public int Year => _year;
         public TimeSpan Total
         {
             get
             {
                 TimeSpan sum = TimeSpan.Zero;
                 foreach (HoursLogDay day in Days)
-                    if(day!=null)
-                        sum+=day.Total;
+                    if (day != null)
+                        sum += day.Total;
                 return sum;
             }
         }
-        public TimeSpan TotalOvertime 
-        { 
-            get 
+        public TimeSpan TotalOvertime
+        {
+            get
             {
                 TimeSpan sum = TimeSpan.Zero;
                 foreach (HoursLogDay day in Days)
                     if (day != null)
                         sum += day.TotalOvertime;
                 return sum;
-            } 
+            }
         }
-        
+
         public HoursLogMonth(string data, Employee employee)
         {
             _employee = employee;
@@ -54,7 +55,9 @@ namespace EMS_Library.MyEmployee.HoursLog
             _days = new HoursLogDay[daysInMonth];
 
             for (int i = 0; i < daysInMonth; i++)
-                _days[i] = new HoursLogDay(Array.FindAll(entries, x => x.Start.Day==i));
+            { 
+                _days[i] = new HoursLogDay(Array.FindAll(entries, x => x.Start.Day == i+1), new DateTime(_year, _month, i+1));
+            }
         }
 
         public string JSON()
@@ -68,29 +71,56 @@ namespace EMS_Library.MyEmployee.HoursLog
                 $"\"MonthlyHours\":\"{Total}\"," +
                 $"\"TotalOvertime\":\"{Config.NormalShiftLength}\"," +
                 $"\"Days\":[";
-            foreach (HoursLogDay day in _days) 
-                hold+=(day!=null?day.JSON():"{}")+',';
-            hold=hold.Remove(hold.Length - 1);
+            foreach (HoursLogDay day in _days)
+                hold += (day != null ? day.JSON() : "{}") + ',';
+            hold = hold.Remove(hold.Length - 1);
             hold += "]}";
 
             return hold;
         }
-        public string[][] getAttendanceTable
+        public HoursLogTableStructure GetDataForTable()
         {
-            get
+            return new HoursLogTableStructure(this);
+            //string[][] daysForTable = new string[DateTime.DaysInMonth(_year, Month)][];
+            //for (int i = 1; i <= DateTime.DaysInMonth(_year,_month); i++)
+            //    if (_days[i-1] != default && !_days[i-1].Entries.IsEmpty()) 
+            //        daysForTable[i-1] = _days[i-1].attendanceTable();
+            //    else
+            //    {
+            //        DateTime dt = DateTime.Parse($"{_year}/{Month}/{i}");
+            //        daysForTable[i] = new string[] { $"{dt}", $"{dt.DayOfWeek}", "", "", "" };
+            //    }
+            //return daysForTable;
+        }
+    }
+    public struct HoursLogTableStructure
+    {
+        public int Month;
+        public int Year;
+        public string[][] Data;
+        public HoursLogTableStructure(HoursLogMonth log)
+        {
+            Month = log.Month;
+            Year = log.Year;
+            Data = new string[DateTime.DaysInMonth(Year, Month)][];
+            foreach (var day in log.Days)
             {
-                string[][] daysForTable = new string[DateTime.DaysInMonth(_year, Month)][];
-                foreach (var day in _days)
-                    daysForTable[day.Day-1] = day.attendanceTable();
-                for (int i = 0; i < daysForTable.Length; i++)
-                    if (daysForTable[i] == default)
+                if (day.Entries.IsEmpty())
+                {
+                    Data[day.Date.Day - 1] = new string[] { $"{day.Date.Date}", $"{day.Date.DayOfWeek}", "", "", "" };
+                }
+                else
+                {
+                    Data[day.Date.Day - 1] = new string[]
                     {
-                        DateTime dt = DateTime.Parse($"{_year}/{Month}/{i + 1}");
-                        daysForTable[i] = new string[] {$"{dt}",$"{dt.DayOfWeek}","","",""};
-                    }
-                return daysForTable;
+                            day.Date.ToString(),
+                            day.Date.DayOfWeek.ToString(),
+                            day.Entries[0].Start.TimeOfDay.ToString(),
+                            day.Entries.Last().End.TimeOfDay.ToString(),
+                            day.Total.ToString()
+                    };
+                }
             }
         }
-
     }
 }

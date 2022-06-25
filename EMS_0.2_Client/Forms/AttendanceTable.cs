@@ -24,7 +24,7 @@ namespace EMS_Client.Forms
 
         public void Fill()
         {
-            txtName.Text = EMS_ClientMainScreen.employee.LName.ToString() +" "+ EMS_ClientMainScreen.employee.FName.ToString();
+            txtName.Text = EMS_ClientMainScreen.employee.LName.ToString() + " " + EMS_ClientMainScreen.employee.FName.ToString();
             txtID.Text = EMS_ClientMainScreen.employee.IntId.ToString();
 
         }
@@ -44,37 +44,36 @@ namespace EMS_Client.Forms
 
         private void btnPrint_Click(object sender, EventArgs e)
         {
-            BuildLog();
-            if(log != null)
+            if (EMS_ClientMainScreen.employee == null)
             {
-                string logJson = log.JSON();
-                File.WriteAllText(EMS_Library.Config.RootDirectory + "\\log.json", logJson);
+                MessageBox.Show("Please select a employee");
+                return;
             }
-            
+            BuildLog();
+            if (log != null)
+            { string logJson = log.JSON(); File.WriteAllText(EMS_Library.Config.RootDirectory + "\\log.json", logJson); }
+
         }
 
         private void BuildLog()
         {
-            if (EMS_ClientMainScreen.employee == null) 
-            { 
-                MessageBox.Show("Please select a employee");
-                return; 
-            }
             List<string> buffer = new List<string>();
-            DateTime temp = DateTime.Parse( "01/"+dateTime.Text);
+            DateTime temp = DateTime.Parse("01/" + dateTime.Text);
             MessageBox.Show(temp.ToString());
             string querry = Requests.GetHourLogs(EMS_ClientMainScreen.employee.IntId, temp.Year, temp.Month);
             Action action = Requests.BuildAction(this, new EMS_Library.Network.DataPacket(querry, 5), buffer, false);
 
             action.Invoke();
-            if(buffer[0]!="-1")
+            if (buffer[0] != "-1")
                 log = new HoursLogMonth(buffer[0], EMS_ClientMainScreen.employee);
         }
         private void btnShowHours_Click(object sender, EventArgs e)
         {
+            if (EMS_ClientMainScreen.employee == null)
+            { MessageBox.Show("Please select a employee"); return; }
             BuildLog();
-            string[][] tmpGetAttendanceTable = log.getAttendanceTable;
-            foreach(string[] item in tmpGetAttendanceTable)
+            HoursLogTableStructure tmpGetAttendanceTable = log.GetDataForTable();
+            foreach (string[] item in tmpGetAttendanceTable.Data)
             {
                 GridViewAttrndance.Rows.Add(item[0], item[1], item[2], item[3], item[4]);
             }

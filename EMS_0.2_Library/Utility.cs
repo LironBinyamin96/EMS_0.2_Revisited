@@ -64,7 +64,8 @@ namespace EMS_Library
         /// <returns></returns>
         public static bool IsEmpty<T>(this IEnumerable<T> collection)
         {
-            // Convert an object to a byte array
+            if(collection == null || collection.Count()==0) return true;
+            if(default(T) == null) return collection.Contains(default);
             byte[] def = default(T).ObjectToByteArray();
             foreach (T item in collection)
             { 

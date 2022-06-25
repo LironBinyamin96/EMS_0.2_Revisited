@@ -9,8 +9,9 @@ namespace EMS_Library.MyEmployee.HoursLog
 {
     public class HoursLogDay
     {
-        HoursLogEntry[] _entries = new HoursLogEntry[0];
-        public int Day => _entries[0].Start.Day;
+        HoursLogEntry[] _entries;
+        DateTime _date;
+
 
         public TimeSpan Total
         {
@@ -24,10 +25,12 @@ namespace EMS_Library.MyEmployee.HoursLog
         }
         public TimeSpan TotalOvertime => Total - Config.NormalShiftLength > TimeSpan.Zero ? Total - Config.NormalShiftLength : TimeSpan.Zero;
         public HoursLogEntry[] Entries { get => _entries; set => _entries = value; }
+        public DateTime Date => _date;
 
-        public HoursLogDay(HoursLogEntry[] entries)
+        public HoursLogDay(HoursLogEntry[] entries, DateTime date)
         {
             _entries = entries;
+            _date = date;
         }
         public override string ToString()
         {
@@ -57,14 +60,14 @@ namespace EMS_Library.MyEmployee.HoursLog
             return hold;
         }
 
-        public string[] attendanceTable() => new string[]
-        {
-            _entries[0].Start.Date.ToString(),
-            _entries[0].Start.Date.DayOfWeek.ToString(),
-            _entries[0].Start.TimeOfDay.ToString(),
-            _entries[0].End.TimeOfDay.ToString(),
-            _entries[0].Total.ToString()
-        };
+        //public string[] attendanceTable() => new string[]
+        //{
+        //    _entries[0].Start.Date.ToString(),
+        //    _entries[0].Start.Date.DayOfWeek.ToString(),
+        //    _entries[0].Start.TimeOfDay.ToString(),
+        //    _entries[0].End.TimeOfDay.ToString(),
+        //    _entries[0].Total.ToString()
+        //};
 
 
 
