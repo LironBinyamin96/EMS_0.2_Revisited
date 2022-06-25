@@ -72,8 +72,8 @@ namespace EMS_Client.Forms
             if (EMS_ClientMainScreen.employee == null)
             { MessageBox.Show("Please select a employee"); return; }
             BuildLog();
-            HoursLogTableStructure tmpGetAttendanceTable = log.GetDataForTable();
-            foreach (string[] item in tmpGetAttendanceTable.Data)
+            string[][] tmpGetAttendanceTable = log.GetHoursLogTableStructure();
+            foreach (string[] item in tmpGetAttendanceTable)
             {
                 GridViewAttrndance.Rows.Add(item[0], item[1], item[2], item[3], item[4]);
             }

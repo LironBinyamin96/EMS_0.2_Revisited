@@ -55,8 +55,8 @@ namespace EMS_Library.MyEmployee.HoursLog
             _days = new HoursLogDay[daysInMonth];
 
             for (int i = 0; i < daysInMonth; i++)
-            { 
-                _days[i] = new HoursLogDay(Array.FindAll(entries, x => x.Start.Day == i+1), new DateTime(_year, _month, i+1));
+            {
+                _days[i] = new HoursLogDay(Array.FindAll(entries, x => x.Start.Day == i + 1), new DateTime(_year, _month, i + 1));
             }
         }
 
@@ -78,32 +78,10 @@ namespace EMS_Library.MyEmployee.HoursLog
 
             return hold;
         }
-        public HoursLogTableStructure GetDataForTable()
+        public string[][] GetHoursLogTableStructure()
         {
-            return new HoursLogTableStructure(this);
-            //string[][] daysForTable = new string[DateTime.DaysInMonth(_year, Month)][];
-            //for (int i = 1; i <= DateTime.DaysInMonth(_year,_month); i++)
-            //    if (_days[i-1] != default && !_days[i-1].Entries.IsEmpty()) 
-            //        daysForTable[i-1] = _days[i-1].attendanceTable();
-            //    else
-            //    {
-            //        DateTime dt = DateTime.Parse($"{_year}/{Month}/{i}");
-            //        daysForTable[i] = new string[] { $"{dt}", $"{dt.DayOfWeek}", "", "", "" };
-            //    }
-            //return daysForTable;
-        }
-    }
-    public struct HoursLogTableStructure
-    {
-        public int Month;
-        public int Year;
-        public string[][] Data;
-        public HoursLogTableStructure(HoursLogMonth log)
-        {
-            Month = log.Month;
-            Year = log.Year;
-            Data = new string[DateTime.DaysInMonth(Year, Month)][];
-            foreach (var day in log.Days)
+            string[][] Data = new string[DateTime.DaysInMonth(Year, Month)][];
+            foreach (var day in _days)
             {
                 if (day.Entries.IsEmpty())
                 {
@@ -121,6 +99,7 @@ namespace EMS_Library.MyEmployee.HoursLog
                     };
                 }
             }
+            return Data;
         }
     }
 }
