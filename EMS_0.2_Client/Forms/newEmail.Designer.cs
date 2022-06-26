@@ -252,6 +252,7 @@
             this.btnSelect.TabIndex = 15;
             this.btnSelect.Text = "Select an employee";
             this.btnSelect.UseVisualStyleBackColor = true;
+            this.btnSelect.Click += new System.EventHandler(this.btnSelect_Click);
             // 
             // newEmail
             // 

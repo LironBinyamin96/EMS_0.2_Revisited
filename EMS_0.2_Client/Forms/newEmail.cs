@@ -87,5 +87,11 @@ namespace EMS_Client.Forms
                 txtSubject.Text = subject;
             }
         }
+
+        private void btnSelect_Click(object sender, EventArgs e)
+        {
+            selectEmployee se = new selectEmployee(this);
+            se.Show();
+        }
     }
 }

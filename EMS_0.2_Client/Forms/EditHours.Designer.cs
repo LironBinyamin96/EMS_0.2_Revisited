@@ -31,16 +31,16 @@
             this.panelEditHours = new System.Windows.Forms.Panel();
             this.btnX = new System.Windows.Forms.Button();
             this.lblEditHours = new System.Windows.Forms.Label();
-            this.txtDate = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.lblDate = new System.Windows.Forms.Label();
-            this.txtEntry = new System.Windows.Forms.TextBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.lblEntry = new System.Windows.Forms.Label();
-            this.txtExit = new System.Windows.Forms.TextBox();
             this.panel3 = new System.Windows.Forms.Panel();
             this.lblExit = new System.Windows.Forms.Label();
             this.btnSave = new System.Windows.Forms.Button();
+            this.dateTimeEntey = new System.Windows.Forms.DateTimePicker();
+            this.dateTimeExit = new System.Windows.Forms.DateTimePicker();
+            this.lblDay = new System.Windows.Forms.Label();
             this.panelEditHours.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -54,6 +54,7 @@
             this.panelEditHours.Name = "panelEditHours";
             this.panelEditHours.Size = new System.Drawing.Size(515, 96);
             this.panelEditHours.TabIndex = 3;
+            this.panelEditHours.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panelEditHours_MouseDown);
             // 
             // btnX
             // 
@@ -80,17 +81,6 @@
             this.lblEditHours.TabIndex = 0;
             this.lblEditHours.Text = "Edit Hours";
             // 
-            // txtDate
-            // 
-            this.txtDate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
-            this.txtDate.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtDate.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.txtDate.ForeColor = System.Drawing.SystemColors.Menu;
-            this.txtDate.Location = new System.Drawing.Point(210, 136);
-            this.txtDate.Name = "txtDate";
-            this.txtDate.Size = new System.Drawing.Size(150, 16);
-            this.txtDate.TabIndex = 8;
-            // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
@@ -110,17 +100,6 @@
             this.lblDate.TabIndex = 6;
             this.lblDate.Text = "Date :";
             // 
-            // txtEntry
-            // 
-            this.txtEntry.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
-            this.txtEntry.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtEntry.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.txtEntry.ForeColor = System.Drawing.SystemColors.Menu;
-            this.txtEntry.Location = new System.Drawing.Point(210, 182);
-            this.txtEntry.Name = "txtEntry";
-            this.txtEntry.Size = new System.Drawing.Size(150, 16);
-            this.txtEntry.TabIndex = 11;
-            // 
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
@@ -139,17 +118,6 @@
             this.lblEntry.Size = new System.Drawing.Size(45, 18);
             this.lblEntry.TabIndex = 9;
             this.lblEntry.Text = "Entry :";
-            // 
-            // txtExit
-            // 
-            this.txtExit.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
-            this.txtExit.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtExit.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.txtExit.ForeColor = System.Drawing.SystemColors.Menu;
-            this.txtExit.Location = new System.Drawing.Point(210, 233);
-            this.txtExit.Name = "txtExit";
-            this.txtExit.Size = new System.Drawing.Size(150, 16);
-            this.txtExit.TabIndex = 14;
             // 
             // panel3
             // 
@@ -184,20 +152,49 @@
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
+            // dateTimeEntey
+            // 
+            this.dateTimeEntey.CustomFormat = "yyyy-MM-dd HH:mm:ss";
+            this.dateTimeEntey.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+            this.dateTimeEntey.Location = new System.Drawing.Point(230, 171);
+            this.dateTimeEntey.Name = "dateTimeEntey";
+            this.dateTimeEntey.ShowUpDown = true;
+            this.dateTimeEntey.Size = new System.Drawing.Size(78, 23);
+            this.dateTimeEntey.TabIndex = 42;
+            // 
+            // dateTimeExit
+            // 
+            this.dateTimeExit.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+            this.dateTimeExit.Location = new System.Drawing.Point(230, 226);
+            this.dateTimeExit.Name = "dateTimeExit";
+            this.dateTimeExit.ShowUpDown = true;
+            this.dateTimeExit.Size = new System.Drawing.Size(78, 23);
+            this.dateTimeExit.TabIndex = 43;
+            // 
+            // lblDay
+            // 
+            this.lblDay.AutoSize = true;
+            this.lblDay.Font = new System.Drawing.Font("Bahnschrift SemiCondensed", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblDay.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
+            this.lblDay.Location = new System.Drawing.Point(230, 133);
+            this.lblDay.Name = "lblDay";
+            this.lblDay.Size = new System.Drawing.Size(0, 18);
+            this.lblDay.TabIndex = 44;
+            // 
             // EditHours
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
             this.ClientSize = new System.Drawing.Size(515, 369);
+            this.Controls.Add(this.lblDay);
+            this.Controls.Add(this.dateTimeExit);
+            this.Controls.Add(this.dateTimeEntey);
             this.Controls.Add(this.btnSave);
-            this.Controls.Add(this.txtExit);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.lblExit);
-            this.Controls.Add(this.txtEntry);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.lblEntry);
-            this.Controls.Add(this.txtDate);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.lblDate);
             this.Controls.Add(this.panelEditHours);
@@ -217,15 +214,15 @@
         private Panel panelEditHours;
         private Label lblEditHours;
         private Button btnX;
-        private TextBox txtDate;
         private Panel panel1;
         private Label lblDate;
-        private TextBox txtEntry;
         private Panel panel2;
         private Label lblEntry;
-        private TextBox txtExit;
         private Panel panel3;
         private Label lblExit;
         private Button btnSave;
+        private DateTimePicker dateTimeEntey;
+        private DateTimePicker dateTimeExit;
+        private Label lblDay;
     }
 }

@@ -73,9 +73,6 @@ namespace EMS_Client
             action.Invoke();
             File.WriteAllBytes($"{EMS_Library.Config.RootDirectory}\\Images\\" + $"111111111_copy.bmp", buffer);
             File.WriteAllBytes($"{EMS_Library.Config.RootDirectory}\\Images\\" + $"111111111_copy.txt", buffer);
-            //File.WriteAllBytes(@"C:\Users\levkh\Desktop\EMS_Root\Images\" + $"111111111_copy.bmp", buffer);
-            //File.WriteAllBytes(@"C:\Users\levkh\Desktop\EMS_Root\Images\" + $"111111111_copy.txt", buffer);
-            //userPicture.Image = Image.FromFile(@"C:\Users\levkh\Desktop\EMS_Root\Images\" + $"111111111_copy.bmp");
             if (!buffer.IsEmpty())
                 userPicture.Image = Image.FromStream(new MemoryStream(buffer));
         }

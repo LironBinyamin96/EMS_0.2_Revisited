@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.userPicture = new System.Windows.Forms.PictureBox();
             this.panelStyle = new System.Windows.Forms.Panel();
             this.btnExit = new System.Windows.Forms.Button();
             this.btnAttendence = new System.Windows.Forms.Button();
@@ -37,7 +38,6 @@
             this.btnEditingEmployee = new System.Windows.Forms.Button();
             this.panelForUser = new System.Windows.Forms.Panel();
             this.panelDesktop = new System.Windows.Forms.Panel();
-            this.userPicture = new System.Windows.Forms.PictureBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.userPicture)).BeginInit();
             this.SuspendLayout();
@@ -58,6 +58,15 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(178, 594);
             this.panel1.TabIndex = 0;
+            // 
+            // userPicture
+            // 
+            this.userPicture.Location = new System.Drawing.Point(12, 364);
+            this.userPicture.Name = "userPicture";
+            this.userPicture.Size = new System.Drawing.Size(149, 165);
+            this.userPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.userPicture.TabIndex = 6;
+            this.userPicture.TabStop = false;
             // 
             // panelStyle
             // 
@@ -180,14 +189,6 @@
             this.panelDesktop.Size = new System.Drawing.Size(759, 594);
             this.panelDesktop.TabIndex = 1;
             this.panelDesktop.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panelDesktop_MouseDown);
-            // 
-            // userPicture
-            // 
-            this.userPicture.Location = new System.Drawing.Point(29, 380);
-            this.userPicture.Name = "userPicture";
-            this.userPicture.Size = new System.Drawing.Size(114, 131);
-            this.userPicture.TabIndex = 6;
-            this.userPicture.TabStop = false;
             // 
             // EMS_ClientMainScreen
             // 
