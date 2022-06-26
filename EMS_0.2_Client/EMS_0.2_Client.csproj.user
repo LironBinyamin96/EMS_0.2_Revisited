@@ -13,6 +13,9 @@
     <Compile Update="Forms\EditingEmployee.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Forms\EditHours.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Forms\GeneralData.cs">
       <SubType>Form</SubType>
     </Compile>

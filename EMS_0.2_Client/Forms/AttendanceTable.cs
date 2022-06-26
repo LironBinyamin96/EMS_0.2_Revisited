@@ -17,6 +17,8 @@ namespace EMS_Client.Forms
         public static bool fill = false;
         public HoursLogMonth log;
         #endregion
+
+        
         public AttendanceTable()
         {
             InitializeComponent();
@@ -59,7 +61,6 @@ namespace EMS_Client.Forms
         {
             List<string> buffer = new List<string>();
             DateTime temp = DateTime.Parse("01/" + dateTime.Text);
-            MessageBox.Show(temp.ToString());
             string querry = Requests.GetHourLogs(EMS_ClientMainScreen.employee.IntId, temp.Year, temp.Month);
             Action action = Requests.BuildAction(this, new EMS_Library.Network.DataPacket(querry, 5), buffer, false);
 
@@ -71,12 +72,26 @@ namespace EMS_Client.Forms
         {
             if (EMS_ClientMainScreen.employee == null)
             { MessageBox.Show("Please select a employee"); return; }
+
+            GridViewAttrndance.Rows.Clear();
             BuildLog();
-            string[][] tmpGetAttendanceTable = log.GetHoursLogTableStructure();
-            foreach (string[] item in tmpGetAttendanceTable)
+            if (log != null)
             {
-                GridViewAttrndance.Rows.Add(item[0], item[1], item[2], item[3], item[4]);
+                string[][] tmpGetAttendanceTable = log.GetHoursLogTableStructure();
+                foreach (string[] item in tmpGetAttendanceTable)
+                {
+                    GridViewAttrndance.Rows.Add(item[0], item[1], item[2], item[3], item[4]);
+                }
             }
+        }
+        // בדאבל קליל - נפתח חלון עריכת שעות עבודה
+        public void GridViewAttrndance_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            string idEmployee= EMS_ClientMainScreen.employee.IntId.ToString();
+            int y = GridViewAttrndance.CurrentCell.RowIndex;
+            string[] hold = new string[]{idEmployee, GridViewAttrndance.SelectedCells[0].Value.ToString(), GridViewAttrndance.SelectedCells[2].Value.ToString(), GridViewAttrndance.SelectedCells[3].Value.ToString() };
+            EditHours editHours = new EditHours(hold);
+            editHours.Show();
         }
     }
 }

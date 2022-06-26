@@ -20,7 +20,6 @@ namespace EMS_Server
                 /*Delete employee*/ case 4: { return new DataPacket(SQLBridge.OneWayCommand(SQLBridge.Delete(data.StringData)), 255); }
                 /*Get employee log*/case 5: {
                         string temp = SQLBridge.TwoWayCommand(SQLBridge.GetMonthLog(data.StringData));
-                        Console.WriteLine(temp + "aaaaaaaaaaaaaaaaaaaaaa");
                         DataPacket debug = new DataPacket(temp, 255); 
                         return debug;
                     }
@@ -30,6 +29,7 @@ namespace EMS_Server
 
                         return packet;
                     }
+                /* update entry*/   case 7: { return new DataPacket(SQLBridge.OneWayCommand(SQLBridge.Update(data.StringData)), 255); };
                 /*Get free ID*/     case 252: { return new DataPacket(SQLBridge.GetFreeID(), 255); }
                 /*Direct querry*/   case 253: { return new DataPacket(SQLBridge.OneWayCommand(data.StringData), 255); }
                 /*Direct querry*/   case 254: { return new DataPacket(SQLBridge.TwoWayCommand(data.StringData), 255); }

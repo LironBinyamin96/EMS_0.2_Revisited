@@ -81,17 +81,18 @@ namespace EMS_Library.MyEmployee.HoursLog
         public string[][] GetHoursLogTableStructure()
         {
             string[][] Data = new string[DateTime.DaysInMonth(Year, Month)][];
+            
             foreach (var day in _days)
             {
                 if (day.Entries.IsEmpty())
                 {
-                    Data[day.Date.Day - 1] = new string[] { $"{day.Date.Date}", $"{day.Date.DayOfWeek}", "", "", "" };
+                    Data[day.Date.Day - 1] = new string[] { $"{day.Date.Date.ToString().Substring(0, 10)}", $"{day.Date.DayOfWeek}", "", "", "" };
                 }
                 else
                 {
                     Data[day.Date.Day - 1] = new string[]
                     {
-                            day.Date.ToString(),
+                            day.Date.ToString().Substring(0,10),
                             day.Date.DayOfWeek.ToString(),
                             day.Entries[0].Start.TimeOfDay.ToString(),
                             day.Entries.Last().End.TimeOfDay.ToString(),

@@ -22,6 +22,11 @@ namespace EMS_Client
             }
             return querry;
         }
+        public static string updateEntry(string id,string date,string entry,string exit)
+        {
+
+            return "";
+        }
         public static string UpdateEmployee(Dictionary<string, string> data, Dictionary<string, string> clause)
         {
             string querry = $"update employee where ";

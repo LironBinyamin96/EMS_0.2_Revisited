@@ -29,11 +29,23 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panelAttendance = new System.Windows.Forms.Panel();
             this.lblAttendance = new System.Windows.Forms.Label();
             this.btnPrint = new System.Windows.Forms.Button();
             this.btnSelect = new System.Windows.Forms.Button();
             this.GridViewAttrndance = new System.Windows.Forms.DataGridView();
+            this.date = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Day = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Entry = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Exit = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.total_hours = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.getDaysBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.txtName = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -49,11 +61,6 @@
             this.hoursLogMonthBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.hoursLogMonthBindingSource2 = new System.Windows.Forms.BindingSource(this.components);
             this.hoursLogMonthBindingSource3 = new System.Windows.Forms.BindingSource(this.components);
-            this.date = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Day = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Entry = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Exit = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.total_hours = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panelAttendance.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GridViewAttrndance)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.getDaysBindingSource)).BeginInit();
@@ -112,22 +119,106 @@
             // 
             this.GridViewAttrndance.AllowUserToAddRows = false;
             this.GridViewAttrndance.AllowUserToDeleteRows = false;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
+            this.GridViewAttrndance.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.GridViewAttrndance.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.GridViewAttrndance.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
-            this.GridViewAttrndance.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.GridViewAttrndance.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.GridViewAttrndance.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.GridViewAttrndance.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.GridViewAttrndance.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            this.GridViewAttrndance.ColumnHeadersHeight = 30;
             this.GridViewAttrndance.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.date,
             this.Day,
             this.Entry,
             this.Exit,
+            this.dataGridViewTextBoxColumn1,
+            this.dataGridViewTextBoxColumn2,
+            this.dataGridViewTextBoxColumn3,
+            this.dataGridViewTextBoxColumn4,
             this.total_hours});
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.GridViewAttrndance.DefaultCellStyle = dataGridViewCellStyle3;
+            this.GridViewAttrndance.EnableHeadersVisualStyles = false;
+            this.GridViewAttrndance.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
             this.GridViewAttrndance.Location = new System.Drawing.Point(12, 185);
             this.GridViewAttrndance.Name = "GridViewAttrndance";
             this.GridViewAttrndance.ReadOnly = true;
+            this.GridViewAttrndance.RowHeadersWidth = 30;
             this.GridViewAttrndance.RowTemplate.Height = 25;
+            this.GridViewAttrndance.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.GridViewAttrndance.Size = new System.Drawing.Size(734, 378);
             this.GridViewAttrndance.TabIndex = 5;
+            this.GridViewAttrndance.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.GridViewAttrndance_CellMouseDoubleClick);
+            // 
+            // date
+            // 
+            this.date.HeaderText = "Date";
+            this.date.Name = "date";
+            this.date.ReadOnly = true;
+            // 
+            // Day
+            // 
+            this.Day.HeaderText = "Day";
+            this.Day.Name = "Day";
+            this.Day.ReadOnly = true;
+            // 
+            // Entry
+            // 
+            this.Entry.HeaderText = "Entry";
+            this.Entry.Name = "Entry";
+            this.Entry.ReadOnly = true;
+            // 
+            // Exit
+            // 
+            this.Exit.HeaderText = "Exit";
+            this.Exit.Name = "Exit";
+            this.Exit.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.HeaderText = "Entry";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.HeaderText = "Exit";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            this.dataGridViewTextBoxColumn3.HeaderText = "Entry";
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            this.dataGridViewTextBoxColumn3.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn4
+            // 
+            this.dataGridViewTextBoxColumn4.HeaderText = "Exit";
+            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            this.dataGridViewTextBoxColumn4.ReadOnly = true;
+            // 
+            // total_hours
+            // 
+            this.total_hours.HeaderText = "Total hours";
+            this.total_hours.Name = "total_hours";
+            this.total_hours.ReadOnly = true;
             // 
             // getDaysBindingSource
             // 
@@ -257,36 +348,6 @@
             // 
             this.hoursLogMonthBindingSource3.DataSource = typeof(EMS_Library.MyEmployee.HoursLog.HoursLogMonth);
             // 
-            // date
-            // 
-            this.date.HeaderText = "Date";
-            this.date.Name = "date";
-            this.date.ReadOnly = true;
-            // 
-            // Day
-            // 
-            this.Day.HeaderText = "Day";
-            this.Day.Name = "Day";
-            this.Day.ReadOnly = true;
-            // 
-            // Entry
-            // 
-            this.Entry.HeaderText = "Entry";
-            this.Entry.Name = "Entry";
-            this.Entry.ReadOnly = true;
-            // 
-            // Exit
-            // 
-            this.Exit.HeaderText = "Exit";
-            this.Exit.Name = "Exit";
-            this.Exit.ReadOnly = true;
-            // 
-            // total_hours
-            // 
-            this.total_hours.HeaderText = "Total hours";
-            this.total_hours.Name = "total_hours";
-            this.total_hours.ReadOnly = true;
-            // 
             // AttendanceTable
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -350,6 +411,10 @@
         private DataGridViewTextBoxColumn Day;
         private DataGridViewTextBoxColumn Entry;
         private DataGridViewTextBoxColumn Exit;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
         private DataGridViewTextBoxColumn total_hours;
     }
 }

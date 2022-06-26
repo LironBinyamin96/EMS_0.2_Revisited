@@ -1234,3 +1234,4 @@ C:\Users\liron\Desktop\EMS\EMS_0.2_Client\bin\Debug\net6.0-windows\runtimes\osx-
 C:\Users\liron\Desktop\EMS\EMS_0.2_Client\bin\Debug\net6.0-windows\runtimes\osx-x64\native\libMono.Unix.dylib
 C:\Users\liron\Desktop\EMS\EMS_0.2_Client\bin\Debug\net6.0-windows\runtimes\tvos-arm64\native\libMono.Unix.a
 C:\Users\liron\Desktop\EMS\EMS_0.2_Client\bin\Debug\net6.0-windows\runtimes\tvossimulator-x64\native\libMono.Unix.a
+C:\Users\liron\Desktop\EMS\EMS_0.2_Client\obj\Debug\net6.0-windows\EMS_Client.Forms.EditHours.resources
