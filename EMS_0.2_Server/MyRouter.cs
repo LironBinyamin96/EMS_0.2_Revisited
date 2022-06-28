@@ -17,25 +17,15 @@ namespace EMS_Server
                 /*Select employee*/ case 1: { return new DataPacket(SQLBridge.TwoWayCommand(SQLBridge.Select(data.StringData)), 255); }
                 /*Add employee*/    case 2: { return new DataPacket(SQLBridge.OneWayCommand(SQLBridge.Add(data.StringData)), 255); }
                 /*Update employee*/ case 3: { return new DataPacket(SQLBridge.OneWayCommand(SQLBridge.Update(data.StringData)), 255); }
-                /*Delete employee*/ case 4: { return new DataPacket(SQLBridge.OneWayCommand(SQLBridge.Delete(data.StringData)), 255); }
-                /*Get employee log*/case 5: {
-                        string temp = SQLBridge.TwoWayCommand(SQLBridge.GetMonthLog(data.StringData));
-                        DataPacket debug = new DataPacket(temp, 255); 
-                        return debug;
-                    }
-                /*Get Picture*/     case 6: {
-                        DataPacket packet = new DataPacket(GetPicture(), 255);
-
-
-                        return packet;
-                    }
-                /* update entry*/   case 7: { return new DataPacket(SQLBridge.OneWayCommand(SQLBridge.Update(data.StringData)), 255); };
+                /*Delete employee*/ case 4: { return new DataPacket(SQLBridge.OneWayCommand(SQLBridge.DeleteEmployee(data.StringData)), 255); }
+                /*Get employee log*/case 5: { return new DataPacket(SQLBridge.TwoWayCommand(SQLBridge.GetMonthLog(data.StringData)), 255);}
+                /*Get Picture*/     case 6: { return new DataPacket(GetPicture(), 255); }
+                /*Update entry*/    case 7: { return new DataPacket(SQLBridge.UpdateEntry(data.StringData), 255); };
                 /*Get free ID*/     case 252: { return new DataPacket(SQLBridge.GetFreeID(), 255); }
                 /*Direct querry*/   case 253: { return new DataPacket(SQLBridge.OneWayCommand(data.StringData), 255); }
                 /*Direct querry*/   case 254: { return new DataPacket(SQLBridge.TwoWayCommand(data.StringData), 255); }
                 /*Ping*/            case 255: { return new DataPacket(data.StringData, 255); }
             }
-
             byte[] GetPicture()
             {
                 //"get picture of #_intid"

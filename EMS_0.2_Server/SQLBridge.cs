@@ -59,7 +59,7 @@ namespace EMS_Server
                         stringBuilder.Append('|');
                     }
                     Connection.Close();
-                    return stringBuilder.Length > 0 ? stringBuilder.ToString().Remove(stringBuilder.Length-1) : "-1";
+                    return stringBuilder.Length > 0 ? stringBuilder.ToString().Remove(stringBuilder.Length - 1) : "-1";
                 }
                 catch (SqlException ex) { return ex.Message + Environment.NewLine + IncomingCommand; }
             }
@@ -92,21 +92,21 @@ namespace EMS_Server
             final += clientQuerry.Substring(clientQuerry.IndexOf("where"), clientQuerry.IndexOf('#') - clientQuerry.IndexOf("where")) + ';';
             return final;
         }
-        public static string Delete(string clientQuerry)
+        public static string DeleteEmployee(string clientQuerry)
         {
             string id = clientQuerry.Substring(clientQuerry.IndexOf('#') + 1);
             return
-                $"delete from {Config.EmployeeHourLogsTable} where _intId={id};"+
+                $"delete from {Config.EmployeeHourLogsTable} where _intId={id};" +
                 $"delete from {Config.EmployeeDataTable} where _intId={id};";
         } //delete #_intId
         public static string GetMonthLog(string clientQuerry) //get log #_intId, year, month
         {
             string[] data = clientQuerry.Substring(clientQuerry.IndexOf('#') + 1).Split(',');
             DateTime time = DateTime.Parse($"{data[1].Trim()}-{data[2].Trim()}-01");
-            string debug = 
+            string debug =
                 $"select * from HourLogs" +
                 $" where " +
-                $"((_entry between '{data[1]}-{data[2]}-01' and '{data[1]}-{data[2]}-{DateTime.DaysInMonth(int.Parse(data[1]),int.Parse(data[2]))}') or" +
+                $"((_entry between '{data[1]}-{data[2]}-01' and '{data[1]}-{data[2]}-{DateTime.DaysInMonth(int.Parse(data[1]), int.Parse(data[2]))}') or" +
                 $"(_exit between '{data[1]}-{data[2]}-01' and '{data[1]}-{data[2]}-{DateTime.DaysInMonth(int.Parse(data[1]), int.Parse(data[2]))}'))" +
                 $" and _intId = {data[0]}; ";
             return debug;
@@ -118,7 +118,7 @@ namespace EMS_Server
             try
             {
                 DateTime arrivalDate = DateTime.Parse(lastArrival);
-                if(arrivalDate.Day==DateTime.Now.Day)
+                if (arrivalDate.Day == DateTime.Now.Day)
                     return $"update HourLogs" +
                            $" set _exit='{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}' " +
                            $"where _intId={_intId} and _entry = '{lastArrTime.ToString("yyyy-MM-dd HH:mm:ss")}';";
@@ -128,18 +128,28 @@ namespace EMS_Server
             }
             catch (Exception ex) { return ex.Source + Environment.NewLine + ex.Message; }
         }
-
-        public static string Arrival(string _intId) => $"insert into HourLogs (_intId ,_entry) values ({_intId},'{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}');";
-    
+        public static string Arrival(string _intId) => $"insert into {Config.EmployeeHourLogsTable} (_intId ,_entry) values ({_intId},'{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}');";
         public static void TimestampCheck(KeyValuePair<EMS_Library.MyEmployee.Employee, DateTime> data)
         {
 
         }
-    
-    
-    
-    
-    
-    
+        public static string UpdateEntry(string clientQuerry)
+        {
+            string[] querryData = clientQuerry.Substring(clientQuerry.IndexOf('#')).Split(',');
+            int responce = 0;
+            if (querryData.Length != 3) 
+                return new ArgumentException("Invalid querry format.").Message;
+            {
+                string res = OneWayCommand($"delete from {Config.EmployeeHourLogsTable} where _intId={querryData[0]} and (_entry='{querryData[1]}' or _exit='{querryData[2]}');");
+                if (int.TryParse(res, out int resInt))
+                    responce += resInt;
+            }
+            {
+                string res = OneWayCommand($"insert into {Config.EmployeeHourLogsTable} values({querryData[0]},'{querryData[1]}','{querryData[2]}');");
+                if (int.TryParse(res, out int resInt))
+                    responce += resInt;
+            }
+            return responce.ToString();
+        }
     }
 }

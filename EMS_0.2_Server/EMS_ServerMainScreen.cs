@@ -20,6 +20,7 @@ namespace EMS_Server
         TcpClient client = null;
         Task FacialRecognition;
         bool scheduleForceExits = true;
+        bool SQLQuerryInput = false;
         #endregion
 
         #region Tasks&Tokens
@@ -50,18 +51,36 @@ namespace EMS_Server
             if (e.KeyChar == 13)
             {
                 string[] temp = txtServerConsole.Text.Split(Environment.NewLine);
-                switch (temp[temp.Length - 1].ToLower())
+                if (SQLQuerryInput)
                 {
-                    default: break;
-                    case "close": { Close(); break; }
-                    case "terminate": { Close(); break; }
-                    case "exit": { Close(); break; }
-                    case "shutdown": { Close(); break; }
-                        /*
-                    case "fr powerup": { try { FR_Process.Start(); } catch { } break; }
-                    case "fr shutdown": { try { FR_Process.Close(); } catch { } break; }
-                        */
+                    if(temp[temp.Length - 1].ToLower()== "sql querry stop")
+                    { SQLQuerryInput = false; WriteToServerConsole(Environment.NewLine + "stoped"); return; }
+                    if (temp[temp.Length - 1].ToLower().Contains("select"))
+                    {
+                        WriteToServerConsole("");
+                        WriteToServerConsole(SQLBridge.TwoWayCommand(temp[temp.Length - 1].ToLower()).Split('|'));
+                    }
+                    else
+                    {
+                        WriteToServerConsole("");
+                        WriteToServerConsole(SQLBridge.OneWayCommand(temp[temp.Length - 1].ToLower()));
+                    }
+                    return;
                 }
+                else
+                    switch (temp[temp.Length - 1].ToLower())
+                    {
+                        default: break;
+                        case "close": { Close(); break; }
+                        case "terminate": { Close(); break; }
+                        case "exit": { Close(); break; }
+                        case "shutdown": { Close(); break; }
+                        case "sql querry begin": { SQLQuerryInput = true; WriteToServerConsole(Environment.NewLine + "Listening for querry:"); break; }
+                            /*
+                        case "fr powerup": { try { FR_Process.Start(); } catch { } break; }
+                        case "fr shutdown": { try { FR_Process.Close(); } catch { } break; }
+                            */
+                    }
             }
         }
 
@@ -106,6 +125,11 @@ namespace EMS_Server
                 txtServerConsole.AppendText(text + Environment.NewLine);
                 Console.WriteLine(text + "\n");
             });
+        }
+        public void WriteToServerConsole(string[] text)
+        {
+            foreach (string s in text)
+                WriteToServerConsole(s);
         }
         private void WriteToConfigFile()
         {
@@ -197,7 +221,7 @@ namespace EMS_Server
 
         #endregion
 
-       
+
 
         #region Debug
         private void btnSimExit_Click(object sender, EventArgs e)

@@ -314,8 +314,8 @@
             this.dateTime.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.dateTime.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dateTime.Location = new System.Drawing.Point(536, 148);
-            this.dateTime.MaxDate = new System.DateTime(2022, 6, 22, 0, 0, 0, 0);
-            this.dateTime.MinDate = new System.DateTime(2022, 1, 1, 0, 0, 0, 0);
+            this.dateTime.MaxDate = new System.DateTime(2030, 12, 31, 0, 0, 0, 0);
+            this.dateTime.MinDate = new System.DateTime(1990, 12, 31, 0, 0, 0, 0);
             this.dateTime.Name = "dateTime";
             this.dateTime.ShowUpDown = true;
             this.dateTime.Size = new System.Drawing.Size(78, 25);

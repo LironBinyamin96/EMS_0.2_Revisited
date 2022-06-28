@@ -22,10 +22,7 @@ namespace EMS_Client
             }
             return querry;
         }
-        public static string UpdateEntry(string id,DateTime entry, DateTime exit)
-        {
-            return $"update entry #{id}, {entry.ToString("yyyy-MM-dd HH:mm:ss")}, {exit.ToString("yyyy-MM-dd HH:mm:ss")}";
-        }
+        public static string UpdateEntry(string id, DateTime entry, DateTime exit) => $"update entry #{id}, {entry.ToString("yyyy-MM-dd HH:mm:ss")}, {exit.ToString("yyyy-MM-dd HH:mm:ss")}";
         public static string UpdateEmployee(Dictionary<string, string> data, Dictionary<string, string> clause)
         {
             string querry = $"update employee where ";
