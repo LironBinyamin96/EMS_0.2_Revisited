@@ -135,7 +135,7 @@ namespace EMS_Server
         }
         public static string UpdateEntry(string clientQuerry)
         {
-            string[] querryData = clientQuerry.Substring(clientQuerry.IndexOf('#')).Split(',');
+            string[] querryData = clientQuerry.Substring(clientQuerry.IndexOf('#')+1).Split(',');
             int responce = 0;
             if (querryData.Length != 3) 
                 return new ArgumentException("Invalid querry format.").Message;

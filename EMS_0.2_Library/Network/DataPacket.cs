@@ -22,7 +22,7 @@ namespace EMS_Library.Network
         /// <param name="stream"></param>
         public DataPacket(NetworkStream stream, [System.Runtime.CompilerServices.CallerMemberName] string memberName = "")
         {
-            Console.WriteLine($"DataPacket creation called by {memberName}\nConstructor NetworkStream");
+
             try
             {
                 byte[] temp = new byte[]{
@@ -39,13 +39,17 @@ namespace EMS_Library.Network
                 stream.Read(_byteData, 0, _header.DataIntLength);
 
                 StringData = Encoding.UTF8.GetString(_byteData, 0, _header.DataIntLength);
-                //Console.WriteLine(this + " Created");
+                if (Config.DevelopmentMode)
+                {
+                    Console.WriteLine($"DataPacket creation called by {memberName}\nConstructor NetworkStream");
+                    Console.WriteLine("Creation complete!\n" + ToString());
+                }
             }
             catch
             {
                 throw new Exception($"Failed to create data packet!");
             }
-           
+
         }
         /// <summary>
         /// בנאי שמקבל סטרינג ובונה ממנו חבילת מידע
@@ -56,13 +60,16 @@ namespace EMS_Library.Network
         /// <exception cref="Exception"></exception>
         public DataPacket(string data, byte func, [System.Runtime.CompilerServices.CallerMemberName] string memberName = "")
         {
-            Console.WriteLine($"DataPacket creation called by {memberName}\nConstructor string");
             if (data.Length > Math.Pow(255, 4) - 20) throw new Exception("Data is too long! 4294967296 max! Length was " + data.Length);
             if (data.Length == 0) data = " ";
             _header = new DataPacketHeader(data.Length, func);
             StringData = data;
             _byteData = Encoding.UTF8.GetBytes(data);
-            //Console.WriteLine(this + " Created");
+            if (Config.DevelopmentMode)
+            {
+                Console.WriteLine($"DataPacket creation called by {memberName}\nConstructor NetworkStream");
+                Console.WriteLine("Creation complete!\n" + ToString());
+            }
         }
         public DataPacket(DataPacket data)
         {
@@ -72,11 +79,14 @@ namespace EMS_Library.Network
         }
         public DataPacket(byte[] data, byte func, [System.Runtime.CompilerServices.CallerMemberName] string memberName = "")
         {
-            Console.WriteLine($"DataPacket creation called by {memberName}\nConstructor byte[]");
             _header = new DataPacketHeader(data.Length, func);
             _byteData = data;
             StringData = Encoding.UTF8.GetString(data);
-            //Console.WriteLine(this + " Created");
+            if (Config.DevelopmentMode)
+            {
+                Console.WriteLine($"DataPacket creation called by {memberName}\nConstructor NetworkStream");
+                Console.WriteLine("Creation complete!\n" + ToString());
+            }
         }
         public byte[] Write() => _header.GetHeader().Concat(_byteData).ToArray();
         /// <summary>
@@ -93,9 +103,10 @@ namespace EMS_Library.Network
         }
 
         public int GetTotalSize() => _header.DataIntLength + _header.HeaderSize;
-        public override string ToString()
-        {
-            return _header + " " + StringData;
+        public override string ToString() 
+        { 
+            if(StringData.Length<1000) return $"Header: [{_header}], Data: [{StringData}]";
+            else return $"Header: [{_header}], Data lenght: [{StringData.Length}]";
         }
 
         private void PrintDebug()
