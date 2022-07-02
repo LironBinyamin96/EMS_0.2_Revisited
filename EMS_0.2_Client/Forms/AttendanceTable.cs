@@ -66,7 +66,7 @@ namespace EMS_Client.Forms
 
             action.Invoke();
             if (buffer[0] != "-1")
-                log = new HoursLogMonth(buffer[0], EMS_ClientMainScreen.employee);
+                log = new HoursLogMonth(buffer.ToArray(), EMS_ClientMainScreen.employee);
         }
         private void btnShowHours_Click(object sender, EventArgs e)
         {

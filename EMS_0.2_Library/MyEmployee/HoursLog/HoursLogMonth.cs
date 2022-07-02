@@ -44,10 +44,10 @@ namespace EMS_Library.MyEmployee.HoursLog
             }
         }
 
-        public HoursLogMonth(string data, Employee employee)
+        public HoursLogMonth(string[] data, Employee employee)
         {
             _employee = employee;
-            HoursLogEntry[] entries = Array.ConvertAll(data.Split('|'), x => new HoursLogEntry(x));
+            HoursLogEntry[] entries = Array.ConvertAll(data, x => new HoursLogEntry(x));
             DateTime tempDate = entries[0].Start;
             _month = tempDate.Month;
             _year = tempDate.Year;

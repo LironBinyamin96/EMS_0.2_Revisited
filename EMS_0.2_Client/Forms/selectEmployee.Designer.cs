@@ -114,10 +114,9 @@
             this.txtSaerch.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
             this.txtSaerch.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtSaerch.ForeColor = System.Drawing.SystemColors.Menu;
-            this.txtSaerch.Location = new System.Drawing.Point(411, 91);
-            this.txtSaerch.Multiline = true;
+            this.txtSaerch.Location = new System.Drawing.Point(411, 96);
             this.txtSaerch.Name = "txtSaerch";
-            this.txtSaerch.Size = new System.Drawing.Size(136, 25);
+            this.txtSaerch.Size = new System.Drawing.Size(136, 16);
             this.txtSaerch.TabIndex = 21;
             // 
             // lblUpload

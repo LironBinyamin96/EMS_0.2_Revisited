@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Data.OleDb;
 
 namespace EMS_Client.Forms
 {
@@ -21,6 +22,11 @@ namespace EMS_Client.Forms
         {
             selectEmployee select_Employee = new selectEmployee(this);
             select_Employee.Show();
+        }
+
+        private void DrawGraph()
+        {
+            
         }
     }
 }

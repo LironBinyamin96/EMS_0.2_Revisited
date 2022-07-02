@@ -48,14 +48,46 @@ namespace EMS_Client.Forms
         }
         private void btnSaerch_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(txtSaerch.Text.Length.ToString());
-            
+            string querry = "";
+            switch (comboBoxSelect.SelectedIndex)
+            {
+                default: return;
+                /*ID*/    case 0: { querry = Requests.SelectEmployee(new Dictionary<string, string>() { { "_intId", $"{txtSaerch.Text}" } }); break; }
+                /*_fName*/case 1: { querry = Requests.SelectEmployee(new Dictionary<string, string>() { { "_fName", $"'{txtSaerch.Text}'" } }); break; }
+                /*_lName*/case 2: { querry = Requests.SelectEmployee(new Dictionary<string, string>() { { "_lName", $"'{txtSaerch.Text}'" } }); break; }
+                /*type*/  case 3: { querry = Requests.SelectEmployee(new Dictionary<string, string>() { { "type", $"'{txtSaerch.Text}'" } }); break; }
+            }
+
+            Action action = Requests.BuildAction(this, new DataPacket(querry, 1), buffer, false);
+            action.Invoke();
+            employeesTable.Rows.Clear();
+            employeesTable.Columns.Clear();
+            employeesTable.Columns.AddRange(new DataGridViewColumn[] {
+            Type,
+            intID,
+            StateID,
+            FirstName,
+            LastName,
+            MiddelName,
+            Email,
+            Gender,
+            Birthday,
+            Position,
+            BaseSalary,
+            SalaryModifire,
+            Phone,
+            Address});
+            foreach (string item in buffer)
+                employeesTable.Rows.Add(item.Split(','));
+
         }
         // הצגת כל העובדים בטבלה
         private void selectEmployee_Load(object sender, EventArgs e)
         {
             if (EMS_Library.Config.DevelopmentMode)
             {
+                
+                
                 string querry = Requests.SelectEmployee();
                 Action action = Requests.BuildAction(this, new DataPacket(querry, 1), buffer, false);
                 action.Invoke();

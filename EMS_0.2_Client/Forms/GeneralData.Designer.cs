@@ -1,4 +1,5 @@
-﻿namespace EMS_Client.Forms
+﻿using System.Data.OleDb;
+namespace EMS_Client.Forms
 {
     partial class GeneralData
     {
@@ -36,10 +37,13 @@
             this.lblgraph = new System.Windows.Forms.Label();
             this.lblAvg = new System.Windows.Forms.Label();
             this.lblHours = new System.Windows.Forms.Label();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.panelGeneralData.SuspendLayout();
             this.panelWorkerData.SuspendLayout();
             this.panelData.SuspendLayout();
             this.SuspendLayout();
+
+            
             // 
             // panelGeneralData
             // 
@@ -91,6 +95,7 @@
             // 
             this.panelData.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(58)))));
             this.panelData.Controls.Add(this.lblgraph);
+            this.panelData.Controls.Add(this.dataChart);
             this.panelData.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panelData.Location = new System.Drawing.Point(0, 185);
             this.panelData.Name = "panelData";
@@ -149,7 +154,28 @@
             this.panelData.ResumeLayout(false);
             this.panelData.PerformLayout();
             this.ResumeLayout(false);
-
+            // 
+            // dataChart
+            // 
+            this.dataChart.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(58)))));
+            this.dataChart.BackGradientStyle = System.Windows.Forms.DataVisualization.Charting.GradientStyle.TopBottom;
+            this.dataChart.BackSecondaryColor = System.Drawing.Color.Black;
+            this.dataChart.BorderlineColor = System.Drawing.Color.DarkGray;
+            chartArea1.Name = "ChartArea1";
+            this.dataChart.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.dataChart.Legends.Add(legend1);
+            this.dataChart.Location = new System.Drawing.Point(12, 209);
+            this.dataChart.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.dataChart.Name = "chart1";
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this.dataChart.Series.Add(series1);
+            this.dataChart.Size = new System.Drawing.Size(776, 229);
+            this.dataChart.TabIndex = 0;
+            this.dataChart.Text = "chart1";
+            this.dataChart.DataSource = new int[] { 12, 3, 432, 54, 1 };
         }
 
         #endregion
@@ -162,5 +188,10 @@
         private Label lblHours;
         private Panel panelData;
         private Label lblgraph;
+        private System.Windows.Forms.DataVisualization.Charting.Chart dataChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
+        System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+        System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+        System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
     }
 }

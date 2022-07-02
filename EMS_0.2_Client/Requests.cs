@@ -41,6 +41,7 @@ namespace EMS_Client
         public static string GetHourLogs(int _intId, int year, int month) => $"get log #{_intId}, {year}, {month}";
         public static Action BuildAction(Form parentForm, DataPacket data, List<string> buffer, bool closeForm = false)
         {
+            buffer.Clear();
             Action action = new Action(() =>
                 {
                     try

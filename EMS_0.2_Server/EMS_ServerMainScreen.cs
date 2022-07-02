@@ -169,7 +169,7 @@ namespace EMS_Server
                         DataPacket responce = new MyRouter().Router(data);
                         WriteToServerConsole("Responce:\n"+responce.ToString());
                         stream.Write(responce.Write(), 0, responce.GetTotalSize());
-                        Thread.Sleep(500);
+                        Thread.Sleep(responce.ByteData.Length/1000);
                         client.Close();
                         client.Dispose();
                     }

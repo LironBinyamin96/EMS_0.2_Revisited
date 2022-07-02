@@ -52,9 +52,21 @@
               "target": "Package",
               "version": "[2.7.12, )"
             },
+            "Microsoft.Chart.Controls": {
+              "target": "Package",
+              "version": "[4.7.2046, )"
+            },
             "S22.Imap": {
               "target": "Package",
               "version": "[3.6.0, )"
+            },
+            "System.Data.OleDb": {
+              "target": "Package",
+              "version": "[6.0.0, )"
+            },
+            "System.Data.SqlClient": {
+              "target": "Package",
+              "version": "[4.8.3, )"
             }
           },
           "imports": [
