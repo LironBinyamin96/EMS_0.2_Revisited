@@ -218,10 +218,7 @@ namespace EMS_Server
                 py.ExecuteFile("IdentifyAndUpdateHours.py");
             });
         }
-
         #endregion
-
-
 
         #region Debug
         private void btnSimExit_Click(object sender, EventArgs e)

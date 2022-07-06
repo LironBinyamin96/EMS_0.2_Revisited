@@ -33,9 +33,39 @@ namespace EMS_Library
 
         }
 
-
         public static DateTime RandomDateTime() => new DateTime(RandomInt(1800, 2022), RandomInt(1, 13), RandomInt(1, 29), RandomInt(0,24), RandomInt(0, 60), RandomInt(0, 60));
+
+        public static Bitmap RescaleImage(Bitmap image)
+        {
+            float width = Config.FRImmageWidth;
+            float height = Config.FRImmageHeight;
+            SolidBrush brush = new SolidBrush(Color.Black);
+
+            float scale = Math.Min(width / image.Width, height / image.Height);
+
+            Bitmap bmp = new Bitmap((int)width, (int)height);
+            Graphics graph = Graphics.FromImage(bmp);
+
+            graph.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.High;
+            graph.CompositingQuality = System.Drawing.Drawing2D.CompositingQuality.HighQuality;
+            graph.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+
+            int scaleWidth = (int)(image.Width * scale);
+            int scaleHeight = (int)(image.Height * scale);
+
+            graph.FillRectangle(brush, new RectangleF(0, 0, width, height));
+            graph.DrawImage(image, ((int)width - scaleWidth) / 2, ((int)height - scaleHeight) / 2, scaleWidth, scaleHeight);
+
+            return bmp;
+        }
+
+
+
+
     }
+
+
+
     public static class Extensions
     {
         /// <summary>
@@ -76,6 +106,35 @@ namespace EMS_Library
             }
             return true;
         }
+
+        /// <summary>
+        /// Checks if string contains any of substrings from provided array.
+        /// </summary>
+        /// <param name="arr">
+        /// Array of strings.
+        /// </param>
+        public static bool ContainsAnyOf(this string str, string[] arr)
+        {
+            if(arr == null || arr.Length==0) return false;
+            foreach(string item in arr)
+                if(str.Contains(item))return true;
+            return false;
+        }
+
+        public static bool Parsable(this string str, Type type)
+        {
+            if (type == typeof(int)) try { int.Parse(str); return true; } catch { return false; }
+            else if (type == typeof(DateTime)) try { DateTime.Parse(str); return true; } catch { return false; }
+            else if(type == typeof(TimeSpan)) try { TimeSpan.Parse(str); return true; } catch { return false; }
+            else if(type == typeof(float) && type == typeof(double)) try { double.Parse(str); return true; } catch { return false; }
+            return true;
+        }
+
+        public static bool AllParsable(this string[] arr, Type type)
+        {
+            foreach(string item in arr)
+                if(!item.Parsable(type)) return false;
+            return true;
+        }
     }
-    
 }

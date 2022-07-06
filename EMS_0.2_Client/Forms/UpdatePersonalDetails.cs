@@ -46,7 +46,7 @@ namespace EMS_Client.Forms
         }
         private void btnUpload_Click(object sender, EventArgs e)
         {
-            openFileDialog1.Filter = "picture |*.jpg| picture |*.png | all files|*.*";
+            openFileDialog1.Filter = "picture |*.bmp| all files|*.*";
             openFileDialog1.FilterIndex = 2;
             openFileDialog1.InitialDirectory = "c:\\";
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
@@ -58,7 +58,7 @@ namespace EMS_Client.Forms
             if (delete == DialogResult.OK)
             {
                 List<string> buffer = new List<string>();
-                string querry = Requests.Delete(Int32.Parse(txtID.Text));
+                string querry = Requests.Delete(int.Parse(txtID.Text));
                 Action action = Requests.BuildAction(this, new DataPacket(querry, 4), buffer, false);
                 action.Invoke();
                 Clear();               
@@ -87,10 +87,12 @@ namespace EMS_Client.Forms
             txtPosition.Text = "";
             txtBaseSalary.Text = "";
             txtSalaryModifire.Text = "";
+            txtEmail.Text = "";
+            pictureBox1.Image = null;
         }
         public void Fill()
         {
-            txtID.Text = EMS_ClientMainScreen.employee.IntId.ToString();
+            txtID.Text = EMS_ClientMainScreen.employee.StateId.ToString();
             txtFirstName.Text = EMS_ClientMainScreen.employee.FName.ToString();
             txtLastName.Text = EMS_ClientMainScreen.employee.LName.ToString();
             txtMiddleName.Text = EMS_ClientMainScreen.employee.MName.ToString();
@@ -102,11 +104,15 @@ namespace EMS_Client.Forms
             txtPosition.Text = EMS_ClientMainScreen.employee.Type.Name;
             txtBaseSalary.Text = EMS_ClientMainScreen.employee.BaseSalary.ToString();
             txtSalaryModifire.Text = EMS_ClientMainScreen.employee.SalaryModifire.ToString();
+            try { pictureBox1.Image = new Bitmap(EMS_Library.Config.FR_Images + $"\\{EMS_ClientMainScreen.employee.IntId}.bmp"); } catch { }
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-
+            string querry = Requests.UpdateEmployee(
+                EMS_ClientMainScreen.employee.ProvideFieldsAndValues(),
+                new Dictionary<string, string>() { { "_intId", EMS_ClientMainScreen.employee.IntId.ToString() } }
+                ) ;
         }
     }
 }

@@ -19,7 +19,7 @@
             "DESKTOP-A6E5597\\SQLEXPRESS",
             "DESKTOP-LL8D68S",
         };
-        
+
         public const string DefaultId = "111111111";
         public const string DefaultPassword = "111111111";
 
@@ -33,12 +33,18 @@
         public const string EmployeeDataTable = "Employees";
         public const string EmployeeHourLogsTable = "HourLogs";
 
-        public static string PythonDBConnection="";
+        public static string PythonDBConnection = "";
         #endregion
 
         #region Legal
         public static TimeSpan NormalShiftLength = new TimeSpan(0, 8, 0, 0);
         public static TimeSpan MaxShiftLength = new TimeSpan(0, 12, 0, 0);
+        public static string[] NullableEmployeeData = { "MName", "MiddleName", "_mName", "Gender", "_gender" };
+        #endregion
+
+        #region FR & Imaging
+        public const int FRImmageHeight = 164;
+        public const int FRImmageWidth = 164;
         #endregion
 
         //Development Mode

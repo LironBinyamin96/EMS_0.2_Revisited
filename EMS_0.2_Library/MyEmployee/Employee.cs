@@ -215,5 +215,26 @@ namespace EMS_Library.MyEmployee
                $"'{_phoneNumber}'," +
                $"'{_address}'";
         }
+        public Dictionary<string, string> ProvideFieldsAndValues()
+        {
+            return new Dictionary<string, string>() {
+                {"type", _type.Name},
+                { "_intId", _intId.ToString()},
+                {"_stateId", _stateId},
+                {"_fName", _fName },
+                {"_lName", _lName},
+                {"_mName", _mName },
+                {"_password", _password},
+                {"_email", _email},
+                {"_gender", _gender},
+                {"_birthDate", _birthDate.ToString()},
+                {"_created", _created.ToString()},
+                {"_employmentStatus", _employmentStatus},
+                {"_baseSalary", _baseSalary.ToString()},
+                {"_salaryModifire", _salaryModifire.ToString()},
+                {"_phoneNumber",_phoneNumber },
+                {"_address",_address },
+            };
+        }
     }
 }
