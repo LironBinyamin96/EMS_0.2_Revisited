@@ -7,14 +7,11 @@ namespace EMS_Client
 {
     public partial class EMS_ClientMainScreen : Form
     {
-
-
         #region Variables
         public static Stack<Form> PrimaryForms = new Stack<Form>();
         public static EMS_Library.MyEmployee.Employee CurEmployee;
         public static Employee employee;
         private Form activeForm; // משתנה עזר ששומר את החלון הנוכחי
-
         #endregion
         #region Drag Window
         /// <summary>
@@ -69,10 +66,8 @@ namespace EMS_Client
             PrimaryForms.Push(login);
             login.ShowDialog();
             byte[] buffer = new byte[2000000];
-            Action action = Requests.BuildAction(this, new EMS_Library.Network.DataPacket("get image #111111111", 6), buffer, false);
+            Action action = Requests.BuildAction(this, new EMS_Library.Network.DataPacket($"get image #{CurEmployee.IntId}", 6), buffer, false);
             action.Invoke();
-            File.WriteAllBytes($"{EMS_Library.Config.RootDirectory}\\Images\\" + $"111111111_copy.bmp", buffer);
-            File.WriteAllBytes($"{EMS_Library.Config.RootDirectory}\\Images\\" + $"111111111_copy.txt", buffer);
             if (!buffer.IsEmpty())
                 userPicture.Image = Image.FromStream(new MemoryStream(buffer));
         }
@@ -86,12 +81,9 @@ namespace EMS_Client
             openChildForm(form, sender);
             x.BackColor = Color.FromArgb(46, 51, 73);
             if (panelDesktop.BackgroundImage != null)
-            {
                 panelDesktop.BackgroundImage = null;
-            }
         }
         private void btnEditingEmployee_Click(object sender, EventArgs e) => changeButton(btnEditingEmployee, new EditingEmployee(), sender);
-
         private void btnMail_Click(object sender, EventArgs e) => changeButton(btnMail, new Mail(), sender);
         private void btnData_Click(object sender, EventArgs e) => changeButton(btnData, new GeneralData(), sender);
         private void btnAttendence_Click(object sender, EventArgs e) => changeButton(btnAttendence, new AttendanceTable(), sender);
@@ -99,10 +91,8 @@ namespace EMS_Client
         private void btnMail_Leave(object sender, EventArgs e) => btnMail.BackColor = Color.FromArgb(24, 30, 54);
         private void btnData_Leave(object sender, EventArgs e) => btnData.BackColor = Color.FromArgb(24, 30, 54);
         private void btnAttendence_Leave(object sender, EventArgs e) => btnAttendence.BackColor = Color.FromArgb(24, 30, 54);
-
-        #endregion
-
         private void btnExit_Click_1(object sender, EventArgs e) => Close();
+        #endregion
 
     }
 }

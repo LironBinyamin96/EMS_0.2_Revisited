@@ -49,10 +49,14 @@ namespace EMS_Client.Forms
             CancellationTokenSource CXL_Src = new CancellationTokenSource();
             CancellationToken CXL = CXL_Src.Token;
 
+            //Credentials format check
+            if(!txtIntId.Text.Parsable(typeof(int)))
+            { MessageBox.Show("Wrong credentials"); return; }
+
             string querry = Requests.SelectEmployee(new Dictionary<string, string> 
             { 
                 {"_intId", txtIntId.Text},
-                {"_password",txtPassword.Text }
+                {"_password",$"'{txtPassword.Text}'" }
             });
             List<string> buffer = new List<string>();
 
@@ -60,11 +64,12 @@ namespace EMS_Client.Forms
             StandbyScreen standby = new StandbyScreen(action);
             standby.ShowDialog();
 
-            if(buffer.Count != 0) 
-            { 
-                EMS_ClientMainScreen.CurEmployee = Employee.ActivateEmployee(buffer[0].Split(','));
-                Close();
-            }
+            //Credentials check
+            if (buffer.Count == 0 || buffer[0] == "-1") 
+            { MessageBox.Show("Wrong credentials"); return; }
+
+            EMS_ClientMainScreen.CurEmployee = Employee.ActivateEmployee(buffer[0].Split(','));
+            Close();
         }
         private void lblExit_Click(object sender, EventArgs e)
         {

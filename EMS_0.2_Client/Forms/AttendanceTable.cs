@@ -28,7 +28,6 @@ namespace EMS_Client.Forms
         {
             txtName.Text = EMS_ClientMainScreen.employee.LName.ToString() + " " + EMS_ClientMainScreen.employee.FName.ToString();
             txtID.Text = EMS_ClientMainScreen.employee.IntId.ToString();
-
         }
 
         private void btnSelect_Click(object sender, EventArgs e)
@@ -36,7 +35,6 @@ namespace EMS_Client.Forms
             selectEmployee select_Employee = new selectEmployee(this);
             select_Employee.ShowDialog();
             Fill();
-
         }
 
         private void AttendanceTable_Activated(object sender, EventArgs e)
@@ -67,6 +65,7 @@ namespace EMS_Client.Forms
             action.Invoke();
             if (buffer[0] != "-1")
                 log = new HoursLogMonth(buffer.ToArray(), EMS_ClientMainScreen.employee);
+            else log = null;
         }
         private void btnShowHours_Click(object sender, EventArgs e)
         {

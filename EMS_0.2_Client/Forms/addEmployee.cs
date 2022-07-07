@@ -46,7 +46,7 @@ namespace EMS_Client.Forms
             activeControls = new Control[] {
                 txtID, txtFirstName , txtLastName, txtMiddleName,
                 txtGender,txtDateOfBirth,txtAddres,txtPhone,
-                txtBaseSalary,txtSalaryModifire,txtEmail,positionBox
+                txtBaseSalary,txtSalaryModifire,txtEmail,positionBox,txtFile,pictureBox1
             };
         }
 
@@ -78,8 +78,8 @@ namespace EMS_Client.Forms
                     txtFirstName.Text,
                     txtLastName.Text,
                     txtMiddleName.Text,
-                    "PasswordPlaceholder",
                     txtEmail.Text,
+                    "PasswordPlaceholder",
                     txtGender.Text,
                     txtDateOfBirth.Text,
                     DateTime.Now,        //created at
@@ -116,8 +116,8 @@ namespace EMS_Client.Forms
             {
                 if (control is TextBox) ((TextBox)control).Text = "";
                 else if (control is CheckBox) ((ComboBox)control).SelectedIndex = 0;
+                else if (control is PictureBox) ((PictureBox)control).Image = null;
             }
-            pictureBox1.Image = null;
         }
 
         /// <summary>
