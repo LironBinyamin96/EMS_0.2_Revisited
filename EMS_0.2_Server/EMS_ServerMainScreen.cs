@@ -46,6 +46,38 @@ namespace EMS_Server
             FacialRecognition = BuildFRTask();
             TestingTask = TestingTaskBuilder();
         }
+
+
+        #region Event Methods
+        private void EMS_ServerMainScreen_Load(object sender, EventArgs e)
+        {
+            SQLServerLookup.Start();
+            listener.Start();
+            listeningTask.Start();
+            TestingTask.Start();
+            FacialRecognition.Start();
+            listnerTimer.Interval = 60000;
+            listnerTimer.Start();
+            if (!Directory.Exists(EMS_Library.Config.RootDirectory)) Directory.CreateDirectory(EMS_Library.Config.RootDirectory);
+            if (!Directory.Exists(EMS_Library.Config.FR_Images)) Directory.CreateDirectory(EMS_Library.Config.FR_Images);
+
+        }
+        private void listnerTimer_Tick(object sender, EventArgs e)
+        {
+            if (EMS_Library.Config.SQLConnectionString != default)
+            {
+                if ((DateTime.Now + new TimeSpan(300000000000)).Day >= DateTime.Now.Day + 1)
+                {
+                    if (scheduleForceExits)
+                    {
+                        scheduleForceExits = false;
+                        SQLBridge.TwoWayCommand("update HourLogs set _exit='01-01-0001 00:00:00' where _exit is null;");
+                    }
+                }
+                else scheduleForceExits = true;
+            }
+        }
+        private void btnExit_Click_1(object sender, EventArgs e) => Close();
         private void txtServerConsole_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == 13)
@@ -53,7 +85,7 @@ namespace EMS_Server
                 string[] temp = txtServerConsole.Text.Split(Environment.NewLine);
                 if (SQLQuerryInput)
                 {
-                    if(temp[temp.Length - 1].ToLower()== "sql querry stop")
+                    if (temp[temp.Length - 1].ToLower() == "sql querry stop")
                     { SQLQuerryInput = false; WriteToServerConsole(Environment.NewLine + "stoped"); return; }
                     if (temp[temp.Length - 1].ToLower().Contains("select"))
                     {
@@ -83,37 +115,6 @@ namespace EMS_Server
                     }
             }
         }
-
-        #region Event Methods
-        private void EMS_ServerMainScreen_Load(object sender, EventArgs e)
-        {
-            SQLServerLookup.Start();
-            listener.Start();
-            listeningTask.Start();
-            TestingTask.Start();
-            //FacialRecognition.Start();
-            listnerTimer.Interval = 60000;
-            listnerTimer.Start();
-            if (!Directory.Exists(EMS_Library.Config.RootDirectory)) Directory.CreateDirectory(EMS_Library.Config.RootDirectory);
-            if (!Directory.Exists(EMS_Library.Config.FR_Images)) Directory.CreateDirectory(EMS_Library.Config.FR_Images);
-
-        }
-        private void listnerTimer_Tick(object sender, EventArgs e)
-        {
-            if (EMS_Library.Config.SQLConnectionString != default)
-            {
-                if ((DateTime.Now + new TimeSpan(300000000000)).Day >= DateTime.Now.Day + 1)
-                {
-                    if (scheduleForceExits)
-                    {
-                        scheduleForceExits = false;
-                        SQLBridge.TwoWayCommand("update HourLogs set _exit='01-01-0001 00:00:00' where _exit is null;");
-                    }
-                }
-                else scheduleForceExits = true;
-            }
-        }
-        private void btnExit_Click_1(object sender, EventArgs e) => Close();
 
         #endregion
 
