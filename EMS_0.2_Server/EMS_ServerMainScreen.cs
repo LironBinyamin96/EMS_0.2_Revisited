@@ -21,6 +21,7 @@ namespace EMS_Server
         Task FacialRecognition;
         bool scheduleForceExits = true;
         bool SQLQuerryInput = false;
+        Process FRProcess = null;
         #endregion
 
         #region Tasks&Tokens
@@ -108,12 +109,15 @@ namespace EMS_Server
                         case "exit": { Close(); break; }
                         case "shutdown": { Close(); break; }
                         case "sql querry begin": { SQLQuerryInput = true; WriteToServerConsole(Environment.NewLine + "Listening for querry:"); break; }
-                            /*
-                        case "fr powerup": { try { FR_Process.Start(); } catch { } break; }
-                        case "fr shutdown": { try { FR_Process.Close(); } catch { } break; }
-                            */
+                        case "fr powerup": { try { FRProcess.Start(); } catch { } break; }
+                        case "fr shutdown": { try { FRProcess.Kill(); WriteToServerConsole(FRProcess.ProcessName + " " + FRProcess.HasExited); } catch { } break; }
                     }
             }
+        }
+
+        private void FRStoped(object sender, EventArgs e)
+        {
+            WriteToServerConsole("fr stoped");
         }
 
         #endregion
@@ -215,8 +219,15 @@ namespace EMS_Server
         {
             return new Task(() =>
             {
+                FRProcess = new Process();
+                FRProcess.StartInfo.FileName = "IdentifyAndUpdateHours.py";
+                FRProcess.StartInfo.UseShellExecute = true;
+                FRProcess.Start();
+                FRProcess.Exited += this.FRStoped;
+                /*
                 var py = IronPython.Hosting.Python.CreateEngine();
                 py.ExecuteFile("IdentifyAndUpdateHours.py");
+                */
             });
         }
         #endregion

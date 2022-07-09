@@ -40,7 +40,7 @@ namespace EMS_Server
             {
                 try
                 {
-                    SqlConnection Connection = new SqlConnection(EMS_Library.Config.SQLConnectionString);
+                    SqlConnection Connection = new SqlConnection(Config.SQLConnectionString);
                     SqlCommand Command = Connection.CreateCommand();
                     Command.CommandText = IncomingCommand;
                     if (Connection.State != System.Data.ConnectionState.Open) Connection.Open();

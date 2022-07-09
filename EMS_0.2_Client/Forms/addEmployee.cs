@@ -117,6 +117,7 @@ namespace EMS_Client.Forms
             catch { MessageBox.Show("Failed"); }
         }
         #endregion
+
         #region Drag Window
         /// <summary>
         /// Controlls form's movement during drag.
