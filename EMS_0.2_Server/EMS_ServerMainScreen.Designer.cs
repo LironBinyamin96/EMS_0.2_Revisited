@@ -158,6 +158,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.EMS_ServerMainScreen_FormClosing);
             this.Load += new System.EventHandler(this.EMS_ServerMainScreen_Load);
             this.panelLeft.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.centerPic)).EndInit();

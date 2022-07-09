@@ -1248,3 +1248,16 @@ C:\Users\levkh\Documents\GitHub\EMS_0.2_Revisited\EMS_0.2_Client\bin\Debug\net6.
 C:\Users\levkh\Documents\GitHub\EMS_0.2_Revisited\EMS_0.2_Client\bin\Debug\net6.0-windows\runtimes\win-x86\native\sni.dll
 C:\Users\levkh\Documents\GitHub\EMS_0.2_Revisited\EMS_0.2_Client\bin\Debug\net6.0-windows\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
 C:\Users\levkh\Documents\GitHub\EMS_0.2_Revisited\EMS_0.2_Client\bin\Debug\net6.0-windows\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
+C:\Users\liron\Desktop\EMS\EMS_0.2_Client\bin\Debug\net6.0-windows\System.Web.DataVisualization.Design.dll
+C:\Users\liron\Desktop\EMS\EMS_0.2_Client\bin\Debug\net6.0-windows\System.Web.DataVisualization.dll
+C:\Users\liron\Desktop\EMS\EMS_0.2_Client\bin\Debug\net6.0-windows\System.Windows.Forms.DataVisualization.Design.dll
+C:\Users\liron\Desktop\EMS\EMS_0.2_Client\bin\Debug\net6.0-windows\System.Windows.Forms.DataVisualization.dll
+C:\Users\liron\Desktop\EMS\EMS_0.2_Client\bin\Debug\net6.0-windows\System.Data.OleDb.dll
+C:\Users\liron\Desktop\EMS\EMS_0.2_Client\bin\Debug\net6.0-windows\System.Data.SqlClient.dll
+C:\Users\liron\Desktop\EMS\EMS_0.2_Client\bin\Debug\net6.0-windows\runtimes\win-arm64\native\sni.dll
+C:\Users\liron\Desktop\EMS\EMS_0.2_Client\bin\Debug\net6.0-windows\runtimes\win-x64\native\sni.dll
+C:\Users\liron\Desktop\EMS\EMS_0.2_Client\bin\Debug\net6.0-windows\runtimes\win-x86\native\sni.dll
+C:\Users\liron\Desktop\EMS\EMS_0.2_Client\bin\Debug\net6.0-windows\runtimes\win\lib\net6.0\System.Data.OleDb.dll
+C:\Users\liron\Desktop\EMS\EMS_0.2_Client\bin\Debug\net6.0-windows\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
+C:\Users\liron\Desktop\EMS\EMS_0.2_Client\bin\Debug\net6.0-windows\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
+C:\Users\liron\Desktop\EMS\EMS_0.2_Client\bin\Debug\net6.0-windows\main.py

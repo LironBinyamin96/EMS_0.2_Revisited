@@ -14,7 +14,6 @@ namespace EMS_Server
 {
     public partial class EMS_ServerMainScreen : Form
     {
-
         #region Variables
         TcpListener listener = new TcpListener(System.Net.IPAddress.Parse(EMS_Library.Config.ServerIP), EMS_Library.Config.ServerPort);
         TcpClient client = null;
@@ -47,7 +46,6 @@ namespace EMS_Server
             FacialRecognition = BuildFRTask();
             TestingTask = TestingTaskBuilder();
         }
-
 
         #region Event Methods
         private void EMS_ServerMainScreen_Load(object sender, EventArgs e)
@@ -118,6 +116,11 @@ namespace EMS_Server
         private void FRStoped(object sender, EventArgs e)
         {
             WriteToServerConsole("fr stoped");
+        }
+
+        private void EMS_ServerMainScreen_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            FRProcess.Kill();
         }
 
         #endregion
@@ -215,6 +218,11 @@ namespace EMS_Server
                 WriteToConfigFile();
             }, SQLLookup_CXL);
         }
+
+        /// <summary>
+        /// Build facial recognition task
+        /// </summary>
+        /// <returns></returns>
         public Task BuildFRTask()
         {
             return new Task(() =>
@@ -224,10 +232,6 @@ namespace EMS_Server
                 FRProcess.StartInfo.UseShellExecute = true;
                 FRProcess.Start();
                 FRProcess.Exited += this.FRStoped;
-                /*
-                var py = IronPython.Hosting.Python.CreateEngine();
-                py.ExecuteFile("IdentifyAndUpdateHours.py");
-                */
             });
         }
         #endregion
@@ -296,5 +300,7 @@ namespace EMS_Server
         }
 
         #endregion
+
+
     }
 }

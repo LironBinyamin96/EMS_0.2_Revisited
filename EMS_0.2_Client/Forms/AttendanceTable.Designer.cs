@@ -34,7 +34,6 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panelAttendance = new System.Windows.Forms.Panel();
             this.lblAttendance = new System.Windows.Forms.Label();
-            this.btnPrint = new System.Windows.Forms.Button();
             this.btnSelect = new System.Windows.Forms.Button();
             this.GridViewAttrndance = new System.Windows.Forms.DataGridView();
             this.date = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -61,6 +60,7 @@
             this.hoursLogMonthBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.hoursLogMonthBindingSource2 = new System.Windows.Forms.BindingSource(this.components);
             this.hoursLogMonthBindingSource3 = new System.Windows.Forms.BindingSource(this.components);
+            this.button1 = new System.Windows.Forms.Button();
             this.panelAttendance.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GridViewAttrndance)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.getDaysBindingSource)).BeginInit();
@@ -90,16 +90,6 @@
             this.lblAttendance.Size = new System.Drawing.Size(161, 35);
             this.lblAttendance.TabIndex = 0;
             this.lblAttendance.Text = "Attendance";
-            // 
-            // btnPrint
-            // 
-            this.btnPrint.Location = new System.Drawing.Point(671, 109);
-            this.btnPrint.Name = "btnPrint";
-            this.btnPrint.Size = new System.Drawing.Size(75, 23);
-            this.btnPrint.TabIndex = 1;
-            this.btnPrint.Text = "Print";
-            this.btnPrint.UseVisualStyleBackColor = true;
-            this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
             // 
             // btnSelect
             // 
@@ -348,15 +338,29 @@
             // 
             this.hoursLogMonthBindingSource3.DataSource = typeof(EMS_Library.MyEmployee.HoursLog.HoursLogMonth);
             // 
+            // button1
+            // 
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Font = new System.Drawing.Font("Bahnschrift SemiLight", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.button1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
+            this.button1.Location = new System.Drawing.Point(575, 101);
+            this.button1.Name = "button1";
+            this.button1.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.button1.Size = new System.Drawing.Size(171, 30);
+            this.button1.TabIndex = 21;
+            this.button1.Text = "View hours report";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // AttendanceTable
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
             this.ClientSize = new System.Drawing.Size(758, 575);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.btnShowHours);
             this.Controls.Add(this.dateTime);
-            this.Controls.Add(this.btnPrint);
             this.Controls.Add(this.txtID);
             this.Controls.Add(this.panel4);
             this.Controls.Add(this.lblID);
@@ -398,7 +402,6 @@
         private TextBox txtID;
         private Panel panel4;
         private Label lblID;
-        private Button btnPrint;
         private BindingSource getDaysBindingSource;
         private BindingSource hoursLogMonthBindingSource;
         public DateTimePicker dateTime;
@@ -415,5 +418,6 @@
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
         private DataGridViewTextBoxColumn total_hours;
+        private Button button1;
     }
 }

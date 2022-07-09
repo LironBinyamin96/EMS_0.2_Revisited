@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using EMS_Library.MyEmployee.HoursLog;
+using System.Diagnostics;
 
 namespace EMS_Client.Forms
 {
@@ -16,6 +17,7 @@ namespace EMS_Client.Forms
         #region Variables
         public static bool fill = false;
         public HoursLogMonth log;
+        Process HLProcess = null;
         #endregion
 
         #region Buttons
@@ -24,18 +26,6 @@ namespace EMS_Client.Forms
             selectEmployee select_Employee = new selectEmployee(this);
             select_Employee.ShowDialog();
             Fill();
-        }
-        private void btnPrint_Click(object sender, EventArgs e)
-        {
-            if (EMS_ClientMainScreen.employee == null)
-            {
-                MessageBox.Show("Please select a employee");
-                return;
-            }
-            BuildLog();
-            if (log != null)
-            { string logJson = log.JSON(); File.WriteAllText(EMS_Library.Config.RootDirectory + "\\log.json", logJson); }
-
         }
         private void btnShowHours_Click(object sender, EventArgs e)
         {
@@ -84,6 +74,38 @@ namespace EMS_Client.Forms
             string[] hold = new string[]{idEmployee, GridViewAttrndance.SelectedCells[0].Value.ToString(), GridViewAttrndance.SelectedCells[2].Value.ToString(), GridViewAttrndance.SelectedCells[3].Value.ToString() };
             EditHours editHours = new EditHours(hold);
             editHours.Show();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (EMS_ClientMainScreen.employee == null)
+            {
+                MessageBox.Show("Please select a employee");
+                return;
+            }
+            BuildLog();
+            if (log != null)
+            { string logJson = log.JSON(); File.WriteAllText(EMS_Library.Config.RootDirectory + "\\log.json", logJson); }
+            BuildHoursLog();
+            Thread.Sleep(2000);
+            OpemExcelFile();
+        }
+
+        public void BuildHoursLog()
+        {
+            HLProcess = new Process();
+            HLProcess.StartInfo.FileName = "main.py";
+            HLProcess.StartInfo.UseShellExecute = true;
+            HLProcess.Start();
+        }
+        public void OpemExcelFile()
+        {
+            Process XLSXProcess = null;
+
+            XLSXProcess = new Process();
+            XLSXProcess.StartInfo.FileName = $"C:\\Users\\liron\\Desktop\\EMS_Root\\{ EMS_ClientMainScreen.employee.IntId}.xlsx";
+            XLSXProcess.StartInfo.UseShellExecute = true;
+            XLSXProcess.Start();
         }
     }
 }
