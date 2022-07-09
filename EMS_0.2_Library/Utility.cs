@@ -34,7 +34,13 @@ namespace EMS_Library
         }
 
         public static DateTime RandomDateTime() => new DateTime(RandomInt(1800, 2022), RandomInt(1, 13), RandomInt(1, 29), RandomInt(0,24), RandomInt(0, 60), RandomInt(0, 60));
-
+        
+        /// <summary>
+        /// Rescales image to appropriate size for FR
+        /// (see EMS_Library.Config->FR & Images)
+        /// </summary>
+        /// <param name="image"></param>
+        /// <returns></returns>
         public static Bitmap RescaleImage(Bitmap image)
         {
             float width = Config.FRImmageWidth;
@@ -58,10 +64,6 @@ namespace EMS_Library
 
             return bmp;
         }
-
-
-
-
     }
 
 

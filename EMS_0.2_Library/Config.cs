@@ -45,6 +45,7 @@
         #region FR & Imaging
         public const int FRImmageHeight = 164;
         public const int FRImmageWidth = 164;
+        public const string ImageFormat = ".jpg";
         #endregion
 
         //Development Mode

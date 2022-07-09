@@ -113,7 +113,6 @@
             this.inbox.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.inbox.Size = new System.Drawing.Size(800, 315);
             this.inbox.TabIndex = 5;
-            this.inbox.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.inbox_CellContentClick);
             this.inbox.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.inbox_MouseDoubleClick);
             // 
             // Form

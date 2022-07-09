@@ -12,12 +12,12 @@ namespace EMS_Client.Forms
 {
     public partial class EditingEmployee : Form
     {
-
         public EditingEmployee()
         {
             InitializeComponent();
         }
 
+        #region Buttons
         private void btnAddWorker_Click(object sender, EventArgs e)
         {
             addEmployee ae = new addEmployee();
@@ -29,5 +29,6 @@ namespace EMS_Client.Forms
             UpdatePersonalDetails upd = new UpdatePersonalDetails();
             upd.Show();
         }
+        #endregion
     }
 }

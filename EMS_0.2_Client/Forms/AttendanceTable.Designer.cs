@@ -371,7 +371,6 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "AttendanceTable";
             this.Text = "AttendanceTable";
-            this.Activated += new System.EventHandler(this.AttendanceTable_Activated);
             this.panelAttendance.ResumeLayout(false);
             this.panelAttendance.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GridViewAttrndance)).EndInit();

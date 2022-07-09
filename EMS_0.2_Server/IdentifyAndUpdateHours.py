@@ -109,8 +109,10 @@ def findEncodings (images):
     encodingList= []
     for ImageForIdentification in images:
         ImageForIdentification = cv2.cvtColor(ImageForIdentification, cv2.COLOR_BGR2RGB)
-        encodeImageForIdentification = face_recognition.face_encodings(ImageForIdentification)[0]
-        encodingList.append(encodeImageForIdentification)
+        try:
+            encodeImageForIdentification = face_recognition.face_encodings(ImageForIdentification)[0]
+            encodingList.append(encodeImageForIdentification)
+        finally: continue
     return encodingList
 
 def EntryOrExitTime(Employee):

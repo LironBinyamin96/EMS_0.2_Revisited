@@ -18,30 +18,13 @@ namespace EMS_Client.Forms
         public HoursLogMonth log;
         #endregion
 
-        
-        public AttendanceTable()
-        {
-            InitializeComponent();
-        }
-
-        public void Fill()
-        {
-            txtName.Text = EMS_ClientMainScreen.employee.LName.ToString() + " " + EMS_ClientMainScreen.employee.FName.ToString();
-            txtID.Text = EMS_ClientMainScreen.employee.IntId.ToString();
-        }
-
+        #region Buttons
         private void btnSelect_Click(object sender, EventArgs e)
         {
             selectEmployee select_Employee = new selectEmployee(this);
             select_Employee.ShowDialog();
             Fill();
         }
-
-        private void AttendanceTable_Activated(object sender, EventArgs e)
-        {
-            MessageBox.Show("Activated");
-        }
-
         private void btnPrint_Click(object sender, EventArgs e)
         {
             if (EMS_ClientMainScreen.employee == null)
@@ -54,7 +37,27 @@ namespace EMS_Client.Forms
             { string logJson = log.JSON(); File.WriteAllText(EMS_Library.Config.RootDirectory + "\\log.json", logJson); }
 
         }
+        private void btnShowHours_Click(object sender, EventArgs e)
+        {
+            if (EMS_ClientMainScreen.employee == null)
+            { MessageBox.Show("Please select a employee"); return; }
 
+            GridViewAttrndance.Rows.Clear();
+            BuildLog();
+            if (log != null)
+            {
+                string[][] tmpGetAttendanceTable = log.GetHoursLogTableStructure();
+                foreach (string[] item in tmpGetAttendanceTable)
+                    GridViewAttrndance.Rows.Add(item[0], item[1], item[2], item[3], item[4]);
+            }
+        }
+        #endregion
+        #region Supplemental
+        public void Fill()
+        {
+            txtName.Text = EMS_ClientMainScreen.employee.LName.ToString() + " " + EMS_ClientMainScreen.employee.FName.ToString();
+            txtID.Text = EMS_ClientMainScreen.employee.IntId.ToString();
+        }
         private void BuildLog()
         {
             List<string> buffer = new List<string>();
@@ -67,22 +70,12 @@ namespace EMS_Client.Forms
                 log = new HoursLogMonth(buffer.ToArray(), EMS_ClientMainScreen.employee);
             else log = null;
         }
-        private void btnShowHours_Click(object sender, EventArgs e)
+        #endregion
+        public AttendanceTable()
         {
-            if (EMS_ClientMainScreen.employee == null)
-            { MessageBox.Show("Please select a employee"); return; }
-
-            GridViewAttrndance.Rows.Clear();
-            BuildLog();
-            if (log != null)
-            {
-                string[][] tmpGetAttendanceTable = log.GetHoursLogTableStructure();
-                foreach (string[] item in tmpGetAttendanceTable)
-                {
-                    GridViewAttrndance.Rows.Add(item[0], item[1], item[2], item[3], item[4]);
-                }
-            }
+            InitializeComponent();
         }
+
         // בדאבל קליל - נפתח חלון עריכת שעות עבודה
         public void GridViewAttrndance_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {

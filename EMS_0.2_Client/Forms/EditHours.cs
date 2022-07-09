@@ -13,6 +13,44 @@ namespace EMS_Client.Forms
 {
     public partial class EditHours : Form
     {
+        string[] editHours;
+        public EditHours()
+        {
+            InitializeComponent();
+        }
+        public EditHours(string[] arr)
+        {
+            InitializeComponent();
+            editHours = arr;
+        }
+
+        #region Buttons
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show($"entry: {dateTimeEntey.Value}\n exit: {dateTimeExit.Value}");
+            string querry = Requests.UpdateEntry(editHours[0], dateTimeEntey.Value, dateTimeExit.Value);
+            List<string> buffer = new List<string>();
+            Action action = Requests.BuildAction(this, new EMS_Library.Network.DataPacket(querry, 7), buffer, true);
+            StandbyScreen standby = new StandbyScreen(action);
+            standby.ShowDialog();
+        }
+        private void btnX_Click(object sender, EventArgs e) => Close();
+        #endregion
+
+        #region Supplemental
+        private void Fill()
+        {
+            lblDay.Text = editHours[1];
+            dateTimeEntey.Value = DateTime.Parse($"{lblDay.Text} {editHours[2]}");
+            dateTimeExit.Value = DateTime.Parse($"{lblDay.Text} {editHours[3]}");
+        }
+
+        private void EditHours_Load(object sender, EventArgs e)
+        {
+            Fill();
+        }
+        #endregion 
+
         #region Drag Window
         /// <summary>
         /// Controlls form movement during drag.
@@ -32,42 +70,7 @@ namespace EMS_Client.Forms
         [DllImportAttribute("user32.dll")]
         public static extern bool ReleaseCapture();
         private void panelEditHours_MouseDown(object sender, MouseEventArgs e) => Drag(e);
-
-
         #endregion
-
-        public EditHours()
-        {
-            InitializeComponent();
-        }
-        string[] editHours; 
-        public EditHours(string[] arr)
-        {
-            InitializeComponent();
-            editHours = arr;
-        }
-        private void Fill()
-        {
-            lblDay.Text = editHours[1];
-            dateTimeEntey.Value = DateTime.Parse($"{lblDay.Text} {editHours[2]}");
-            dateTimeExit.Value = DateTime.Parse($"{lblDay.Text} {editHours[3]}");
-        }
-        private void btnSave_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show($"entry: {dateTimeEntey.Value}\n exit: {dateTimeExit.Value}");
-            string querry = Requests.UpdateEntry(editHours[0], dateTimeEntey.Value, dateTimeExit.Value);
-            List<string> buffer = new List<string>();
-            Action action = Requests.BuildAction(this, new EMS_Library.Network.DataPacket(querry, 7), buffer,true);
-            StandbyScreen standby = new StandbyScreen(action);
-            standby.ShowDialog();
-        }
-        private void EditHours_Load(object sender, EventArgs e)
-        {
-            Fill();
-        }
-
-        private void btnX_Click(object sender, EventArgs e) => Close();
-
 
     }
 }

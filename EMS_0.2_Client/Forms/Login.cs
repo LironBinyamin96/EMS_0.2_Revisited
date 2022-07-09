@@ -16,6 +16,66 @@ namespace EMS_Client.Forms
 {
     public partial class Login : Form
     {
+        public Login()
+        {
+            InitializeComponent();
+            if (Config.DevelopmentMode)
+            {
+                txtIntId.Text = Config.DefaultId;
+                txtPassword.Text = Config.DefaultPassword;
+            }
+        }
+
+        #region Buttons
+        private void btnLogin_Click(object sender, EventArgs e)
+        {
+            CancellationTokenSource CXL_Src = new CancellationTokenSource();
+            CancellationToken CXL = CXL_Src.Token;
+
+            //Credentials format check
+            if (!txtIntId.Text.Parsable(typeof(int)))
+            { MessageBox.Show("Wrong credentials"); return; }
+
+            string querry = Requests.SelectEmployee(new Dictionary<string, string>
+            {
+                {"_intId", txtIntId.Text},
+                {"_password",$"'{txtPassword.Text}'" }
+            });
+            List<string> buffer = new List<string>();
+
+            Action action = Requests.BuildAction(this, new DataPacket(querry, 1), buffer, true);
+            StandbyScreen standby = new StandbyScreen(action);
+            standby.ShowDialog();
+
+            //Credentials check
+            if (buffer.Count == 0 || buffer[0] == "-1")
+            { MessageBox.Show("Wrong credentials"); return; }
+
+            EMS_ClientMainScreen.CurEmployee = Employee.ActivateEmployee(buffer[0].Split(','));
+            Close();
+        }
+        private void lblExit_Click(object sender, EventArgs e)
+        {
+            while (EMS_ClientMainScreen.PrimaryForms.TryPop(out Form result))
+                result.Close();
+        }
+
+        private void txtIntId_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == 13)
+                btnLogin.PerformClick();
+        }
+
+        private void txtPassword_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == 13)
+                btnLogin.PerformClick();
+        }
+        #endregion
+
+        #region Supplemental
+        #endregion
+
         #region Drag Window
         /// <summary>
         /// Controlls form movement during drag.
@@ -37,48 +97,6 @@ namespace EMS_Client.Forms
         private void lblProgrammName_MouseDown(object sender, MouseEventArgs e) => Drag(e);
         private void Login_MouseDown(object sender, MouseEventArgs e) => Drag(e);
         #endregion
-        public Login()
-        {
-            InitializeComponent();
-            //Debug
-            txtIntId.Text = Config.DefaultId;
-            txtPassword.Text = Config.DefaultPassword;
-        }
-        private void btnLogin_Click(object sender, EventArgs e)
-        {
-            CancellationTokenSource CXL_Src = new CancellationTokenSource();
-            CancellationToken CXL = CXL_Src.Token;
-
-            //Credentials format check
-            if(!txtIntId.Text.Parsable(typeof(int)))
-            { MessageBox.Show("Wrong credentials"); return; }
-
-            string querry = Requests.SelectEmployee(new Dictionary<string, string> 
-            { 
-                {"_intId", txtIntId.Text},
-                {"_password",$"'{txtPassword.Text}'" }
-            });
-            List<string> buffer = new List<string>();
-
-            Action action = Requests.BuildAction(this, new DataPacket(querry, 1), buffer, true);
-            StandbyScreen standby = new StandbyScreen(action);
-            standby.ShowDialog();
-
-            //Credentials check
-            if (buffer.Count == 0 || buffer[0] == "-1") 
-            { MessageBox.Show("Wrong credentials"); return; }
-
-            EMS_ClientMainScreen.CurEmployee = Employee.ActivateEmployee(buffer[0].Split(','));
-            Close();
-        }
-        private void lblExit_Click(object sender, EventArgs e)
-        {
-            while(EMS_ClientMainScreen.PrimaryForms.TryPop(out Form result))
-                result.Close();
-        }
-
-
-
     }
 
 }

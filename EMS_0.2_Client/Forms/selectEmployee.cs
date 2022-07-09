@@ -19,6 +19,7 @@ namespace EMS_Client.Forms
         List<string> buffer = new List<string>();
         Form callerForm;
         #endregion
+
         #region Drag Window
         /// <summary>
         /// Controlls form movement during drag.
@@ -41,46 +42,57 @@ namespace EMS_Client.Forms
         private void lblSelectEmployee_MouseDown(object sender, MouseEventArgs e) => Drag(e);
 
         #endregion
-        public selectEmployee(Form caller)
-        {
-            InitializeComponent();
-            callerForm = caller;
-        }
+
+        #region Buttons
         private void btnSaerch_Click(object sender, EventArgs e)
         {
             string querry = "";
             switch (comboBoxSelect.SelectedIndex)
             {
                 default: return;
-                /*ID*/    case 0: { querry = Requests.SelectEmployee(new Dictionary<string, string>() { { "_intId", $"{txtSaerch.Text}" } }); break; }
-                /*_fName*/case 1: { querry = Requests.SelectEmployee(new Dictionary<string, string>() { { "_fName", $"'{txtSaerch.Text}'" } }); break; }
-                /*_lName*/case 2: { querry = Requests.SelectEmployee(new Dictionary<string, string>() { { "_lName", $"'{txtSaerch.Text}'" } }); break; }
-                /*type*/  case 3: { querry = Requests.SelectEmployee(new Dictionary<string, string>() { { "type", $"'{txtSaerch.Text}'" } }); break; }
+                /*ID*/
+                case 0: { querry = Requests.SelectEmployee(new Dictionary<string, string>() { { "_intId", $"{txtSaerch.Text}" } }); break; }
+                /*_fName*/
+                case 1: { querry = Requests.SelectEmployee(new Dictionary<string, string>() { { "_fName", $"'{txtSaerch.Text}'" } }); break; }
+                /*_lName*/
+                case 2: { querry = Requests.SelectEmployee(new Dictionary<string, string>() { { "_lName", $"'{txtSaerch.Text}'" } }); break; }
+                /*type*/
+                case 3: { querry = Requests.SelectEmployee(new Dictionary<string, string>() { { "type", $"'{txtSaerch.Text}'" } }); break; }
             }
 
             Action action = Requests.BuildAction(this, new DataPacket(querry, 1), buffer, false);
             action.Invoke();
             employeesTable.Rows.Clear();
             employeesTable.Columns.Clear();
-            employeesTable.Columns.AddRange(new DataGridViewColumn[] {
-            Type,
-            intID,
-            StateID,
-            FirstName,
-            LastName,
-            MiddelName,
-            Email,
-            Gender,
-            Birthday,
-            Position,
-            BaseSalary,
-            SalaryModifire,
-            Phone,
-            Address});
+            employeesTable.Columns.AddRange(new DataGridViewColumn[] 
+            {
+                Type,
+                intID,
+                StateID,
+                FirstName,
+                LastName,
+                MiddelName,
+                Email,
+                Gender,
+                Birthday,
+                Position,
+                BaseSalary,
+                SalaryModifire,
+                Phone,
+                Address
+            });
             foreach (string item in buffer)
                 employeesTable.Rows.Add(item.Split(','));
 
         }
+        private void btnX_Click(object sender, EventArgs e) => Close();
+        #endregion
+        public selectEmployee(Form caller)
+        {
+            InitializeComponent();
+            callerForm = caller;
+        }
+        
         // הצגת כל העובדים בטבלה
         private void selectEmployee_Load(object sender, EventArgs e)
         {
@@ -98,6 +110,7 @@ namespace EMS_Client.Forms
                 }
             }
         }
+
         // בדאבל קליק - העובד שלחצנו עליו ייכנס לתוך משתנה סטטי שנמצא במסך הראשי
         private void employeesTable_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
@@ -108,7 +121,5 @@ namespace EMS_Client.Forms
             //callerForm.Focus();
             Close();
         }
-        private void btnX_Click(object sender, EventArgs e) => Close();
-
     }
 }

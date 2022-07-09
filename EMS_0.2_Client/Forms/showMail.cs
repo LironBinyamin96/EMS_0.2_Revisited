@@ -12,11 +12,19 @@ namespace EMS_Client.Forms
 {
     public partial class showMail : Form
     {
+        string sub, body, form;
+
         public showMail()
         {
             InitializeComponent();
         }
-        string sub, body, form;
+        public showMail(string[] fullMessage)
+        {
+            InitializeComponent();
+            form = fullMessage[0];
+            sub = fullMessage[1];
+            body = fullMessage[2];
+        }
 
         private void showMail_Load(object sender, EventArgs e)
         {
@@ -25,20 +33,13 @@ namespace EMS_Client.Forms
             richTextBody.Text = body;
         }
 
+        #region Buttons
         private void btnX_Click(object sender, EventArgs e) => Close();
-
-        public showMail(string[] fullMessage)
-        {
-            InitializeComponent();
-            this.form = fullMessage[0];
-            this.sub = fullMessage[1];
-            this.body = fullMessage[2];
-        }
-
         private void btnReply_Click(object sender, EventArgs e)
         {
             newEmail newEmail = new newEmail(form, sub);
             newEmail.Show();
         }
+        #endregion
     }
 }

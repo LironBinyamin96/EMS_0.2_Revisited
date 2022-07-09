@@ -42,6 +42,7 @@
             this.txtIntId.PlaceholderText = "Internal ID";
             this.txtIntId.Size = new System.Drawing.Size(100, 23);
             this.txtIntId.TabIndex = 0;
+            this.txtIntId.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtIntId_KeyPress);
             // 
             // txtPassword
             // 
@@ -51,6 +52,7 @@
             this.txtPassword.Size = new System.Drawing.Size(100, 23);
             this.txtPassword.TabIndex = 1;
             this.txtPassword.UseSystemPasswordChar = true;
+            this.txtPassword.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPassword_KeyPress);
             // 
             // btnLogin
             // 

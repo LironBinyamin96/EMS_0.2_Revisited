@@ -12,6 +12,29 @@ namespace EMS_Client.Forms
 {
     public partial class StandbyScreen : Form
     {
+        Action action;
+
+        /// <summary>
+        /// Action passed must handle it's own termination as well as form closure! 
+        /// </summary>
+        /// <param name="act"></param>
+        public StandbyScreen(Action act)
+        {
+            InitializeComponent();
+            action = act;
+            EMS_ClientMainScreen.PrimaryForms.Push(this);
+            System.Drawing.Drawing2D.GraphicsPath shape = new System.Drawing.Drawing2D.GraphicsPath();
+            shape.AddEllipse(5, 5, this.Width-15, this.Height-15);
+            this.Region = new Region(shape);
+        }
+
+        private void StandbyScreen_Load(object sender, EventArgs e)
+        {
+            CancellationTokenSource CXL_src = new CancellationTokenSource();
+            CancellationToken CXL = CXL_src.Token;
+            Task.Run(action, CXL);
+        }
+
         #region Drag Window
         /// <summary>
         /// Controlls form movement during drag.
@@ -33,27 +56,5 @@ namespace EMS_Client.Forms
         private void picStandbySphere_MouseDown(object sender, MouseEventArgs e) => Drag(e);
         private void lblStandby_MouseDown(object sender, MouseEventArgs e) => Drag(e);
         #endregion
-
-        Action action;
-        /// <summary>
-        /// Action passed must handle it's own termination as well as form closure! 
-        /// </summary>
-        /// <param name="act"></param>
-        public StandbyScreen(Action act)
-        {
-            InitializeComponent();
-            action = act;
-            EMS_ClientMainScreen.PrimaryForms.Push(this);
-            System.Drawing.Drawing2D.GraphicsPath shape = new System.Drawing.Drawing2D.GraphicsPath();
-            shape.AddEllipse(5, 5, this.Width-15, this.Height-15);
-            this.Region = new Region(shape);
-        }
-
-        private void StandbyScreen_Load(object sender, EventArgs e)
-        {
-            CancellationTokenSource CXL_src = new CancellationTokenSource();
-            CancellationToken CXL = CXL_src.Token;
-            Task.Run(action, CXL);
-        }
     }
 }

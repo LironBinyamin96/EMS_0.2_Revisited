@@ -39,18 +39,23 @@ namespace EMS_Client.Forms
         {
             InitializeComponent();
         }
-        private void btnX_Click(object sender, EventArgs e) 
+        private void UpdatePersonalDetails_Activated(object sender, EventArgs e)
         {
-            EMS_ClientMainScreen.employee = null;
-            Close();
+            if (EMS_ClientMainScreen.employee != null) Fill();
         }
-        private void btnUpload_Click(object sender, EventArgs e)
+
+        #region Buttons
+        private void btnSave_Click(object sender, EventArgs e)
         {
-            openFileDialog1.Filter = "picture |*.bmp| all files|*.*";
-            openFileDialog1.FilterIndex = 2;
-            openFileDialog1.InitialDirectory = "c:\\";
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
-                txtFile.Text = openFileDialog1.FileName;
+            string querry = Requests.UpdateEmployee(
+                EMS_ClientMainScreen.employee.ProvideFieldsAndValues(),
+                new Dictionary<string, string>() { { "_intId", EMS_ClientMainScreen.employee.IntId.ToString() } }
+                );
+        }
+        private void btnSelect_Click(object sender, EventArgs e)
+        {
+            selectEmployee select_Employee = new selectEmployee(this);
+            select_Employee.Show();
         }
         private void btnDelete_Click(object sender, EventArgs e)
         {
@@ -61,18 +66,25 @@ namespace EMS_Client.Forms
                 string querry = Requests.Delete(int.Parse(txtID.Text));
                 Action action = Requests.BuildAction(this, new DataPacket(querry, 4), buffer, false);
                 action.Invoke();
-                Clear();               
+                Clear();
             }
         }
-        private void btnSelect_Click(object sender, EventArgs e)
+        private void btnUpload_Click(object sender, EventArgs e)
         {
-            selectEmployee select_Employee = new selectEmployee(this);
-            select_Employee.Show();
+            openFileDialog1.Filter = $"picture |*{EMS_Library.Config.ImageFormat}| all files|*.*";
+            openFileDialog1.FilterIndex = 2;
+            openFileDialog1.InitialDirectory = "c:\\";
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+                txtFile.Text = openFileDialog1.FileName;
         }
-        private void UpdatePersonalDetails_Activated(object sender, EventArgs e)
+        private void btnX_Click(object sender, EventArgs e)
         {
-            if (EMS_ClientMainScreen.employee != null) Fill();
+            EMS_ClientMainScreen.employee = null;
+            Close();
         }
+        #endregion
+
+        #region Supplimental
         public void Clear()
         {
             txtID.Text = "";
@@ -104,15 +116,8 @@ namespace EMS_Client.Forms
             txtPosition.Text = EMS_ClientMainScreen.employee.Type.Name;
             txtBaseSalary.Text = EMS_ClientMainScreen.employee.BaseSalary.ToString();
             txtSalaryModifire.Text = EMS_ClientMainScreen.employee.SalaryModifire.ToString();
-            try { pictureBox1.Image = new Bitmap(EMS_Library.Config.FR_Images + $"\\{EMS_ClientMainScreen.employee.IntId}.bmp"); } catch { }
+            try { pictureBox1.Image = new Bitmap(EMS_Library.Config.FR_Images + $"\\{EMS_ClientMainScreen.employee.IntId}{EMS_Library.Config.ImageFormat}"); } catch { }
         }
-
-        private void btnSave_Click(object sender, EventArgs e)
-        {
-            string querry = Requests.UpdateEmployee(
-                EMS_ClientMainScreen.employee.ProvideFieldsAndValues(),
-                new Dictionary<string, string>() { { "_intId", EMS_ClientMainScreen.employee.IntId.ToString() } }
-                ) ;
-        }
+        #endregion
     }
 }

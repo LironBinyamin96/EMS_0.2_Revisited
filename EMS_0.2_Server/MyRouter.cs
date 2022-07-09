@@ -9,6 +9,11 @@ namespace EMS_Server
 {
     internal class MyRouter
     {
+        /// <summary>
+        /// Requests router
+        /// </summary>
+        /// <param name="data"></param>
+        /// <exception cref="Exception"></exception>
         public DataPacket Router(DataPacket data)
         {
             switch (data._header.Act)
@@ -26,13 +31,16 @@ namespace EMS_Server
                 /*Direct querry*/   case 254: { return new DataPacket(SQLBridge.TwoWayCommand(data.StringData), 255); }
                 /*Ping*/            case 255: { return new DataPacket(data.StringData, 255); }
             }
+            
+            //Retrieves picture and returns it as byte[]
             byte[] GetPicture()
             {
                 //"get picture of #_intid"
                 if (int.TryParse(data.StringData.Substring(data.StringData.IndexOf('#') + 1), out int id))
                 {
-                    if (File.Exists(EMS_Library.Config.FR_Images + $"\\{id}.bmp"))
-                        return File.ReadAllBytes(EMS_Library.Config.FR_Images + $"\\{id}.bmp");
+                    string imagePath = EMS_Library.Config.FR_Images + $"\\{id}{EMS_Library.Config.ImageFormat}";
+                    if (File.Exists(imagePath))
+                        return File.ReadAllBytes(imagePath);
                     else return new byte[0];
                 }
                 else return new byte[0];
