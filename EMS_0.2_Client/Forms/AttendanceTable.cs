@@ -17,8 +17,22 @@ namespace EMS_Client.Forms
         #region Variables
         public static bool fill = false;
         public HoursLogMonth log;
-        Process HLProcess = null;
         #endregion
+
+        public AttendanceTable()
+        {
+            InitializeComponent();
+        }
+
+        // בדאבל קליל - נפתח חלון עריכת שעות עבודה
+        public void GridViewAttrndance_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            string idEmployee = EMS_ClientMainScreen.employee.IntId.ToString();
+            int y = GridViewAttrndance.CurrentCell.RowIndex;
+            string[] hold = new string[] { idEmployee, GridViewAttrndance.SelectedCells[0].Value.ToString(), GridViewAttrndance.SelectedCells[2].Value.ToString(), GridViewAttrndance.SelectedCells[3].Value.ToString() };
+            EditHours editHours = new EditHours(hold);
+            editHours.Show();
+        }
 
         #region Buttons
         private void btnSelect_Click(object sender, EventArgs e)
@@ -41,7 +55,20 @@ namespace EMS_Client.Forms
                     GridViewAttrndance.Rows.Add(item[0], item[1], item[2], item[3], item[4]);
             }
         }
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (EMS_ClientMainScreen.employee == null)
+            {
+                MessageBox.Show("Please select a employee");
+                return;
+            }
+            BuildLog();
+            if (log != null)
+                File.WriteAllText(EMS_Library.Config.RootDirectory + "\\log.json", log.JSON());
+            GenerateXlsxLog();
+        }
         #endregion
+
         #region Supplemental
         public void Fill()
         {
@@ -60,52 +87,35 @@ namespace EMS_Client.Forms
                 log = new HoursLogMonth(buffer.ToArray(), EMS_ClientMainScreen.employee);
             else log = null;
         }
-        #endregion
-        public AttendanceTable()
-        {
-            InitializeComponent();
-        }
 
-        // בדאבל קליל - נפתח חלון עריכת שעות עבודה
-        public void GridViewAttrndance_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        /// <summary>
+        /// Generates and opens hours log in Excel format.
+        /// </summary>
+        public void GenerateXlsxLog()
         {
-            string idEmployee= EMS_ClientMainScreen.employee.IntId.ToString();
-            int y = GridViewAttrndance.CurrentCell.RowIndex;
-            string[] hold = new string[]{idEmployee, GridViewAttrndance.SelectedCells[0].Value.ToString(), GridViewAttrndance.SelectedCells[2].Value.ToString(), GridViewAttrndance.SelectedCells[3].Value.ToString() };
-            EditHours editHours = new EditHours(hold);
-            editHours.Show();
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            if (EMS_ClientMainScreen.employee == null)
+            Thread xlsxBuilder = new Thread(() =>
             {
-                MessageBox.Show("Please select a employee");
-                return;
-            }
-            BuildLog();
-            if (log != null)
-            { string logJson = log.JSON(); File.WriteAllText(EMS_Library.Config.RootDirectory + "\\log.json", logJson); }
-            BuildHoursLog();
-            Thread.Sleep(2000);
-            OpemExcelFile();
-        }
+                File.WriteAllText(Directory.GetCurrentDirectory()+"\\TempClientConfig.txt",$"HoursLog.xlsx_output_directory={EMS_Library.Config.RootDirectory}");
 
-        public void BuildHoursLog()
-        {
-            HLProcess = new Process();
-            HLProcess.StartInfo.FileName = "main.py";
-            HLProcess.StartInfo.UseShellExecute = true;
-            HLProcess.Start();
-        }
-        public void OpemExcelFile()
-        {
-            Process XLSXProcess = null;
+                Process writingXlsx = new Process();
+                writingXlsx.StartInfo.FileName = "main.py";
+                writingXlsx.StartInfo.UseShellExecute = true;
+                writingXlsx.Start();
+                while (!writingXlsx.HasExited) { }
 
-            XLSXProcess = new Process();
-            XLSXProcess.StartInfo.FileName = $"C:\\Users\\liron\\Desktop\\EMS_Root\\{ EMS_ClientMainScreen.employee.IntId}.xlsx";
-            XLSXProcess.StartInfo.UseShellExecute = true;
-            XLSXProcess.Start();
+                Process XLSXProcess = new Process();
+                XLSXProcess.StartInfo.FileName = $"{EMS_Library.Config.RootDirectory}\\{ EMS_ClientMainScreen.employee.IntId}.xlsx";
+                XLSXProcess.StartInfo.UseShellExecute = true;
+                XLSXProcess.Start();
+
+                while (!writingXlsx.HasExited) { }
+
+                //Release of resouces
+                writingXlsx.Dispose();
+                XLSXProcess.Dispose();
+            });
+            xlsxBuilder.Start();
         }
+        #endregion
     }
 }

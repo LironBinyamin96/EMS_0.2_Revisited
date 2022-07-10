@@ -202,6 +202,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "EMS_ClientMainScreen";
             this.Text = "Form1";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.EMS_ClientMainScreen_FormClosing);
             this.Load += new System.EventHandler(this.EMS_ClientMainScreen_Load);
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.userPicture)).EndInit();

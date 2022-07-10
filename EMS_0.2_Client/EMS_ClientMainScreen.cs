@@ -13,28 +13,6 @@ namespace EMS_Client
         public static Employee employee;
         private Form activeForm; // משתנה עזר ששומר את החלון הנוכחי
         #endregion
-        #region Drag Window
-        /// <summary>
-        /// Controlls form movement during drag.
-        /// </summary>
-        void Drag(MouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Left)
-            {
-                ReleaseCapture();
-                SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
-            }
-        }
-        public const int WM_NCLBUTTONDOWN = 0xA1;
-        public const int HT_CAPTION = 0x2;
-        [DllImportAttribute("user32.dll")]
-        public static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
-        [DllImportAttribute("user32.dll")]
-        public static extern bool ReleaseCapture();
-        private void panelForUser_MouseDown(object sender, MouseEventArgs e) => Drag(e);
-        private void panelDesktop_MouseDown(object sender, MouseEventArgs e) => Drag(e);
-
-        #endregion
 
         // סימון הכפתורים
         [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
@@ -93,6 +71,50 @@ namespace EMS_Client
         private void btnAttendence_Leave(object sender, EventArgs e) => btnAttendence.BackColor = Color.FromArgb(24, 30, 54);
         private void btnExit_Click_1(object sender, EventArgs e) => Close();
         #endregion
+
+        #region Drag Window
+        /// <summary>
+        /// Controlls form movement during drag.
+        /// </summary>
+        void Drag(MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                ReleaseCapture();
+                SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
+            }
+        }
+        public const int WM_NCLBUTTONDOWN = 0xA1;
+        public const int HT_CAPTION = 0x2;
+        [DllImportAttribute("user32.dll")]
+        public static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
+        [DllImportAttribute("user32.dll")]
+        public static extern bool ReleaseCapture();
+        private void panelForUser_MouseDown(object sender, MouseEventArgs e) => Drag(e);
+        private void panelDesktop_MouseDown(object sender, MouseEventArgs e) => Drag(e);
+
+        #endregion
+
+        #region Cleanup
+        /// <summary>
+        /// Cleans temporarry files created by the programm
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void EMS_ClientMainScreen_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            string[] employeeLogs = Directory.GetFiles(Config.RootDirectory);
+
+            //Delete all .xlsx files with numeric names (employee logs)
+            foreach(string employeeLog in employeeLogs)
+                if(employeeLog.Split("\\").Last().Replace(".xlsx","").Parsable(typeof(int)))
+                    File.Delete(employeeLog);
+
+            File.Delete($"{Config.RootDirectory}\\log.json");
+            File.Delete(Directory.GetCurrentDirectory() + "\\TempClientConfig.txt");
+        }
+        #endregion
+
 
     }
 }

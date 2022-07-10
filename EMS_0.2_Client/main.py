@@ -3,7 +3,16 @@ import datetime
 from openpyxl import load_workbook
 import calendar
 
-path = "C:\\Users\\liron\\Desktop\\EMS_Root\\"
+
+pathConfig = []
+with open('TempClientConfig.txt') as file:
+        lines = file.readlines()
+        line = lines[0].split('=')
+        print(lines)
+        pathConfig = line
+print(pathConfig)
+
+path = pathConfig[1]+'//'
 f = open(f"{path}log.json", "r")
 jsonFile = json.load(f)
 
