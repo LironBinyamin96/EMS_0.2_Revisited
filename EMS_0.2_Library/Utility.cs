@@ -123,6 +123,7 @@ namespace EMS_Library
             return false;
         }
 
+        // בודק האם אפשר להמיר סטרינג לטיפוס המתבקש
         public static bool Parsable(this string str, Type type)
         {
             if (type == typeof(int)) try { int.Parse(str); return true; } catch { return false; }

@@ -35,6 +35,7 @@ namespace EMS_Client.Forms
         private void lblUpdatePersonalDetails_MouseDown(object sender, MouseEventArgs e) => Drag(e);
 
         #endregion
+
         public UpdatePersonalDetails()
         {
             InitializeComponent();
@@ -47,10 +48,12 @@ namespace EMS_Client.Forms
         #region Buttons
         private void btnSave_Click(object sender, EventArgs e)
         {
-            string querry = Requests.UpdateEmployee(
-                EMS_ClientMainScreen.employee.ProvideFieldsAndValues(),
-                new Dictionary<string, string>() { { "_intId", EMS_ClientMainScreen.employee.IntId.ToString() } }
-                );
+            if (!CheckingDataFields()) return;
+            MessageBox.Show("OK");
+            //string querry = Requests.UpdateEmployee(
+            //    EMS_ClientMainScreen.employee.ProvideFieldsAndValues(),
+            //    new Dictionary<string, string>() { { "_intId", EMS_ClientMainScreen.employee.IntId.ToString() } }
+            //    );
         }
         private void btnSelect_Click(object sender, EventArgs e)
         {
@@ -84,6 +87,32 @@ namespace EMS_Client.Forms
         }
         #endregion
 
+        private bool CheckingDataFields()
+        {
+            Checks checks = new Checks();
+
+            Dictionary<Panel, bool> test = new Dictionary<Panel, bool>();
+            test.Add(panelID, !checks.IdNumber(txtID.Text));
+            test.Add(panelFname, !checks.StringLength(txtFirstName.Text));
+            test.Add(panelLname, !checks.StringLength(txtLastName.Text));
+            test.Add(panelDate, !checks.ItsDate(txtDateOfBirth.Text));
+            test.Add(panelAddres, !checks.StringLength(txtAddres.Text));
+            test.Add(panelPhone, !checks.IsNumber(txtPhone.Text));
+            test.Add(panelEmail, !checks.IsValidEmail(txtEmail.Text));
+            test.Add(panelBaseSalary, !checks.IsNumber(txtBaseSalary.Text));
+            test.Add(panelSalaryModifire, !checks.IsNumber(txtSalaryModifire.Text));
+            test.Add(panelPosition, !checks.SelectedPosition(positionBox));
+           // test.Add(panelUpload, !checks.picture(employeeImage));
+
+            int countTrue = 0;
+            foreach (KeyValuePair<Panel, bool> item in test)
+            {
+                if (item.Value) item.Key.BackColor = Color.FromArgb(255, 102, 102);
+                else { item.Key.BackColor = Color.FromArgb(0, 126, 249); countTrue++; }
+            }
+            return countTrue == 10;
+        }
+
         #region Supplimental
         public void Clear()
         {
@@ -96,7 +125,7 @@ namespace EMS_Client.Forms
             txtAddres.Text = "";
             txtPhone.Text = "";
             txtFile.Text = "";
-            txtPosition.Text = "";
+            positionBox.Text = "";
             txtBaseSalary.Text = "";
             txtSalaryModifire.Text = "";
             txtEmail.Text = "";
@@ -104,20 +133,33 @@ namespace EMS_Client.Forms
         }
         public void Fill()
         {
-            txtID.Text = EMS_ClientMainScreen.employee.StateId.ToString();
-            txtFirstName.Text = EMS_ClientMainScreen.employee.FName.ToString();
-            txtLastName.Text = EMS_ClientMainScreen.employee.LName.ToString();
-            txtMiddleName.Text = EMS_ClientMainScreen.employee.MName.ToString();
-            txtEmail.Text = EMS_ClientMainScreen.employee.Email.ToString();
-            txtGender.Text = EMS_ClientMainScreen.employee.Gender.ToString();
-            txtDateOfBirth.Text = EMS_ClientMainScreen.employee.BirthDate.ToString();
-            txtAddres.Text = EMS_ClientMainScreen.employee.Address.ToString();
-            txtPhone.Text = EMS_ClientMainScreen.employee.PhoneNumber.ToString();
-            txtPosition.Text = EMS_ClientMainScreen.employee.Type.Name;
-            txtBaseSalary.Text = EMS_ClientMainScreen.employee.BaseSalary.ToString();
-            txtSalaryModifire.Text = EMS_ClientMainScreen.employee.SalaryModifire.ToString();
-            try { pictureBox1.Image = new Bitmap(EMS_Library.Config.FR_Images + $"\\{EMS_ClientMainScreen.employee.IntId}{EMS_Library.Config.ImageFormat}"); } catch { }
+            if (EMS_ClientMainScreen.employee != null)
+            {
+                txtID.Text = EMS_ClientMainScreen.employee.StateId.ToString();
+                txtFirstName.Text = EMS_ClientMainScreen.employee.FName.ToString();
+                txtLastName.Text = EMS_ClientMainScreen.employee.LName.ToString();
+                txtMiddleName.Text = EMS_ClientMainScreen.employee.MName.ToString();
+                txtEmail.Text = EMS_ClientMainScreen.employee.Email.ToString();
+                txtGender.Text = EMS_ClientMainScreen.employee.Gender.ToString();
+                txtDateOfBirth.Text = EMS_ClientMainScreen.employee.BirthDate.ToString();
+                txtAddres.Text = EMS_ClientMainScreen.employee.Address.ToString();
+                txtPhone.Text = EMS_ClientMainScreen.employee.PhoneNumber.ToString();
+                positionBox.Text = EMS_ClientMainScreen.employee.Type.Name;
+                txtBaseSalary.Text = EMS_ClientMainScreen.employee.BaseSalary.ToString();
+                txtSalaryModifire.Text = EMS_ClientMainScreen.employee.SalaryModifire.ToString();
+                try { pictureBox1.Image = new Bitmap(EMS_Library.Config.FR_Images + $"\\{EMS_ClientMainScreen.employee.IntId}{EMS_Library.Config.ImageFormat}"); } catch { }
+            }
         }
         #endregion
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            Fill();
+            Panel[] panelArr = new Panel[] { panelID, panelFname, panelLname, panelDate, panelAddres, panelPhone, panelEmail, panelBaseSalary
+                ,panelSalaryModifire,panelPosition,panelUpload };
+            foreach (Panel panel in panelArr)
+                panel.BackColor = Color.FromArgb(0, 126, 249);
+
+        }
     }
 }

@@ -35,13 +35,11 @@ namespace EMS_Client.Forms
         /// </summary>
         private void btnSave_Click(object sender, EventArgs e)
         {
-            //Immage existance check
-            if (employeeImage == null)
-            { MessageBox.Show("Choose Image!"); return; }
 
-            //All nesesery fields are filled
-            if (Array.Find(activeControls, x => x.Text == "" && !x.Name.ContainsAnyOf(Config.NullableEmployeeData)) != null)
-            { MessageBox.Show("Fill all fields!\n"); return; }
+            if (!CheckingDataFields()) return;
+
+            MessageBox.Show("OK");
+
 
             //Format validation
             if (txtDateOfBirth.Text.Parsable(typeof(DateTime)))
@@ -92,6 +90,11 @@ namespace EMS_Client.Forms
         /// </summary>
         private void btnClear_Click(object sender, EventArgs e)
         {
+            Panel[] panelArr = new Panel[] { panelID, panelFname, panelLname, panelDate, panelAddres, panelPhone, panelEmail, panelBaseSalary
+                ,panelSalaryModifire,panelPosition,panelUpload };
+            foreach (Panel panel in panelArr)
+                panel.BackColor = Color.FromArgb(0, 126, 249);
+
             foreach (Control control in activeControls)
             {
                 if (control is TextBox) ((TextBox)control).Text = "";
@@ -99,7 +102,6 @@ namespace EMS_Client.Forms
                 else if (control is PictureBox) ((PictureBox)control).Image = null;
             }
         }
-
         /// <summary>
         /// Import picture
         /// </summary>
@@ -117,6 +119,32 @@ namespace EMS_Client.Forms
             catch { MessageBox.Show("Failed"); }
         }
         #endregion
+
+        private bool CheckingDataFields()
+        {
+            Checks checks = new Checks();
+
+            Dictionary<Panel, bool> test = new Dictionary<Panel, bool>();
+            test.Add(panelID,!checks.IdNumber(txtID.Text));
+            test.Add(panelFname,!checks.StringLength(txtFirstName.Text));
+            test.Add(panelLname, !checks.StringLength(txtLastName.Text));
+            test.Add(panelDate, !checks.ItsDate(txtDateOfBirth.Text));
+            test.Add(panelAddres, !checks.StringLength(txtAddres.Text));
+            test.Add(panelPhone, !checks.IsNumber(txtPhone.Text));
+            test.Add(panelEmail, !checks.IsValidEmail(txtEmail.Text));
+            test.Add(panelBaseSalary, !checks.IsNumber(txtBaseSalary.Text));
+            test.Add(panelSalaryModifire, !checks.IsNumber(txtSalaryModifire.Text));
+            test.Add(panelPosition, !checks.SelectedPosition(positionBox));
+            test.Add(panelUpload, !checks.picture(employeeImage));
+
+            int countTrue = 0;
+            foreach (KeyValuePair<Panel, bool> item in test)
+            {
+                if (item.Value) item.Key.BackColor = Color.FromArgb(255, 102, 102);
+                else { item.Key.BackColor = Color.FromArgb(0, 126, 249); countTrue++; }
+            }
+            return countTrue == 11;
+        }
 
         #region Drag Window
         /// <summary>
