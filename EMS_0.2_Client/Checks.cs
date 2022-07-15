@@ -8,8 +8,6 @@ namespace EMS_Client
 {
     public class Checks
     {
-
-
         // אורך מחרוזת - בדיקה לשם פרטי\שם משפחה\כתובת
         public bool StringLength(string str) => str.Trim().Length > 2;
         // בדיקה למספר פלאפון
@@ -39,5 +37,7 @@ namespace EMS_Client
         public bool SelectedPosition(ComboBox position) => position.Text != ""; 
         // בדיקת תמונה
         public bool picture(Bitmap employeeImage) => employeeImage != null;
-}
+
+        
+    }
 }

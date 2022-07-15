@@ -103,16 +103,16 @@ namespace EMS_Client.Forms
                 writingXlsx.Start();
                 while (!writingXlsx.HasExited) { }
 
-                Process XLSXProcess = new Process();
-                XLSXProcess.StartInfo.FileName = $"{EMS_Library.Config.RootDirectory}\\{ EMS_ClientMainScreen.employee.IntId}.xlsx";
-                XLSXProcess.StartInfo.UseShellExecute = true;
-                XLSXProcess.Start();
+                Process PDFProcess = new Process();
+                PDFProcess.StartInfo.FileName = $"{EMS_Library.Config.RootDirectory}\\{ EMS_ClientMainScreen.employee.IntId}.pdf";
+                PDFProcess.StartInfo.UseShellExecute = true;
+                PDFProcess.Start();
 
                 while (!writingXlsx.HasExited) { }
 
                 //Release of resouces
                 writingXlsx.Dispose();
-                XLSXProcess.Dispose();
+                PDFProcess.Dispose();
             });
             xlsxBuilder.Start();
         }

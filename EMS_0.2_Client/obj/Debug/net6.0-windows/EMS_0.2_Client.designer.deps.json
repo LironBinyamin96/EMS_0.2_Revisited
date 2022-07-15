@@ -6,6 +6,14 @@
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v6.0": {
+      "AE.Net.Mail/1.7.10": {
+        "runtime": {
+          "lib/net45/AE.Net.Mail.dll": {
+            "assemblyVersion": "1.7.10.0",
+            "fileVersion": "1.7.10.0"
+          }
+        }
+      },
       "Microsoft.Chart.Controls/4.7.2046": {
         "runtime": {
           "lib/net35/System.Web.DataVisualization.Design.dll": {
@@ -301,6 +309,13 @@
     }
   },
   "libraries": {
+    "AE.Net.Mail/1.7.10": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-qOeui+HJQkonh7OCVfOLcuQtzsFYrNSLfKy8BMvnP237uDUSCn/9OT1Xt6Sr/pqOYbOgEFvUKH6Z2oa5r8IAfg==",
+      "path": "ae.net.mail/1.7.10",
+      "hashPath": "ae.net.mail.1.7.10.nupkg.sha512"
+    },
     "Microsoft.Chart.Controls/4.7.2046": {
       "type": "package",
       "serviceable": true,

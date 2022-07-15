@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "QE/LWN3ZNZXZDKilfg1mXejYoZvppglde08YbbetltOiCOYi/SiW+vGY9pbyQettc9Vfzw5l2sHD3dpnV2aSMg==",
+  "dgSpecHash": "kY+Gn1L2KZ1XUvME1q9ZBuOhSImoHTFV5hVdrblgjjTvJqLPEwNviGRYL0bHZZMPo+d0pGNCT5ShWg+D6flDmw==",
   "success": true,
   "projectFilePath": "C:\\Users\\liron\\Desktop\\EMS\\EMS_0.2_Client\\EMS_0.2_Client.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\liron\\.nuget\\packages\\ae.net.mail\\1.7.10\\ae.net.mail.1.7.10.nupkg.sha512",
     "C:\\Users\\liron\\.nuget\\packages\\microsoft.chart.controls\\4.7.2046\\microsoft.chart.controls.4.7.2046.nupkg.sha512",
     "C:\\Users\\liron\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",
     "C:\\Users\\liron\\.nuget\\packages\\microsoft.win32.systemevents\\6.0.0\\microsoft.win32.systemevents.6.0.0.nupkg.sha512",
@@ -24,6 +25,16 @@
     "C:\\Users\\liron\\.nuget\\packages\\system.windows.extensions\\6.0.0\\system.windows.extensions.6.0.0.nupkg.sha512"
   ],
   "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'AE.Net.Mail 1.7.10' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework 'net6.0-windows7.0'. This package may not be fully compatible with your project.",
+      "libraryId": "AE.Net.Mail",
+      "targetGraphs": [
+        "net6.0-windows7.0"
+      ]
+    },
     {
       "code": "NU1701",
       "level": "Warning",

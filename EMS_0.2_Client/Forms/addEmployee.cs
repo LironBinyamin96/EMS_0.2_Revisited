@@ -90,15 +90,16 @@ namespace EMS_Client.Forms
         /// </summary>
         private void btnClear_Click(object sender, EventArgs e)
         {
+            // החזרת הפאנלים לצבע כחול
             Panel[] panelArr = new Panel[] { panelID, panelFname, panelLname, panelDate, panelAddres, panelPhone, panelEmail, panelBaseSalary
                 ,panelSalaryModifire,panelPosition,panelUpload };
             foreach (Panel panel in panelArr)
                 panel.BackColor = Color.FromArgb(0, 126, 249);
-
+            
             foreach (Control control in activeControls)
             {
                 if (control is TextBox) ((TextBox)control).Text = "";
-                else if (control is CheckBox) ((ComboBox)control).SelectedIndex = 0;
+                else if (control is ComboBox) ((ComboBox)control).Text = "";
                 else if (control is PictureBox) ((PictureBox)control).Image = null;
             }
         }

@@ -32,10 +32,10 @@
             this.btnX = new System.Windows.Forms.Button();
             this.lblNewMail = new System.Windows.Forms.Label();
             this.txtTo = new System.Windows.Forms.TextBox();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.panelTo = new System.Windows.Forms.Panel();
             this.lblTo = new System.Windows.Forms.Label();
             this.txtSubject = new System.Windows.Forms.TextBox();
-            this.panel2 = new System.Windows.Forms.Panel();
+            this.panelSubject = new System.Windows.Forms.Panel();
             this.lblSubject = new System.Windows.Forms.Label();
             this.lblBody = new System.Windows.Forms.Label();
             this.richTextBody = new System.Windows.Forms.RichTextBox();
@@ -99,13 +99,13 @@
             this.txtTo.Size = new System.Drawing.Size(358, 16);
             this.txtTo.TabIndex = 5;
             // 
-            // panel1
+            // panelTo
             // 
-            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
-            this.panel1.Location = new System.Drawing.Point(155, 137);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(378, 1);
-            this.panel1.TabIndex = 4;
+            this.panelTo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
+            this.panelTo.Location = new System.Drawing.Point(155, 137);
+            this.panelTo.Name = "panelTo";
+            this.panelTo.Size = new System.Drawing.Size(378, 1);
+            this.panelTo.TabIndex = 4;
             // 
             // lblTo
             // 
@@ -129,13 +129,13 @@
             this.txtSubject.Size = new System.Drawing.Size(358, 16);
             this.txtSubject.TabIndex = 8;
             // 
-            // panel2
+            // panelSubject
             // 
-            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
-            this.panel2.Location = new System.Drawing.Point(155, 187);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(378, 1);
-            this.panel2.TabIndex = 7;
+            this.panelSubject.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
+            this.panelSubject.Location = new System.Drawing.Point(155, 187);
+            this.panelSubject.Name = "panelSubject";
+            this.panelSubject.Size = new System.Drawing.Size(378, 1);
+            this.panelSubject.TabIndex = 7;
             // 
             // lblSubject
             // 
@@ -271,10 +271,10 @@
             this.Controls.Add(this.richTextBody);
             this.Controls.Add(this.lblBody);
             this.Controls.Add(this.txtSubject);
-            this.Controls.Add(this.panel2);
+            this.Controls.Add(this.panelSubject);
             this.Controls.Add(this.lblSubject);
             this.Controls.Add(this.txtTo);
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.panelTo);
             this.Controls.Add(this.lblTo);
             this.Controls.Add(this.panelNewMail);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -293,10 +293,10 @@
         private Panel panelNewMail;
         private Label lblNewMail;
         private TextBox txtTo;
-        private Panel panel1;
+        private Panel panelTo;
         private Label lblTo;
         private TextBox txtSubject;
-        private Panel panel2;
+        private Panel panelSubject;
         private Label lblSubject;
         private Label lblBody;
         private RichTextBox richTextBody;

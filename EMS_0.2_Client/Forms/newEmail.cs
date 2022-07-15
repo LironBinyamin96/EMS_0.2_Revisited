@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.Net;
 using System.Net.Mail;
 
+
 namespace EMS_Client.Forms
 {
     public partial class newEmail : Form
@@ -47,9 +48,17 @@ namespace EMS_Client.Forms
         }
 
         #region Buttons
-        private void btnX_Click(object sender, EventArgs e) => Close();
+        /// <summary>
+        /// כפתור שליחת מייל
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnSend_Click(object sender, EventArgs e)
         {
+            // בדיקה ששדות נמען ונושא המייל לא ריקים
+            if (!CheckingDataFields()) return;
+
+            // יצירת ההמייל ושליחתו
             //user - "employee.management.system010@gmail.com", pass - "employee.management.system!!@" "generated: wcvyicyfscoiqfgr"
             SmtpClient Smtp = new SmtpClient("smtp.gmail.com", 587);
             MailMessage mail = new MailMessage("employee.management.system010@gmail.com", txtTo.Text, txtSubject.Text, richTextBody.Text);
@@ -59,7 +68,6 @@ namespace EMS_Client.Forms
                 mail.Attachments.Add(file);
             }
             Smtp.EnableSsl = true;
-            //Smtp.UseDefaultCredentials = true;
             Smtp.Credentials = new NetworkCredential("employee.management.system010@gmail.com", "wcvyicyfscoiqfgr");
             Smtp.Send(mail);
             txtTo.Clear();
@@ -67,6 +75,11 @@ namespace EMS_Client.Forms
             richTextBody.Clear();
             lblFile.Text = "";
         }
+        /// <summary>
+        /// הוספת קובץ למייל
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnAddFile_Click(object sender, EventArgs e)
         {
             OpenFileDialog opdFile = new OpenFileDialog();
@@ -79,7 +92,27 @@ namespace EMS_Client.Forms
             selectEmployee se = new selectEmployee(this);
             se.Show();
         }
+        private void btnX_Click(object sender, EventArgs e) => Close();
+
         #endregion
+
+        private bool CheckingDataFields()
+        {
+            Checks checks = new Checks();
+
+            Dictionary<Panel, bool> test = new Dictionary<Panel, bool>();
+            test.Add(panelTo, !checks.IsValidEmail(txtTo.Text));
+            test.Add(panelSubject, !checks.StringLength(txtSubject.Text));;
+
+            bool res = true;
+            foreach (KeyValuePair<Panel, bool> item in test)
+            {
+                if (item.Value) { item.Key.BackColor = Color.FromArgb(255, 102, 102); res &= false; }
+                else { item.Key.BackColor = Color.FromArgb(0, 126, 249); res &= true; }
+            }
+            return res;
+        }
+
 
         #region Drag Window
         /// <summary>

@@ -10,6 +10,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AE.Net.Mail" Version="1.7.10" />
     <PackageReference Include="Microsoft.Chart.Controls" Version="4.7.2046" />
     <PackageReference Include="S22.Imap" Version="3.6.0" />
     <PackageReference Include="System.Data.OleDb" Version="6.0.0" />

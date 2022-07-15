@@ -17,30 +17,12 @@ namespace EMS_Client.Forms
         {
             InitializeComponent();
         }
-
-        private void btnNewEmail_Click(object sender, EventArgs e)
-        {
-            newEmail ne = new newEmail();
-            ne.Show();
-        }
-
-        private void inbox_MouseDoubleClick(object sender, MouseEventArgs e)
-        {
-            foreach (DataGridViewRow item in this.inbox.SelectedRows)
-            {
-                string[] fullMessage = new string[3];
-                fullMessage[0] = item.Cells[0].Value.ToString();
-                fullMessage[1] = item.Cells[1].Value.ToString();
-                fullMessage[2] = item.Cells[2].Value.ToString();
-                showMail ShowMAil = new showMail(fullMessage);
-                ShowMAil.Show();
-            }
-        }
-
-        #region Buttons
-        #endregion
-
         #region Supplemental
+        /// <summary>
+        /// התחברות למייל
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Mail_Load(object sender, EventArgs e)
         {
             Task getMail = new Task(() =>
@@ -64,5 +46,34 @@ namespace EMS_Client.Forms
             getMail.Start();
         }
         #endregion
+
+        /// <summary>
+        /// פתיחת חלון של מייל חדש
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnNewEmail_Click(object sender, EventArgs e)
+        {
+            newEmail ne = new newEmail();
+            ne.Show();
+        }
+
+        /// <summary>
+        /// פתיחת מייל לקריאה
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void inbox_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            foreach (DataGridViewRow item in this.inbox.SelectedRows)
+            {
+                string[] fullMessage = new string[3];
+                fullMessage[0] = item.Cells[0].Value.ToString();
+                fullMessage[1] = item.Cells[1].Value.ToString();
+                fullMessage[2] = item.Cells[2].Value.ToString();
+                showMail ShowMAil = new showMail(fullMessage);
+                ShowMAil.Show();
+            }
+        }
     }
 }

@@ -8,6 +8,7 @@
     ".NETCoreApp,Version=v6.0": {
       "EMS_0.2_Client/1.0.0": {
         "dependencies": {
+          "AE.Net.Mail": "1.7.10",
           "EMS_0.2_Library": "1.0.0",
           "Microsoft.Chart.Controls": "4.7.2046",
           "S22.Imap": "3.6.0",
@@ -16,6 +17,14 @@
         },
         "runtime": {
           "EMS_0.2_Client.dll": {}
+        }
+      },
+      "AE.Net.Mail/1.7.10": {
+        "runtime": {
+          "lib/net45/AE.Net.Mail.dll": {
+            "assemblyVersion": "1.7.10.0",
+            "fileVersion": "1.7.10.0"
+          }
         }
       },
       "Microsoft.Chart.Controls/4.7.2046": {
@@ -176,6 +185,13 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
+    },
+    "AE.Net.Mail/1.7.10": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-qOeui+HJQkonh7OCVfOLcuQtzsFYrNSLfKy8BMvnP237uDUSCn/9OT1Xt6Sr/pqOYbOgEFvUKH6Z2oa5r8IAfg==",
+      "path": "ae.net.mail/1.7.10",
+      "hashPath": "ae.net.mail.1.7.10.nupkg.sha512"
     },
     "Microsoft.Chart.Controls/4.7.2046": {
       "type": "package",

@@ -2,6 +2,15 @@
   "version": 3,
   "targets": {
     "net6.0-windows7.0": {
+      "AE.Net.Mail/1.7.10": {
+        "type": "package",
+        "compile": {
+          "lib/net45/AE.Net.Mail.dll": {}
+        },
+        "runtime": {
+          "lib/net45/AE.Net.Mail.dll": {}
+        }
+      },
       "Microsoft.Chart.Controls/4.7.2046": {
         "type": "package",
         "compile": {
@@ -315,6 +324,21 @@
     }
   },
   "libraries": {
+    "AE.Net.Mail/1.7.10": {
+      "sha512": "qOeui+HJQkonh7OCVfOLcuQtzsFYrNSLfKy8BMvnP237uDUSCn/9OT1Xt6Sr/pqOYbOgEFvUKH6Z2oa5r8IAfg==",
+      "type": "package",
+      "path": "ae.net.mail/1.7.10",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "ae.net.mail.1.7.10.nupkg.sha512",
+        "ae.net.mail.nuspec",
+        "lib/net40/AE.Net.Mail.dll",
+        "lib/net40/AE.Net.Mail.pdb",
+        "lib/net45/AE.Net.Mail.dll",
+        "lib/net45/AE.Net.Mail.pdb"
+      ]
+    },
     "Microsoft.Chart.Controls/4.7.2046": {
       "sha512": "tSNkrA2zBGiRFC5Xmb2pnowds+2919zGyuiNMZf5cP1OpKi/Q1qPbQ8xWr2jnr8hCfBFiRV9WeIdCANMpo/jRw==",
       "type": "package",
@@ -871,6 +895,7 @@
   },
   "projectFileDependencyGroups": {
     "net6.0-windows7.0": [
+      "AE.Net.Mail >= 1.7.10",
       "EMS_0.2_Library >= 1.0.0",
       "Microsoft.Chart.Controls >= 4.7.2046",
       "S22.Imap >= 3.6.0",
@@ -921,6 +946,10 @@
       "net6.0-windows7.0": {
         "targetAlias": "net6.0-windows",
         "dependencies": {
+          "AE.Net.Mail": {
+            "target": "Package",
+            "version": "[1.7.10, )"
+          },
           "Microsoft.Chart.Controls": {
             "target": "Package",
             "version": "[4.7.2046, )"
@@ -961,6 +990,16 @@
     }
   },
   "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'AE.Net.Mail 1.7.10' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework 'net6.0-windows7.0'. This package may not be fully compatible with your project.",
+      "libraryId": "AE.Net.Mail",
+      "targetGraphs": [
+        "net6.0-windows7.0"
+      ]
+    },
     {
       "code": "NU1701",
       "level": "Warning",

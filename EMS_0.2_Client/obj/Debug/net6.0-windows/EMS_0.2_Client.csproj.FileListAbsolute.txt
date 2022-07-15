@@ -172,3 +172,4 @@ C:\Users\liron\Desktop\EMS\EMS_0.2_Client\bin\Debug\net6.0-windows\runtimes\unix
 C:\Users\liron\Desktop\EMS\EMS_0.2_Client\bin\Debug\net6.0-windows\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
 C:\Users\liron\Desktop\EMS\EMS_0.2_Client\bin\Debug\net6.0-windows\main.py
 C:\Users\levkh\Documents\GitHub\EMS_0.2_Revisited\EMS_0.2_Client\bin\Debug\net6.0-windows\main.py
+C:\Users\liron\Desktop\EMS\EMS_0.2_Client\bin\Debug\net6.0-windows\AE.Net.Mail.dll

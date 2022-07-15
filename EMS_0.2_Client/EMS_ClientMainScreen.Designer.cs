@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EMS_ClientMainScreen));
             this.panel1 = new System.Windows.Forms.Panel();
             this.userPicture = new System.Windows.Forms.PictureBox();
             this.panelStyle = new System.Windows.Forms.Panel();
@@ -170,7 +171,7 @@
             // 
             // panelForUser
             // 
-            this.panelForUser.BackgroundImage = global::EMS_Client.Properties.Resources.HR_LOGO1;
+            this.panelForUser.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panelForUser.BackgroundImage")));
             this.panelForUser.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.panelForUser.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelForUser.Location = new System.Drawing.Point(0, 0);

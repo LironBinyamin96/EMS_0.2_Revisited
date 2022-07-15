@@ -106,3 +106,4 @@ excel = client.Dispatch("Excel.Application")
 sheets = excel.Workbooks.Open(f"{path}{InternalID}.xlsx")
 work_sheets = sheets.Worksheets[0]
 work_sheets.ExportAsFixedFormat(0, f"{path}{InternalID}.pdf")
+sheets.Close(True)
