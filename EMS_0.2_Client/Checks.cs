@@ -8,6 +8,8 @@ namespace EMS_Client
 {
     public class Checks
     {
+
+
         // אורך מחרוזת - בדיקה לשם פרטי\שם משפחה\כתובת
         public bool StringLength(string str) => str.Trim().Length > 2;
         // בדיקה למספר פלאפון

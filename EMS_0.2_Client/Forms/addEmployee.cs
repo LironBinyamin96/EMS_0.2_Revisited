@@ -137,13 +137,13 @@ namespace EMS_Client.Forms
             test.Add(panelPosition, !checks.SelectedPosition(positionBox));
             test.Add(panelUpload, !checks.picture(employeeImage));
 
-            int countTrue = 0;
+            bool res = true;
             foreach (KeyValuePair<Panel, bool> item in test)
             {
-                if (item.Value) item.Key.BackColor = Color.FromArgb(255, 102, 102);
-                else { item.Key.BackColor = Color.FromArgb(0, 126, 249); countTrue++; }
+                if  (item.Value) {item.Key.BackColor = Color.FromArgb(255, 102, 102); res &= false; }
+                else { item.Key.BackColor = Color.FromArgb(0, 126, 249); res &= true; }
             }
-            return countTrue == 11;
+            return res;
         }
 
         #region Drag Window

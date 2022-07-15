@@ -1,6 +1,7 @@
 import json
 import datetime
 from openpyxl import load_workbook
+from win32com import client
 import calendar
 
 
@@ -12,7 +13,7 @@ with open('TempClientConfig.txt') as file:
         pathConfig = line
 print(pathConfig)
 
-path = pathConfig[1]+'//'
+path = pathConfig[1]+'\\'
 f = open(f"{path}log.json", "r")
 jsonFile = json.load(f)
 
@@ -100,3 +101,8 @@ returnDetails()
 returnHours()
 
 workbook.save(filename=f"{path}{InternalID}.xlsx")
+
+excel = client.Dispatch("Excel.Application")
+sheets = excel.Workbooks.Open(f"{path}{InternalID}.xlsx")
+work_sheets = sheets.Worksheets[0]
+work_sheets.ExportAsFixedFormat(0, f"{path}{InternalID}.pdf")
