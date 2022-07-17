@@ -22,8 +22,8 @@ namespace EMS_Library.MyEmployee
         private string _fName;
         private string _lName;
         private string _mName;
-        private string _password;
         private string _email;
+        private string _password;
         private string _gender;
         private DateTime _birthDate;
         private DateTime _created;
@@ -40,8 +40,8 @@ namespace EMS_Library.MyEmployee
         public string FName { get => _fName; set => _fName = value; }
         public string LName { get => _lName; set => _lName = value; }
         public string MName { get => _mName; set => _mName = value; }
-        public string Password { get => _password; set => _password = value; }
         public string Email { get => _email; set => _email = value; }
+        public string Password { get => _password; set => _password = value; }
         public string Gender { get => _gender; set => _gender = value; }
         public DateTime BirthDate { get => _birthDate; set => _birthDate = value; }
         public DateTime Created { get => _created; set => _created = value; }
@@ -81,8 +81,8 @@ namespace EMS_Library.MyEmployee
             _fName = temp[counter++];
             _lName = temp[counter++];
             _mName = temp[counter++];
-            _password = temp[counter++];
             _email = temp[counter++];
+            _password = temp[counter++];
             _gender = temp[counter++];
             _birthDate = DateTime.Parse(temp[counter++]);
             _created = DateTime.Parse(temp[counter++]);
@@ -224,8 +224,8 @@ namespace EMS_Library.MyEmployee
                 {"_fName", _fName },
                 {"_lName", _lName},
                 {"_mName", _mName },
-                {"_password", _password},
                 {"_email", _email},
+                {"_password", _password},
                 {"_gender", _gender},
                 {"_birthDate", _birthDate.ToString()},
                 {"_created", _created.ToString()},

@@ -87,6 +87,14 @@ namespace EMS_Library
                 return ms.ToArray();
             }
         }
+        public static bool BitByBitEquals(this object obj, object other)
+        {
+            byte[] first = obj.ObjectToByteArray();
+            byte[] second = other.ObjectToByteArray();
+            for (int i = 0; i < first.Length; i++)
+                if (first[i] != second[i]) return false;
+            return true;
+        }
 
         /// <summary>
         /// Checks if enumerable collection consists of only it's default values.
@@ -127,10 +135,11 @@ namespace EMS_Library
         // בודק האם אפשר להמיר סטרינג לטיפוס המתבקש
         public static bool Parsable(this string str, Type type)
         {
-            if (type == typeof(int)) try { int.Parse(str); return true; } catch { return false; }
-            else if (type == typeof(DateTime)) try { DateTime.Parse(str); return true; } catch { return false; }
-            else if(type == typeof(TimeSpan)) try { TimeSpan.Parse(str); return true; } catch { return false; }
-            else if(type == typeof(float) && type == typeof(double)) try { double.Parse(str); return true; } catch { return false; }
+            if (type == typeof(int))                                  return int.TryParse(str, out _);
+            else if (type == typeof(DateTime))                        return DateTime.TryParse(str, out _);
+            else if (type == typeof(TimeSpan))                        return TimeSpan.TryParse(str, out _);
+            else if (type == typeof(float) && type == typeof(double)) return double.TryParse(str, out _);
+            else if (type == typeof(System.Net.Mail.MailAddress))     return System.Net.Mail.MailAddress.TryCreate(str, out _);
             return true;
         }
 

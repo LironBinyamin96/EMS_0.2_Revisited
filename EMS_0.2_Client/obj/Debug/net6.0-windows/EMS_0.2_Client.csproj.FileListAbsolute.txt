@@ -173,3 +173,4 @@ C:\Users\liron\Desktop\EMS\EMS_0.2_Client\bin\Debug\net6.0-windows\runtimes\win\
 C:\Users\liron\Desktop\EMS\EMS_0.2_Client\bin\Debug\net6.0-windows\main.py
 C:\Users\levkh\Documents\GitHub\EMS_0.2_Revisited\EMS_0.2_Client\bin\Debug\net6.0-windows\main.py
 C:\Users\liron\Desktop\EMS\EMS_0.2_Client\bin\Debug\net6.0-windows\AE.Net.Mail.dll
+C:\Users\levkh\Documents\GitHub\EMS_0.2_Revisited\EMS_0.2_Client\bin\Debug\net6.0-windows\AE.Net.Mail.dll

@@ -20,12 +20,15 @@ namespace EMS_Client
             try
             {
                 var addr = new System.Net.Mail.MailAddress(email);
+                //System.Net.Mail.MailAddress.TryCreate(email, out _);
             }
             catch
             {
                 return false;
             }
             return true;
+
+
         }
         // בדיקת מספר זהות
         public bool IdNumber(string id) => id.Trim().Length == 9 && id.Trim().All(char.IsDigit);

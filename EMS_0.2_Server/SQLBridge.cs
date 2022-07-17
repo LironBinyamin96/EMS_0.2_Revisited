@@ -87,7 +87,7 @@ namespace EMS_Server
         public static string Add(string clientQuerry) => $"insert into {Config.EmployeeDataTable} values ({clientQuerry.Substring(clientQuerry.IndexOf('#') + 1)});";
         public static string Update(string clientQuerry)
         {
-            string final = $"update {Config.EmployeeDataTable} set ";
+            string final = $"update {Config.EmployeeDataTable} set values (";
             final += clientQuerry.Substring(clientQuerry.IndexOf('#') + 1) + ' ';
             final += clientQuerry.Substring(clientQuerry.IndexOf("where"), clientQuerry.IndexOf('#') - clientQuerry.IndexOf("where")) + ';';
             return final;

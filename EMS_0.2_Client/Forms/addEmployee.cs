@@ -35,14 +35,8 @@ namespace EMS_Client.Forms
         /// </summary>
         private void btnSave_Click(object sender, EventArgs e)
         {
-
-            if (!CheckingDataFields()) return;
-
-            MessageBox.Show("OK");
-
-
             //Format validation
-            if (txtDateOfBirth.Text.Parsable(typeof(DateTime)))
+            if (CheckingDataFields())
             {
                 //Addition of a new employee to DB.
                 List<string> buffer = new List<string>();
@@ -56,19 +50,21 @@ namespace EMS_Client.Forms
                     txtFirstName.Text,
                     txtLastName.Text,
                     txtMiddleName.Text,
-                    txtEmail.Text,
                     "PasswordPlaceholder",
+                    txtEmail.Text,
                     txtGender.Text,
                     txtDateOfBirth.Text,
                     DateTime.Now,        //created at
                     "1",                 //status
                     txtBaseSalary.Text,
                     txtSalaryModifire.Text,
-                    txtPhone.Text
+                    txtPhone.Text,
+                    txtAddres.Text
                 };
 
                 buffer.Clear();
                 Employee emp = Employee.ActivateEmployee(empParts);
+                if (emp == null) { MessageBox.Show("Failed to create employee!"); return; }
                 string querry = Requests.AddEmployee(emp);
 
                 Action AddEmpAction = Requests.BuildAction(this, new EMS_Library.Network.DataPacket(emp.ToString(), 2), buffer);
@@ -76,6 +72,7 @@ namespace EMS_Client.Forms
 
                 //Rescaling image
                 Utility.RescaleImage(employeeImage).Save(Config.FR_Images + $"\\{emp.IntId}{Config.ImageFormat}");
+                if(buffer[0]=="1") MessageBox.Show($"{emp.FName} {emp.LName} saved");
             }
             else MessageBox.Show("Incorrect format!");
         }
@@ -95,7 +92,7 @@ namespace EMS_Client.Forms
                 ,panelSalaryModifire,panelPosition,panelUpload };
             foreach (Panel panel in panelArr)
                 panel.BackColor = Color.FromArgb(0, 126, 249);
-            
+
             foreach (Control control in activeControls)
             {
                 if (control is TextBox) ((TextBox)control).Text = "";
@@ -123,28 +120,25 @@ namespace EMS_Client.Forms
 
         private bool CheckingDataFields()
         {
-            Checks checks = new Checks();
-
-            Dictionary<Panel, bool> test = new Dictionary<Panel, bool>();
-            test.Add(panelID,!checks.IdNumber(txtID.Text));
-            test.Add(panelFname,!checks.StringLength(txtFirstName.Text));
-            test.Add(panelLname, !checks.StringLength(txtLastName.Text));
-            test.Add(panelDate, !checks.ItsDate(txtDateOfBirth.Text));
-            test.Add(panelAddres, !checks.StringLength(txtAddres.Text));
-            test.Add(panelPhone, !checks.IsNumber(txtPhone.Text));
-            test.Add(panelEmail, !checks.IsValidEmail(txtEmail.Text));
-            test.Add(panelBaseSalary, !checks.IsNumber(txtBaseSalary.Text));
-            test.Add(panelSalaryModifire, !checks.IsNumber(txtSalaryModifire.Text));
-            test.Add(panelPosition, !checks.SelectedPosition(positionBox));
-            test.Add(panelUpload, !checks.picture(employeeImage));
-
-            bool res = true;
+            Dictionary<Panel, bool> test = new Dictionary<Panel, bool>() {
+                { panelID, txtID.Text.Parsable(typeof(int)) },
+                { panelFname, txtFirstName.Text.Length > 1 },
+                { panelLname, txtLastName.Text.Length > 1 },
+                { panelDate, txtDateOfBirth.Text.Parsable(typeof(DateTime)) },
+                { panelAddres, txtAddres.Text.Length > 1 },
+                { panelPhone, txtPhone.Text.Parsable(typeof(int)) },
+                { panelEmail, txtEmail.Text.Parsable(typeof(System.Net.Mail.MailAddress)) },
+                { panelBaseSalary, txtBaseSalary.Text.Parsable(typeof(int)) },
+                { panelSalaryModifire, txtSalaryModifire.Text.Parsable(typeof(double)) },
+                { panelPosition, positionBox.Text != "" },
+                { panelUpload, pictureBox1 != null }
+            };
             foreach (KeyValuePair<Panel, bool> item in test)
             {
-                if  (item.Value) {item.Key.BackColor = Color.FromArgb(255, 102, 102); res &= false; }
-                else { item.Key.BackColor = Color.FromArgb(0, 126, 249); res &= true; }
+                if (!item.Value) item.Key.BackColor = Color.FromArgb(255, 102, 102);
+                else { item.Key.BackColor = Color.FromArgb(0, 126, 249); }
             }
-            return res;
+            return !test.Values.Contains(false);
         }
 
         #region Drag Window

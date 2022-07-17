@@ -183,8 +183,7 @@
             "IT_Grunt",
             "Maintenance_Boss",
             "Mechanic",
-            "Worker",
-            "Suplementary"});
+            "Worker"});
             this.positionBox.Location = new System.Drawing.Point(267, 129);
             this.positionBox.Name = "positionBox";
             this.positionBox.Size = new System.Drawing.Size(102, 24);

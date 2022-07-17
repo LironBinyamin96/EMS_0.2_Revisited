@@ -107,7 +107,7 @@ namespace EMS_Client
 
             //Delete all .xlsx files with numeric names (employee logs)
             foreach (string employeeLog in employeeLogs)
-                if (employeeLog.Split("\\").Last().Substring(0,employeeLog.IndexOf('.')+1).Parsable(typeof(int)))
+                if (employeeLog.Split("\\").Last().Substring(0,employeeLog.Split("\\").Last().IndexOf('.')).Parsable(typeof(int)))
                     File.Delete(employeeLog);
 
             File.Delete($"{Config.RootDirectory}\\log.json");

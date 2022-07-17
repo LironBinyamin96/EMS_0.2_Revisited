@@ -7,7 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using EMS_Library;
 using EMS_Library.Network;
+using EMS_Library.MyEmployee;
 
 namespace EMS_Client.Forms
 {
@@ -35,10 +37,15 @@ namespace EMS_Client.Forms
         private void lblUpdatePersonalDetails_MouseDown(object sender, MouseEventArgs e) => Drag(e);
 
         #endregion
-
+        Control[] activeControls;
         public UpdatePersonalDetails()
         {
             InitializeComponent();
+            activeControls = new Control[] {
+                txtID, txtFirstName , txtLastName, txtMiddleName,
+                txtGender,txtDateOfBirth,txtAddres,txtPhone,
+                txtBaseSalary,txtSalaryModifire,txtEmail,positionBox,txtFile,pictureBox1
+            };
         }
         private void UpdatePersonalDetails_Activated(object sender, EventArgs e)
         {
@@ -48,12 +55,38 @@ namespace EMS_Client.Forms
         #region Buttons
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (!CheckingDataFields()) return;
-            MessageBox.Show("OK");
-            //string querry = Requests.UpdateEmployee(
-            //    EMS_ClientMainScreen.employee.ProvideFieldsAndValues(),
-            //    new Dictionary<string, string>() { { "_intId", EMS_ClientMainScreen.employee.IntId.ToString() } }
-            //    );
+            if (CheckingDataFields())
+            {
+                Employee tempEmp = Employee.ActivateEmployee(new object[] {
+                    positionBox.Text,
+                    EMS_ClientMainScreen.employee.IntId,
+                    txtID.Text,
+                    txtFirstName.Text,
+                    txtLastName.Text,
+                    txtMiddleName.Text,
+                    txtEmail.Text,
+                    EMS_ClientMainScreen.employee.Password,
+                    txtGender.Text,
+                    txtDateOfBirth.Text,
+                    EMS_ClientMainScreen.employee.Created,
+                    EMS_ClientMainScreen.employee.EmploymentStatus,
+                    txtBaseSalary.Text,
+                    txtSalaryModifire.Text,
+                    txtPhone.Text,
+                    txtAddres.Text
+                    });
+
+                Employee hold = tempEmp;
+                if(tempEmp.ToString()!=EMS_ClientMainScreen.employee.ToString())
+                {
+                    string querry = Requests.UpdateEmployee(tempEmp.ProvideFieldsAndValues(), new Dictionary<string, string> { { "_intId", EMS_ClientMainScreen.employee.IntId.ToString() } });
+                    List<string> buffer = new List<string>();
+                    Action action = Requests.BuildAction(this, new DataPacket(querry, 3), buffer);
+                    action.Invoke();
+                    MessageBox.Show("Updated: " + buffer[0]);
+                }
+            }
+            else MessageBox.Show("Incorrect format!");
         }
         private void btnSelect_Click(object sender, EventArgs e)
         {
@@ -62,7 +95,7 @@ namespace EMS_Client.Forms
         }
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            var delete = MessageBox.Show("Are you sure?", "", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+            DialogResult delete = MessageBox.Show("Are you sure?", "", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
             if (delete == DialogResult.OK)
             {
                 List<string> buffer = new List<string>();
@@ -89,28 +122,25 @@ namespace EMS_Client.Forms
 
         private bool CheckingDataFields()
         {
-            Checks checks = new Checks();
-
-            Dictionary<Panel, bool> test = new Dictionary<Panel, bool>();
-            test.Add(panelID, !checks.IdNumber(txtID.Text));
-            test.Add(panelFname, !checks.StringLength(txtFirstName.Text));
-            test.Add(panelLname, !checks.StringLength(txtLastName.Text));
-            test.Add(panelDate, !checks.ItsDate(txtDateOfBirth.Text));
-            test.Add(panelAddres, !checks.StringLength(txtAddres.Text));
-            test.Add(panelPhone, !checks.IsNumber(txtPhone.Text));
-            test.Add(panelEmail, !checks.IsValidEmail(txtEmail.Text));
-            test.Add(panelBaseSalary, !checks.IsNumber(txtBaseSalary.Text));
-            test.Add(panelSalaryModifire, !checks.IsNumber(txtSalaryModifire.Text));
-            test.Add(panelPosition, !checks.SelectedPosition(positionBox));
-           // test.Add(panelUpload, !checks.picture(employeeImage));
-
-            int countTrue = 0;
+            Dictionary<Panel, bool> test = new Dictionary<Panel, bool>() {
+                { panelID, txtID.Text.Parsable(typeof(int)) },
+                { panelFname, txtFirstName.Text.Length > 1 },
+                { panelLname, txtLastName.Text.Length > 1 },
+                { panelDate, txtDateOfBirth.Text.Parsable(typeof(DateTime)) },
+                { panelAddres, txtAddres.Text.Length > 1 },
+                { panelPhone, txtPhone.Text.Parsable(typeof(int)) },
+                { panelEmail, txtEmail.Text.Parsable(typeof(System.Net.Mail.MailAddress)) },
+                { panelBaseSalary, txtBaseSalary.Text.Parsable(typeof(int)) },
+                { panelSalaryModifire, txtSalaryModifire.Text.Parsable(typeof(double)) },
+                { panelPosition, positionBox.Text != "" },
+                { panelUpload, pictureBox1 != null }
+            };
             foreach (KeyValuePair<Panel, bool> item in test)
             {
-                if (item.Value) item.Key.BackColor = Color.FromArgb(255, 102, 102);
-                else { item.Key.BackColor = Color.FromArgb(0, 126, 249); countTrue++; }
+                if (!item.Value) item.Key.BackColor = Color.FromArgb(255, 102, 102);
+                else { item.Key.BackColor = Color.FromArgb(0, 126, 249); }
             }
-            return countTrue == 10;
+            return !test.Values.Contains(false);
         }
 
         #region Supplimental
