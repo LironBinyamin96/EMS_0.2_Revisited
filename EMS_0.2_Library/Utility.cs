@@ -94,17 +94,18 @@ namespace EMS_Library
         /// <typeparam name="T"></typeparam>
         /// <param name="collection"></param>
         /// <returns></returns>
-        public static bool IsEmpty<T>(this IEnumerable<T> collection)
+        public static bool IsEmpty<T>(this IEnumerable<T> collection, int interval = 1)
         {
-            if(collection == null || collection.Count()==0) return true;
-            if(default(T) == null) return collection.Contains(default);
+            if (collection == null || collection.Count() == 0) return true;
+            if (default(T) == null) return collection.Contains(default);
             byte[] def = default(T).ObjectToByteArray();
-            foreach (T item in collection)
-            { 
-                byte[] data = item.ObjectToByteArray();
+
+            for (int i = 0; i < collection.Count(); i += interval)
+            {
+                byte[] data = collection.ElementAt(i).ObjectToByteArray();
                 bool check = true;
-                for (int i = 0; i < data.Length; i++)
-                    if(data[i] != def[i]) return false;
+                for (int j = 0; j < data.Length; j++)
+                    if (data[j] != def[j]) return false;
             }
             return true;
         }

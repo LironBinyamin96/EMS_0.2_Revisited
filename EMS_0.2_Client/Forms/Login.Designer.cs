@@ -28,11 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Login));
             this.txtIntId = new System.Windows.Forms.TextBox();
             this.txtPassword = new System.Windows.Forms.TextBox();
             this.btnLogin = new System.Windows.Forms.Button();
             this.lblProgrammName = new System.Windows.Forms.Label();
             this.lblExit = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // txtIntId
@@ -69,7 +72,7 @@
             this.lblProgrammName.BackColor = System.Drawing.Color.Transparent;
             this.lblProgrammName.Font = new System.Drawing.Font("Yu Gothic", 20.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
             this.lblProgrammName.ForeColor = System.Drawing.Color.LightCyan;
-            this.lblProgrammName.Location = new System.Drawing.Point(12, 9);
+            this.lblProgrammName.Location = new System.Drawing.Point(12, 274);
             this.lblProgrammName.Name = "lblProgrammName";
             this.lblProgrammName.Size = new System.Drawing.Size(246, 117);
             this.lblProgrammName.TabIndex = 3;
@@ -89,6 +92,17 @@
             this.lblExit.Text = "X";
             this.lblExit.Click += new System.EventHandler(this.lblExit_Click);
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(12, 9);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(208, 161);
+            this.pictureBox1.TabIndex = 5;
+            this.pictureBox1.TabStop = false;
+            // 
             // Login
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -98,6 +112,7 @@
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(698, 409);
             this.ControlBox = false;
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.lblExit);
             this.Controls.Add(this.lblProgrammName);
             this.Controls.Add(this.btnLogin);
@@ -108,6 +123,7 @@
             this.Name = "Login";
             this.Text = "Login";
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Login_MouseDown);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -120,5 +136,6 @@
         private Button btnLogin;
         private Label lblProgrammName;
         private Label lblExit;
+        private PictureBox pictureBox1;
     }
 }

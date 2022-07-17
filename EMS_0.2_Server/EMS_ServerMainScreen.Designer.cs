@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EMS_ServerMainScreen));
             this.panelLeft = new System.Windows.Forms.Panel();
             this.centerPic = new System.Windows.Forms.PictureBox();
             this.btnSimExit = new System.Windows.Forms.Button();
@@ -60,10 +59,10 @@
             // centerPic
             // 
             this.centerPic.Dock = System.Windows.Forms.DockStyle.Top;
-            this.centerPic.Image = ((System.Drawing.Image)(resources.GetObject("centerPic.Image")));
+            this.centerPic.Image = global::EMS_0._2_Server.Properties.Resources.serverLogo;
             this.centerPic.Location = new System.Drawing.Point(0, 0);
             this.centerPic.Name = "centerPic";
-            this.centerPic.Size = new System.Drawing.Size(185, 159);
+            this.centerPic.Size = new System.Drawing.Size(185, 183);
             this.centerPic.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.centerPic.TabIndex = 1;
             this.centerPic.TabStop = false;

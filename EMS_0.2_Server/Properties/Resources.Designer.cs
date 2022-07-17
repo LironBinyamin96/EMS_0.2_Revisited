@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace EMS_Server.Properties {
+namespace EMS_0._2_Server.Properties {
     using System;
     
     
@@ -66,6 +66,16 @@ namespace EMS_Server.Properties {
         internal static System.Drawing.Bitmap AntiMatterSphere {
             get {
                 object obj = ResourceManager.GetObject("AntiMatterSphere", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap serverLogo {
+            get {
+                object obj = ResourceManager.GetObject("serverLogo", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

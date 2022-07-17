@@ -46,7 +46,7 @@ namespace EMS_Client
             byte[] buffer = new byte[2000000];
             Action action = Requests.BuildAction(this, new EMS_Library.Network.DataPacket($"get image #{CurEmployee.IntId}", 6), buffer, false);
             action.Invoke();
-            if (!buffer.IsEmpty())
+            if (!buffer.IsEmpty(10))
                 userPicture.Image = Image.FromStream(new MemoryStream(buffer));
         }
 
