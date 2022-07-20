@@ -90,8 +90,16 @@ namespace EMS_Library.MyEmployee.HoursLog
                     {
                             day.Date.ToString().Substring(0,10),
                             day.Date.DayOfWeek.ToString(),
+
                             day.Entries[0].Start.TimeOfDay.ToString(),
-                            day.Entries.Last().End.TimeOfDay.ToString(),
+                            day.Entries[0].End.TimeOfDay.ToString(),
+
+                            day.Entries.Length>1?day.Entries[1].Start.TimeOfDay.ToString():"",
+                            day.Entries.Length>1?day.Entries[1].End.TimeOfDay.ToString():"",
+
+                            day.Entries.Length>2?day.Entries.Last().Start.TimeOfDay.ToString():"",
+                            day.Entries.Length>2?day.Entries.Last().End.TimeOfDay.ToString():"",
+
                             day.Total.ToString()
                     };
             return Data;

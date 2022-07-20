@@ -52,7 +52,7 @@ namespace EMS_Client.Forms
             {
                 string[][] tmpGetAttendanceTable = log.GetHoursLogTableStructure();
                 foreach (string[] item in tmpGetAttendanceTable)
-                    GridViewAttrndance.Rows.Add(item[0], item[1], item[2], item[3], item[4]);
+                    GridViewAttrndance.Rows.Add(item);
             }
         }
         private void button1_Click(object sender, EventArgs e)

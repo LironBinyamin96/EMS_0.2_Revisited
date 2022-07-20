@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Net;
 using System.Net.Mail;
-
+using EMS_Library;
 
 namespace EMS_Client.Forms
 {
@@ -101,8 +101,8 @@ namespace EMS_Client.Forms
             Checks checks = new Checks();
 
             Dictionary<Panel, bool> test = new Dictionary<Panel, bool>();
-            test.Add(panelTo, !checks.IsValidEmail(txtTo.Text));
-            test.Add(panelSubject, !checks.StringLength(txtSubject.Text));;
+            test.Add(panelTo, txtTo.Text.Parsable(typeof(MailAddress)));
+            test.Add(panelSubject, txtSubject.Text.Length>2);
 
             bool res = true;
             foreach (KeyValuePair<Panel, bool> item in test)
