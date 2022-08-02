@@ -22,7 +22,6 @@ namespace EMS_Library.Network
         /// <param name="stream"></param>
         public DataPacket(NetworkStream stream, [System.Runtime.CompilerServices.CallerMemberName] string memberName = "")
         {
-
             try
             {
                 byte[] temp = new byte[]{

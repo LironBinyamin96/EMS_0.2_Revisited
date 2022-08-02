@@ -15,7 +15,7 @@ namespace EMS_Server
     public partial class EMS_ServerMainScreen : Form
     {
         #region Variables
-        TcpListener listener = new TcpListener(System.Net.IPAddress.Parse(EMS_Library.Config.ServerIP), EMS_Library.Config.ServerPort);
+        TcpListener listener = null;
         TcpClient client = null;
         Task FacialRecognition;
         bool scheduleForceExits = true;
@@ -51,6 +51,8 @@ namespace EMS_Server
         private void EMS_ServerMainScreen_Load(object sender, EventArgs e)
         {
             SQLServerLookup.Start();
+            ServerAddressResolver.ServerIP(true);
+            listener= new TcpListener(System.Net.IPAddress.Parse(EMS_Library.Config.ServerIP), EMS_Library.Config.ServerPort);
             listener.Start();
             listeningTask.Start();
             TestingTask.Start();
@@ -165,7 +167,7 @@ namespace EMS_Server
                 WriteToServerConsole("Server started");
                 while (true)
                 {
-                    WriteToServerConsole($"Listening...");
+                    WriteToServerConsole($"Listening on {EMS_Library.Config.ServerIP}:{EMS_Library.Config.ServerPort}");
                     client = listener.AcceptTcpClient();
                     WriteToServerConsole($"client: " + client.Client.RemoteEndPoint);
                     listnerTimer.Start();

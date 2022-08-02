@@ -42,6 +42,7 @@ namespace EMS_Client
         {
             Login login = new Login();
             PrimaryForms.Push(login);
+            EMS_Library.Network.ServerAddressResolver.ServerIP(false);
             login.ShowDialog();
             byte[] buffer = new byte[2000000];
             Action action = Requests.BuildAction(this, new EMS_Library.Network.DataPacket($"get image #{CurEmployee.IntId}", 6), buffer, false);

@@ -149,5 +149,11 @@ namespace EMS_Library
                 if(!item.Parsable(type)) return false;
             return true;
         }
+
+        public static void DebugPrint<T>(this IEnumerable<T> collection)
+        {
+            foreach (T item in collection)
+                Console.WriteLine(item.ToString());
+        }
     }
 }

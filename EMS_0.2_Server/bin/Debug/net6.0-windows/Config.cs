@@ -1,10 +1,12 @@
-﻿namespace EMS_Library
+﻿
+namespace EMS_Library
 {
     public static class Config
     {
         #region Server_Config
-        public const string ServerIP = "127.0.0.1";
+        
         public const int ServerPort = 13000;
+        public static string ServerIP = default;
         public static string RootDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\EMS_Root";
         public static string FR_Location = RootDirectory + "\\FR_Boot.cmd";
         public static string FR_Images = RootDirectory + "\\Images";
