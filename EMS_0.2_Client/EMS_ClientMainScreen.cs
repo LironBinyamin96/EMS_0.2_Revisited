@@ -40,6 +40,8 @@ namespace EMS_Client
         }
         private void EMS_ClientMainScreen_Load(object sender, EventArgs e)
         {
+            if(!Directory.Exists(Config.RootDirectory)) //Create working directory if it doesn't exist
+                Directory.CreateDirectory(Config.RootDirectory);
             Action serverLookup = () =>
             {
                 EMS_Library.Network.ServerAddressResolver.ServerIP(false);
@@ -55,14 +57,72 @@ namespace EMS_Client
             login.ShowDialog();
             if (PrimaryForms.Count>0) //App wasn't closed at login screen
             {
-                byte[] buffer = new byte[2000000];
-                Action action = Requests.BuildAction(this, new EMS_Library.Network.DataPacket($"get image #{CurEmployee.IntId}", 6), buffer, false);
-                action.Invoke();
+                EMS_Library.Network.DataPacket packet = new EMS_Library.Network.DataPacket($"get image #{CurEmployee.IntId}", 6);
+                byte[] buffer = Requests.GetImage(packet);
                 if (!buffer.IsEmpty(10))
+                {
+                    /*
+                    PixelQueueOverflow overflow = new PixelQueueOverflow();
+                    for (int i = 0; i < buffer.Length;)
+                    {
+                        
+                        overflow.Add(new byte[] { buffer[i++], buffer[i++], buffer[i++] });
+                        if (overflow.Empty) break;
+                    }
+                    Array.Resize(ref buffer, packet.ByteData.Length);
+                    */
+                    File.WriteAllBytes(Config.RootDirectory + "\\test.jpg", buffer);
+                    File.WriteAllBytes(Config.RootDirectory + "\\test.txt", buffer);
                     userPicture.Image = Image.FromStream(new MemoryStream(buffer));
+                }
+
             }
         }
+        class PixelQueueOverflow
+        {
+            public int counter = 0;
+            bool empty = true;
+            public bool Empty => empty && queue.Count > 100;
+           public Queue<byte[]> queue = new Queue<byte[]>();
+            public void Add(byte[] pixel)
+            {
+                if (pixel.Length != 3) throw new ArgumentException("Needs be 3 bytes per pixel!");
+                if (queue.Count >= 100)
+                {
+                    if (!pixel.IsEmpty()) empty = false;
+                    else
+                        if (!queue.Dequeue().IsEmpty()) empty = IsEmpty();
+                    queue.Enqueue(pixel);
+                }
+                else
+                {
+                    empty = empty && pixel.IsEmpty();
+                    queue.Enqueue(pixel);
 
+                }
+                counter++;
+                Console.WriteLine($"Pixel: [{pixel[0]},{pixel[1]},{pixel[2]}]");
+            }
+            public bool IsEmpty()
+            {
+                bool check = true;
+                foreach (byte[] pixel in queue)
+                    check &= pixel.IsEmpty();
+                return check;
+            }
+            public byte[] ToArray()
+            {
+                byte[] result = new byte[queue.Count*3];
+                int i = 0;
+                foreach(byte[] pixel in queue)
+                {
+                    result[i++] = pixel[0];
+                    result[i++] = pixel[1];
+                    result[i++] = pixel[2];
+                }
+                return result;
+            }
+        }
 
 
         #region Buttons

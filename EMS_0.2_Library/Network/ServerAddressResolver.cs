@@ -11,11 +11,18 @@ namespace EMS_Library.Network
     public class ServerAddressResolver
     {
         public static bool LookedUp=false;
+        /// <summary>
+        /// Mothod for resolving IP addresses for both client and server.
+        /// </summary>
+        /// <param name="server">Indicates if method located at server side</param>
+        /// <exception cref="Exception">Could not find a server</exception>
         static public void ServerIP(bool server)
         {
-            if (Config.ServerIP != default) return;
-            if (server) //My IP lookup
+            if (Config.ServerIP != default) return; //If address is known=>skip.
+
+            if (server) //Am i a server?
             {
+                //Figure out what is my IP address
                 foreach (NetworkInterface netInterface in NetworkInterface.GetAllNetworkInterfaces())
                 {
                     Console.WriteLine("Name: " + netInterface.Name);
@@ -37,8 +44,9 @@ namespace EMS_Library.Network
                     if (temp != null) Config.ServerIP = temp.Address.ToString();
                 }
             }
-            else //Server lookup
+            else //I'm a client!
             {
+                //Look for the server
                 for (int i = 1; i < 256; i++)
                 {
                     Console.WriteLine($"Trying: 192.168.{i}.X");
@@ -71,7 +79,7 @@ namespace EMS_Library.Network
                         }
                     }
                 }
-                throw new TimeoutException("Could not find the server in local network");
+                throw new Exception("Could not find the server in local network");
             }
         }
     }
