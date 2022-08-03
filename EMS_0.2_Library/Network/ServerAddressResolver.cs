@@ -51,7 +51,7 @@ namespace EMS_Library.Network
                             WaitHandle wh = ar.AsyncWaitHandle;
                             try
                             {
-                                if (!ar.AsyncWaitHandle.WaitOne(TimeSpan.FromMilliseconds(5000), false))
+                                if (!ar.AsyncWaitHandle.WaitOne(TimeSpan.FromMilliseconds(5), false))
                                 {
                                     tcp.Close();
                                     throw new TimeoutException();
@@ -63,9 +63,11 @@ namespace EMS_Library.Network
                                 if (responce.StringData == "Ping")
                                     Config.ServerIP = $"192.168.{i}.{j}";
                                 tcp.EndConnect(ar);
+                                wh.Close();
+                                return;
                             }
                             catch { }
-                            wh.Close();
+                            
                         }
 
                     }
