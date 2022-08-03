@@ -10,12 +10,12 @@ namespace EMS_Library.Network
 {
     public class ServerAddressResolver
     {
+        public static bool LookedUp=false;
         static public void ServerIP(bool server)
         {
             if (Config.ServerIP != default) return;
-            if (server)
+            if (server) //My IP lookup
             {
-                //My IP lookup
                 foreach (NetworkInterface netInterface in NetworkInterface.GetAllNetworkInterfaces())
                 {
                     Console.WriteLine("Name: " + netInterface.Name);
@@ -37,21 +37,21 @@ namespace EMS_Library.Network
                     if (temp != null) Config.ServerIP = temp.Address.ToString();
                 }
             }
-            else
+            else //Server lookup
             {
                 for (int i = 1; i < 256; i++)
                 {
+                    Console.WriteLine($"Trying: 192.168.{i}.X");
                     for (int j = 0; j < 256; j++)
                     {
                         string ip = $"192.168.{i}.{j}";
-                        Console.WriteLine("Attempting: " + ip);
                         using (TcpClient tcp = new TcpClient())
                         {
                             IAsyncResult ar = tcp.BeginConnect(ip, Config.ServerPort, null, null);
                             WaitHandle wh = ar.AsyncWaitHandle;
                             try
                             {
-                                if (!ar.AsyncWaitHandle.WaitOne(TimeSpan.FromMilliseconds(5), false))
+                                if (!ar.AsyncWaitHandle.WaitOne(TimeSpan.FromMilliseconds(10), false))
                                 {
                                     tcp.Close();
                                     throw new TimeoutException();
@@ -64,14 +64,14 @@ namespace EMS_Library.Network
                                     Config.ServerIP = $"192.168.{i}.{j}";
                                 tcp.EndConnect(ar);
                                 wh.Close();
+                                LookedUp = true;
                                 return;
                             }
                             catch { }
-                            
                         }
-
                     }
                 }
+                throw new TimeoutException("Could not find the server in local network");
             }
         }
     }

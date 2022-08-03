@@ -9,7 +9,7 @@ namespace EMS_Client
     {
         #region Variables
         public static Stack<Form> PrimaryForms = new Stack<Form>();
-        public static EMS_Library.MyEmployee.Employee CurEmployee;
+        public static Employee CurEmployee;
         public static Employee employee;
         private Form activeForm; // משתנה עזר ששומר את החלון הנוכחי
         #endregion
@@ -40,16 +40,30 @@ namespace EMS_Client
         }
         private void EMS_ClientMainScreen_Load(object sender, EventArgs e)
         {
+            Action serverLookup = () =>
+            {
+                EMS_Library.Network.ServerAddressResolver.ServerIP(false);
+                (Array.Find(PrimaryForms.ToArray(), x=>x is EMS_ClientMainScreen) as EMS_ClientMainScreen).Invoke(()=>PrimaryForms.Pop().Close());
+                if (EMS_Library.Network.ServerAddressResolver.LookedUp) //Message reminding to update ServerIp configurations 
+                    MessageBox.Show($"Had to serach for the server!\nServer ip is {Config.ServerIP}\nPlease update client config files to reduce boot time");
+            };
+            StandbyScreen standby = new StandbyScreen(serverLookup);
+            standby.ShowDialog();
+
             Login login = new Login();
             PrimaryForms.Push(login);
-            EMS_Library.Network.ServerAddressResolver.ServerIP(false);
             login.ShowDialog();
-            byte[] buffer = new byte[2000000];
-            Action action = Requests.BuildAction(this, new EMS_Library.Network.DataPacket($"get image #{CurEmployee.IntId}", 6), buffer, false);
-            action.Invoke();
-            if (!buffer.IsEmpty(10))
-                userPicture.Image = Image.FromStream(new MemoryStream(buffer));
+            if (PrimaryForms.Count>0) //App wasn't closed at login screen
+            {
+                byte[] buffer = new byte[2000000];
+                Action action = Requests.BuildAction(this, new EMS_Library.Network.DataPacket($"get image #{CurEmployee.IntId}", 6), buffer, false);
+                action.Invoke();
+                if (!buffer.IsEmpty(10))
+                    userPicture.Image = Image.FromStream(new MemoryStream(buffer));
+            }
         }
+
+
 
         #region Buttons
         private void changeButton(Button x, Form form, object sender)
