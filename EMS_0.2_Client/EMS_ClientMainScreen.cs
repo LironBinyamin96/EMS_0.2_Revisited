@@ -8,15 +8,12 @@ namespace EMS_Client
     public partial class EMS_ClientMainScreen : Form
     {
         #region Variables
-        public static Stack<Form> PrimaryForms = new Stack<Form>();
-        public static Employee CurEmployee;
-        public static Employee employee;
+        public static Stack<Form> PrimaryForms = new Stack<Form>(); //Stack for storing all primary forms.
+        public static Employee CurEmployee; //User data.
+        public static Employee employee; //Temporary storage for employee data.
         private Form activeForm; // משתנה עזר ששומר את החלון הנוכחי
         #endregion
 
-        // סימון הכפתורים
-        [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
-        private static extern IntPtr CreateRoundRectRgn(int nLeftRect, int nTopRect, int nRightRect, int nBottomRect, int nWidthEllipse, int nHeightEllipse);
         public EMS_ClientMainScreen()
         {
             InitializeComponent();
@@ -24,28 +21,18 @@ namespace EMS_Client
             // סימון הכפתורים
             Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 25, 25));
         }
-        public void openChildForm(Form child, object btnSender)
-        {
-            if (activeForm != null)
-                activeForm.Close();
 
-            activeForm = child;
-            child.TopLevel = false;
-            child.FormBorderStyle = FormBorderStyle.None;
-            child.Dock = DockStyle.Fill;
-            this.panelDesktop.Controls.Add(child);
-            this.panelDesktop.Tag = child;
-            child.BringToFront();
-            child.Show();
-        }
+        /// <summary>
+        /// Method called on form loading
+        /// </summary>
         private void EMS_ClientMainScreen_Load(object sender, EventArgs e)
         {
-            if(!Directory.Exists(Config.RootDirectory)) //Create working directory if it doesn't exist
+            if (!Directory.Exists(Config.RootDirectory)) //Create working directory if it doesn't exist
                 Directory.CreateDirectory(Config.RootDirectory);
             Action serverLookup = () =>
             {
                 EMS_Library.Network.ServerAddressResolver.ServerIP(false);
-                (Array.Find(PrimaryForms.ToArray(), x=>x is EMS_ClientMainScreen) as EMS_ClientMainScreen).Invoke(()=>PrimaryForms.Pop().Close());
+                (Array.Find(PrimaryForms.ToArray(), x => x is EMS_ClientMainScreen) as EMS_ClientMainScreen).Invoke(() => PrimaryForms.Pop().Close());
                 if (EMS_Library.Network.ServerAddressResolver.LookedUp) //Message reminding to update ServerIp configurations 
                     MessageBox.Show($"Had to serach for the server!\nServer ip is {Config.ServerIP}\nPlease update client config files to reduce boot time");
             };
@@ -55,7 +42,7 @@ namespace EMS_Client
             Login login = new Login();
             PrimaryForms.Push(login);
             login.ShowDialog();
-            if (PrimaryForms.Count>0) //App wasn't closed at login screen
+            if (PrimaryForms.Count > 0) //App wasn't closed at login screen
             {
                 EMS_Library.Network.DataPacket packet = new EMS_Library.Network.DataPacket($"get image #{CurEmployee.IntId}", 6);
                 byte[] buffer = Requests.GetImage(packet);
@@ -78,54 +65,26 @@ namespace EMS_Client
 
             }
         }
-        class PixelQueueOverflow
+
+        #region Subscreens
+        // סימון הכפתורים
+        [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
+        private static extern IntPtr CreateRoundRectRgn(int nLeftRect, int nTopRect, int nRightRect, int nBottomRect, int nWidthEllipse, int nHeightEllipse);
+
+        public void openChildForm(Form child, object btnSender)
         {
-            public int counter = 0;
-            bool empty = true;
-            public bool Empty => empty && queue.Count > 100;
-           public Queue<byte[]> queue = new Queue<byte[]>();
-            public void Add(byte[] pixel)
-            {
-                if (pixel.Length != 3) throw new ArgumentException("Needs be 3 bytes per pixel!");
-                if (queue.Count >= 100)
-                {
-                    if (!pixel.IsEmpty()) empty = false;
-                    else
-                        if (!queue.Dequeue().IsEmpty()) empty = IsEmpty();
-                    queue.Enqueue(pixel);
-                }
-                else
-                {
-                    empty = empty && pixel.IsEmpty();
-                    queue.Enqueue(pixel);
+            if (activeForm != null)
+                activeForm.Close();
 
-                }
-                counter++;
-                Console.WriteLine($"Pixel: [{pixel[0]},{pixel[1]},{pixel[2]}]");
-            }
-            public bool IsEmpty()
-            {
-                bool check = true;
-                foreach (byte[] pixel in queue)
-                    check &= pixel.IsEmpty();
-                return check;
-            }
-            public byte[] ToArray()
-            {
-                byte[] result = new byte[queue.Count*3];
-                int i = 0;
-                foreach(byte[] pixel in queue)
-                {
-                    result[i++] = pixel[0];
-                    result[i++] = pixel[1];
-                    result[i++] = pixel[2];
-                }
-                return result;
-            }
+            activeForm = child;
+            child.TopLevel = false;
+            child.FormBorderStyle = FormBorderStyle.None;
+            child.Dock = DockStyle.Fill;
+            this.panelDesktop.Controls.Add(child);
+            this.panelDesktop.Tag = child;
+            child.BringToFront();
+            child.Show();
         }
-
-
-        #region Buttons
         private void changeButton(Button x, Form form, object sender)
         {
             panelStyle.Height = x.Height;
@@ -136,14 +95,20 @@ namespace EMS_Client
             if (panelDesktop.BackgroundImage != null)
                 panelDesktop.BackgroundImage = null;
         }
+
+        private void btnEditingEmployee_Leave(object sender, EventArgs e) => btnEditingEmployee.BackColor = Color.FromArgb(24, 30, 54);
         private void btnEditingEmployee_Click(object sender, EventArgs e) => changeButton(btnEditingEmployee, new EditingEmployee(), sender);
         private void btnMail_Click(object sender, EventArgs e) => changeButton(btnMail, new Mail(), sender);
         private void btnData_Click(object sender, EventArgs e) => changeButton(btnData, new GeneralData(), sender);
         private void btnAttendence_Click(object sender, EventArgs e) => changeButton(btnAttendence, new AttendanceTable(), sender);
-        private void btnEditingEmployee_Leave(object sender, EventArgs e) => btnEditingEmployee.BackColor = Color.FromArgb(24, 30, 54);
         private void btnMail_Leave(object sender, EventArgs e) => btnMail.BackColor = Color.FromArgb(24, 30, 54);
         private void btnData_Leave(object sender, EventArgs e) => btnData.BackColor = Color.FromArgb(24, 30, 54);
         private void btnAttendence_Leave(object sender, EventArgs e) => btnAttendence.BackColor = Color.FromArgb(24, 30, 54);
+
+        #endregion
+
+        #region Buttons
+        //Methods called by buttonPress events
         private void btnExit_Click_1(object sender, EventArgs e) => Close();
         #endregion
 
@@ -190,7 +155,5 @@ namespace EMS_Client
 
         }
         #endregion
-
-
     }
 }

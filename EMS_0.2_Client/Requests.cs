@@ -48,6 +48,7 @@ namespace EMS_Client
         public static string Delete(int _intId) => "delete employee #" + _intId;
         public static string GetHourLogs(int _intId, int year, int month) => $"get log #{_intId}, {year}, {month}";
 
+
         /// <summary>
         /// Builds an lambda method for retrieving data from the server. When invoked action will fill the buffer with the data.
         /// </summary>

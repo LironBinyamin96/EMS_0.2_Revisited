@@ -13,7 +13,7 @@ namespace EMS_Library.MyEmployee
     /// <summary>
     /// Base class for all employees
     /// </summary>
-    public class Employee
+    public abstract class Employee
     {
         #region Employee Fields
         private readonly Type _type;
@@ -57,9 +57,9 @@ namespace EMS_Library.MyEmployee
             _type = type;
             _intId = intId;
             _stateId = stateID;
-            _fName = ToUpperFirst(fName).Replace(" ", "_");
-            _lName = ToUpperFirst(lName).Replace(" ", "_");
-            _mName = ToUpperFirst(mName).Replace(" ", "_");
+            _fName = fName.CapitalizeFirst().Replace(" ", "_");
+            _lName = lName.CapitalizeFirst().Replace(" ", "_");
+            _mName = mName.CapitalizeFirst().Replace(" ", "_");
             _password = password;
             _email = email;
             _gender = gender.Replace(" ", "_");
@@ -113,18 +113,11 @@ namespace EMS_Library.MyEmployee
             _address = hold[15];
         }
 
-        public static string ToUpperFirst(string s)
-        {
-            if (string.IsNullOrEmpty(s)) throw new ArgumentNullException("ToUpperCase: string was empty or null");
-            StringBuilder sb = new StringBuilder(s);
-            if (sb[0] > 'a' && sb[0] < 'z')
-                sb[0] = (char)(sb[0] - 32);
-            return sb.ToString();
-        }
         /// <summary>
-        /// Gets string representing Enployee
+        /// Creates an instance of Employee of specified subtype
         /// </summary>
-        /// <returns>type name, internal id, first name, last name.</returns>
+        /// <param name="data"></param>
+        /// <returns></returns>
         public static Employee ActivateEmployee(object[] data)
         {
             string[] hold = Array.ConvertAll(data, x => x.ToString());

@@ -30,9 +30,7 @@ namespace EMS_Client.Forms
         }
 
         #region Buttons
-        /// <summary>
-        /// Saving data
-        /// </summary>
+        //Methods called by Click events.
         private void btnSave_Click(object sender, EventArgs e)
         {
             //Format validation
@@ -76,15 +74,6 @@ namespace EMS_Client.Forms
             }
             else MessageBox.Show("Incorrect format!");
         }
-
-        /// <summary>
-        /// Close button
-        /// </summary>
-        private void btnX_Click(object sender, EventArgs e) => Close();
-
-        /// <summary>
-        /// Clear all fields
-        /// </summary>
         private void btnClear_Click(object sender, EventArgs e)
         {
             // החזרת הפאנלים לצבע כחול
@@ -100,9 +89,6 @@ namespace EMS_Client.Forms
                 else if (control is PictureBox) ((PictureBox)control).Image = null;
             }
         }
-        /// <summary>
-        /// Import picture
-        /// </summary>
         private void btnUpload_Click(object sender, EventArgs e)
         {
             OpenFileDialog a = new OpenFileDialog();
@@ -116,8 +102,12 @@ namespace EMS_Client.Forms
             }
             catch { MessageBox.Show("Failed"); }
         }
+        private void btnX_Click(object sender, EventArgs e) => Close();
         #endregion
 
+        /// <summary>
+        /// Checks validity of data in the text fields
+        /// </summary>
         private bool CheckingDataFields()
         {
             Dictionary<Panel, bool> test = new Dictionary<Panel, bool>() {

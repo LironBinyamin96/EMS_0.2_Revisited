@@ -155,5 +155,13 @@ namespace EMS_Library
             foreach (T item in collection)
                 Console.WriteLine(item.ToString());
         }
+        public static string CapitalizeFirst(this string s)
+        {
+            if (string.IsNullOrEmpty(s)) throw new ArgumentNullException("ToUpperCase: string was empty or null");
+            StringBuilder sb = new StringBuilder(s);
+            if (sb[0] > 'a' && sb[0] < 'z')
+                sb[0] = (char)(sb[0] - 32);
+            return sb.ToString();
+        }
     }
 }

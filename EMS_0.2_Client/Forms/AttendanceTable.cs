@@ -35,6 +35,7 @@ namespace EMS_Client.Forms
         }
 
         #region Buttons
+        //Methods called by Click events
         private void btnSelect_Click(object sender, EventArgs e)
         {
             selectEmployee select_Employee = new selectEmployee(this);
@@ -70,11 +71,18 @@ namespace EMS_Client.Forms
         #endregion
 
         #region Supplemental
+        /// <summary>
+        /// Fills appropriate fields with chosen employee data.
+        /// </summary>
         public void Fill()
         {
             txtName.Text = EMS_ClientMainScreen.employee.LName.ToString() + " " + EMS_ClientMainScreen.employee.FName.ToString();
             txtID.Text = EMS_ClientMainScreen.employee.IntId.ToString();
         }
+
+        /// <summary>
+        /// Builds hour logs for chosen employee
+        /// </summary>
         private void BuildLog()
         {
             List<string> buffer = new List<string>();
