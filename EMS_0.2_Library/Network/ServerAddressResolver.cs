@@ -68,7 +68,7 @@ namespace EMS_Library.Network
                                 DataPacket ping = new DataPacket("Ping", 255);
                                 stream.Write(ping.Write(), 0, ping.GetTotalSize());
                                 DataPacket responce = new DataPacket(stream);
-                                if (responce.StringData == "Ping")
+                                if (responce.StringData.ToLower() == "ping")
                                     Config.ServerIP = $"192.168.{i}.{j}";
                                 tcp.EndConnect(ar);
                                 wh.Close();

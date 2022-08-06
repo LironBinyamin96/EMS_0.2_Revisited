@@ -57,7 +57,7 @@ namespace EMS_Library.Network
         /// <param name="header"></param>
         /// <param name="data"></param>
         /// <exception cref="Exception"></exception>
-        public DataPacket(string data, byte func, [System.Runtime.CompilerServices.CallerMemberName] string memberName = "")
+        public DataPacket(string data, byte func=255, [System.Runtime.CompilerServices.CallerMemberName] string memberName = "")
         {
             if (data.Length > Math.Pow(255, 4) - 20) throw new Exception("Data is too long! 4294967296 max! Length was " + data.Length);
             if (data.Length == 0) data = " ";
@@ -76,7 +76,7 @@ namespace EMS_Library.Network
             _byteData = data.ByteData;
             StringData = data.StringData;
         }
-        public DataPacket(byte[] data, byte func, [System.Runtime.CompilerServices.CallerMemberName] string memberName = "")
+        public DataPacket(byte[] data, byte func=255, [System.Runtime.CompilerServices.CallerMemberName] string memberName = "")
         {
             _header = new DataPacketHeader(data.Length, func);
             _byteData = data;
@@ -103,7 +103,7 @@ namespace EMS_Library.Network
 
         public int GetTotalSize() => _header.DataIntLength + _header.HeaderSize;
         public override string ToString() 
-        { 
+        {
             if(StringData.Length<1000) return $"Header: [{_header}], Data: [{StringData}]";
             else return $"Header: [{_header}], Data lenght: [{StringData.Length}]";
         }

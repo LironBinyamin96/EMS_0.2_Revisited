@@ -16,7 +16,7 @@ namespace EMS_Client.Forms
     public partial class selectEmployee : Form
     {
         #region Variables
-        List<string> buffer = new List<string>();
+        string[] buffer;
         Form callerForm;
         #endregion
 
@@ -59,9 +59,7 @@ namespace EMS_Client.Forms
                 /*type*/
                 case 3: { querry = Requests.SelectEmployee(new Dictionary<string, string>() { { "type", $"'{txtSaerch.Text}'" } }); break; }
             }
-
-            Action action = Requests.BuildAction(this, new DataPacket(querry, 1), buffer, false);
-            action.Invoke();
+            buffer = Requests.RequestFromServer(querry,1);
             employeesTable.Rows.Clear();
             employeesTable.Columns.Clear();
             employeesTable.Columns.AddRange(new DataGridViewColumn[] 
@@ -98,11 +96,8 @@ namespace EMS_Client.Forms
         {
             if (EMS_Library.Config.DevelopmentMode)
             {
-                
-                
                 string querry = Requests.SelectEmployee();
-                Action action = Requests.BuildAction(this, new DataPacket(querry, 1), buffer, false);
-                action.Invoke();
+                buffer = Requests.RequestFromServer(querry, 1);
                 foreach (string item in buffer)
                 {
                     string[] newItem = item.Split(',');

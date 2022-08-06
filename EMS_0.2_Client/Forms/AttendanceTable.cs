@@ -85,12 +85,9 @@ namespace EMS_Client.Forms
         /// </summary>
         private void BuildLog()
         {
-            List<string> buffer = new List<string>();
             DateTime temp = DateTime.Parse("01/" + dateTime.Text);
             string querry = Requests.GetHourLogs(EMS_ClientMainScreen.employee.IntId, temp.Year, temp.Month);
-            Action action = Requests.BuildAction(this, new EMS_Library.Network.DataPacket(querry, 5), buffer, false);
-
-            action.Invoke();
+            string[] buffer = Requests.RequestFromServer(querry, 5);
             if (buffer[0] != "-1")
                 log = new HoursLogMonth(buffer.ToArray(), EMS_ClientMainScreen.employee);
             else log = null;

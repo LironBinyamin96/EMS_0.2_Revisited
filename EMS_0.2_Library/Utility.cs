@@ -87,6 +87,13 @@ namespace EMS_Library
                 return ms.ToArray();
             }
         }
+
+        /// <summary>
+        /// Prefoms "bit by bit" comparison of two objects.
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <param name="other"></param>
+        /// <returns></returns>
         public static bool BitByBitEquals(this object obj, object other)
         {
             byte[] first = obj.ObjectToByteArray();
@@ -132,7 +139,13 @@ namespace EMS_Library
             return false;
         }
 
-        // בודק האם אפשר להמיר סטרינג לטיפוס המתבקש
+        /// <summary>
+        /// Checks if the string is parsable into provided type.
+        /// בודק האם אפשר להמיר סטרינג לטיפוס המתבקש
+        /// </summary>
+        /// <param name="str"></param>
+        /// <param name="type"></param>
+        /// <returns></returns>
         public static bool Parsable(this string str, Type type)
         {
             if (type == typeof(int))                                  return int.TryParse(str, out _);
@@ -143,6 +156,12 @@ namespace EMS_Library
             return true;
         }
 
+        /// <summary>
+        /// Checks if all strings in provided array are parsable into given type.
+        /// </summary>
+        /// <param name="arr"></param>
+        /// <param name="type"></param>
+        /// <returns></returns>
         public static bool AllParsable(this string[] arr, Type type)
         {
             foreach(string item in arr)
@@ -150,18 +169,32 @@ namespace EMS_Library
             return true;
         }
 
+        /// <summary>
+        /// Prints any enumerable collection intop console.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="collection"></param>
         public static void DebugPrint<T>(this IEnumerable<T> collection)
         {
+            if(collection == null || collection.Count() == 0) return;
             foreach (T item in collection)
                 Console.WriteLine(item.ToString());
         }
+
+        /// <summary>
+        /// Capitalizing first letter in the string.
+        /// </summary>
+        /// <param name="s"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException"></exception>
         public static string CapitalizeFirst(this string s)
         {
-            if (string.IsNullOrEmpty(s)) throw new ArgumentNullException("ToUpperCase: string was empty or null");
+            if (string.IsNullOrEmpty(s)) throw new ArgumentNullException("CapitalizeFirst: string was empty or null");
             StringBuilder sb = new StringBuilder(s);
             if (sb[0] > 'a' && sb[0] < 'z')
                 sb[0] = (char)(sb[0] - 32);
             return sb.ToString();
         }
+        
     }
 }

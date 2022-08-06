@@ -4,8 +4,9 @@ namespace EMS_Library
     public static class Config
     {
         #region Server_Config
-        
-        public const int ServerPort = 13000; //Do not forget to open this port in server side firewall settings!
+        //Do not forget to open thouse ports in server side firewall settings!
+        public const int ServerPort = 13000; 
+
         public static string ServerIP = default;
         public static string RootDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\EMS_Root";
         public static string FR_Location = RootDirectory + "\\FR_Boot.cmd";

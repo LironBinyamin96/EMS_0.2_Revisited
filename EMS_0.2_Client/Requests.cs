@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Net.Sockets;
 using EMS_Library.Network;
+using EMS_Library;
 
 namespace EMS_Client
 {
@@ -49,53 +50,66 @@ namespace EMS_Client
         public static string GetHourLogs(int _intId, int year, int month) => $"get log #{_intId}, {year}, {month}";
 
 
+        
         /// <summary>
-        /// Builds an lambda method for retrieving data from the server. When invoked action will fill the buffer with the data.
+        /// Requests an image from the server
         /// </summary>
-        /// <param name="parentForm"></param>
         /// <param name="data"></param>
-        /// <param name="buffer"></param>
-        /// <param name="closeForm"></param>
         /// <returns></returns>
-        public static Action BuildAction(Form parentForm, DataPacket data, List<string> buffer, bool closeForm = false)
-        {
-            buffer.Clear();
-            Action action = new Action(() =>
-                {
-                    try
-                    {
-                        TcpClient tcpClient = new TcpClient(EMS_Library.Config.ServerIP, EMS_Library.Config.ServerPort);
-                        NetworkStream stream = tcpClient.GetStream();
-                        stream.Write(data.Write(), 0, data.GetTotalSize());
-                        DataPacket responce = new DataPacket(stream);
-
-                        string[] processed = responce.StringData.Split('|');
-                        foreach (string a in processed)
-                            buffer.Add(a);
-                    }
-                    catch (Exception ex) { parentForm.Invoke(() => { MessageBox.Show(ex.Message); }); }
-                    if (closeForm) parentForm.Invoke(() => { EMS_ClientMainScreen.PrimaryForms.Pop().Close(); });
-                });
-            return action;
-        }
-        /// <summary>
-        /// Requests an image rom the server
-        /// </summary>
-        /// <param name="data"></param>
-        /// <returns>byte[] containing the image.</returns>
         public static byte[] GetImage(DataPacket data)
         {
             byte[] result = new byte[0];
             try
             {
-                TcpClient tcpClient = new TcpClient(EMS_Library.Config.ServerIP, EMS_Library.Config.ServerPort);
+                //Request an image
+                TcpClient tcpClient = new TcpClient(Config.ServerIP, Config.ServerPort);
                 NetworkStream stream = tcpClient.GetStream();
                 stream.Write(data.Write(), 0, data.GetTotalSize());
                 DataPacket packet = new DataPacket(stream);
                 result = packet.ByteData;
+
+                //Notify server that you're done reading the responce.
+                stream = new TcpClient(Config.ServerIP, Config.ServerPort).GetStream();
+                DataPacket done = new DataPacket("done");
+                stream.Write(done.Write(), 0, done.GetTotalSize());
             }
             catch { }
             return result;
         }
+
+        /// <summary>
+        /// Handles clien-server requests
+        /// </summary>
+        /// <param name="querry"></param>
+        /// <param name="routingFunctionNum"></param>
+        /// <returns>Array of strings containing the responce</returns>
+        public static string[] RequestFromServer(string querry, byte routingFunctionNum=255)
+        {
+            string[] result = null;
+            Action action = () => {
+                //request data from the server
+                DataPacket request = new DataPacket(querry, routingFunctionNum);
+                NetworkStream stream = new TcpClient(Config.ServerIP, Config.ServerPort).GetStream();
+                stream.Write(request.Write(), 0, request.GetTotalSize());
+                DataPacket responce = new DataPacket(stream);
+                result = responce.StringData.Split('|');
+
+                //Notify the server that you're done reading the responce
+                stream = new TcpClient(Config.ServerIP, Config.ServerPort).GetStream();
+                DataPacket done = new DataPacket("done");
+                stream.Write(done.Write(), 0, done.GetTotalSize());
+
+                //Close Standby screen
+                EMS_ClientMainScreen.PrimaryForms.Peek().Invoke(() => { EMS_ClientMainScreen.PrimaryForms.Pop().Close(); });
+            };
+            Forms.StandbyScreen standby = new Forms.StandbyScreen(action);
+            standby.ShowDialog();
+            return result;
+        }
+
+
+
+
+
     }
 }

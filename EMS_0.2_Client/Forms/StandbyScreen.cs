@@ -15,7 +15,7 @@ namespace EMS_Client.Forms
         Action action;
 
         /// <summary>
-        /// Action passed must handle it's own termination as well as form closure! 
+        /// Preforms an action while dispalying standby screen 
         /// </summary>
         /// <param name="act"></param>
         public StandbyScreen(Action act)

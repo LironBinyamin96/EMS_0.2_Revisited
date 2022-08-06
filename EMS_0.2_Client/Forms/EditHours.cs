@@ -29,10 +29,7 @@ namespace EMS_Client.Forms
         {
             MessageBox.Show($"entry: {dateTimeEntey.Value}\n exit: {dateTimeExit.Value}");
             string querry = Requests.UpdateEntry(editHours[0], dateTimeEntey.Value, dateTimeExit.Value);
-            List<string> buffer = new List<string>();
-            Action action = Requests.BuildAction(this, new EMS_Library.Network.DataPacket(querry, 7), buffer, true);
-            StandbyScreen standby = new StandbyScreen(action);
-            standby.ShowDialog();
+            string[] buffer = Requests.RequestFromServer(querry, 7);
         }
         private void btnX_Click(object sender, EventArgs e) => Close();
         #endregion

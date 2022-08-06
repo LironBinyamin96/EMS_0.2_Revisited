@@ -21,6 +21,7 @@ namespace EMS_Server
         bool scheduleForceExits = true;
         bool SQLQuerryInput = false;
         Process FRProcess = null;
+        public static EMS_ServerMainScreen serverForm;
         #endregion
 
         #region Tasks&Tokens
@@ -45,6 +46,7 @@ namespace EMS_Server
             SQLLookup_CXL = SQLLookup_CXL_Src.Token;
             FacialRecognition = BuildFRTask();
             TestingTask = TestingTaskBuilder();
+            serverForm = this;
         }
 
         #region Event Methods
@@ -52,8 +54,8 @@ namespace EMS_Server
         {
             SQLServerLookup.Start();
             ServerAddressResolver.ServerIP(true);
-            listener= new TcpListener(System.Net.IPAddress.Parse(EMS_Library.Config.ServerIP), EMS_Library.Config.ServerPort);
-            listener.Start();
+            //listener= new TcpListener(System.Net.IPAddress.Parse(EMS_Library.Config.ServerIP), EMS_Library.Config.ServerPort);
+            //listener.Start();
             listeningTask.Start();
             TestingTask.Start();
             FacialRecognition.Start();
@@ -165,28 +167,8 @@ namespace EMS_Server
             {
                 if (!SQLServerLookup.IsCompleted) SQLServerLookup.Wait();
                 WriteToServerConsole("Server started");
-                while (true)
-                {
-                    WriteToServerConsole($"Listening on {EMS_Library.Config.ServerIP}:{EMS_Library.Config.ServerPort}");
-                    client = listener.AcceptTcpClient();
-                    WriteToServerConsole($"client: " + client.Client.RemoteEndPoint);
-                    listnerTimer.Start();
-                    try
-                    {
-                        NetworkStream stream = client.GetStream();
-                        DataPacket data = new DataPacket(stream);
-                        WriteToServerConsole("Request:\n" + data.StringData);
-                        DataPacket responce = new MyRouter().Router(data);
-                        WriteToServerConsole("Responce:\n"+responce.ToString());
-                        stream.Write(responce.Write(), 0, responce.GetTotalSize());
-                        Thread.Sleep(responce.ByteData.Length/100);
-                        client.Close();
-                        client.Dispose();
-                    }
-                    catch (Exception ex) { Console.WriteLine(ex); }
-                    WriteToServerConsole("Connection closed.");
-                }
-            }, listner_CXL);
+                ConnectionsManager.Listen();
+            });
         }
         public Task BuildSQLServerLookup()
         {

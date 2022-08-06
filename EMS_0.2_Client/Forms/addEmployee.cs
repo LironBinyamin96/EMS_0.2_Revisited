@@ -37,9 +37,8 @@ namespace EMS_Client.Forms
             if (CheckingDataFields())
             {
                 //Addition of a new employee to DB.
-                List<string> buffer = new List<string>();
-                Action getFreeIdAction = Requests.BuildAction(this, new EMS_Library.Network.DataPacket("", 252), buffer);
-                getFreeIdAction.Invoke();
+                string[] buffer = Requests.RequestFromServer("", 252);
+
 
                 object[] empParts = new object[] {
                     positionBox.Text,
@@ -60,13 +59,11 @@ namespace EMS_Client.Forms
                     txtAddres.Text
                 };
 
-                buffer.Clear();
                 Employee emp = Employee.ActivateEmployee(empParts);
                 if (emp == null) { MessageBox.Show("Failed to create employee!"); return; }
-                string querry = Requests.AddEmployee(emp);
 
-                Action AddEmpAction = Requests.BuildAction(this, new EMS_Library.Network.DataPacket(emp.ToString(), 2), buffer);
-                AddEmpAction.Invoke();
+                string querry = Requests.AddEmployee(emp);
+                buffer = Requests.RequestFromServer(querry, 2);
 
                 //Rescaling image
                 Utility.RescaleImage(employeeImage).Save(Config.FR_Images + $"\\{emp.IntId}{Config.ImageFormat}");

@@ -41,14 +41,10 @@ namespace EMS_Client.Forms
                 {"_intId", txtIntId.Text},
                 {"_password",$"'{txtPassword.Text}'" }
             });
-            List<string> buffer = new List<string>();
-
-            Action action = Requests.BuildAction(this, new DataPacket(querry, 1), buffer, true);
-            StandbyScreen standby = new StandbyScreen(action);
-            standby.ShowDialog();
+            string[] buffer = Requests.RequestFromServer(querry,1);
 
             //Credentials check
-            if (buffer.Count == 0 || buffer[0] == "-1")
+            if (buffer.Length == 0 || buffer[0] == "-1")
             { MessageBox.Show("Wrong credentials"); return; }
 
             EMS_ClientMainScreen.CurEmployee = Employee.ActivateEmployee(buffer[0].Split(','));

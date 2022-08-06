@@ -80,9 +80,7 @@ namespace EMS_Client.Forms
                 if(tempEmp.ToString()!=EMS_ClientMainScreen.employee.ToString())
                 {
                     string querry = Requests.UpdateEmployee(tempEmp.ProvideFieldsAndValues(), new Dictionary<string, string> { { "_intId", EMS_ClientMainScreen.employee.IntId.ToString() } });
-                    List<string> buffer = new List<string>();
-                    Action action = Requests.BuildAction(this, new DataPacket(querry, 3), buffer);
-                    action.Invoke();
+                    string[] buffer = Requests.RequestFromServer(querry, 3);
                     MessageBox.Show("Updated: " + buffer[0]);
                 }
             }
@@ -98,10 +96,9 @@ namespace EMS_Client.Forms
             DialogResult delete = MessageBox.Show("Are you sure?", "", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
             if (delete == DialogResult.OK)
             {
-                List<string> buffer = new List<string>();
+                
                 string querry = Requests.Delete(int.Parse(txtID.Text));
-                Action action = Requests.BuildAction(this, new DataPacket(querry, 4), buffer, false);
-                action.Invoke();
+                string[] buffer = Requests.RequestFromServer(querry,4);
                 Clear();
             }
         }
