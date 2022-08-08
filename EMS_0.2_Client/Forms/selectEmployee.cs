@@ -20,6 +20,38 @@ namespace EMS_Client.Forms
         Form callerForm;
         #endregion
 
+
+        public selectEmployee(Form caller)
+        {
+            InitializeComponent();
+            callerForm = caller;
+        }
+        
+        // הצגת כל העובדים בטבלה
+        private void selectEmployee_Load(object sender, EventArgs e)
+        {
+            if (Config.DevelopmentMode)
+            {
+                string querry = Requests.SelectEmployee();
+                buffer = Requests.RequestFromServer(querry, 1);
+                foreach (string item in buffer)
+                {
+                    string[] newItem = item.Split(',');
+                    employeesTable.Rows.Add(newItem[0], newItem[1], newItem[2], newItem[3], newItem[4], newItem[5], newItem[6], newItem[8], newItem[9], newItem[11], newItem[12], newItem[13], newItem[14], newItem[15]);
+                }
+            }
+        }
+
+        // בדאבל קליק - העובד שלחצנו עליו ייכנס לתוך משתנה סטטי שנמצא במסך הראשי
+        private void employeesTable_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            int indexRow = employeesTable.CurrentCell.RowIndex;
+            EMS_ClientMainScreen.employee = Employee.ActivateEmployee(buffer[indexRow].Remove(buffer[indexRow].Length - 1).Split(','));
+            
+            callerForm.Activate();
+            //callerForm.Focus();
+            Close();
+        }
         #region Drag Window
         /// <summary>
         /// Controlls form movement during drag.
@@ -59,10 +91,10 @@ namespace EMS_Client.Forms
                 /*type*/
                 case 3: { querry = Requests.SelectEmployee(new Dictionary<string, string>() { { "type", $"'{txtSaerch.Text}'" } }); break; }
             }
-            buffer = Requests.RequestFromServer(querry,1);
+            buffer = Requests.RequestFromServer(querry, 1);
             employeesTable.Rows.Clear();
             employeesTable.Columns.Clear();
-            employeesTable.Columns.AddRange(new DataGridViewColumn[] 
+            employeesTable.Columns.AddRange(new DataGridViewColumn[]
             {
                 Type,
                 intID,
@@ -85,36 +117,5 @@ namespace EMS_Client.Forms
         }
         private void btnX_Click(object sender, EventArgs e) => Close();
         #endregion
-        public selectEmployee(Form caller)
-        {
-            InitializeComponent();
-            callerForm = caller;
-        }
-        
-        // הצגת כל העובדים בטבלה
-        private void selectEmployee_Load(object sender, EventArgs e)
-        {
-            if (EMS_Library.Config.DevelopmentMode)
-            {
-                string querry = Requests.SelectEmployee();
-                buffer = Requests.RequestFromServer(querry, 1);
-                foreach (string item in buffer)
-                {
-                    string[] newItem = item.Split(',');
-                    employeesTable.Rows.Add(newItem[0], newItem[1], newItem[2], newItem[3], newItem[4], newItem[5], newItem[6], newItem[8], newItem[9], newItem[11], newItem[12], newItem[13], newItem[14], newItem[15]);
-                }
-            }
-        }
-
-        // בדאבל קליק - העובד שלחצנו עליו ייכנס לתוך משתנה סטטי שנמצא במסך הראשי
-        private void employeesTable_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
-        {
-            int indexRow = employeesTable.CurrentCell.RowIndex;
-            EMS_ClientMainScreen.employee = Employee.ActivateEmployee(buffer[indexRow].Remove(buffer[indexRow].Length - 1).Split(','));
-            
-            callerForm.Activate();
-            //callerForm.Focus();
-            Close();
-        }
     }
 }

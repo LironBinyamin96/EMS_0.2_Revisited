@@ -89,7 +89,7 @@ namespace EMS_Client.Forms
         private void btnSelect_Click(object sender, EventArgs e)
         {
             selectEmployee select_Employee = new selectEmployee(this);
-            select_Employee.Show();
+            select_Employee.ShowDialog();
         }
         private void btnDelete_Click(object sender, EventArgs e)
         {
@@ -162,6 +162,20 @@ namespace EMS_Client.Forms
         {
             if (EMS_ClientMainScreen.employee != null)
             {
+                txtID.Clear();
+                txtFirstName.Clear();
+                txtLastName.Clear();
+                txtMiddleName.Clear();
+                txtEmail.Clear();
+                txtGender.Clear();
+                txtDateOfBirth.Clear();
+                txtAddres.Clear();
+                txtPhone.Clear();
+                txtBaseSalary.Clear();
+                txtSalaryModifire.Clear();
+                pictureBox1.Image=null;
+
+
                 txtID.Text = EMS_ClientMainScreen.employee.StateId.ToString();
                 txtFirstName.Text = EMS_ClientMainScreen.employee.FName.ToString();
                 txtLastName.Text = EMS_ClientMainScreen.employee.LName.ToString();
@@ -174,7 +188,7 @@ namespace EMS_Client.Forms
                 positionBox.Text = EMS_ClientMainScreen.employee.Type.Name;
                 txtBaseSalary.Text = EMS_ClientMainScreen.employee.BaseSalary.ToString();
                 txtSalaryModifire.Text = EMS_ClientMainScreen.employee.SalaryModifire.ToString();
-                try { pictureBox1.Image = new Bitmap(EMS_Library.Config.FR_Images + $"\\{EMS_ClientMainScreen.employee.IntId}{EMS_Library.Config.ImageFormat}"); } catch { }
+                try { pictureBox1.Image = new Bitmap(Config.FR_Images + $"\\{EMS_ClientMainScreen.employee.IntId}{Config.ImageFormat}"); } catch { }
             }
         }
         #endregion

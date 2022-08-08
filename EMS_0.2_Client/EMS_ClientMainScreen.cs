@@ -60,7 +60,7 @@ namespace EMS_Client
                     */
                     File.WriteAllBytes(Config.RootDirectory + "\\test.jpg", buffer);
                     File.WriteAllBytes(Config.RootDirectory + "\\test.txt", buffer);
-                    userPicture.Image = Image.FromStream(new MemoryStream(buffer));
+                    userPicture.Image = new ImageConverter().ConvertFrom(buffer) as Bitmap;
                 }
 
             }

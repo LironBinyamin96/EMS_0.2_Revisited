@@ -30,9 +30,7 @@ namespace EMS_Client.Forms
 
         private void StandbyScreen_Load(object sender, EventArgs e)
         {
-            CancellationTokenSource CXL_src = new CancellationTokenSource();
-            CancellationToken CXL = CXL_src.Token;
-            Task.Run(action, CXL);
+            Task.Run(action);
         }
 
         #region Drag Window

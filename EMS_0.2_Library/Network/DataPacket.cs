@@ -35,12 +35,18 @@ namespace EMS_Library.Network
                 catch (ArgumentOutOfRangeException) { length = int.MaxValue; Console.WriteLine($"DataPacket length {BitConverter.ToInt64(temp, 0)}! setting to {int.MaxValue}"); }
                 _header = new DataPacketHeader(length, (byte)stream.ReadByte());
                 _byteData = new byte[_header.DataIntLength];
-                stream.Read(_byteData, 0, _header.DataIntLength);
+                //int dataAmountRead = stream.Read(_byteData, 0, _header.DataIntLength);
+                int i = 0;
+                while(i<_header.DataIntLength)
+                {
+                    if(stream.DataAvailable) _byteData[i++] = (byte)stream.ReadByte();
+                }
 
                 StringData = Encoding.UTF8.GetString(_byteData, 0, _header.DataIntLength);
                 if (Config.DevelopmentMode)
                 {
                     Console.WriteLine($"DataPacket creation called by {memberName}\nConstructor NetworkStream");
+                    Console.WriteLine($"Read {i} bytes of {_header.DataIntLength}");
                     Console.WriteLine("Creation complete!\n" + ToString());
                 }
             }
@@ -88,6 +94,14 @@ namespace EMS_Library.Network
             }
         }
         public byte[] Write() => _header.GetHeader().Concat(_byteData).ToArray();
+
+        public void WriteToStream(NetworkStream stream)
+        {
+            for (int i = 0; i < _header.DataIntLength; i++)
+                stream.WriteByte(_byteData[i]);
+        }
+
+
         /// <summary>
         /// Returns a Copy of the byte array.
         /// </summary>
@@ -105,7 +119,7 @@ namespace EMS_Library.Network
         public override string ToString() 
         {
             if(StringData.Length<1000) return $"Header: [{_header}], Data: [{StringData}]";
-            else return $"Header: [{_header}], Data lenght: [{StringData.Length}]";
+            else return $"Header: [{_header}]";
         }
 
         private void PrintDebug()

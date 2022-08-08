@@ -35,14 +35,19 @@ namespace EMS_Library.Network
                     }
                     Console.WriteLine("");
                 }
-                NetworkInterface netFace = Array.Find(NetworkInterface.GetAllNetworkInterfaces(), x => x.Name=="Ethernet") ?? Array.Find(NetworkInterface.GetAllNetworkInterfaces(), x => x.Name.Contains("Wi-Fi"));
-                if (netFace != null)
+
+                NetworkInterface netFace = Array.Find(NetworkInterface.GetAllNetworkInterfaces(), x => x.Name.Split().Last() == "Ethernet" && x.OperationalStatus == OperationalStatus.Up);
+                if (netFace == null)
                 {
-                    IPInterfaceProperties x = netFace.GetIPProperties();
-                    Array.ConvertAll(x.UnicastAddresses.ToArray(), x=>x.Address.ToString()).DebugPrint();
-                    var temp = Array.Find(x.UnicastAddresses.ToArray(), x => x.Address.ToString().Contains("192.168."));
-                    if (temp != null) Config.ServerIP = temp.Address.ToString();
+                    netFace = Array.Find(NetworkInterface.GetAllNetworkInterfaces(), x => x.Name.Split().Last() == "Wi-Fi" && x.OperationalStatus == OperationalStatus.Up);
+                    if (netFace == null) throw new ApplicationException("Could not find vialbe network adapter!");
                 }
+
+                IPInterfaceProperties x = netFace.GetIPProperties();
+
+                Array.ConvertAll(x.UnicastAddresses.ToArray(), x => x.Address.ToString()).DebugPrint();
+                var temp = Array.Find(x.UnicastAddresses.ToArray(), x => x.Address.ToString().Contains("192.168."));
+                if (temp != null) Config.ServerIP = temp.Address.ToString();
             }
             else //I'm a client!
             {
@@ -59,7 +64,7 @@ namespace EMS_Library.Network
                             WaitHandle wh = ar.AsyncWaitHandle;
                             try
                             {
-                                if (!ar.AsyncWaitHandle.WaitOne(TimeSpan.FromMilliseconds(10), false))
+                                if (!ar.AsyncWaitHandle.WaitOne(TimeSpan.FromMilliseconds(5), false))
                                 {
                                     tcp.Close();
                                     throw new TimeoutException();

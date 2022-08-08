@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using EMS_Library.Network;
+using EMS_Library;
 
 namespace EMS_Server
 {
@@ -33,22 +34,28 @@ namespace EMS_Server
                 /*Terminate con*/   //case 103: { throw new NotImplementedException(""); }
 
 
-                /*Get free ID*/     case 252: { return new DataPacket(SQLBridge.GetFreeID(), 255); }
-                /*Direct querry*/   case 253: { return new DataPacket(SQLBridge.OneWayCommand(data.StringData)); }
-                /*Direct querry*/   case 254: { return new DataPacket(SQLBridge.TwoWayCommand(data.StringData)); }
-                /*Out*/             case 255: { return data; }
+                /*Get free ID*/
+                case 252: { return new DataPacket(SQLBridge.GetFreeID(), 255); }
+                /*Direct querry*/
+                case 253: { return new DataPacket(SQLBridge.OneWayCommand(data.StringData)); }
+                /*Direct querry*/
+                case 254: { return new DataPacket(SQLBridge.TwoWayCommand(data.StringData)); }
+                /*Out*/
+                case 255: { return data; }
             }
-            
+
             //Retrieves picture and returns it as byte[]
             byte[] GetPicture()
             {
                 //"get picture of #_intid"
                 if (int.TryParse(data.StringData.Substring(data.StringData.IndexOf('#') + 1), out int id))
                 {
-                    string imagePath = EMS_Library.Config.FR_Images + $"\\{id}{EMS_Library.Config.ImageFormat}";
-                    if (File.Exists(imagePath))
-                        return File.ReadAllBytes(imagePath);
-                    else return new byte[0];
+                    string imagePath = Config.FR_Images + $"\\{id}{Config.ImageFormat}";
+                    if (!File.Exists(imagePath)) //If no image found, replace with stock.
+                        imagePath = Config.FR_Images + $"\\StockImage{Config.ImageFormat}";
+                    if (!File.Exists(imagePath)) throw new Exception($"Could not find neither eployee photo nor stock image. Place StockImage{Config.ImageFormat} into {Config.FR_Images} folder");
+                    File.ReadAllBytes(imagePath).DebugPrint();
+                    return File.ReadAllBytes(imagePath);
                 }
                 else return new byte[0];
             }
