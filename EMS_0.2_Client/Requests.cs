@@ -108,12 +108,9 @@ namespace EMS_Client
                 }
                 catch (Exception e) { throw e; }
                 finally
-                { //Close Standby screen
-
-                   // EMS_ClientMainScreen.PrimaryForms.Peek().Invoke(() => { Form SB = EMS_ClientMainScreen.PrimaryForms.Pop(); SB.Close(); SB.Dispose(); });
-
-                    EMS_ClientMainScreen.PrimaryForms.Peek().Invoke(() => { EMS_ClientMainScreen.PrimaryForms.Pop().Close(); });
-
+                {  //Close Standby screen
+                   //EMS_ClientMainScreen.PrimaryForms.Peek().Invoke(() => { Form SB = EMS_ClientMainScreen.PrimaryForms.Pop(); SB.Close(); SB.Dispose(); });
+                   //EMS_ClientMainScreen.PrimaryForms.Peek().Invoke(() => { EMS_ClientMainScreen.PrimaryForms.Pop().Close(); });
                 }
 
             };

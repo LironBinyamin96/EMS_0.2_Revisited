@@ -81,15 +81,11 @@ namespace EMS_Client.Forms
             string querry = "";
             switch (comboBoxSelect.SelectedIndex)
             {
-                default: return;
-                /*ID*/
-                case 0: { querry = Requests.SelectEmployee(new Dictionary<string, string>() { { "_intId", $"{txtSaerch.Text}" } }); break; }
-                /*_fName*/
-                case 1: { querry = Requests.SelectEmployee(new Dictionary<string, string>() { { "_fName", $"'{txtSaerch.Text}'" } }); break; }
-                /*_lName*/
-                case 2: { querry = Requests.SelectEmployee(new Dictionary<string, string>() { { "_lName", $"'{txtSaerch.Text}'" } }); break; }
-                /*type*/
-                case 3: { querry = Requests.SelectEmployee(new Dictionary<string, string>() { { "type", $"'{txtSaerch.Text}'" } }); break; }
+                default:   return;
+                /*ID*/     case 0: { querry = Requests.SelectEmployee(new Dictionary<string, string>() { { "_intId", $"{txtSaerch.Text}" } }); break; }
+                /*_fName*/ case 1: { querry = Requests.SelectEmployee(new Dictionary<string, string>() { { "_fName", $"'{txtSaerch.Text}'" } }); break; }
+                /*_lName*/ case 2: { querry = Requests.SelectEmployee(new Dictionary<string, string>() { { "_lName", $"'{txtSaerch.Text}'" } }); break; }
+                /*type*/   case 3: { querry = Requests.SelectEmployee(new Dictionary<string, string>() { { "type", $"'{txtSaerch.Text}'" } }); break; }
             }
             buffer = Requests.RequestFromServer(querry, 1);
             employeesTable.Rows.Clear();
