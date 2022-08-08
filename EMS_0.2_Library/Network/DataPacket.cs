@@ -40,10 +40,10 @@ namespace EMS_Library.Network
                 while(i<_header.DataIntLength)
                 {
                     if(stream.DataAvailable) _byteData[i++] = (byte)stream.ReadByte();
-                //stream.Read(_byteData, 0, _header.DataIntLength);
-                for (int i = 0; stream.DataAvailable; i++)
-                {
-                    _byteData[i] = (byte)stream.ReadByte();
+                    //stream.Read(_byteData, 0, _header.DataIntLength);
+                    //for (int i = 0; stream.DataAvailable; i++)
+                    //{
+                    //    _byteData[i] = (byte)stream.ReadByte();
                 }
 
                 StringData = Encoding.UTF8.GetString(_byteData, 0, _header.DataIntLength);

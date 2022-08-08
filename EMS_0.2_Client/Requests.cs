@@ -94,7 +94,7 @@ namespace EMS_Client
                 {
                     TcpClient client = new TcpClient(Config.ServerIP, Config.ServerPort);
                     NetworkStream stream = client.GetStream();
-                    NetworkStream stream = new TcpClient(Config.ServerIP, Config.ServerPort).GetStream();
+                    //NetworkStream stream = new TcpClient(Config.ServerIP, Config.ServerPort).GetStream();
                     stream.Write(request.Write(), 0, request.GetTotalSize());
                     DataPacket responce = new DataPacket(stream);
                     result = responce.StringData.Split('|');

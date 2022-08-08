@@ -160,22 +160,9 @@ namespace EMS_Client.Forms
         }
         public void Fill()
         {
+            Clear();
             if (EMS_ClientMainScreen.employee != null)
             {
-                txtID.Clear();
-                txtFirstName.Clear();
-                txtLastName.Clear();
-                txtMiddleName.Clear();
-                txtEmail.Clear();
-                txtGender.Clear();
-                txtDateOfBirth.Clear();
-                txtAddres.Clear();
-                txtPhone.Clear();
-                txtBaseSalary.Clear();
-                txtSalaryModifire.Clear();
-                pictureBox1.Image=null;
-
-
                 txtID.Text = EMS_ClientMainScreen.employee.StateId.ToString();
                 txtFirstName.Text = EMS_ClientMainScreen.employee.FName.ToString();
                 txtLastName.Text = EMS_ClientMainScreen.employee.LName.ToString();

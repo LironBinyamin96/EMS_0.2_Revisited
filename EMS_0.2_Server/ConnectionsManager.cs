@@ -42,7 +42,7 @@ namespace EMS_Server
                     foreach (MyConnection connection in arr)
                     { connection.Terminate(); arr.Remove(connection); break; }
                 }
-                MyConnection[] arr = connections.FindAll(x => x._tcpClient.Client != null && (sender as MyConnection)._tcpClient.Client.RemoteEndPoint.ToString().Split(':')[0] == x._tcpClient.Client.RemoteEndPoint.ToString().Split(":")[0]).ToArray();
+                //MyConnection[] arr = connections.FindAll(x => x._tcpClient.Client != null && (sender as MyConnection)._tcpClient.Client.RemoteEndPoint.ToString().Split(':')[0] == x._tcpClient.Client.RemoteEndPoint.ToString().Split(":")[0]).ToArray();
                 foreach (MyConnection connection in arr)
                     connection.Terminate();
                 return;
