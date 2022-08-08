@@ -35,7 +35,11 @@ namespace EMS_Library.Network
                 catch (ArgumentOutOfRangeException) { length = int.MaxValue; Console.WriteLine($"DataPacket length {BitConverter.ToInt64(temp, 0)}! setting to {int.MaxValue}"); }
                 _header = new DataPacketHeader(length, (byte)stream.ReadByte());
                 _byteData = new byte[_header.DataIntLength];
-                stream.Read(_byteData, 0, _header.DataIntLength);
+                //stream.Read(_byteData, 0, _header.DataIntLength);
+                for (int i = 0; stream.DataAvailable; i++)
+                {
+                    _byteData[i] = (byte)stream.ReadByte();
+                }
 
                 StringData = Encoding.UTF8.GetString(_byteData, 0, _header.DataIntLength);
                 if (Config.DevelopmentMode)
@@ -105,7 +109,7 @@ namespace EMS_Library.Network
         public override string ToString() 
         {
             if(StringData.Length<1000) return $"Header: [{_header}], Data: [{StringData}]";
-            else return $"Header: [{_header}], Data lenght: [{StringData.Length}]";
+            else return $"Header: [{_header}]";
         }
 
         private void PrintDebug()

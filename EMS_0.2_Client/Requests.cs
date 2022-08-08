@@ -83,24 +83,31 @@ namespace EMS_Client
         /// <param name="querry"></param>
         /// <param name="routingFunctionNum"></param>
         /// <returns>Array of strings containing the responce</returns>
-        public static string[] RequestFromServer(string querry, byte routingFunctionNum=255)
+        public static string[] RequestFromServer(string querry, byte routingFunctionNum = 255)
         {
             string[] result = null;
-            Action action = () => {
+            Action action = () =>
+            {
                 //request data from the server
                 DataPacket request = new DataPacket(querry, routingFunctionNum);
-                NetworkStream stream = new TcpClient(Config.ServerIP, Config.ServerPort).GetStream();
-                stream.Write(request.Write(), 0, request.GetTotalSize());
-                DataPacket responce = new DataPacket(stream);
-                result = responce.StringData.Split('|');
+                try //In case server doesn't respond
+                {
+                    NetworkStream stream = new TcpClient(Config.ServerIP, Config.ServerPort).GetStream();
+                    stream.Write(request.Write(), 0, request.GetTotalSize());
+                    DataPacket responce = new DataPacket(stream);
+                    result = responce.StringData.Split('|');
 
-                //Notify the server that you're done reading the responce
-                stream = new TcpClient(Config.ServerIP, Config.ServerPort).GetStream();
-                DataPacket done = new DataPacket("done");
-                stream.Write(done.Write(), 0, done.GetTotalSize());
+                    //Notify the server that you're done reading the responce
+                    stream = new TcpClient(Config.ServerIP, Config.ServerPort).GetStream();
+                    DataPacket done = new DataPacket("done");
+                    stream.Write(done.Write(), 0, done.GetTotalSize());
+                }
+                catch (Exception e) { throw e; }
+                finally
+                { //Close Standby screen
+                    EMS_ClientMainScreen.PrimaryForms.Peek().Invoke(() => { EMS_ClientMainScreen.PrimaryForms.Pop().Close(); });
+                }
 
-                //Close Standby screen
-                EMS_ClientMainScreen.PrimaryForms.Peek().Invoke(() => { EMS_ClientMainScreen.PrimaryForms.Pop().Close(); });
             };
             Forms.StandbyScreen standby = new Forms.StandbyScreen(action);
             standby.ShowDialog();
