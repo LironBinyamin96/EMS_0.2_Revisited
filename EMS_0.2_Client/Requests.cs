@@ -94,6 +94,7 @@ namespace EMS_Client
                 {
                     TcpClient client = new TcpClient(Config.ServerIP, Config.ServerPort);
                     NetworkStream stream = client.GetStream();
+                    NetworkStream stream = new TcpClient(Config.ServerIP, Config.ServerPort).GetStream();
                     stream.Write(request.Write(), 0, request.GetTotalSize());
                     DataPacket responce = new DataPacket(stream);
                     result = responce.StringData.Split('|');
@@ -103,11 +104,16 @@ namespace EMS_Client
                     DataPacket done = new DataPacket("done");
                     stream.Write(done.Write(), 0, done.GetTotalSize());
                     Thread.Sleep(10);
+
                 }
                 catch (Exception e) { throw e; }
                 finally
                 { //Close Standby screen
+
                    // EMS_ClientMainScreen.PrimaryForms.Peek().Invoke(() => { Form SB = EMS_ClientMainScreen.PrimaryForms.Pop(); SB.Close(); SB.Dispose(); });
+
+                    EMS_ClientMainScreen.PrimaryForms.Peek().Invoke(() => { EMS_ClientMainScreen.PrimaryForms.Pop().Close(); });
+
                 }
 
             };
