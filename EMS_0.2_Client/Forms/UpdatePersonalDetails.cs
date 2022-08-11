@@ -44,12 +44,8 @@ namespace EMS_Client.Forms
             activeControls = new Control[] {
                 txtID, txtFirstName , txtLastName, txtMiddleName,
                 txtGender,txtDateOfBirth,txtAddres,txtPhone,
-                txtBaseSalary,txtSalaryModifire,txtEmail,positionBox,txtFile,pictureBox1
+                txtBaseSalary,txtSalaryModifire,txtEmail,positionBox,pictureBox1
             };
-        }
-        private void UpdatePersonalDetails_Activated(object sender, EventArgs e)
-        {
-            if (EMS_ClientMainScreen.employee != null) Fill();
         }
 
         #region Buttons
@@ -104,11 +100,12 @@ namespace EMS_Client.Forms
         }
         private void btnUpload_Click(object sender, EventArgs e)
         {
-            openFileDialog1.Filter = $"picture |*{EMS_Library.Config.ImageFormat}| all files|*.*";
+            string employeePicturePath = "";
+            openFileDialog1.Filter = $"picture |*{Config.ImageFormat}| all files|*.*";
             openFileDialog1.FilterIndex = 2;
             openFileDialog1.InitialDirectory = "c:\\";
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
-                txtFile.Text = openFileDialog1.FileName;
+                employeePicturePath = openFileDialog1.FileName;
         }
         private void btnX_Click(object sender, EventArgs e)
         {
@@ -130,7 +127,6 @@ namespace EMS_Client.Forms
                 { panelBaseSalary, txtBaseSalary.Text.Parsable(typeof(int)) },
                 { panelSalaryModifire, txtSalaryModifire.Text.Parsable(typeof(double)) },
                 { panelPosition, positionBox.Text != "" },
-                { panelUpload, pictureBox1 != null }
             };
             foreach (KeyValuePair<Panel, bool> item in test)
             {
@@ -151,7 +147,7 @@ namespace EMS_Client.Forms
             txtDateOfBirth.Text = "";
             txtAddres.Text = "";
             txtPhone.Text = "";
-            txtFile.Text = "";
+
             positionBox.Text = "";
             txtBaseSalary.Text = "";
             txtSalaryModifire.Text = "";
@@ -160,7 +156,7 @@ namespace EMS_Client.Forms
         }
         public void Fill()
         {
-            Clear();
+            //Clear();
             if (EMS_ClientMainScreen.employee != null)
             {
                 txtID.Text = EMS_ClientMainScreen.employee.StateId.ToString();
@@ -182,9 +178,8 @@ namespace EMS_Client.Forms
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            Fill();
             Panel[] panelArr = new Panel[] { panelID, panelFname, panelLname, panelDate, panelAddres, panelPhone, panelEmail, panelBaseSalary
-                ,panelSalaryModifire,panelPosition,panelUpload };
+                ,panelSalaryModifire,panelPosition };
             foreach (Panel panel in panelArr)
                 panel.BackColor = Color.FromArgb(0, 126, 249);
 

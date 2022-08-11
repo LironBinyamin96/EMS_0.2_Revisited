@@ -36,11 +36,6 @@ namespace EMS_Client
                     querry += $"{kvp.Key}={kvp.Value}, ";
                 else querry += $"{kvp.Key}='{kvp.Value}', ";
             return querry.Remove(querry.Length - 2);
-            /*
-             if(kvp.Key == "_intId" || kvp.Key == "_baseSalary" || kvp.Key == "_baseSalary" || kvp.Key == "_salaryModifire")
-                    querry += $"{kvp.Key}={kvp.Value} ";
-                else querry += $"{kvp.Key}='{kvp.Value}' ";
-            */
         }
         public static string DeleteEmployee(Dictionary<string, string> clause)
         { throw new NotImplementedException("WIP"); }

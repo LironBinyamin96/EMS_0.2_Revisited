@@ -20,7 +20,6 @@ namespace EMS_Client.Forms
         Form callerForm;
         #endregion
 
-
         public selectEmployee(Form caller)
         {
             InitializeComponent();
@@ -47,9 +46,12 @@ namespace EMS_Client.Forms
         {
             int indexRow = employeesTable.CurrentCell.RowIndex;
             EMS_ClientMainScreen.employee = Employee.ActivateEmployee(buffer[indexRow].Remove(buffer[indexRow].Length - 1).Split(','));
-            
+
+            //Invoke Fill() method of callerForm if available
+            System.Reflection.MethodInfo fillMethod = callerForm.GetType().GetMethod("Fill");
+            if (fillMethod != null) fillMethod.Invoke(callerForm,null);
+
             callerForm.Activate();
-            //callerForm.Focus();
             Close();
         }
         #region Drag Window
@@ -82,10 +84,13 @@ namespace EMS_Client.Forms
             switch (comboBoxSelect.SelectedIndex)
             {
                 default:   return;
-                /*ID*/     case 0: { querry = Requests.SelectEmployee(new Dictionary<string, string>() { { "_intId", $"{txtSaerch.Text}" } }); break; }
-                /*_fName*/ case 1: { querry = Requests.SelectEmployee(new Dictionary<string, string>() { { "_fName", $"'{txtSaerch.Text}'" } }); break; }
-                /*_lName*/ case 2: { querry = Requests.SelectEmployee(new Dictionary<string, string>() { { "_lName", $"'{txtSaerch.Text}'" } }); break; }
-                /*type*/   case 3: { querry = Requests.SelectEmployee(new Dictionary<string, string>() { { "type", $"'{txtSaerch.Text}'" } }); break; }
+                /*All*/    case 0: { querry = Requests.SelectEmployee(); break; }
+                /*ID*/     case 1: { querry = Requests.SelectEmployee(new Dictionary<string, string>() { { "_intId", $"{txtSaerch.Text}" } }); break; }
+                /*_fName*/ case 2: { querry = Requests.SelectEmployee(new Dictionary<string, string>() { { "_fName", $"'{txtSaerch.Text}'" } }); break; }
+                /*_lName*/ case 3: { querry = Requests.SelectEmployee(new Dictionary<string, string>() { { "_lName", $"'{txtSaerch.Text}'" } }); break; }
+                /*type*/   case 4: { querry = Requests.SelectEmployee(new Dictionary<string, string>() { { "type", $"'{txtSaerch.Text}'" } }); break; }
+              
+               
             }
             buffer = Requests.RequestFromServer(querry, 1);
             employeesTable.Rows.Clear();

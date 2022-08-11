@@ -33,8 +33,6 @@
             this.lblUpdatePersonalDetails = new System.Windows.Forms.Label();
             this.gUpdatePersonalDetails = new System.Windows.Forms.GroupBox();
             this.positionBox = new System.Windows.Forms.ComboBox();
-            this.txtFile = new System.Windows.Forms.TextBox();
-            this.panelUpload = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.btnUpload = new System.Windows.Forms.Button();
             this.lblUploading = new System.Windows.Forms.Label();
@@ -124,8 +122,6 @@
             // gUpdatePersonalDetails
             // 
             this.gUpdatePersonalDetails.Controls.Add(this.positionBox);
-            this.gUpdatePersonalDetails.Controls.Add(this.txtFile);
-            this.gUpdatePersonalDetails.Controls.Add(this.panelUpload);
             this.gUpdatePersonalDetails.Controls.Add(this.pictureBox1);
             this.gUpdatePersonalDetails.Controls.Add(this.btnUpload);
             this.gUpdatePersonalDetails.Controls.Add(this.lblUploading);
@@ -191,24 +187,6 @@
             this.positionBox.Name = "positionBox";
             this.positionBox.Size = new System.Drawing.Size(102, 24);
             this.positionBox.TabIndex = 42;
-            // 
-            // txtFile
-            // 
-            this.txtFile.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
-            this.txtFile.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtFile.ForeColor = System.Drawing.SystemColors.Menu;
-            this.txtFile.Location = new System.Drawing.Point(452, 69);
-            this.txtFile.Name = "txtFile";
-            this.txtFile.Size = new System.Drawing.Size(155, 17);
-            this.txtFile.TabIndex = 40;
-            // 
-            // panelUpload
-            // 
-            this.panelUpload.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
-            this.panelUpload.Location = new System.Drawing.Point(446, 88);
-            this.panelUpload.Name = "panelUpload";
-            this.panelUpload.Size = new System.Drawing.Size(170, 1);
-            this.panelUpload.TabIndex = 39;
             // 
             // pictureBox1
             // 
@@ -631,7 +609,6 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "UpdatePersonalDetails";
             this.Text = "UpdatePersonalDetails";
-            this.Activated += new System.EventHandler(this.UpdatePersonalDetails_Activated);
             this.panelUpdatePersonalDetails.ResumeLayout(false);
             this.panelUpdatePersonalDetails.PerformLayout();
             this.gUpdatePersonalDetails.ResumeLayout(false);
@@ -647,8 +624,6 @@
         private Button btnX;
         private Label lblUpdatePersonalDetails;
         private GroupBox gUpdatePersonalDetails;
-        private TextBox txtFile;
-        private Panel panelUpload;
         private PictureBox pictureBox1;
         private Button btnUpload;
         private Label lblUploading;

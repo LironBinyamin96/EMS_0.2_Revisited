@@ -1,1 +1,0 @@
-HoursLog.xlsx_output_directory=C:\Users\levkh\Desktop\EMS_Root

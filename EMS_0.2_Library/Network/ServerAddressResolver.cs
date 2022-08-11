@@ -64,7 +64,7 @@ namespace EMS_Library.Network
                             WaitHandle wh = ar.AsyncWaitHandle;
                             try
                             {
-                                if (!ar.AsyncWaitHandle.WaitOne(TimeSpan.FromMilliseconds(5), false))
+                                if (!ar.AsyncWaitHandle.WaitOne(TimeSpan.FromMilliseconds(2), false))
                                 {
                                     tcp.Close();
                                     throw new TimeoutException();

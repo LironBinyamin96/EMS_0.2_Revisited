@@ -262,6 +262,7 @@
             this.comboBoxSelect.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
             this.comboBoxSelect.FormattingEnabled = true;
             this.comboBoxSelect.Items.AddRange(new object[] {
+            "All",
             "ID",
             "First Name",
             "Last Name",

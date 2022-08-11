@@ -33,8 +33,6 @@
             this.lblAddEmployee = new System.Windows.Forms.Label();
             this.gBoxRegistration = new System.Windows.Forms.GroupBox();
             this.positionBox = new System.Windows.Forms.ComboBox();
-            this.txtFile = new System.Windows.Forms.TextBox();
-            this.panelUpload = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.btnUpload = new System.Windows.Forms.Button();
             this.lblUploading = new System.Windows.Forms.Label();
@@ -121,8 +119,6 @@
             // gBoxRegistration
             // 
             this.gBoxRegistration.Controls.Add(this.positionBox);
-            this.gBoxRegistration.Controls.Add(this.txtFile);
-            this.gBoxRegistration.Controls.Add(this.panelUpload);
             this.gBoxRegistration.Controls.Add(this.pictureBox1);
             this.gBoxRegistration.Controls.Add(this.btnUpload);
             this.gBoxRegistration.Controls.Add(this.lblUploading);
@@ -188,24 +184,6 @@
             this.positionBox.Name = "positionBox";
             this.positionBox.Size = new System.Drawing.Size(102, 24);
             this.positionBox.TabIndex = 41;
-            // 
-            // txtFile
-            // 
-            this.txtFile.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
-            this.txtFile.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtFile.ForeColor = System.Drawing.SystemColors.Menu;
-            this.txtFile.Location = new System.Drawing.Point(452, 69);
-            this.txtFile.Name = "txtFile";
-            this.txtFile.Size = new System.Drawing.Size(155, 17);
-            this.txtFile.TabIndex = 40;
-            // 
-            // panelUpload
-            // 
-            this.panelUpload.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
-            this.panelUpload.Location = new System.Drawing.Point(446, 88);
-            this.panelUpload.Name = "panelUpload";
-            this.panelUpload.Size = new System.Drawing.Size(170, 1);
-            this.panelUpload.TabIndex = 39;
             // 
             // pictureBox1
             // 
@@ -645,8 +623,6 @@
         private Panel panelDate;
         private Label lblDateOfBirth;
         private Button btnX;
-        private TextBox txtFile;
-        private Panel panelUpload;
         private PictureBox pictureBox1;
         private Button btnUpload;
         private Button btnSave;

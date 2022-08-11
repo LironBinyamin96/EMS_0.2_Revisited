@@ -25,7 +25,7 @@ namespace EMS_Client.Forms
             activeControls = new Control[] {
                 txtID, txtFirstName , txtLastName, txtMiddleName,
                 txtGender,txtDateOfBirth,txtAddres,txtPhone,
-                txtBaseSalary,txtSalaryModifire,txtEmail,positionBox,txtFile,pictureBox1
+                txtBaseSalary,txtSalaryModifire,txtEmail,positionBox,pictureBox1
             };
         }
 
@@ -75,7 +75,7 @@ namespace EMS_Client.Forms
         {
             // החזרת הפאנלים לצבע כחול
             Panel[] panelArr = new Panel[] { panelID, panelFname, panelLname, panelDate, panelAddres, panelPhone, panelEmail, panelBaseSalary
-                ,panelSalaryModifire,panelPosition,panelUpload };
+                ,panelSalaryModifire,panelPosition};
             foreach (Panel panel in panelArr)
                 panel.BackColor = Color.FromArgb(0, 126, 249);
 
@@ -95,7 +95,6 @@ namespace EMS_Client.Forms
             {
                 employeeImage = new Bitmap(file);
                 pictureBox1.Image = employeeImage;
-                txtFile.Text = file;
             }
             catch { MessageBox.Show("Failed"); }
         }
@@ -118,7 +117,6 @@ namespace EMS_Client.Forms
                 { panelBaseSalary, txtBaseSalary.Text.Parsable(typeof(int)) },
                 { panelSalaryModifire, txtSalaryModifire.Text.Parsable(typeof(double)) },
                 { panelPosition, positionBox.Text != "" },
-                { panelUpload, pictureBox1 != null }
             };
             foreach (KeyValuePair<Panel, bool> item in test)
             {

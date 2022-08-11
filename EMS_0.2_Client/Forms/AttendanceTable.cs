@@ -98,6 +98,7 @@ namespace EMS_Client.Forms
         /// </summary>
         public void GenerateXlsxLog()
         {
+            if (log == null) return;
             Thread xlsxBuilder = new Thread(() =>
             {
                 File.WriteAllText(Directory.GetCurrentDirectory()+"\\TempClientConfig.txt",$"HoursLog.xlsx_output_directory={EMS_Library.Config.RootDirectory}");

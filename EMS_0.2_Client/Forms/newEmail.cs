@@ -98,8 +98,6 @@ namespace EMS_Client.Forms
 
         private bool CheckingDataFields()
         {
-            Checks checks = new Checks();
-
             Dictionary<Panel, bool> test = new Dictionary<Panel, bool>();
             test.Add(panelTo, txtTo.Text.Parsable(typeof(MailAddress)));
             test.Add(panelSubject, txtSubject.Text.Length>2);
@@ -107,12 +105,15 @@ namespace EMS_Client.Forms
             bool res = true;
             foreach (KeyValuePair<Panel, bool> item in test)
             {
-                if (item.Value) { item.Key.BackColor = Color.FromArgb(255, 102, 102); res &= false; }
+                if (!item.Value) { item.Key.BackColor = Color.FromArgb(255, 102, 102); res &= false; }
                 else { item.Key.BackColor = Color.FromArgb(0, 126, 249); res &= true; }
             }
             return res;
         }
-
+        public void Fill()
+        {
+            txtTo.Text = EMS_ClientMainScreen.employee.Email;
+        }
 
         #region Drag Window
         /// <summary>
