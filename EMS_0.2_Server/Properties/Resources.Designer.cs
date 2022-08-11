@@ -73,6 +73,16 @@ namespace EMS_0._2_Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap its_not_a_tumor {
+            get {
+                object obj = ResourceManager.GetObject("its-not-a-tumor", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap serverLogo {
             get {
                 object obj = ResourceManager.GetObject("serverLogo", resourceCulture);

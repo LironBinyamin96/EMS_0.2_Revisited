@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StandbyScreen));
             this.picStandbySphere = new System.Windows.Forms.PictureBox();
             this.lblStandBy = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.picStandbySphere)).BeginInit();
@@ -36,7 +35,7 @@
             // 
             // picStandbySphere
             // 
-            this.picStandbySphere.Image = ((System.Drawing.Image)(resources.GetObject("picStandbySphere.Image")));
+            this.picStandbySphere.Image = global::EMS_Client.Properties.Resources.its_not_a_tumor;
             this.picStandbySphere.Location = new System.Drawing.Point(42, 83);
             this.picStandbySphere.Name = "picStandbySphere";
             this.picStandbySphere.Size = new System.Drawing.Size(175, 175);
