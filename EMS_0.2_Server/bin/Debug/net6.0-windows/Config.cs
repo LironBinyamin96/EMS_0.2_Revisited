@@ -8,9 +8,9 @@ namespace EMS_Library
         public const int ServerPort = 13000; 
 
         public static string ServerIP = default;
-        public static string RootDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\EMS_Root";
-        public static string FR_Location = RootDirectory + "\\FR_Boot.cmd";
-        public static string FR_Images = RootDirectory + "\\Images";
+        public static readonly string RootDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\EMS_Root";
+        public static readonly string FR_Location = RootDirectory + "\\FR_Boot.cmd";
+        public static readonly string FR_Images = RootDirectory + "\\Images";
         #endregion
 
         #region SQL_server_config
@@ -39,10 +39,11 @@ namespace EMS_Library
         public static string PythonDBConnection = "";
         #endregion
 
-        #region Legal
-        public static TimeSpan NormalShiftLength = new TimeSpan(0, 8, 0, 0);
-        public static TimeSpan MaxShiftLength = new TimeSpan(0, 12, 0, 0);
-        public static string[] NullableEmployeeData = { "MName", "MiddleName", "_mName", "Gender", "_gender" };
+        #region General
+        public static readonly TimeSpan NormalShiftLength = new TimeSpan(0, 8, 0, 0);
+        public static readonly TimeSpan MaxShiftLength = new TimeSpan(0, 12, 0, 0);
+        public static readonly string[] NullableEmployeeData = { "MName", "MiddleName", "_mName", "Gender", "_gender" };
+        public static readonly DateTime MinDate = DateTime.Parse("1800-01-01 00:00:00");
         #endregion
 
         #region FR & Imaging

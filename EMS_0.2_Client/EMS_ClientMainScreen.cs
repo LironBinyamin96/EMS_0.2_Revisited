@@ -29,7 +29,7 @@ namespace EMS_Client
         {
             if (!Directory.Exists(Config.RootDirectory)) //Create working directory if it doesn't exist
                 Directory.CreateDirectory(Config.RootDirectory);
-            Action serverLookup = () =>
+            Action serverLookup = () => //Method to look for the server.
             {
                 EMS_Library.Network.ServerAddressResolver.ServerIP(false);
                 (Array.Find(PrimaryForms.ToArray(), x => x is EMS_ClientMainScreen) as EMS_ClientMainScreen).Invoke(() => PrimaryForms.Pop().Close());
@@ -48,16 +48,6 @@ namespace EMS_Client
                 byte[] buffer = Requests.GetImage(packet);
                 if (!buffer.IsEmpty(10))
                 {
-                    /*
-                    PixelQueueOverflow overflow = new PixelQueueOverflow();
-                    for (int i = 0; i < buffer.Length;)
-                    {
-                        
-                        overflow.Add(new byte[] { buffer[i++], buffer[i++], buffer[i++] });
-                        if (overflow.Empty) break;
-                    }
-                    Array.Resize(ref buffer, packet.ByteData.Length);
-                    */
                     File.WriteAllBytes(Config.RootDirectory + "\\test.jpg", buffer);
                     File.WriteAllBytes(Config.RootDirectory + "\\test.txt", buffer);
                     userPicture.Image = new ImageConverter().ConvertFrom(buffer) as Bitmap;

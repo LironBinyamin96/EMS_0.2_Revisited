@@ -178,7 +178,7 @@ namespace EMS_Library
         {
             if(collection == null || collection.Count() == 0) return;
             foreach (T item in collection)
-                Console.WriteLine(item.ToString());
+                if(item!=null) Console.WriteLine(item.ToString());
         }
 
         /// <summary>

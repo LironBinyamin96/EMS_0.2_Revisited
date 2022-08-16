@@ -43,6 +43,17 @@ namespace EMS_Library.MyEmployee.HoursLog
                 return sum;
             }
         }
+        public TimeSpan Average
+        {
+            get
+            {
+                int count = 0;
+                foreach (HoursLogDay day in Days)
+                    if (day != null && day.Total > TimeSpan.Zero)
+                        count++;
+                return Total / count;
+            }
+        }
 
         public HoursLogMonth(string[] data, Employee employee)
         {

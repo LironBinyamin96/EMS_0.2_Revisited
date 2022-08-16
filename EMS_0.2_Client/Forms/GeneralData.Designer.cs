@@ -29,7 +29,6 @@ namespace EMS_Client.Forms
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GeneralData));
             this.panelGeneralData = new System.Windows.Forms.Panel();
             this.lblGeneralData = new System.Windows.Forms.Label();
             this.btnSelect = new System.Windows.Forms.Button();
@@ -62,6 +61,7 @@ namespace EMS_Client.Forms
             this.panel2 = new System.Windows.Forms.Panel();
             this.lblAvgText = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.yearPicker = new System.Windows.Forms.ComboBox();
             this.panelGeneralData.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -131,7 +131,7 @@ namespace EMS_Client.Forms
             this.panel1.Controls.Add(this.monthBar2);
             this.panel1.Controls.Add(this.monthBar1);
             this.panel1.Controls.Add(this.monthBar0);
-            this.panel1.Location = new System.Drawing.Point(247, 91);
+            this.panel1.Location = new System.Drawing.Point(247, 143);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(471, 240);
             this.panel1.TabIndex = 5;
@@ -284,7 +284,7 @@ namespace EMS_Client.Forms
             this.lblJan.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblJan.AutoSize = true;
             this.lblJan.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.lblJan.Location = new System.Drawing.Point(724, 96);
+            this.lblJan.Location = new System.Drawing.Point(724, 148);
             this.lblJan.Name = "lblJan";
             this.lblJan.Size = new System.Drawing.Size(47, 15);
             this.lblJan.TabIndex = 7;
@@ -295,7 +295,7 @@ namespace EMS_Client.Forms
             this.lblFeb.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblFeb.AutoSize = true;
             this.lblFeb.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.lblFeb.Location = new System.Drawing.Point(724, 116);
+            this.lblFeb.Location = new System.Drawing.Point(724, 168);
             this.lblFeb.Name = "lblFeb";
             this.lblFeb.Size = new System.Drawing.Size(53, 15);
             this.lblFeb.TabIndex = 8;
@@ -306,7 +306,7 @@ namespace EMS_Client.Forms
             this.lblMar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblMar.AutoSize = true;
             this.lblMar.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.lblMar.Location = new System.Drawing.Point(724, 136);
+            this.lblMar.Location = new System.Drawing.Point(724, 188);
             this.lblMar.Name = "lblMar";
             this.lblMar.Size = new System.Drawing.Size(41, 15);
             this.lblMar.TabIndex = 9;
@@ -317,7 +317,7 @@ namespace EMS_Client.Forms
             this.lblApr.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblApr.AutoSize = true;
             this.lblApr.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.lblApr.Location = new System.Drawing.Point(724, 156);
+            this.lblApr.Location = new System.Drawing.Point(724, 208);
             this.lblApr.Name = "lblApr";
             this.lblApr.Size = new System.Drawing.Size(32, 15);
             this.lblApr.TabIndex = 10;
@@ -328,7 +328,7 @@ namespace EMS_Client.Forms
             this.lblMay.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblMay.AutoSize = true;
             this.lblMay.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.lblMay.Location = new System.Drawing.Point(724, 176);
+            this.lblMay.Location = new System.Drawing.Point(724, 228);
             this.lblMay.Name = "lblMay";
             this.lblMay.Size = new System.Drawing.Size(30, 15);
             this.lblMay.TabIndex = 11;
@@ -339,7 +339,7 @@ namespace EMS_Client.Forms
             this.lblJun.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblJun.AutoSize = true;
             this.lblJun.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.lblJun.Location = new System.Drawing.Point(724, 196);
+            this.lblJun.Location = new System.Drawing.Point(724, 248);
             this.lblJun.Name = "lblJun";
             this.lblJun.Size = new System.Drawing.Size(31, 15);
             this.lblJun.TabIndex = 12;
@@ -350,7 +350,7 @@ namespace EMS_Client.Forms
             this.lblJul.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblJul.AutoSize = true;
             this.lblJul.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.lblJul.Location = new System.Drawing.Point(724, 216);
+            this.lblJul.Location = new System.Drawing.Point(724, 268);
             this.lblJul.Name = "lblJul";
             this.lblJul.Size = new System.Drawing.Size(27, 15);
             this.lblJul.TabIndex = 13;
@@ -361,7 +361,7 @@ namespace EMS_Client.Forms
             this.lblAug.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblAug.AutoSize = true;
             this.lblAug.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.lblAug.Location = new System.Drawing.Point(724, 236);
+            this.lblAug.Location = new System.Drawing.Point(724, 288);
             this.lblAug.Name = "lblAug";
             this.lblAug.Size = new System.Drawing.Size(45, 15);
             this.lblAug.TabIndex = 14;
@@ -372,7 +372,7 @@ namespace EMS_Client.Forms
             this.lblSep.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblSep.AutoSize = true;
             this.lblSep.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.lblSep.Location = new System.Drawing.Point(724, 256);
+            this.lblSep.Location = new System.Drawing.Point(724, 308);
             this.lblSep.Name = "lblSep";
             this.lblSep.Size = new System.Drawing.Size(64, 15);
             this.lblSep.TabIndex = 15;
@@ -383,7 +383,7 @@ namespace EMS_Client.Forms
             this.lblOct.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblOct.AutoSize = true;
             this.lblOct.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.lblOct.Location = new System.Drawing.Point(724, 276);
+            this.lblOct.Location = new System.Drawing.Point(724, 328);
             this.lblOct.Name = "lblOct";
             this.lblOct.Size = new System.Drawing.Size(50, 15);
             this.lblOct.TabIndex = 16;
@@ -394,7 +394,7 @@ namespace EMS_Client.Forms
             this.lblNov.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblNov.AutoSize = true;
             this.lblNov.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.lblNov.Location = new System.Drawing.Point(724, 296);
+            this.lblNov.Location = new System.Drawing.Point(724, 348);
             this.lblNov.Name = "lblNov";
             this.lblNov.Size = new System.Drawing.Size(63, 15);
             this.lblNov.TabIndex = 17;
@@ -405,7 +405,7 @@ namespace EMS_Client.Forms
             this.lblDec.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblDec.AutoSize = true;
             this.lblDec.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.lblDec.Location = new System.Drawing.Point(724, 316);
+            this.lblDec.Location = new System.Drawing.Point(724, 368);
             this.lblDec.Name = "lblDec";
             this.lblDec.Size = new System.Drawing.Size(61, 15);
             this.lblDec.TabIndex = 18;
@@ -413,21 +413,17 @@ namespace EMS_Client.Forms
             // 
             // lblEmpData
             // 
-            this.lblEmpData.AutoSize = true;
             this.lblEmpData.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.lblEmpData.Location = new System.Drawing.Point(5, 306);
+            this.lblEmpData.Location = new System.Drawing.Point(5, 308);
             this.lblEmpData.Name = "lblEmpData";
-            this.lblEmpData.Size = new System.Drawing.Size(186, 135);
+            this.lblEmpData.Size = new System.Drawing.Size(193, 96);
             this.lblEmpData.TabIndex = 19;
-            this.lblEmpData.Text = "Here will be some employee stats.\r\nMaybe a name\r\nAnd a Last Name\r\nAnd then\r\nLet\'s" +
-    " say number of hours \r\nworked total?\r\nAverage Daily?\r\nAverage entrances and exit" +
-    "s?\r\nMay be something else?";
             // 
             // panel2
             // 
             this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.panel2.Controls.Add(this.lblAvgText);
-            this.panel2.Location = new System.Drawing.Point(214, 85);
+            this.panel2.Location = new System.Drawing.Point(214, 137);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(586, 267);
             this.panel2.TabIndex = 20;
@@ -444,13 +440,23 @@ namespace EMS_Client.Forms
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(5, 137);
+            this.pictureBox1.Location = new System.Drawing.Point(12, 137);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(193, 154);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.Size = new System.Drawing.Size(169, 163);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 21;
             this.pictureBox1.TabStop = false;
+            // 
+            // yearPicker
+            // 
+            this.yearPicker.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(58)))));
+            this.yearPicker.ForeColor = System.Drawing.Color.DodgerBlue;
+            this.yearPicker.FormattingEnabled = true;
+            this.yearPicker.Location = new System.Drawing.Point(597, 108);
+            this.yearPicker.Name = "yearPicker";
+            this.yearPicker.Size = new System.Drawing.Size(121, 23);
+            this.yearPicker.TabIndex = 22;
+            this.yearPicker.SelectedIndexChanged += new System.EventHandler(this.yearPicker_SelectedIndexChanged);
             // 
             // GeneralData
             // 
@@ -458,6 +464,7 @@ namespace EMS_Client.Forms
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.yearPicker);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.lblEmpData);
             this.Controls.Add(this.lblDec);
@@ -479,7 +486,6 @@ namespace EMS_Client.Forms
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "GeneralData";
             this.Text = "GeneralData";
-            this.Load += new System.EventHandler(this.GeneralData_Load);
             this.panelGeneralData.ResumeLayout(false);
             this.panelGeneralData.PerformLayout();
             this.panel1.ResumeLayout(false);
@@ -529,5 +535,6 @@ namespace EMS_Client.Forms
         private Panel panel2;
         private Label lblAvgText;
         private PictureBox pictureBox1;
+        private ComboBox yearPicker;
     }
 }

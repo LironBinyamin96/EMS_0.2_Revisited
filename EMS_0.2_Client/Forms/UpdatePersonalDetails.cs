@@ -93,7 +93,7 @@ namespace EMS_Client.Forms
             if (delete == DialogResult.OK)
             {
                 
-                string querry = Requests.Delete(int.Parse(txtID.Text));
+                string querry = Requests.Delete(EMS_ClientMainScreen.employee.IntId);
                 string[] buffer = Requests.RequestFromServer(querry,4);
                 Clear();
             }

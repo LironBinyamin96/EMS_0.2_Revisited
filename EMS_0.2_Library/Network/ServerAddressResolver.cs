@@ -10,11 +10,12 @@ namespace EMS_Library.Network
 {
     public class ServerAddressResolver
     {
-        public static bool LookedUp=false;
+        public static bool LookedUp=false; //(true if had to look for the server) Notify user that he should update server ip in the config.
+
         /// <summary>
         /// Mothod for resolving IP addresses for both client and server.
         /// </summary>
-        /// <param name="server">Indicates if method located at server side</param>
+        /// <param name="server">Indicates if method called by the server</param>
         /// <exception cref="Exception">Could not find a server</exception>
         static public void ServerIP(bool server)
         {
@@ -22,20 +23,7 @@ namespace EMS_Library.Network
 
             if (server) //Am i a server?
             {
-                //Figure out what is my IP address
-                foreach (NetworkInterface netInterface in NetworkInterface.GetAllNetworkInterfaces())
-                {
-                    Console.WriteLine("Name: " + netInterface.Name);
-                    Console.WriteLine("Description: " + netInterface.Description);
-                    Console.WriteLine("Addresses: ");
-                    IPInterfaceProperties ipProps = netInterface.GetIPProperties();
-                    foreach (UnicastIPAddressInformation addr in ipProps.UnicastAddresses)
-                    {
-                        Console.WriteLine(" " + addr.Address.ToString());
-                    }
-                    Console.WriteLine("");
-                }
-
+                //Find suitable IP to operate from.
                 NetworkInterface netFace = Array.Find(NetworkInterface.GetAllNetworkInterfaces(), x => x.Name.Split().Last() == "Ethernet" && x.OperationalStatus == OperationalStatus.Up);
                 if (netFace == null)
                 {
@@ -44,8 +32,6 @@ namespace EMS_Library.Network
                 }
 
                 IPInterfaceProperties x = netFace.GetIPProperties();
-
-                Array.ConvertAll(x.UnicastAddresses.ToArray(), x => x.Address.ToString()).DebugPrint();
                 var temp = Array.Find(x.UnicastAddresses.ToArray(), x => x.Address.ToString().Contains("192.168."));
                 if (temp != null) Config.ServerIP = temp.Address.ToString();
             }
@@ -60,21 +46,23 @@ namespace EMS_Library.Network
                         string ip = $"192.168.{i}.{j}";
                         using (TcpClient tcp = new TcpClient())
                         {
-                            IAsyncResult ar = tcp.BeginConnect(ip, Config.ServerPort, null, null);
+                            IAsyncResult ar = tcp.BeginConnect(ip, Config.ServerPort, null, null); //Try to connect
                             WaitHandle wh = ar.AsyncWaitHandle;
                             try
                             {
-                                if (!ar.AsyncWaitHandle.WaitOne(TimeSpan.FromMilliseconds(2), false))
+                                if (!ar.AsyncWaitHandle.WaitOne(TimeSpan.FromMilliseconds(2), false)) //Wait for 2ms.
                                 {
-                                    tcp.Close();
+                                    tcp.Close(); //If 2ms passed without responce=>stop.
                                     throw new TimeoutException();
                                 }
+
+                                //If you managed to connect try to send request in EMS format to double-check that this is EMS server. (ping)
                                 NetworkStream stream = tcp.GetStream();
                                 DataPacket ping = new DataPacket("Ping", 255);
                                 stream.Write(ping.Write(), 0, ping.GetTotalSize());
                                 DataPacket responce = new DataPacket(stream);
-                                if (responce.StringData.ToLower() == "ping")
-                                    Config.ServerIP = $"192.168.{i}.{j}";
+                                if (responce.StringData.ToLower() == "ping") //If responce is "ping", you've found the server.
+                                    Config.ServerIP = $"192.168.{i}.{j}";    //Remember the address.
                                 tcp.EndConnect(ar);
                                 wh.Close();
                                 LookedUp = true;
