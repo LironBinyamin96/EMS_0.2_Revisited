@@ -41,11 +41,19 @@ namespace EMS_Client.Forms
                 {"_intId", txtIntId.Text},
                 {"_password",$"'{txtPassword.Text}'" }
             });
-            string[] buffer = Requests.RequestFromServer(querry,1);
+            string[] buffer = Requests.RequestFromServer(querry, 1);
 
             //Credentials check
+
             if (buffer.Length == 0 || buffer[0] == "-1")
-            { MessageBox.Show("Wrong credentials"); return; }
+            {
+                Employee emp = Employee.ActivateEmployee(buffer[0].Split(','));
+                if (!(emp is EMS_Library.MyEmployee.IAccess.IExtendedAccess))
+                {
+                    MessageBox.Show("Wrong credentials");
+                    return;
+                }
+            }
 
             EMS_ClientMainScreen.CurEmployee = Employee.ActivateEmployee(buffer[0].Split(','));
             Close();

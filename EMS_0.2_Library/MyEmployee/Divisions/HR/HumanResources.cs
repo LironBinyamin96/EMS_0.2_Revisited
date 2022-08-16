@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace EMS_Library.MyEmployee.Divisions
 {
-    public abstract class HumanResources : Employee, IAccess.IBasicAccess
+    public abstract class HumanResources : Employee, IAccess.IExtendedAccess
     {
         protected HumanResources(string data) : base(data)
         {
