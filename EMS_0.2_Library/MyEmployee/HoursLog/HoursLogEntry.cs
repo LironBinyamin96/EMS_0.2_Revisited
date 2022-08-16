@@ -18,7 +18,8 @@ namespace EMS_Library.MyEmployee.HoursLog
         public int IntId { get => _IntId; set => _IntId = value; }
         public DateTime Start { get => _start; set => _start = value; }
         public DateTime End { get => _end; set => _end = value; }
-        public TimeSpan Total => _end -_start;
+        public TimeSpan Total => (_end - _start) > TimeSpan.Zero ? (_end - _start) : TimeSpan.Zero;
+
         public HoursLogEntry(string data)
         {
             string[] hold = data.Split(',');

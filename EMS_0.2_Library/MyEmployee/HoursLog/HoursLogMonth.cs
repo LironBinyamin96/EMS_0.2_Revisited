@@ -27,8 +27,11 @@ namespace EMS_Library.MyEmployee.HoursLog
             {
                 TimeSpan sum = TimeSpan.Zero;
                 foreach (HoursLogDay day in Days)
+                {
                     if (day != null)
                         sum += day.Total;
+                }
+
                 return sum;
             }
         }

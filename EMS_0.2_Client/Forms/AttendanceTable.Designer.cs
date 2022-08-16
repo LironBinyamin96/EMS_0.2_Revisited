@@ -61,6 +61,7 @@
             this.hoursLogMonthBindingSource2 = new System.Windows.Forms.BindingSource(this.components);
             this.hoursLogMonthBindingSource3 = new System.Windows.Forms.BindingSource(this.components);
             this.button1 = new System.Windows.Forms.Button();
+            this.lblNoData = new System.Windows.Forms.Label();
             this.panelAttendance.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GridViewAttrndance)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.getDaysBindingSource)).BeginInit();
@@ -352,12 +353,25 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // lblNoData
+            // 
+            this.lblNoData.AutoSize = true;
+            this.lblNoData.Font = new System.Drawing.Font("Bahnschrift", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblNoData.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
+            this.lblNoData.Location = new System.Drawing.Point(271, 228);
+            this.lblNoData.Name = "lblNoData";
+            this.lblNoData.Size = new System.Drawing.Size(195, 35);
+            this.lblNoData.TabIndex = 22;
+            this.lblNoData.Text = "No data found";
+            this.lblNoData.Visible = false;
+            // 
             // AttendanceTable
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
             this.ClientSize = new System.Drawing.Size(758, 575);
+            this.Controls.Add(this.lblNoData);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.btnShowHours);
             this.Controls.Add(this.dateTime);
@@ -419,5 +433,6 @@
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
         private DataGridViewTextBoxColumn total_hours;
         private Button button1;
+        private Label lblNoData;
     }
 }

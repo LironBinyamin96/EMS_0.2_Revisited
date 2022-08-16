@@ -88,9 +88,16 @@ namespace EMS_Client.Forms
             DateTime temp = DateTime.Parse("01/" + dateTime.Text);
             string querry = Requests.GetHourLogs(EMS_ClientMainScreen.employee.IntId, temp.Year, temp.Month);
             string[] buffer = Requests.RequestFromServer(querry, 5);
-            if (buffer[0] != "-1")
+            if (buffer[0] != "-1") 
+            {
                 log = new HoursLogMonth(buffer.ToArray(), EMS_ClientMainScreen.employee);
-            else log = null;
+                lblNoData.Visible = false;
+            }
+            else 
+            {
+                log = null;
+                lblNoData.Visible = true;
+            }
         }
 
         /// <summary>
