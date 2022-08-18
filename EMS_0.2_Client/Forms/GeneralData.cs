@@ -19,6 +19,10 @@ namespace EMS_Client.Forms
         private HoursLogMonth[] data;
         private bool employeeChanged=false;
         private bool firtsOpen = true;
+
+        /// <summary>
+        /// Constructor for GeneralData screen.
+        /// </summary>
         public GeneralData()
         {
             InitializeComponent();
@@ -31,30 +35,26 @@ namespace EMS_Client.Forms
             firtsOpen = false;
         }
 
-
+        /// <summary>
+        /// Button for selecting employee.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnSelect_Click(object sender, EventArgs e)
         {
             selectEmployee select_Employee = new selectEmployee(this);
             select_Employee.Show();
             employeeChanged = true;
         }
+
+        /// <summary>
+        /// Triggered when selecting a year.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void yearPicker_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (!firtsOpen) Fill();
-        }
-
-        /// <summary>
-        /// Retrieves selected employee data from the server
-        /// </summary>
-        void GetData()
-        {
-            if (EMS_ClientMainScreen.employee == null) { MessageBox.Show("No employee selected!"); return; }
-            data = new HoursLogMonth[12];
-            for (int i = 1; i <= 12; i++)
-            {
-                string[] responce = Requests.RequestFromServer(Requests.GetHourLogs(EMS_ClientMainScreen.employee.IntId, (int)yearPicker.SelectedValue, i), 5);
-                if (responce[0] != "-1") data[i] = new HoursLogMonth(responce, EMS_ClientMainScreen.employee);
-            }
         }
 
         /// <summary>
@@ -62,15 +62,22 @@ namespace EMS_Client.Forms
         /// </summary>
         public void Fill()
         {
-            GetData();
+            // Retrieves selected employee data from the server
+            if (EMS_ClientMainScreen.employee == null) { MessageBox.Show("No employee selected!"); return; }
+            data = new HoursLogMonth[12];
+            for (int i = 1; i <= 12; i++)
+            {
+                string[] responce = Requests.RequestFromServer(Requests.GetHourLogs(EMS_ClientMainScreen.employee.IntId, (int)yearPicker.SelectedValue, i), 5);
+                if (responce[0] != "-1") data[i] = new HoursLogMonth(responce, EMS_ClientMainScreen.employee);
+            }
+
+            //Fill controls
             if (data == null) { MessageBox.Show("No data available!"); return; }
             for (int i = 0; i < progressBars.Length; i++)
             {
                 if (data[i] != null)
-                {
-                    int barValue = (int)(data[i].Total.Hours / 7.056); //7.056 is a 1% of total hours in month
-                    progressBars[i].Value = barValue >= 0 ? barValue : 0;
-                }
+                    // = total hours worked / (Max work hours in month / 100%)
+                    progressBars[i].Value = (int)(data[i].Total.TotalHours / (Config.MaxShiftLength.TotalHours * Config.WorkDaysInWeek * (DateTime.DaysInMonth(data[i].Year, data[i].Month) / 7) / 100));
                 else progressBars[i].Value = 0;
             }
 
@@ -79,7 +86,7 @@ namespace EMS_Client.Forms
                 $"Total: {(float)data.Sum(x => x?.Average.Hours):F2}\n" +
                 $"Daily average: {(float)data.Sum(x => x?.Average.Hours) / 12:F2} hours";
             lblEmpData.Text = empData;
-            if (employeeChanged)
+            if (employeeChanged) //Only request picture if employee changed to reduce traffic
             {
                 pictureBox1.Image = (Bitmap)new ImageConverter().ConvertFrom(Requests.GetImage(new EMS_Library.Network.DataPacket(EMS_ClientMainScreen.employee.IntId.ToString(), 6)));
                 employeeChanged = false;

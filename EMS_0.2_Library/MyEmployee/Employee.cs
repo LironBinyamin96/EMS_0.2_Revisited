@@ -127,67 +127,11 @@ namespace EMS_Library.MyEmployee
             try { return Activator.CreateInstance(Type.GetType("EMS_Library.MyEmployee.Divisions." + hold[0]), temp.Trim()) as Employee; }
             catch { return null; }
         }
-        public static Employee GetStockEmployee()
-        {
-            return new Divisions.IT_Boss(
-                int.MaxValue / 10,
-                "689175846",
-                "Fstock",
-                "Lstock",
-                "Mstock",
-                "123",
-                "email@gmail.com",
-                "Four-dimensional bullshit",
-                DateTime.Parse("01/02/0003"),
-                DateTime.Now,
-                "1",
-                69.96,
-                1.5,
-                "0983246875",
-                "Lala Land"
-                );
-        }
-        public static Employee RandomEmployeeGenerator(int _intId)
-        {
 
-            string RandomEmployeeType()
-            {
-                int num = Utility.RandomInt(1);
-                switch (num)
-                {
-                    default: return typeof(IT_Boss).Name;
-                    case 0: return typeof(HR_Boss).Name;
-                    case 1: return typeof(HR_Grunt).Name;
-                    case 2: return typeof(Worker).Name;
-                    case 3: return typeof(Mechanic).Name;
-                    case 4: return typeof(Supplementary).Name;
-                    case 5: return typeof(IT_Boss).Name;
-                    case 6: return typeof(IT_Grunt).Name;
-                    case 7: return typeof(HR_Boss).Name;
-                    case 8: return typeof(Worker).Name;
-                    case 9: return typeof(Mechanic).Name;
-                }
-            }
-            return ActivateEmployee(new object[]
-            {
-                RandomEmployeeType(),                           //Type
-                _intId,                                         //IntID must be send from outside
-                Utility.RandomInt(9),                           //StatedID
-                Utility.RandomString(Utility.RandomInt(5,15)),  //fName
-                Utility.RandomString(Utility.RandomInt(5,15)),  //lName
-                Utility.RandomString(Utility.RandomInt(5,15)),  //mName
-                "1234",                                         //Password
-                Utility.RandomString(Utility.RandomInt(5,10))+'@'+Utility.RandomString(Utility.RandomInt(3,7))+".com", //email
-                Utility.RandomBool()?"male":"female",           //Gender
-                DateTime.Parse("01/02/0003"),                   //BirthDate
-                DateTime.Now,                                   //Created At
-                "1",                                            //Employee status
-                Utility.RandomInt(2),                           //Salary
-                1,                                              //Salary modifire
-                Utility.RandomNumericString(10),                //Phone Number
-                Utility.RandomString(Utility.RandomInt(15,50)), //Address
-            });
-        }
+        /// <summary>
+        /// Provides string representing the employee.
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
             return $"" +
@@ -208,6 +152,11 @@ namespace EMS_Library.MyEmployee
                $"'{_phoneNumber}'," +
                $"'{_address}'";
         }
+
+        /// <summary>
+        /// Provides dictionary of fields and their values.
+        /// </summary>
+        /// <returns></returns>
         public Dictionary<string, string> ProvideFieldsAndValues()
         {
             return new Dictionary<string, string>() {

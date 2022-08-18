@@ -54,6 +54,7 @@ namespace EMS_Client.Forms
             callerForm.Activate();
             Close();
         }
+
         #region Drag Window
         /// <summary>
         /// Controlls form movement during drag.

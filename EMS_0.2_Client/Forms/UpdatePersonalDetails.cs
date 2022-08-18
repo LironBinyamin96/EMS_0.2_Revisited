@@ -112,6 +112,14 @@ namespace EMS_Client.Forms
             EMS_ClientMainScreen.employee = null;
             Close();
         }
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            Panel[] panelArr = new Panel[] { panelID, panelFname, panelLname, panelDate, panelAddres, panelPhone, panelEmail, panelBaseSalary
+                ,panelSalaryModifire,panelPosition };
+            foreach (Panel panel in panelArr)
+                panel.BackColor = Color.FromArgb(0, 126, 249);
+
+        }
         #endregion
 
         private bool CheckingDataFields()
@@ -176,13 +184,6 @@ namespace EMS_Client.Forms
         }
         #endregion
 
-        private void btnCancel_Click(object sender, EventArgs e)
-        {
-            Panel[] panelArr = new Panel[] { panelID, panelFname, panelLname, panelDate, panelAddres, panelPhone, panelEmail, panelBaseSalary
-                ,panelSalaryModifire,panelPosition };
-            foreach (Panel panel in panelArr)
-                panel.BackColor = Color.FromArgb(0, 126, 249);
 
-        }
     }
 }

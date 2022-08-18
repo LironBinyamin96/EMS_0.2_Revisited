@@ -8,6 +8,9 @@ using System.Net.Sockets;
 
 namespace EMS_Library.Network
 {
+    /// <summary>
+    /// Class for resolving server address.
+    /// </summary>
     public class ServerAddressResolver
     {
         public static bool LookedUp=false; //(true if had to look for the server) Notify user that he should update server ip in the config.

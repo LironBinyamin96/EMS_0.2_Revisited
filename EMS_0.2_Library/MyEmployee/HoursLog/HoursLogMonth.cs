@@ -21,6 +21,10 @@ namespace EMS_Library.MyEmployee.HoursLog
         public HoursLogDay[] Days { get => _days; set => _days = value; }
         public int Month => _month;
         public int Year => _year;
+
+        /// <summary>
+        /// Provides total amount of hours worked.
+        /// </summary>
         public TimeSpan Total
         {
             get
@@ -35,6 +39,10 @@ namespace EMS_Library.MyEmployee.HoursLog
                 return sum;
             }
         }
+
+        /// <summary>
+        /// Provides total amount of overtime.
+        /// </summary>
         public TimeSpan TotalOvertime
         {
             get
@@ -46,6 +54,10 @@ namespace EMS_Library.MyEmployee.HoursLog
                 return sum;
             }
         }
+
+        /// <summary>
+        /// Provides average amount of daily hours worked
+        /// </summary>
         public TimeSpan Average
         {
             get
@@ -69,11 +81,12 @@ namespace EMS_Library.MyEmployee.HoursLog
             _days = new HoursLogDay[daysInMonth];
 
             for (int i = 0; i < daysInMonth; i++)
-            {
                 _days[i] = new HoursLogDay(Array.FindAll(entries, x => x.Start.Day == i + 1), new DateTime(_year, _month, i + 1));
-            }
         }
 
+        /// <summary>
+        /// Provides string representing the log in JSON format.
+        /// </summary>
         public string JSON()
         {
             string hold = $"{{" +
@@ -92,6 +105,11 @@ namespace EMS_Library.MyEmployee.HoursLog
 
             return hold;
         }
+
+        /// <summary>
+        /// Provides the log in format that is suitable for the WinForms Table component.
+        /// </summary>
+        /// <returns></returns>
         public string[][] GetHoursLogTableStructure()
         {
             string[][] Data = new string[DateTime.DaysInMonth(Year, Month)][];

@@ -1,6 +1,9 @@
 ﻿
 namespace EMS_Library
 {
+    /// <summary>
+    /// Class containing user defined configurations for the programm.
+    /// </summary>
     public static class Config
     {
         #region Server_Config
@@ -40,6 +43,7 @@ namespace EMS_Library
         #endregion
 
         #region General
+        public const int WorkDaysInWeek = 5;
         public static readonly TimeSpan NormalShiftLength = new TimeSpan(0, 8, 0, 0);
         public static readonly TimeSpan MaxShiftLength = new TimeSpan(0, 12, 0, 0);
         public static readonly string[] NullableEmployeeData = { "MName", "MiddleName", "_mName", "Gender", "_gender" };

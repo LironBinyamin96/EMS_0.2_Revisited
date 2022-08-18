@@ -9,14 +9,51 @@ using System.Runtime.Serialization;
 
 namespace EMS_Library
 {
+    /// <summary>
+    /// Class containing utility methods for the programm.
+    /// </summary>
     public static class Utility
     {
         private static Random rnd = new Random();
+
+        /// <summary>
+        /// Generates random number in specified range.
+        /// </summary>
+        /// <param name="floor"></param>
+        /// <param name="ceiling"></param>
+        /// <returns>Random number</returns>
         public static int RandomInt(int floor, int ceiling) => rnd.Next(floor, ceiling);
+
+        /// <summary>
+        /// Generates random nuber with specified number of didgits.
+        /// </summary>
+        /// <param name="numOfDigits"></param>
+        /// <returns></returns>
         public static int RandomInt(int numOfDigits) => rnd.Next((int)(1 * Math.Pow(10, numOfDigits - 1)), (int)(1 * Math.Pow(10, numOfDigits)));
+
+        /// <summary>
+        /// Generates random boolean value.
+        /// </summary>
+        /// <returns></returns>
         public static bool RandomBool() => rnd.Next(2) == 1;
+
+        /// <summary>
+        /// Generates random char.
+        /// </summary>
+        /// <returns></returns>
         public static char RandomChar() => (char)rnd.Next((int)'a', (int)'z' + 1);
+
+        /// <summary>
+        /// Generates random numeric char.
+        /// </summary>
+        /// <returns></returns>
         public static char RandomNumericChar() => (char)rnd.Next((int)'0', (int)'9' + 1);
+
+        /// <summary>
+        /// Generates random string of specified length.
+        /// </summary>
+        /// <param name="len"></param>
+        /// <returns></returns>
         public static string RandomString(int len)
         {
             string str = "";
@@ -24,6 +61,12 @@ namespace EMS_Library
                 str += RandomChar();
             return str;
         }
+
+        /// <summary>
+        /// Generates random string of specified length that contains only numbers.
+        /// </summary>
+        /// <param name="len"></param>
+        /// <returns></returns>
         public static string RandomNumericString(int len)
         {
             string str = "";
@@ -33,6 +76,10 @@ namespace EMS_Library
 
         }
 
+        /// <summary>
+        /// Generates random DateTime object.
+        /// </summary>
+        /// <returns></returns>
         public static DateTime RandomDateTime() => new DateTime(RandomInt(1800, 2022), RandomInt(1, 13), RandomInt(1, 29), RandomInt(0,24), RandomInt(0, 60), RandomInt(0, 60));
         
         /// <summary>
@@ -89,7 +136,7 @@ namespace EMS_Library
         }
 
         /// <summary>
-        /// Prefoms "bit by bit" comparison of two objects.
+        /// Prefoms "bit by bit" comparison between two objects.
         /// </summary>
         /// <param name="obj"></param>
         /// <param name="other"></param>
@@ -170,7 +217,7 @@ namespace EMS_Library
         }
 
         /// <summary>
-        /// Prints any enumerable collection intop console.
+        /// Prints any enumerable collection into console.
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="collection"></param>

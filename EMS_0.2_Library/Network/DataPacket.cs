@@ -73,12 +73,12 @@ namespace EMS_Library.Network
             if (Config.DevelopmentMode)
                 Console.WriteLine("Creation complete!\n" + ToString());
         }
-        public DataPacket(DataPacket data)
-        {
-            _header = data._header;
-            _byteData = data.ByteData;
-            StringData = data.StringData;
-        }
+
+        /// <summary>
+        /// Constructs data packet out of byte array. (used for transfering pictures) 
+        /// </summary>
+        /// <param name="data"></param>
+        /// <param name="func"></param>
         public DataPacket(byte[] data, byte func=255)
         {
             _header = new DataPacketHeader(data.Length, func);
@@ -89,14 +89,12 @@ namespace EMS_Library.Network
                 Console.WriteLine("Creation complete!\n" + ToString());
             }
         }
+
+        /// <summary>
+        /// Provides data in format that is suitable for writing into the network stream.
+        /// </summary>
+        /// <returns></returns>
         public byte[] Write() => _header.GetHeader().Concat(_byteData).ToArray();
-
-        public void WriteToStream(NetworkStream stream)
-        {
-            for (int i = 0; i < _header.DataIntLength; i++)
-                stream.WriteByte(_byteData[i]);
-        }
-
 
         /// <summary>
         /// Returns a Copy of the byte array.
@@ -111,18 +109,21 @@ namespace EMS_Library.Network
             }
         }
 
+
+        /// <summary>
+        /// Calculates total size of data to be transfered. (including the header)
+        /// </summary>
+        /// <returns></returns>
         public int GetTotalSize() => _header.DataIntLength + _header.HeaderSize;
+
+        /// <summary>
+        /// Provides string representing the DataPacket object. (Won't provide data if it's longer than 1000 characters.)
+        /// </summary>
+        /// <returns></returns>
         public override string ToString() 
         {
             if(StringData.Length<1000) return $"Header: [{_header}], Data: [{StringData}]";
             else return $"Header: [{_header}]";
-        }
-
-        private void PrintDebug()
-        {
-            foreach (byte a in _byteData)
-                Console.Write((char)a);
-            Console.WriteLine();
         }
     }
 }
