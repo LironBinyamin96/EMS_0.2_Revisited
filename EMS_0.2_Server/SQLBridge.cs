@@ -33,7 +33,7 @@ namespace EMS_Server
         /// שאילתה דו כיווני
         /// Sends provided querry to the server.
         /// </summary>
-        /// <returns> Responce from the server (Listof objects or an object depending on the querry). </returns>
+        /// <returns> Responce from the server (string where each object is separated by | ). </returns>
         public static string TwoWayCommand(string IncomingCommand)
         {
             lock (LOCK)
@@ -151,5 +151,6 @@ namespace EMS_Server
             }
             return responce.ToString();
         }
+        public static string GetAllExceptions(string clientQuerry) => $"select * from {Config.EmployeeHourLogsTable} where _entry<'{Config.MinDate}' or _exit<'{Config.MinDate}' or _exit<_entry";
     }
 }

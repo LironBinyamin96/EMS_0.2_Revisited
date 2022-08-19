@@ -130,5 +130,12 @@ namespace EMS_Client.Forms
             xlsxBuilder.Start();
         }
         #endregion
+
+        private void btnExceptions_Click(object sender, EventArgs e)
+        {
+            ExceptionsScreen exception = new ExceptionsScreen(this.ParentForm);
+            exception.Location = new Point(Parent.Parent.Location.X + Parent.Parent.Size.Width, Parent.Parent.Location.Y);
+            exception.Show();
+        }
     }
 }

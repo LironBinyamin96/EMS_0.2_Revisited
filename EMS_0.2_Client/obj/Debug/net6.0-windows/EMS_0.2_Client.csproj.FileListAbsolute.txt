@@ -191,3 +191,4 @@ C:\Users\Lev's_Laptop\Desktop\Git\EMS_0.2_Revisited\EMS_0.2_Client\bin\Debug\net
 C:\Users\Lev's_Laptop\Desktop\Git\EMS_0.2_Revisited\EMS_0.2_Client\bin\Debug\net6.0-windows\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
 C:\Users\Lev's_Laptop\Desktop\Git\EMS_0.2_Revisited\EMS_0.2_Client\obj\Debug\net6.0-windows\EMS_Client.Forms.EditHours.resources
 C:\Users\Lev's_Laptop\Desktop\Git\EMS_0.2_Revisited\EMS_0.2_Client\obj\Debug\net6.0-windows\EMS_Client.Forms.selectEmployee.resources
+C:\Users\levkh\Documents\GitHub\EMS_0.2_Revisited\EMS_0.2_Client\obj\Debug\net6.0-windows\EMS_Client.Forms.ExceptionsScreen.resources

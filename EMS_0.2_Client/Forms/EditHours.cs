@@ -27,9 +27,31 @@ namespace EMS_Client.Forms
         #region Buttons
         private void btnSave_Click(object sender, EventArgs e)
         {
-            MessageBox.Show($"entry: {dateTimeEntey.Value}\n exit: {dateTimeExit.Value}");
-            string querry = Requests.UpdateEntry(editHours[0], dateTimeEntey.Value, dateTimeExit.Value);
-            string[] buffer = Requests.RequestFromServer(querry, 7);
+            //MessageBox.Show($"entry: {dateTimeEntey.Value}\n exit: {dateTimeExit.Value}");
+            DateTime entry = dateTimeEntey.Value, exit = dateTimeExit.Value;
+            Dictionary<Label, bool> invalidation = new Dictionary<Label, bool>()
+            {
+                { lblEntry, entry>EMS_Library.Config.MinDate && entry < exit },
+                { lblExit, exit>EMS_Library.Config.MinDate && entry<exit}
+            };
+
+
+
+
+            if (invalidation.Values.Contains(false))
+            {
+                foreach(KeyValuePair<Label,bool> label in invalidation)
+                {
+                    if(label.Value) label.Key.ForeColor = Color.DodgerBlue;
+                    else label.Key.ForeColor = Color.Red;
+                }
+            }
+            else
+            {
+                string querry = Requests.UpdateEntry(editHours[0], entry, exit);
+                Requests.RequestFromServer(querry, 7);
+                Close();
+            }
         }
         private void btnX_Click(object sender, EventArgs e) => Close();
         #endregion

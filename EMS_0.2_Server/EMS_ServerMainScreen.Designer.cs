@@ -59,7 +59,7 @@
             // centerPic
             // 
             this.centerPic.Dock = System.Windows.Forms.DockStyle.Top;
-            this.centerPic.Image = global::EMS_0._2_Server.Properties.Resources.its_not_a_tumor;
+            this.centerPic.Image = global::EMS_0._2_Server.Properties.Resources.eb8ca4cab565c0f5fb036988856bf906;
             this.centerPic.Location = new System.Drawing.Point(0, 0);
             this.centerPic.Name = "centerPic";
             this.centerPic.Size = new System.Drawing.Size(185, 183);

@@ -16,6 +16,9 @@
     <Compile Update="Forms\EditHours.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Forms\ExceptionsScreen.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Forms\GeneralData.cs">
       <SubType>Form</SubType>
     </Compile>
