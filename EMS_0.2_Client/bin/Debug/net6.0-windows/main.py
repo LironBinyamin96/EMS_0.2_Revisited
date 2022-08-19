@@ -26,9 +26,9 @@ MonthlyHours = jsonFile["MonthlyHours"]
 TotalOvertime = jsonFile["TotalOvertime"]
 
 def returnDetails():
-    sheet["B1"] = f"Monthly employee report {month}/{year}"
-    sheet["A3"] = f"Employee name: {name}"
-    sheet["E3"] = f"State ID: {StateID}"
+    sheet["C1"] = f"Monthly employee report {month}/{year}"
+    sheet["C3"] = f"Employee name: {name}"
+    sheet["F3"] = f"State ID: {StateID}"
     sheet["I3"] = f"Internal ID: {InternalID}"
     sheet["J39"] = MonthlyHours
     sheet["K39"] = TotalOvertime

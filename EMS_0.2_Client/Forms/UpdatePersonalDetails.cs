@@ -124,22 +124,32 @@ namespace EMS_Client.Forms
 
         private bool CheckingDataFields()
         {
-            Dictionary<Panel, bool> test = new Dictionary<Panel, bool>() {
+            Dictionary<Control, bool> test = new Dictionary<Control, bool>() {
                 { panelID, txtID.Text.Parsable(typeof(int)) },
                 { panelFname, txtFirstName.Text.Length > 1 },
                 { panelLname, txtLastName.Text.Length > 1 },
                 { panelDate, txtDateOfBirth.Text.Parsable(typeof(DateTime)) },
                 { panelAddres, txtAddres.Text.Length > 1 },
                 { panelPhone, txtPhone.Text.Parsable(typeof(int)) },
-                { panelEmail, txtEmail.Text.Parsable(typeof(System.Net.Mail.MailAddress)) },
-                { panelBaseSalary, txtBaseSalary.Text.Parsable(typeof(int)) },
-                { panelSalaryModifire, txtSalaryModifire.Text.Parsable(typeof(double)) },
+                { panelEmail, txtEmail.Text.Parsable(typeof(System.Net.Mail.MailAddress)) && (!txtEmail.Text.Contains(".") || txtEmail.Text.Trim().EndsWith(".")) },
+                { panelBaseSalary, txtBaseSalary.Text.Parsable(typeof(int)) && int.Parse(txtBaseSalary.Text)>0 },
+                { panelSalaryModifire, txtSalaryModifire.Text.Parsable(typeof(double)) && int.Parse(txtSalaryModifire.Text)>0},
                 { panelPosition, positionBox.Text != "" },
+                { btnUpload,pictureBox1.Image != null }
+            
             };
-            foreach (KeyValuePair<Panel, bool> item in test)
+            foreach (KeyValuePair<Control, bool> item in test)
             {
-                if (!item.Value) item.Key.BackColor = Color.FromArgb(255, 102, 102);
-                else { item.Key.BackColor = Color.FromArgb(0, 126, 249); }
+                if (item.Key is Button)
+                {
+                    if (!item.Value) item.Key.ForeColor = Color.FromArgb(255, 102, 102);
+                    else { item.Key.ForeColor = Color.FromArgb(0, 126, 249); }
+                }
+                else
+                {
+                    if (!item.Value) item.Key.BackColor = Color.FromArgb(255, 102, 102);
+                    else { item.Key.BackColor = Color.FromArgb(0, 126, 249); }
+                }
             }
             return !test.Values.Contains(false);
         }

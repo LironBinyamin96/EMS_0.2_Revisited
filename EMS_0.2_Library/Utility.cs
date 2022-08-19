@@ -198,7 +198,7 @@ namespace EMS_Library
             if (type == typeof(int))                                  return int.TryParse(str, out _);
             else if (type == typeof(DateTime))                        return DateTime.TryParse(str, out _);
             else if (type == typeof(TimeSpan))                        return TimeSpan.TryParse(str, out _);
-            else if (type == typeof(float) && type == typeof(double)) return double.TryParse(str, out _);
+            else if (type == typeof(float) || type == typeof(double)) return double.TryParse(str, out _);
             else if (type == typeof(System.Net.Mail.MailAddress))     return System.Net.Mail.MailAddress.TryCreate(str, out _);
             return true;
         }

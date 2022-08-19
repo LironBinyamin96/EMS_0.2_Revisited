@@ -10,7 +10,7 @@ namespace EMS_Library
         //Do not forget to open thouse ports in server side firewall settings!
         public const int ServerPort = 13000; 
 
-        public static string ServerIP = default;
+        public static string ServerIP = "10.50.20.17";
         public static readonly string RootDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\EMS_Root";
         public static readonly string FR_Location = RootDirectory + "\\FR_Boot.cmd";
         public static readonly string FR_Images = RootDirectory + "\\Images";
@@ -44,6 +44,7 @@ namespace EMS_Library
 
         #region General
         public const int WorkDaysInWeek = 5;
+        public const int MinEmployeeAge = 18;
         public static readonly TimeSpan NormalShiftLength = new TimeSpan(0, 8, 0, 0);
         public static readonly TimeSpan MaxShiftLength = new TimeSpan(0, 12, 0, 0);
         public static readonly string[] NullableEmployeeData = { "MName", "MiddleName", "_mName", "Gender", "_gender" };
