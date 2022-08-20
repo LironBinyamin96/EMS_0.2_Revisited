@@ -312,7 +312,7 @@
             this.dateTime.ShowUpDown = true;
             this.dateTime.Size = new System.Drawing.Size(78, 25);
             this.dateTime.TabIndex = 19;
-            this.dateTime.Value = new System.DateTime(2022, 6, 22, 0, 0, 0, 0);
+            this.dateTime.Value = DateTime.Now;
             // 
             // btnShowHours
             // 

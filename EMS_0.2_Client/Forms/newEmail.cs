@@ -136,5 +136,12 @@ namespace EMS_Client.Forms
         private void panelNewMail_MouseDown(object sender, MouseEventArgs e) => Drag(e);
         private void lblNewMail_MouseDown(object sender, MouseEventArgs e) => Drag(e);
         #endregion
+
+        private void btnSendToAll_Click(object sender, EventArgs e)
+        {
+            string[] emails = Requests.RequestFromServer(Requests.GetAllEmails(),9);
+            txtTo.Text = emails.ArrayToString();
+
+        }
     }
 }

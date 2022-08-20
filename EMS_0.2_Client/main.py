@@ -26,10 +26,10 @@ MonthlyHours = jsonFile["MonthlyHours"]
 TotalOvertime = jsonFile["TotalOvertime"]
 
 def returnDetails():
-    sheet["C1"] = f"Monthly employee report {month}/{year}"
-    sheet["C3"] = f"Employee name: {name}"
-    sheet["F3"] = f"State ID: {StateID}"
-    sheet["I3"] = f"Internal ID: {InternalID}"
+    sheet["C1"] = f"       Monthly employee report {month}/{year}"
+    sheet["D3"] = f"Employee name: {name}"
+    sheet["C4"] = f"     State ID: {StateID}"
+    sheet["F4"] = f"     Internal ID: {InternalID}"
     sheet["J39"] = MonthlyHours
     sheet["K39"] = TotalOvertime
 
@@ -54,7 +54,7 @@ def returnHours():
            continue
         else:
             sheet[f"J{c}"] = (data["Total"])
-            if len(data["Entries"]) == 3: forThree(data,c)
+            if len(data["Entries"]) >= 3: forThree(data,c)
             elif len(data["Entries"]) == 2: forTwo(data,c)
             else: forOne(data,c)
             if data["Overtime"] == "00:00:00":
@@ -70,7 +70,7 @@ def forThree(data,c):
     two = data["Entries"][1]
     sheet[f"F{c}"] = two["Start"][:5]
     sheet[f"G{c}"] = two["End"][:5]
-    three = data["Entries"][2]
+    three = data["Entries"][-1]
     sheet[f"H{c}"] = three["Start"][:5]
     sheet[f"I{c}"] = three["End"][:5]
 

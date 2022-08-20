@@ -104,10 +104,27 @@ namespace EMS_Client.Forms
         /// <summary>
         /// Checks validity of data in the text fields
         /// </summary>
+        /// 
+        public bool IsVaildId(string id)
+        {
+            int[] id_12_digits = { 1, 2, 1, 2, 1, 2, 1, 2, 1 };
+            int count = 0;
+
+            if (id == null || id == "" || id.Length > 9) return false;
+            id = id.PadLeft(9, '0'); // מוסיף את הספרה 0 מצד שמאל עד לאורך 9 ספרות
+            for (int i = 0; i < 9; i++)
+            {
+                int num = int.Parse(id.Substring(i, 1)) * id_12_digits[i];
+                if (num > 9)
+                    num = (num / 10) + (num % 10);
+                count += num;
+            }
+            return count % 10 == 0;
+        }
         private bool CheckingDataFields()
         {
             Dictionary<Control, bool> test = new Dictionary<Control, bool>() {
-                { panelID, txtID.Text.Parsable(typeof(int)) },
+                { panelID, IsVaildId(txtID.Text)},
                 { panelFname, txtFirstName.Text.Length > 1 },
                 { panelLname, txtLastName.Text.Length > 1 },
                 { panelDate, txtDateOfBirth.Text.Parsable(typeof(DateTime)) && (DateTime.Now - DateTime.Parse(txtDateOfBirth.Text)).TotalDays / 365 >= 18 },

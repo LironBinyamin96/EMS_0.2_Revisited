@@ -10,6 +10,26 @@ namespace EMS_Client
     {
         // אורך מחרוזת - בדיקה לשם פרטי\שם משפחה\כתובת
         public bool StringLength(string str) => str.Trim().Length > 2;
+
+        // בדיקת תקינות תעודת זהות
+
+        public bool IsVaildId(string id)
+        {
+            int[] id_12_digits = { 1, 2, 1, 2, 1, 2, 1, 2, 1 };
+            int count = 0;
+
+            if (id == null || id == default || id.Length>9)  return false;
+            id = id.PadLeft(9, '0'); // מוסיף את הספרה 0 מצד שמאל עד לאורך 9 ספרות
+            for (int i = 0; i < 9; i++)
+            {
+                int num = Int32.Parse(id.Substring(i, 1)) * id_12_digits[i];
+
+                if (num > 9)
+                    num = (num / 10) + (num % 10);
+                count += num;
+            }
+            return count % 10 == 0;
+        }
         // בדיקה למספר פלאפון
         public bool PhoneNumber(string number) => (number.Length == 10) && (number.StartsWith("0")) && number.All(char.IsDigit);
         // בדיקה למייל

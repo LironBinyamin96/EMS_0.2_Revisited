@@ -242,6 +242,19 @@ namespace EMS_Library
                 sb[0] = (char)(sb[0] - 32);
             return sb.ToString();
         }
-        
+
+        /// <summary>
+        /// Converts provided string array to contineous string
+        /// </summary>
+        /// <param name="arr"></param>
+        /// <returns></returns>
+        public static string ArrayToString(this string[] arr)
+        {
+            StringBuilder builder = new StringBuilder();
+            foreach (string str in arr)
+                builder.Append(str + ", ");
+            return builder.ToString().Remove(builder.Length - 2);
+        }
+
     }
 }

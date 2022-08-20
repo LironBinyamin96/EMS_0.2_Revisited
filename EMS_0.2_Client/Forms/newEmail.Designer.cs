@@ -47,6 +47,7 @@
             this.btnAddFile = new System.Windows.Forms.Button();
             this.lblFile = new System.Windows.Forms.Label();
             this.btnSelect = new System.Windows.Forms.Button();
+            this.btnSendToAll = new System.Windows.Forms.Button();
             this.panelNewMail.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -245,7 +246,7 @@
             this.btnSelect.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSelect.Font = new System.Drawing.Font("Bahnschrift SemiLight", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btnSelect.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
-            this.btnSelect.Location = new System.Drawing.Point(555, 100);
+            this.btnSelect.Location = new System.Drawing.Point(565, 143);
             this.btnSelect.Name = "btnSelect";
             this.btnSelect.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.btnSelect.Size = new System.Drawing.Size(79, 38);
@@ -254,12 +255,27 @@
             this.btnSelect.UseVisualStyleBackColor = true;
             this.btnSelect.Click += new System.EventHandler(this.btnSelect_Click);
             // 
+            // btnSendToAll
+            // 
+            this.btnSendToAll.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSendToAll.Font = new System.Drawing.Font("Bahnschrift SemiLight", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btnSendToAll.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
+            this.btnSendToAll.Location = new System.Drawing.Point(565, 99);
+            this.btnSendToAll.Name = "btnSendToAll";
+            this.btnSendToAll.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.btnSendToAll.Size = new System.Drawing.Size(79, 38);
+            this.btnSendToAll.TabIndex = 16;
+            this.btnSendToAll.Text = "Send to all";
+            this.btnSendToAll.UseVisualStyleBackColor = true;
+            this.btnSendToAll.Click += new System.EventHandler(this.btnSendToAll_Click);
+            // 
             // newEmail
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
             this.ClientSize = new System.Drawing.Size(656, 537);
+            this.Controls.Add(this.btnSendToAll);
             this.Controls.Add(this.btnSelect);
             this.Controls.Add(this.lblFile);
             this.Controls.Add(this.btnAddFile);
@@ -309,5 +325,6 @@
         private Label lblFile;
         private Button btnX;
         private Button btnSelect;
+        private Button btnSendToAll;
     }
 }
