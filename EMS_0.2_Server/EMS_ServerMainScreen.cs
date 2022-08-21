@@ -19,6 +19,7 @@ namespace EMS_Server
         TcpClient client = null;
         Task FacialRecognition;
         bool scheduleForceExits = true;
+        bool scheduleBackup = true;
         bool SQLQuerryInput = false;
         Process FRProcess = null;
         public static EMS_ServerMainScreen serverForm;
@@ -59,7 +60,7 @@ namespace EMS_Server
             listeningTask.Start();
             TestingTask.Start();
             FacialRecognition.Start();
-            listnerTimer.Interval = 60000;
+            listnerTimer.Interval = 6000;
             listnerTimer.Start();
             if (!Directory.Exists(EMS_Library.Config.RootDirectory)) Directory.CreateDirectory(EMS_Library.Config.RootDirectory);
             if (!Directory.Exists(EMS_Library.Config.FR_Images)) Directory.CreateDirectory(EMS_Library.Config.FR_Images);
@@ -67,14 +68,36 @@ namespace EMS_Server
         }
         private void listnerTimer_Tick(object sender, EventArgs e)
         {
+
             if (EMS_Library.Config.SQLConnectionString != default)
             {
-                if ((DateTime.Now + new TimeSpan(300000000000)).Day >= DateTime.Now.Day + 1)
+                ForceExits(); //Automated exit enforcer
+                BackupDB();   //Automated Database Backup
+            }
+
+            void BackupDB()
+            {
+                if ((DateTime.Now + new TimeSpan(60000)).Day >= DateTime.Now.Day + 1)
                 {
+                    if (scheduleBackup)
+                    {
+                        if (!Directory.Exists(EMS_Library.Config.RootDirectory + "\\Backups")) Directory.CreateDirectory(EMS_Library.Config.RootDirectory + "\\Backups");
+                        SQLBridge.OneWayCommand($"backup database {EMS_Library.Config.SQLDatabaseName } to disk=N'{ EMS_Library.Config.RootDirectory}\\Backups\\DB_Backup.{DateTime.Now.Date.ToString("yyyy-MM-dd HH-mm-ss")}.bak' WITH NOFORMAT, NOINIT,  NAME = N'data-Full Database Backup', SKIP, NOREWIND, NOUNLOAD,  STATS = 10");
+                        scheduleBackup = false;
+                    }
+                }
+                else scheduleBackup = true;
+            }
+
+            void ForceExits()
+            {
+                if ((DateTime.Now + new TimeSpan(60000)).Day >= DateTime.Now.Day + 1)
+                {
+                    //Auto exit if none present
                     if (scheduleForceExits)
                     {
                         scheduleForceExits = false;
-                        SQLBridge.TwoWayCommand("update HourLogs set _exit='01-01-0001 00:00:00' where _exit is null;");
+                        SQLBridge.TwoWayCommand($"update {EMS_Library.Config.EmployeeHourLogsTable} set _exit='01-01-0001 00:00:00' where _exit is null;");
                     }
                 }
                 else scheduleForceExits = true;
@@ -125,6 +148,11 @@ namespace EMS_Server
         private void EMS_ServerMainScreen_FormClosing(object sender, FormClosingEventArgs e)
         {
             FRProcess.Kill();
+        }
+
+        private void OnClockTick(object sender, EventArgs e)
+        {
+
         }
 
         #endregion
