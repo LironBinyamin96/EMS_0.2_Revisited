@@ -13,7 +13,8 @@ namespace EMS_Client.Forms
 {
     public partial class ExceptionsScreen : Form
     {
-        public ExceptionsScreen(Form parent)
+        string[] _data;
+        public ExceptionsScreen()
         {
             InitializeComponent();
         }
@@ -22,12 +23,12 @@ namespace EMS_Client.Forms
 
         private void ExceptionsScreen_Load(object sender, EventArgs e)
         {
-            string[] responce = Requests.RequestFromServer(Requests.GetAllExceptions(), 8);
-            if (responce != null)
+            _data = Requests.RequestFromServer(Requests.GetAllExceptions(), 8);
+            if (_data != null)
             {
                 try
                 {
-                    foreach (string item in responce)
+                    foreach (string item in _data)
                         exceptionsTable.Rows.Add(item.Split(','));
                 }
                 catch { }
@@ -57,14 +58,12 @@ namespace EMS_Client.Forms
 
         private void exceptionsTable_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            EditHours editHours = new EditHours(new string[]
+            if (_data != null)
             {
-                exceptionsTable.SelectedRows[0].Cells[0].Value.ToString(),
-                exceptionsTable.SelectedRows[0].Cells[1].Value.ToString().Split(' ')[0],
-                exceptionsTable.SelectedRows[0].Cells[1].Value.ToString().Split(' ')[1],
-                exceptionsTable.SelectedRows[0].Cells[2].Value.ToString().Split(' ')[1]
-            });
-            editHours.Show();
+                Point cellCoordinates = exceptionsTable.CurrentCellAddress;
+                EditHours editHours = new EditHours(new EMS_Library.MyEmployee.HoursLog.HoursLogEntry(_data[cellCoordinates.Y]));
+                editHours.Show();
+            }
         }
     }
 }

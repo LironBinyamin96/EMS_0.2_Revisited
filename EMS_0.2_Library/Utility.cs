@@ -256,5 +256,12 @@ namespace EMS_Library
             return builder.ToString().Remove(builder.Length - 2);
         }
 
+        public static T Find<T>(this IEnumerable<T> collection, Predicate<T> predicate)
+        {
+            foreach (T item in collection)
+                if(predicate(item)) return item;
+            return default(T);
+        }
+
     }
 }

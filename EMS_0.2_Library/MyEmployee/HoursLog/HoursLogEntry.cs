@@ -23,9 +23,9 @@ namespace EMS_Library.MyEmployee.HoursLog
         public HoursLogEntry(string data)
         {
             string[] hold = data.Split(',');
-            _IntId = int.Parse(hold[0]);
-            _start = DateTime.Parse(hold[1]);
-            _end = DateTime.Parse(hold[2]);
+            { if (int.TryParse(hold[0], out int x)) _IntId = x; }
+            { if (DateTime.TryParse(hold[1], out DateTime x)) _start = x; }
+            { if (DateTime.TryParse(hold[2], out DateTime x)) _end = x; }
         }
         public override string ToString() => $"Start: {_start}, End: {_end}, Total: {Total}";
         public string JSON() => $"{{\"Date\": \"{_start.Date}\", \"Start\": \"{_start.TimeOfDay}\", \"End\": \"{_end.TimeOfDay}\"}}";

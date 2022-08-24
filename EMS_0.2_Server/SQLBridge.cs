@@ -151,6 +151,6 @@ namespace EMS_Server
             }
             return responce.ToString();
         }
-        public static string GetAllExceptions(string clientQuerry) => $"select * from {Config.EmployeeHourLogsTable} where _entry<'{Config.MinDate}' or _exit<'{Config.MinDate}' or _exit<_entry";
+        public static string GetAllExceptions(string clientQuerry) => $"select * from {Config.EmployeeHourLogsTable} where _entry<'{Config.MinDate}' or _exit<'{Config.MinDate}' or _exit<_entry or _entry is NULL or _exit is NULL";
     }
 }

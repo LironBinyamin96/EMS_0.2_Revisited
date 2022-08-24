@@ -83,6 +83,7 @@ namespace EMS_Client
         {
             string[] result = null;
             Action action = () =>
+            
             {
                 //request data from the server
                 DataPacket request = new DataPacket(querry, routingFunctionNum);

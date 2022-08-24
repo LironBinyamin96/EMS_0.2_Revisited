@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using EMS_Library.MyEmployee.HoursLog;
+using EMS_Library;
 using System.Diagnostics;
 
 namespace EMS_Client.Forms
@@ -17,6 +18,7 @@ namespace EMS_Client.Forms
         #region Variables
         public static bool fill = false;
         public HoursLogMonth log;
+        private string[][] hoursLogTableStructure;
         #endregion
 
         public AttendanceTable()
@@ -27,10 +29,15 @@ namespace EMS_Client.Forms
         // בדאבל קליל - נפתח חלון עריכת שעות עבודה
         public void GridViewAttrndance_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            string idEmployee = EMS_ClientMainScreen.employee.IntId.ToString();
-            int y = GridViewAttrndance.CurrentCell.RowIndex;
-            string[] hold = new string[] { idEmployee, GridViewAttrndance.SelectedCells[0].Value.ToString(), GridViewAttrndance.SelectedCells[2].Value.ToString(), GridViewAttrndance.SelectedCells[3].Value.ToString() };
-            EditHours editHours = new EditHours(hold);
+            if (hoursLogTableStructure == null) return;
+            Point coordinates = GridViewAttrndance.CurrentCellAddress;
+            string columnName = GridViewAttrndance.CurrentCell.OwningColumn.HeaderText;
+            string entryData = EMS_ClientMainScreen.employee.IntId.ToString();
+            if (columnName == "Entry")
+                entryData += $", {log.Days[coordinates.Y].Date.ToString().Split(' ')[0]} {hoursLogTableStructure[coordinates.Y][coordinates.X]}, {log.Days[coordinates.Y].Date.ToString().Split(' ')[0]} {hoursLogTableStructure[coordinates.Y][coordinates.X + 1]}";
+            else if (columnName == "Exit")
+                entryData += $", {log.Days[coordinates.Y].Date.ToString().Split(' ')[0]} {hoursLogTableStructure[coordinates.Y][coordinates.X - 1]}, {log.Days[coordinates.Y].Date.ToString().Split(' ')[0]} {hoursLogTableStructure[coordinates.Y][coordinates.X]}";
+            EditHours editHours = new EditHours(new HoursLogEntry(entryData));
             editHours.Show();
         }
 
@@ -51,9 +58,10 @@ namespace EMS_Client.Forms
             BuildLog();
             if (log != null)
             {
-                string[][] tmpGetAttendanceTable = log.GetHoursLogTableStructure();
-                foreach (string[] item in tmpGetAttendanceTable)
-                    GridViewAttrndance.Rows.Add(item);
+                hoursLogTableStructure = log.GetHoursLogTableStructure();
+                if (hoursLogTableStructure != null)
+                    foreach (string[] item in hoursLogTableStructure)
+                        GridViewAttrndance.Rows.Add(item);
             }
         }
         private void button1_Click(object sender, EventArgs e)
@@ -65,7 +73,7 @@ namespace EMS_Client.Forms
             }
             BuildLog();
             if (log != null)
-                File.WriteAllText(EMS_Library.Config.RootDirectory + "\\log.json", log.JSON());
+                File.WriteAllText(Config.RootDirectory + "\\log.json", log.JSON());
             GenerateXlsxLog();
         }
         #endregion
@@ -88,12 +96,12 @@ namespace EMS_Client.Forms
             DateTime temp = DateTime.Parse("01/" + dateTime.Text);
             string querry = Requests.GetHourLogs(EMS_ClientMainScreen.employee.IntId, temp.Year, temp.Month);
             string[] buffer = Requests.RequestFromServer(querry, 5);
-            if (buffer[0] != "-1") 
+            if (buffer[0] != "-1")
             {
                 log = new HoursLogMonth(buffer.ToArray(), EMS_ClientMainScreen.employee);
                 lblNoData.Visible = false;
             }
-            else 
+            else
             {
                 log = null;
                 lblNoData.Visible = true;
@@ -108,7 +116,7 @@ namespace EMS_Client.Forms
             if (log == null) return;
             Thread xlsxBuilder = new Thread(() =>
             {
-                File.WriteAllText(Directory.GetCurrentDirectory()+"\\TempClientConfig.txt",$"HoursLog.xlsx_output_directory={EMS_Library.Config.RootDirectory}");
+                File.WriteAllText(Directory.GetCurrentDirectory() + "\\TempClientConfig.txt", $"HoursLog.xlsx_output_directory={EMS_Library.Config.RootDirectory}");
 
                 Process writingXlsx = new Process();
                 writingXlsx.StartInfo.FileName = "main.py";
@@ -133,7 +141,7 @@ namespace EMS_Client.Forms
 
         private void btnExceptions_Click(object sender, EventArgs e)
         {
-            ExceptionsScreen exception = new ExceptionsScreen(this.ParentForm);
+            ExceptionsScreen exception = new ExceptionsScreen();
             exception.Location = new Point(Parent.Parent.Location.X + Parent.Parent.Size.Width, Parent.Parent.Location.Y);
             exception.Show();
         }

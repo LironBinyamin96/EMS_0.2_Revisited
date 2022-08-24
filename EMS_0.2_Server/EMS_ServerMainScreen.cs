@@ -15,8 +15,8 @@ namespace EMS_Server
     public partial class EMS_ServerMainScreen : Form
     {
         #region Variables
-        TcpListener listener = null;
-        TcpClient client = null;
+        //TcpListener listener = null;
+        //TcpClient client = null;
         Task FacialRecognition;
         bool scheduleForceExits = true;
         bool scheduleBackup = true;
@@ -55,8 +55,6 @@ namespace EMS_Server
         {
             SQLServerLookup.Start();
             ServerAddressResolver.ServerIP(true);
-            //listener= new TcpListener(System.Net.IPAddress.Parse(EMS_Library.Config.ServerIP), EMS_Library.Config.ServerPort);
-            //listener.Start();
             listeningTask.Start();
             TestingTask.Start();
             FacialRecognition.Start();
@@ -148,6 +146,7 @@ namespace EMS_Server
         private void EMS_ServerMainScreen_FormClosing(object sender, FormClosingEventArgs e)
         {
             FRProcess.Kill();
+            FacialRecognition.Dispose();
         }
 
         private void OnClockTick(object sender, EventArgs e)

@@ -8,31 +8,36 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using EMS_Library.MyEmployee.HoursLog;
 
 namespace EMS_Client.Forms
 {
     public partial class EditHours : Form
     {
-        string[] editHours;
+        HoursLogEntry _entry;
         public EditHours()
         {
             InitializeComponent();
         }
-        public EditHours(string[] arr)
+        public EditHours(HoursLogEntry entry)
         {
             InitializeComponent();
-            editHours = arr;
+            _entry = entry;
+            bool startCheck = _entry.Start < dateTimeEntey.MinDate || _entry.Start > dateTimeEntey.MaxDate;
+            bool endCheck = _entry.End > dateTimeEntey.MaxDate || _entry.End < dateTimeEntey.MinDate;
+            dateTimeEntey.Value = startCheck? dateTimeEntey.MinDate : _entry.Start;
+            dateTimeExit.Value = endCheck ? dateTimeEntey.MaxDate : _entry.End;
         }
 
         #region Buttons
         private void btnSave_Click(object sender, EventArgs e)
         {
             //MessageBox.Show($"entry: {dateTimeEntey.Value}\n exit: {dateTimeExit.Value}");
-            DateTime entry = dateTimeEntey.Value, exit = dateTimeExit.Value;
+            DateTime newEntry = dateTimeEntey.Value, newExit = dateTimeExit.Value;
             Dictionary<Label, bool> invalidation = new Dictionary<Label, bool>()
             {
-                { lblEntry, entry>EMS_Library.Config.MinDate && entry < exit },
-                { lblExit, exit>EMS_Library.Config.MinDate && entry<exit}
+                { lblEntry, newEntry>EMS_Library.Config.MinDate && newEntry < newExit },
+                { lblExit, newExit>EMS_Library.Config.MinDate && newEntry<newExit}
             };
 
 
@@ -48,27 +53,14 @@ namespace EMS_Client.Forms
             }
             else
             {
-                string querry = Requests.UpdateEntry(editHours[0], entry, exit);
-                Requests.RequestFromServer(querry, 7);
+                string querry = Requests.UpdateEntry(_entry.IntId.ToString(), newEntry, newExit);
+                string[] x = Requests.RequestFromServer(querry, 7);
                 Close();
             }
         }
         private void btnX_Click(object sender, EventArgs e) => Close();
         #endregion
 
-        #region Supplemental
-        private void Fill()
-        {
-            lblDay.Text = editHours[1];
-            dateTimeEntey.Value = DateTime.Parse($"{lblDay.Text} {editHours[2]}");
-            dateTimeExit.Value = DateTime.Parse($"{lblDay.Text} {editHours[3]}");
-        }
-
-        private void EditHours_Load(object sender, EventArgs e)
-        {
-            Fill();
-        }
-        #endregion 
 
         #region Drag Window
         /// <summary>
