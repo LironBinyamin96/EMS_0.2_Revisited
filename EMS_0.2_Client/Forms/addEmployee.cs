@@ -130,7 +130,7 @@ namespace EMS_Client.Forms
                 { panelDate, txtDateOfBirth.Text.Parsable(typeof(DateTime)) && (DateTime.Now - DateTime.Parse(txtDateOfBirth.Text)).TotalDays / 365 >= 18 },
                 { panelAddres, txtAddres.Text.Length > 1 },
                 { panelPhone, txtPhone.Text.Parsable(typeof(int)) },
-                { panelEmail, txtEmail.Text.Parsable(typeof(System.Net.Mail.MailAddress)) && (!txtEmail.Text.Contains(".") || txtEmail.Text.Trim().EndsWith(".")) },
+                { panelEmail, txtEmail.Text.Parsable(typeof(System.Net.Mail.MailAddress)) && (txtEmail.Text.Contains(".")) },
                 { panelBaseSalary, txtBaseSalary.Text.Parsable(typeof(int))&& int.Parse(txtBaseSalary.Text)>0 },
                 { panelSalaryModifire, txtSalaryModifire.Text.Parsable(typeof(double))&& double.Parse(txtSalaryModifire.Text)>0},
                 { panelPosition, positionBox.Text != "" },

@@ -16,8 +16,9 @@ namespace EMS_Client.Forms
     public partial class GeneralData : Form
     {
         private ProgressBar[] progressBars;
+        private Label[] labels;
         private HoursLogMonth[] data;
-        private bool employeeChanged=false;
+        private bool employeeChanged = false;
         private bool firtsOpen = true;
 
         /// <summary>
@@ -26,12 +27,14 @@ namespace EMS_Client.Forms
         public GeneralData()
         {
             InitializeComponent();
-            progressBars = new ProgressBar[] {monthBar0, monthBar1 , monthBar2 , monthBar3 , monthBar4 , monthBar5 , monthBar6 , monthBar7 , monthBar8 , monthBar9, monthBar10, monthBar11 };
+            progressBars = new ProgressBar[] { monthBar0, monthBar1, monthBar2, monthBar3, monthBar4, monthBar5, monthBar6, monthBar7, monthBar8, monthBar9, monthBar10, monthBar11 };
+            labels = new Label[] { lblMonthData0, lblMonthData1, lblMonthData2, lblMonthData3, lblMonthData4, lblMonthData5, lblMonthData6, lblMonthData7, lblMonthData8, lblMonthData9, lblMonthData10, lblMonthData11 };
+            foreach(Label label in labels) label.Text = String.Empty;
             List<int> years = new List<int>();
             for (int i = Config.MinDate.Year; i <= DateTime.Now.Year; i++)
                 years.Add(i);
             yearPicker.DataSource = years;
-            yearPicker.SelectedIndex = years.Count-1;
+            yearPicker.SelectedIndex = years.Count - 1;
             firtsOpen = false;
         }
 
@@ -71,15 +74,25 @@ namespace EMS_Client.Forms
                 if (responce[0] != "-1") data[i] = new HoursLogMonth(responce, EMS_ClientMainScreen.employee);
             }
 
-            //Fill controls
-            if (data == null) { MessageBox.Show("No data available!"); return; }
-            for (int i = 0; i < progressBars.Length; i++)
+
+            if (data != null)
             {
-                if (data[i] != null)
-                    // = total hours worked / (Max work hours in month / 100%)
-                    progressBars[i].Value = (int)(data[i].Total.TotalHours / (Config.MaxShiftLength.TotalHours * Config.WorkDaysInWeek * (DateTime.DaysInMonth(data[i].Year, data[i].Month) / 7) / 100));
-                else progressBars[i].Value = 0;
+                //Fill graph data
+                for (int i = 0; i < progressBars.Length; i++)
+                {
+                    if (data[i] != null)
+                    {
+                        // = total hours worked / (Max work hours in month / 100%)
+                        double value = (data[i].Total.TotalHours / (Config.MaxShiftLength.TotalHours * Config.WorkDaysInWeek * (DateTime.DaysInMonth(data[i].Year, data[i].Month) / 7) / 100));
+                        progressBars[i].Value = (int)value;
+                        labels[i].Text = $"{value:F2}";
+                    }
+
+                    else progressBars[i].Value = 0;
+                }
+
             }
+
 
             string empData = $"{EMS_ClientMainScreen.employee.LName} " +
                 $"{EMS_ClientMainScreen.employee.FName}:\n" +
