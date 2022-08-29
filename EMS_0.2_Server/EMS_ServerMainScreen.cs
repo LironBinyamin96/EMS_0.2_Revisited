@@ -15,8 +15,6 @@ namespace EMS_Server
     public partial class EMS_ServerMainScreen : Form
     {
         #region Variables
-        //TcpListener listener = null;
-        //TcpClient client = null;
         Task FacialRecognition;
         bool scheduleForceExits = true;
         bool scheduleBackup = true;
@@ -64,6 +62,7 @@ namespace EMS_Server
             if (!Directory.Exists(EMS_Library.Config.FR_Images)) Directory.CreateDirectory(EMS_Library.Config.FR_Images);
 
         }
+
         private void listnerTimer_Tick(object sender, EventArgs e)
         {
 

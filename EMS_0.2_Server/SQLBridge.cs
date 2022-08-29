@@ -12,13 +12,19 @@ namespace EMS_Server
     {
         public static bool SQLConnected = false;
         private static object LOCK = new object();
-        public static string OneWayCommand(string IncomingCommand)
+
+        /// <summary>
+        /// Method used to pass one way command to the SQL DB.
+        /// </summary>
+        /// <param name="IncomingCommand"></param>
+        /// <returns></returns>
+        public static string OneWayCommand(string querry)
         {
             lock (LOCK)
             {
                 SqlConnection Connection = new SqlConnection(EMS_Library.Config.SQLConnectionString);
                 SqlCommand Command = Connection.CreateCommand();
-                Command.CommandText = IncomingCommand;
+                Command.CommandText = querry;
                 try
                 {
                     if (Connection.State != System.Data.ConnectionState.Open) Connection.Open();
@@ -26,15 +32,16 @@ namespace EMS_Server
                     Connection.Close();
                     return responce.ToString();
                 }
-                catch (SqlException ex) { return ex.Message + Environment.NewLine + IncomingCommand; }
+                catch (SqlException ex) { return ex.Message + Environment.NewLine + querry; }
             }
         }
+
         /// <summary>
         /// שאילתה דו כיווני
         /// Sends provided querry to the server.
         /// </summary>
         /// <returns> Responce from the server (string where each object is separated by | ). </returns>
-        public static string TwoWayCommand(string IncomingCommand)
+        public static string TwoWayCommand(string querry)
         {
             lock (LOCK)
             {
@@ -42,7 +49,7 @@ namespace EMS_Server
                 {
                     SqlConnection Connection = new SqlConnection(Config.SQLConnectionString);
                     SqlCommand Command = Connection.CreateCommand();
-                    Command.CommandText = IncomingCommand;
+                    Command.CommandText = querry;
                     if (Connection.State != System.Data.ConnectionState.Open) Connection.Open();
                     SqlDataReader DataReader = Command.ExecuteReader();
                     StringBuilder stringBuilder = new StringBuilder();
@@ -61,9 +68,14 @@ namespace EMS_Server
                     Connection.Close();
                     return stringBuilder.Length > 0 ? stringBuilder.ToString().Remove(stringBuilder.Length - 1) : "-1";
                 }
-                catch (SqlException ex) { return ex.Message + Environment.NewLine + IncomingCommand; }
+                catch (SqlException ex) { return ex.Message + Environment.NewLine + querry; }
             }
         }
+
+        /// <summary>
+        /// Generates randomized free id for a new employee.
+        /// </summary>
+        /// <returns></returns>
         public static string GetFreeID()
         {
             Random random = new Random();
@@ -72,6 +84,12 @@ namespace EMS_Server
                 id = random.Next(100000000, 1000000000);
             return id.ToString();
         }
+
+        /// <summary>
+        /// Generates a "select" querry from provided data.
+        /// </summary>
+        /// <param name="clientQuerry"></param>
+        /// <returns></returns>
         public static string Select(string clientQuerry)
         {
             string[] clause = clientQuerry.Substring(clientQuerry.IndexOf('#') + 1).Split(',');
@@ -84,7 +102,19 @@ namespace EMS_Server
             }
             return final;
         }
+
+        /// <summary>
+        /// Generates a "add" querry from provided data.
+        /// </summary>
+        /// <param name="clientQuerry"></param>
+        /// <returns></returns>
         public static string Add(string clientQuerry) => $"insert into {Config.EmployeeDataTable} values ({clientQuerry.Substring(clientQuerry.IndexOf('#') + 1)});";
+
+        /// <summary>
+        /// Generates a "update" querry from provided data.
+        /// </summary>
+        /// <param name="clientQuerry"></param>
+        /// <returns></returns>
         public static string Update(string clientQuerry)
         {
             string final = $"update {Config.EmployeeDataTable} set ";
@@ -92,6 +122,12 @@ namespace EMS_Server
             final += clientQuerry.Substring(clientQuerry.IndexOf("where"), clientQuerry.IndexOf('#') - clientQuerry.IndexOf("where")) + ';';
             return final;
         }
+
+        /// <summary>
+        /// Generates a "delete" querry from provided data.
+        /// </summary>
+        /// <param name="clientQuerry"></param>
+        /// <returns></returns>
         public static string DeleteEmployee(string clientQuerry)
         {
             string id = clientQuerry.Substring(clientQuerry.IndexOf('#') + 1);
@@ -99,6 +135,12 @@ namespace EMS_Server
                 $"delete from {Config.EmployeeHourLogsTable} where _intId={id};" +
                 $"delete from {Config.EmployeeDataTable} where _intId={id};";
         } //delete #_intId
+
+        /// <summary>
+        /// Generates a querry for retrieving hour logs.
+        /// </summary>
+        /// <param name="clientQuerry"></param>
+        /// <returns></returns>
         public static string GetMonthLog(string clientQuerry) //get log #_intId, year, month
         {
             string[] data = clientQuerry.Substring(clientQuerry.IndexOf('#') + 1).Split(',');
@@ -111,6 +153,39 @@ namespace EMS_Server
                 $" and _intId = {data[0]}; ";
             return debug;
         }
+
+        /// <summary>
+        /// Generates a querry for updating entries from provided data.
+        /// </summary>
+        /// <param name="clientQuerry"></param>
+        /// <returns></returns>
+        public static string UpdateEntry(string clientQuerry)
+        {
+            string[] querryData = clientQuerry.Substring(clientQuerry.IndexOf('#') + 1).Split(',');
+            int responce = 0;
+            if (querryData.Length != 3)
+                return new ArgumentException("Invalid querry format.").Message;
+            {
+                string res = OneWayCommand($"delete from {Config.EmployeeHourLogsTable} where _intId={querryData[0]} and (_entry='{querryData[1]}' or _exit='{querryData[2]}');");
+                if (int.TryParse(res, out int resInt))
+                    responce += resInt;
+            }
+            {
+                string res = OneWayCommand($"insert into {Config.EmployeeHourLogsTable} values({querryData[0]},'{querryData[1]}','{querryData[2]}');");
+                if (int.TryParse(res, out int resInt))
+                    responce += resInt;
+            }
+            return responce.ToString();
+        }
+
+        /// <summary>
+        /// Generates a querry for retrieving entries with the wrong format. The parameter is unnecesery and is there only for consistency across the class.
+        /// </summary>
+        /// <param name="clientQuerry"></param>
+        /// <returns></returns>
+        public static string GetAllExceptions(string clientQuerry = "") => $"select * from {Config.EmployeeHourLogsTable} where _entry<'{Config.MinDate}' or _exit<'{Config.MinDate}' or _exit<_entry or _entry is NULL or _exit is NULL";
+        
+        //Following two methods are for simulating entries and exits during developement.
         public static string Departure(string _intId)
         {
             string lastArrival = TwoWayCommand($"select top (1) _entry from HourLogs where _intId = {_intId} and _entry is not NULL order by _entry DESC");
@@ -129,28 +204,5 @@ namespace EMS_Server
             catch (Exception ex) { return ex.Source + Environment.NewLine + ex.Message; }
         }
         public static string Arrival(string _intId) => $"insert into {Config.EmployeeHourLogsTable} (_intId ,_entry) values ({_intId},'{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}');";
-        public static void TimestampCheck(KeyValuePair<EMS_Library.MyEmployee.Employee, DateTime> data)
-        {
-
-        }
-        public static string UpdateEntry(string clientQuerry)
-        {
-            string[] querryData = clientQuerry.Substring(clientQuerry.IndexOf('#')+1).Split(',');
-            int responce = 0;
-            if (querryData.Length != 3) 
-                return new ArgumentException("Invalid querry format.").Message;
-            {
-                string res = OneWayCommand($"delete from {Config.EmployeeHourLogsTable} where _intId={querryData[0]} and (_entry='{querryData[1]}' or _exit='{querryData[2]}');");
-                if (int.TryParse(res, out int resInt))
-                    responce += resInt;
-            }
-            {
-                string res = OneWayCommand($"insert into {Config.EmployeeHourLogsTable} values({querryData[0]},'{querryData[1]}','{querryData[2]}');");
-                if (int.TryParse(res, out int resInt))
-                    responce += resInt;
-            }
-            return responce.ToString();
-        }
-        public static string GetAllExceptions(string clientQuerry) => $"select * from {Config.EmployeeHourLogsTable} where _entry<'{Config.MinDate}' or _exit<'{Config.MinDate}' or _exit<_entry or _entry is NULL or _exit is NULL";
     }
 }

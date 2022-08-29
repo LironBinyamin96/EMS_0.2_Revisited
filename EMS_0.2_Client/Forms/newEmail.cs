@@ -19,18 +19,17 @@ namespace EMS_Client.Forms
         string subject;
 
         /// <summary>
-        /// New email constructor
+        /// NewEmail constructor
         /// בנאי להודעה חדשה
         /// </summary>
         public newEmail()
         {
             InitializeComponent();
         }
+
         /// <summary>
-        /// Reply constructor בנאי להשיב למייל
+        /// NewEmail constructor בנאי להשיב למייל
         /// </summary>
-        /// <param name="to"></param>
-        /// <param name="subject"></param>
         public newEmail(string to, string subject)
         {
             InitializeComponent();
@@ -38,6 +37,11 @@ namespace EMS_Client.Forms
             this.subject = subject;
         }
 
+        /// <summary>
+        /// Method called by the OnLoad event.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void newEmail_Load(object sender, EventArgs e)
         {
             if (to != "" || subject != "")
@@ -47,12 +51,41 @@ namespace EMS_Client.Forms
             }
         }
 
+        /// <summary>
+        /// Validating relevant fields and changing thier colors appropriately.
+        /// </summary>
+        private bool CheckingDataFields()
+        {
+            //Aggrigation of the controlls and their vilidity status into singular collection.
+            Dictionary<Panel, bool> test = new Dictionary<Panel, bool>();
+            test.Add(panelTo, txtTo.Text.Parsable(typeof(MailAddress)));
+            test.Add(panelSubject, txtSubject.Text.Length > 2);
+
+            //Prefoms serach for fields with invalid data and coloring them appropriately while aggregating validity status.
+            bool res = true;
+            foreach (KeyValuePair<Panel, bool> item in test)
+            {
+                if (!item.Value) { item.Key.BackColor = Color.FromArgb(255, 102, 102); res &= false; }
+                else { item.Key.BackColor = Color.FromArgb(0, 126, 249); res &= true; }
+            }
+
+            return res;
+        }
+
+        /// <summary>
+        /// Filling fields with data.
+        /// </summary>
+        public void Fill() => txtTo.Text = EMS_ClientMainScreen.employee.Email;
+
+        /// <summary>
+        /// Method for mass email sending.
+        /// </summary>
+        private void btnSendToAll_Click(object sender, EventArgs e) => txtTo.Text = Requests.RequestFromServer(Requests.GetAllEmails(), 9).ArrayToString();
+
         #region Buttons
         /// <summary>
         /// כפתור שליחת מייל
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void btnSend_Click(object sender, EventArgs e)
         {
             // בדיקה ששדות נמען ונושא המייל לא ריקים
@@ -61,25 +94,24 @@ namespace EMS_Client.Forms
             // יצירת ההמייל ושליחתו
             //user - "employee.management.system010@gmail.com", pass - "employee.management.system!!@" "generated: wcvyicyfscoiqfgr"
             SmtpClient Smtp = new SmtpClient("smtp.gmail.com", 587);
-            MailMessage mail = new MailMessage("employee.management.system010@gmail.com", txtTo.Text, txtSubject.Text, richTextBody.Text);
+            MailMessage mail = new MailMessage(Config.EMS_EmailAddress, txtTo.Text, txtSubject.Text, richTextBody.Text);
             if (lblFile.Text != "")
             {
                 Attachment file = new Attachment(lblFile.Text);
                 mail.Attachments.Add(file);
             }
             Smtp.EnableSsl = true;
-            Smtp.Credentials = new NetworkCredential("employee.management.system010@gmail.com", "wcvyicyfscoiqfgr");
+            Smtp.Credentials = new NetworkCredential(Config.EMS_EmailAddress, Config.EMA_EmailPassword);
             Smtp.Send(mail);
             txtTo.Clear();
             txtSubject.Clear();
             richTextBody.Clear();
             lblFile.Text = "";
         }
+
         /// <summary>
         /// הוספת קובץ למייל
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void btnAddFile_Click(object sender, EventArgs e)
         {
             OpenFileDialog opdFile = new OpenFileDialog();
@@ -95,25 +127,6 @@ namespace EMS_Client.Forms
         private void btnX_Click(object sender, EventArgs e) => Close();
 
         #endregion
-
-        private bool CheckingDataFields()
-        {
-            Dictionary<Panel, bool> test = new Dictionary<Panel, bool>();
-            test.Add(panelTo, txtTo.Text.Parsable(typeof(MailAddress)));
-            test.Add(panelSubject, txtSubject.Text.Length>2);
-
-            bool res = true;
-            foreach (KeyValuePair<Panel, bool> item in test)
-            {
-                if (!item.Value) { item.Key.BackColor = Color.FromArgb(255, 102, 102); res &= false; }
-                else { item.Key.BackColor = Color.FromArgb(0, 126, 249); res &= true; }
-            }
-            return res;
-        }
-        public void Fill()
-        {
-            txtTo.Text = EMS_ClientMainScreen.employee.Email;
-        }
 
         #region Drag Window
         /// <summary>
@@ -136,12 +149,5 @@ namespace EMS_Client.Forms
         private void panelNewMail_MouseDown(object sender, MouseEventArgs e) => Drag(e);
         private void lblNewMail_MouseDown(object sender, MouseEventArgs e) => Drag(e);
         #endregion
-
-        private void btnSendToAll_Click(object sender, EventArgs e)
-        {
-            string[] emails = Requests.RequestFromServer(Requests.GetAllEmails(),9);
-            txtTo.Text = emails.ArrayToString();
-
-        }
     }
 }

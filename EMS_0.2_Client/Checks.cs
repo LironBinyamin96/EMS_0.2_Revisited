@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace EMS_Client
 {
+
+    /// <summary>
+    /// Depricated. Use propper type extonsions.
+    /// </summary>
     public class Checks
     {
         // אורך מחרוזת - בדיקה לשם פרטי\שם משפחה\כתובת

@@ -37,7 +37,7 @@ namespace EMS_Client.Forms
         private void lblUpdatePersonalDetails_MouseDown(object sender, MouseEventArgs e) => Drag(e);
 
         #endregion
-        Control[] activeControls;
+        Control[] activeControls; //Collection of controlls for user interaction.
         public UpdatePersonalDetails()
         {
             InitializeComponent();
@@ -93,7 +93,7 @@ namespace EMS_Client.Forms
             if (delete == DialogResult.OK)
             {
                 
-                string querry = Requests.Delete(EMS_ClientMainScreen.employee.IntId);
+                string querry = Requests.DeleteEmployee(EMS_ClientMainScreen.employee.IntId);
                 string[] buffer = Requests.RequestFromServer(querry,4);
                 Clear();
             }

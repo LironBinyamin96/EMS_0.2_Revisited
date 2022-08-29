@@ -7,10 +7,13 @@ namespace EMS_Client
 {
     public partial class EMS_ClientMainScreen : Form
     {
-        #region Variables
+        #region Global Variables
         public static Stack<Form> PrimaryForms = new Stack<Form>(); //Stack for storing all primary forms.
         public static Employee CurEmployee; //User data.
         public static Employee employee; //Temporary storage for employee data.
+        #endregion
+
+        #region Local Variables
         private Form activeForm; // משתנה עזר ששומר את החלון הנוכחי
         #endregion
 

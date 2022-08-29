@@ -27,15 +27,17 @@ namespace EMS_Client.Forms
         }
 
         #region Buttons
+
+        /// <summary>
+        /// Login button
+        /// </summary>
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            CancellationTokenSource CXL_Src = new CancellationTokenSource();
-            CancellationToken CXL = CXL_Src.Token;
-
             //Credentials format check
             if (!txtIntId.Text.Parsable(typeof(int)))
             { MessageBox.Show("Wrong credentials"); return; }
 
+            //Request employee data from the server.
             string querry = Requests.SelectEmployee(new Dictionary<string, string>
             {
                 {"_intId", txtIntId.Text},
@@ -54,29 +56,31 @@ namespace EMS_Client.Forms
                 }
             }
 
+            //Build an Employee object from the data recieved from the server.
             EMS_ClientMainScreen.CurEmployee = Employee.ActivateEmployee(buffer[0].Split(','));
             Close();
         }
+
+        /// <summary>
+        /// Method for closing programm from login screen. (Called by X button)
+        /// </summary>
         private void lblExit_Click(object sender, EventArgs e)
         {
             while (EMS_ClientMainScreen.PrimaryForms.TryPop(out Form result))
                 result.Close();
         }
 
+        //Allowing for use of Enter key for switching to the next field.
         private void txtIntId_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (e.KeyChar == 13)
-                btnLogin.PerformClick();
+            if (e.KeyChar == 13) //KeyChar 13 is the Enter key
+                txtPassword.Focus();
         }
-
         private void txtPassword_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (e.KeyChar == 13)
+            if (e.KeyChar == 13) //KeyChar 13 is the Enter key
                 btnLogin.PerformClick();
         }
-        #endregion
-
-        #region Supplemental
         #endregion
 
         #region Drag Window

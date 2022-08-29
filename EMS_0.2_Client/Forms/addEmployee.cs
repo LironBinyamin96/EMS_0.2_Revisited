@@ -124,7 +124,7 @@ namespace EMS_Client.Forms
                 { btnUpload,pictureBox1.Image != null }
             };
 
-            //Prefoms serach for fields with invalid data and coloring them appropriately
+            //Prefoms serach for fields with invalid data and coloring them appropriately while aggregating validity status
             bool check = true;
             foreach (KeyValuePair<Control, bool> item in test)
             {

@@ -10,14 +10,14 @@ using System.Windows.Forms;
 
 namespace EMS_Client.Forms
 {
+    /// <summary>
+    /// Preforms an provided action while dispalying standby screen.
+    /// </summary>
+    /// <param name="act"></param>
     public partial class StandbyScreen : Form
     {
         Action action;
 
-        /// <summary>
-        /// Preforms an action while dispalying standby screen 
-        /// </summary>
-        /// <param name="act"></param>
         public StandbyScreen(Action act)
         {
             InitializeComponent();

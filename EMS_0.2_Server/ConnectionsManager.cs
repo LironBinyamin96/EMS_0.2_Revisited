@@ -12,7 +12,11 @@ namespace EMS_Server
 {
     internal class ConnectionsManager
     {
-        static List<MyConnection> connections = new List<MyConnection>();
+        static List<MyConnection> connections = new List<MyConnection>(); //All active connections on the server.
+
+        /// <summary>
+        /// Main listening method.
+        /// </summary>
         public static void Listen()
         {
             TcpListener listener = new TcpListener(IPAddress.Parse(Config.ServerIP), Config.ServerPort);
@@ -31,12 +35,20 @@ namespace EMS_Server
             }
 
         }
+
+        /// <summary>
+        /// Method used to shutdown the client connections.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         static void OnClientFinished(object sender, EventArgs e)
         {
             if (sender is MyConnection)
             {
+                //Search for all connections from the same ip.
                 List<MyConnection> arr = connections.FindAll(x => x._tcpClient.Client != null && (sender as MyConnection)._tcpClient.Client.RemoteEndPoint.ToString().Split(':')[0] == x._tcpClient.Client.RemoteEndPoint.ToString().Split(":")[0]);
 
+                //Dispose of the found connections.
                 while (arr.Count > 0)
                     foreach (MyConnection connection in arr)
                     { connection.Terminate(); arr.Remove(connection); break; }
@@ -60,13 +72,21 @@ namespace EMS_Server
                 _stream = _tcpClient.GetStream();
             }
 
+            /// <summary>
+            /// Method used for reading requests sent by the client.
+            /// </summary>
             public void ReadData()
             {
                 _request = new DataPacket(_stream);
                 EMS_ServerMainScreen.serverForm.WriteToServerConsole("Recieved request: " + _request);
+
+                //Preform action dependant on the request recieved.
                 switch (_request.StringData.ToLower())
                 {
+                    //Reply to the ping.
                     case "ping": { DataPacket responce = new DataPacket("ping"); _stream.Write(responce.Write(), 0, responce.GetTotalSize()); Thread.Sleep(10); OnClientFinished(this, EventArgs.Empty); break; }
+                    
+                    //Terminate this connection.
                     case "done":
                         {
                             DataPacket responce = new DataPacket("terminated");
@@ -76,6 +96,8 @@ namespace EMS_Server
                             
                             break;
                         }
+
+                    //In all other cases, pass the request to the Router, and then pass the responce by to the client.
                     default:
                         {
                             _responce = new MyRouter().Router(_request);
@@ -86,6 +108,10 @@ namespace EMS_Server
                 }
             }
 
+
+            /// <summary>
+            /// Terminate the client connection.
+            /// </summary>
             public void Terminate()
             {
                 if (_tcpClient.Client != null)

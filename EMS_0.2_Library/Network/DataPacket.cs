@@ -15,6 +15,7 @@ namespace EMS_Library.Network
         public readonly DataPacketHeader _header;
         public readonly string StringData;
         readonly byte[] _byteData;
+
         /// <summary>
         /// בנאי שמקבל זרם נתונים ובונה מהם חבילת מידע
         /// Reconstructs recieved data as DataPacket
@@ -125,6 +126,5 @@ namespace EMS_Library.Network
             if (StringData.Length < 1000) return $"Header: [{_header}], Data: [{StringData}]";
             else return $"Header: [{_header}]";
         }
-
     }
 }

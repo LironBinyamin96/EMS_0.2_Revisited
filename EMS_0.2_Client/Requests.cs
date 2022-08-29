@@ -38,15 +38,13 @@ namespace EMS_Client
                 else querry += $"{kvp.Key}='{kvp.Value}', ";
             return querry.Remove(querry.Length - 2);
         }
-        public static string DeleteEmployee(Dictionary<string, string> clause)
-        { throw new NotImplementedException("WIP"); }
+        public static string DeleteEmployee(int _intId) => "delete employee #" + _intId;
         public static string AddEmployee(EMS_Library.MyEmployee.Employee employee) => "add employee #" + employee.ToString();
         public static string UpdateEmployee(EMS_Library.MyEmployee.Employee employee) => "update employee #" + employee.ToString();
-        public static string Delete(int _intId) => "delete employee #" + _intId;
         public static string GetHourLogs(int _intId, int year, int month) => $"get log #{_intId}, {year}, {month}";
         public static string GetAllExceptions() => "get all exceptions #";
 
-        
+
         /// <summary>
         /// Requests an image from the server
         /// </summary>
@@ -74,7 +72,7 @@ namespace EMS_Client
         }
 
         /// <summary>
-        /// Handles clien-server requests
+        /// Main client side method for handling client-server communication.
         /// </summary>
         /// <param name="querry"></param>
         /// <param name="routingFunctionNum"></param>
@@ -82,36 +80,26 @@ namespace EMS_Client
         public static string[] RequestFromServer(string querry, byte routingFunctionNum = 255)
         {
             string[] result = null;
-            Action action = () =>
-            
+            //request data from the server
+            DataPacket request = new DataPacket(querry, routingFunctionNum);
+            try //In case server doesn't respond
             {
-                //request data from the server
-                DataPacket request = new DataPacket(querry, routingFunctionNum);
-                try //In case server doesn't respond
-                {
-                    TcpClient client = new TcpClient(Config.ServerIP, Config.ServerPort);
-                    NetworkStream stream = client.GetStream();
-                    //NetworkStream stream = new TcpClient(Config.ServerIP, Config.ServerPort).GetStream();
-                    stream.Write(request.Write(), 0, request.GetTotalSize());
-                    DataPacket responce = new DataPacket(stream);
-                    result = responce.StringData.Split('|');
+                TcpClient client = new TcpClient(Config.ServerIP, Config.ServerPort);
+                NetworkStream stream = client.GetStream();
+                //NetworkStream stream = new TcpClient(Config.ServerIP, Config.ServerPort).GetStream();
+                stream.Write(request.Write(), 0, request.GetTotalSize());
+                DataPacket responce = new DataPacket(stream);
+                result = responce.StringData.Split('|');
 
-                    //Notify the server that you're done reading the responce
-                    stream = new TcpClient(Config.ServerIP, Config.ServerPort).GetStream();
-                    DataPacket done = new DataPacket("done");
-                    stream.Write(done.Write(), 0, done.GetTotalSize());
-                    Thread.Sleep(10);
+                //Notify the server that you're done reading the responce
+                stream = new TcpClient(Config.ServerIP, Config.ServerPort).GetStream();
+                DataPacket done = new DataPacket("done");
+                stream.Write(done.Write(), 0, done.GetTotalSize());
+                Thread.Sleep(5); //Give a moment to the server to read the "done" packet. (Unnecessary. Just a precaution.)
+            }
+            catch (Exception e) { throw e; }
 
-                }
-                catch (Exception e) { throw e; }
-            };
-            action.Invoke();
             return result;
         }
-
-
-
-
-
     }
 }

@@ -48,7 +48,6 @@ namespace EMS_Server
                     if (!File.Exists(imagePath)) //If no image found, replace with stock.
                         imagePath = Config.FR_Images + $"\\StockImage{Config.ImageFormat}";
                     if (!File.Exists(imagePath)) throw new Exception($"Could not find neither eployee photo nor stock image. Place StockImage{Config.ImageFormat} into {Config.FR_Images} folder");
-                    //File.ReadAllBytes(imagePath).DebugPrint();
                     return File.ReadAllBytes(imagePath);
                 }
                 else return new byte[0];

@@ -160,12 +160,11 @@ namespace EMS_Library
         {
             if (collection == null || collection.Count() == 0) return true;
             if (default(T) == null) return collection.Contains(default);
-            byte[] def = default(T).ObjectToByteArray();
+            byte[] def = default(T)?.ObjectToByteArray();
 
             for (int i = 0; i < collection.Count(); i += interval)
             {
                 byte[] data = collection.ElementAt(i).ObjectToByteArray();
-                bool check = true;
                 for (int j = 0; j < data.Length; j++)
                     if (data[j] != def[j]) return false;
             }
@@ -256,6 +255,13 @@ namespace EMS_Library
             return builder.ToString().Remove(builder.Length - 2);
         }
 
+        /// <summary>
+        /// Search for an object in the collection.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="collection"></param>
+        /// <param name="predicate"></param>
+        /// <returns>An object. If nothing found, returns default value for that type.</returns>
         public static T Find<T>(this IEnumerable<T> collection, Predicate<T> predicate)
         {
             foreach (T item in collection)
@@ -263,6 +269,11 @@ namespace EMS_Library
             return default(T);
         }
 
+        /// <summary>
+        /// Checks if a string represents Israeli internal ID number.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public static bool IsStateID(this string id)
         {
             int[] id_12_digits = { 1, 2, 1, 2, 1, 2, 1, 2, 1 };
@@ -281,10 +292,9 @@ namespace EMS_Library
         }
 
         /// <summary>
-        /// Counting didgits in an integer using a while iteration
+        /// Counting didgits in an integer using a while iteration.
         /// </summary>
         /// <param name="x"></param>
-        /// <returns></returns>
         public static int CountDidgits(this int x)
         {
             byte digits = 0;

@@ -26,9 +26,12 @@ namespace EMS_Client.Forms
             callerForm = caller;
         }
         
-        // הצגת כל העובדים בטבלה
+        /// <summary>
+        /// Method called by OnLoad event.
+        /// </summary>
         private void selectEmployee_Load(object sender, EventArgs e)
         {
+            //In "Developement mode" request all employees from the DB on screen load.
             if (Config.DevelopmentMode)
             {
                 string querry = Requests.SelectEmployee();
@@ -41,7 +44,9 @@ namespace EMS_Client.Forms
             }
         }
 
-        // בדאבל קליק - העובד שלחצנו עליו ייכנס לתוך משתנה סטטי שנמצא במסך הראשי
+        /// <summary>
+        /// Requests chosen employee from the server and stores in as global variable.
+        /// </summary>
         private void employeesTable_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             int indexRow = employeesTable.CurrentCell.RowIndex;
@@ -55,43 +60,25 @@ namespace EMS_Client.Forms
             Close();
         }
 
-        #region Drag Window
-        /// <summary>
-        /// Controlls form movement during drag.
-        /// </summary>
-        void Drag(MouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Left)
-            {
-                ReleaseCapture();
-                SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
-            }
-        }
-        public const int WM_NCLBUTTONDOWN = 0xA1;
-        public const int HT_CAPTION = 0x2;
-        [System.Runtime.InteropServices.DllImportAttribute("user32.dll")]
-        public static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
-        [System.Runtime.InteropServices.DllImportAttribute("user32.dll")]
-        public static extern bool ReleaseCapture();
-        private void panelSelectEmployee_MouseDown(object sender, MouseEventArgs e) => Drag(e);
-        private void lblSelectEmployee_MouseDown(object sender, MouseEventArgs e) => Drag(e);
-
-        #endregion
-
         #region Buttons
         private void btnSaerch_Click(object sender, EventArgs e)
         {
             string querry = "";
             switch (comboBoxSelect.SelectedIndex)
             {
-                default:   return;
-                /*All*/    case 0: { querry = Requests.SelectEmployee(); break; }
-                /*ID*/     case 1: { querry = Requests.SelectEmployee(new Dictionary<string, string>() { { "_intId", $"{txtSaerch.Text}" } }); break; }
-                /*_fName*/ case 2: { querry = Requests.SelectEmployee(new Dictionary<string, string>() { { "_fName", $"'{txtSaerch.Text}'" } }); break; }
-                /*_lName*/ case 3: { querry = Requests.SelectEmployee(new Dictionary<string, string>() { { "_lName", $"'{txtSaerch.Text}'" } }); break; }
-                /*type*/   case 4: { querry = Requests.SelectEmployee(new Dictionary<string, string>() { { "type", $"'{txtSaerch.Text}'" } }); break; }
-              
-               
+                default: return;
+                /*All*/
+                case 0: { querry = Requests.SelectEmployee(); break; }
+                /*ID*/
+                case 1: { querry = Requests.SelectEmployee(new Dictionary<string, string>() { { "_intId", $"{txtSaerch.Text}" } }); break; }
+                /*_fName*/
+                case 2: { querry = Requests.SelectEmployee(new Dictionary<string, string>() { { "_fName", $"'{txtSaerch.Text}'" } }); break; }
+                /*_lName*/
+                case 3: { querry = Requests.SelectEmployee(new Dictionary<string, string>() { { "_lName", $"'{txtSaerch.Text}'" } }); break; }
+                /*type*/
+                case 4: { querry = Requests.SelectEmployee(new Dictionary<string, string>() { { "type", $"'{txtSaerch.Text}'" } }); break; }
+
+
             }
             buffer = Requests.RequestFromServer(querry, 1);
             employeesTable.Rows.Clear();
@@ -119,5 +106,29 @@ namespace EMS_Client.Forms
         }
         private void btnX_Click(object sender, EventArgs e) => Close();
         #endregion
+
+        #region Drag Window
+        /// <summary>
+        /// Controlls form movement during drag.
+        /// </summary>
+        void Drag(MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                ReleaseCapture();
+                SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
+            }
+        }
+        public const int WM_NCLBUTTONDOWN = 0xA1;
+        public const int HT_CAPTION = 0x2;
+        [System.Runtime.InteropServices.DllImportAttribute("user32.dll")]
+        public static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
+        [System.Runtime.InteropServices.DllImportAttribute("user32.dll")]
+        public static extern bool ReleaseCapture();
+        private void panelSelectEmployee_MouseDown(object sender, MouseEventArgs e) => Drag(e);
+        private void lblSelectEmployee_MouseDown(object sender, MouseEventArgs e) => Drag(e);
+
+        #endregion
+
     }
 }
