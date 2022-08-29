@@ -17,12 +17,13 @@ namespace EMS_Client.Forms
     {
         #region Variables
         Bitmap employeeImage;
-        Control[] activeControls;
+        Control[] activeControls; //Collection holding references for the interactable controlls (excluding buttons)
         #endregion
         public addEmployee()
         {
             InitializeComponent();
-            activeControls = new Control[] {
+            activeControls = new Control[]
+            {
                 txtID, txtFirstName , txtLastName, txtMiddleName,
                 txtGender,txtDateOfBirth,txtAddres,txtPhone,
                 txtBaseSalary,txtSalaryModifire,txtEmail,positionBox,pictureBox1
@@ -101,30 +102,16 @@ namespace EMS_Client.Forms
         private void btnX_Click(object sender, EventArgs e) => Close();
         #endregion
 
-        /// <summary>
-        /// Checks validity of data in the text fields
-        /// </summary>
-        /// 
-        public bool IsVaildId(string id)
-        {
-            int[] id_12_digits = { 1, 2, 1, 2, 1, 2, 1, 2, 1 };
-            int count = 0;
 
-            if (id == null || id == "" || id.Length > 9) return false;
-            id = id.PadLeft(9, '0'); // מוסיף את הספרה 0 מצד שמאל עד לאורך 9 ספרות
-            for (int i = 0; i < 9; i++)
-            {
-                int num = int.Parse(id.Substring(i, 1)) * id_12_digits[i];
-                if (num > 9)
-                    num = (num / 10) + (num % 10);
-                count += num;
-            }
-            return count % 10 == 0;
-        }
+        /// <summary>
+        /// Prefforms validation of data provided by the user.
+        /// </summary>
+        /// <returns></returns>
         private bool CheckingDataFields()
         {
+            //Aggrigation of the controlls and their vilidity status into singular collection.
             Dictionary<Control, bool> test = new Dictionary<Control, bool>() {
-                { panelID, IsVaildId(txtID.Text)},
+                { panelID, txtID.Text.IsStateID()},
                 { panelFname, txtFirstName.Text.Length > 1 },
                 { panelLname, txtLastName.Text.Length > 1 },
                 { panelDate, txtDateOfBirth.Text.Parsable(typeof(DateTime)) && (DateTime.Now - DateTime.Parse(txtDateOfBirth.Text)).TotalDays / 365 >= 18 },
@@ -136,20 +123,23 @@ namespace EMS_Client.Forms
                 { panelPosition, positionBox.Text != "" },
                 { btnUpload,pictureBox1.Image != null }
             };
+
+            //Prefoms serach for fields with invalid data and coloring them appropriately
+            bool check = true;
             foreach (KeyValuePair<Control, bool> item in test)
             {
                 if (item.Key is Button)
                 {
-                    if (!item.Value) item.Key.ForeColor = Color.FromArgb(255, 102, 102);
-                    else { item.Key.ForeColor = Color.FromArgb(0, 126, 249); }
+                    if (!item.Value) { item.Key.ForeColor = Color.Red; check = false; }
+                    else { item.Key.ForeColor = Color.DodgerBlue; check &= true; }
                 }
-                else 
-                { 
-                if (!item.Value) item.Key.BackColor = Color.FromArgb(255, 102, 102);
-                else { item.Key.BackColor = Color.FromArgb(0, 126, 249); }
+                else
+                {
+                    if (!item.Value) { item.Key.BackColor = Color.Red; check = false; }
+                    else { item.Key.BackColor = Color.DodgerBlue; check &= true; }
                 }
             }
-            return !test.Values.Contains(false);
+            return check;
         }
 
         #region Drag Window

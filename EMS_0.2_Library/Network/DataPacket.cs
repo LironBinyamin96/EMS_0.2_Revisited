@@ -38,9 +38,9 @@ namespace EMS_Library.Network
                 _byteData = new byte[_header.DataIntLength];
                 //int dataAmountRead = stream.Read(_byteData, 0, _header.DataIntLength);
                 int i = 0;
-                while(i<_header.DataIntLength)
+                while (i < _header.DataIntLength)
                 {
-                    if(stream.DataAvailable) _byteData[i++] = (byte)stream.ReadByte();
+                    if (stream.DataAvailable) _byteData[i++] = (byte)stream.ReadByte();
                 }
 
                 StringData = Encoding.UTF8.GetString(_byteData, 0, _header.DataIntLength);
@@ -63,7 +63,7 @@ namespace EMS_Library.Network
         /// <param name="header"></param>
         /// <param name="data"></param>
         /// <exception cref="Exception"></exception>
-        public DataPacket(string data, byte func=255)
+        public DataPacket(string data, byte func = 255)
         {
             if (data.Length > Math.Pow(255, 4) - 20) throw new Exception("Data is too long! 4294967296 max! Length was " + data.Length);
             if (data.Length == 0) data = " ";
@@ -79,7 +79,7 @@ namespace EMS_Library.Network
         /// </summary>
         /// <param name="data"></param>
         /// <param name="func"></param>
-        public DataPacket(byte[] data, byte func=255)
+        public DataPacket(byte[] data, byte func = 255)
         {
             _header = new DataPacketHeader(data.Length, func);
             _byteData = data;
@@ -120,10 +120,11 @@ namespace EMS_Library.Network
         /// Provides string representing the DataPacket object. (Won't provide data if it's longer than 1000 characters.)
         /// </summary>
         /// <returns></returns>
-        public override string ToString() 
+        public override string ToString()
         {
-            if(StringData.Length<1000) return $"Header: [{_header}], Data: [{StringData}]";
+            if (StringData.Length < 1000) return $"Header: [{_header}], Data: [{StringData}]";
             else return $"Header: [{_header}]";
         }
+
     }
 }

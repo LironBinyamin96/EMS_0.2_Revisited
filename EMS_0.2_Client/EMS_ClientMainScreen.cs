@@ -29,34 +29,36 @@ namespace EMS_Client
         {
             if (!Directory.Exists(Config.RootDirectory)) //Create working directory if it doesn't exist
                 Directory.CreateDirectory(Config.RootDirectory);
-            Action serverLookup = () => //Method to look for the server.
+            Action serverLookup = () => //Lambda method to look for the server.
             {
                 EMS_Library.Network.ServerAddressResolver.ServerIP(false);
                 (Array.Find(PrimaryForms.ToArray(), x => x is EMS_ClientMainScreen) as EMS_ClientMainScreen).Invoke(() => PrimaryForms.Pop().Close());
-                if (EMS_Library.Network.ServerAddressResolver.LookedUp) //Message reminding to update ServerIp configurations 
+                if (EMS_Library.Network.ServerAddressResolver.LookedUp) //Message reminding to update ServerIp configurations
                     MessageBox.Show($"Had to serach for the server!\nServer ip is {Config.ServerIP}\nPlease update client config files to reduce boot time");
             };
             StandbyScreen standby = new StandbyScreen(serverLookup);
             standby.ShowDialog();
 
+
             Login login = new Login();
             PrimaryForms.Push(login);
             login.ShowDialog();
-            if (PrimaryForms.Count > 0) //App wasn't closed at login screen
-            {
-                EMS_Library.Network.DataPacket packet = new EMS_Library.Network.DataPacket($"get image #{CurEmployee.IntId}", 6);
-                byte[] buffer = Requests.GetImage(packet);
-                if (!buffer.IsEmpty(10))
-                {
-                    File.WriteAllBytes(Config.RootDirectory + "\\test.jpg", buffer);
-                    File.WriteAllBytes(Config.RootDirectory + "\\test.txt", buffer);
-                    userPicture.Image = new ImageConverter().ConvertFrom(buffer) as Bitmap;
-                }
 
+            if (PrimaryForms.Count == 0) return; //App was closed at login screen
+
+            EMS_Library.Network.DataPacket packet = new EMS_Library.Network.DataPacket($"get image #{CurEmployee.IntId}", 6);
+            byte[] buffer = Requests.GetImage(packet);
+            if (!buffer.IsEmpty(10))
+            {
+                File.WriteAllBytes(Config.RootDirectory + "\\test.jpg", buffer);
+                File.WriteAllBytes(Config.RootDirectory + "\\test.txt", buffer);
+                userPicture.Image = new ImageConverter().ConvertFrom(buffer) as Bitmap;
             }
         }
 
         #region Subscreens
+        //This region contains methods needed for the subscreens rendering
+
         // סימון הכפתורים
         [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
         private static extern IntPtr CreateRoundRectRgn(int nLeftRect, int nTopRect, int nRightRect, int nBottomRect, int nWidthEllipse, int nHeightEllipse);

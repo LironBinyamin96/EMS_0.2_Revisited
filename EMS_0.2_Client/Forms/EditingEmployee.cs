@@ -18,12 +18,18 @@ namespace EMS_Client.Forms
         }
 
         #region Buttons
+        /// <summary>
+        /// Opens Add Worker screen
+        /// </summary>
         private void btnAddWorker_Click(object sender, EventArgs e)
         {
             addEmployee ae = new addEmployee();
             ae.Show();
         }
 
+        /// <summary>
+        /// Opens Update Personal Details screen
+        /// </summary>
         private void btnUpdatePersonalDetails_Click(object sender, EventArgs e)
         {
             UpdatePersonalDetails upd = new UpdatePersonalDetails();

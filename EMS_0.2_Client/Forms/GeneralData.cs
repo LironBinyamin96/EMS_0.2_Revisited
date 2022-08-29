@@ -18,8 +18,8 @@ namespace EMS_Client.Forms
         private ProgressBar[] progressBars;
         private Label[] labels;
         private HoursLogMonth[] data;
-        private bool employeeChanged = false;
-        private bool firtsOpen = true;
+        private bool employeeChanged = false; //Avoiding unnesasery requests for pictures.
+        private bool firtsOpen = true; //Avoiding condition checks on first load.
 
         /// <summary>
         /// Constructor for GeneralData screen.
@@ -27,8 +27,12 @@ namespace EMS_Client.Forms
         public GeneralData()
         {
             InitializeComponent();
+
+            //Aggregating controlls into collections for later use
             progressBars = new ProgressBar[] { monthBar0, monthBar1, monthBar2, monthBar3, monthBar4, monthBar5, monthBar6, monthBar7, monthBar8, monthBar9, monthBar10, monthBar11 };
             labels = new Label[] { lblMonthData0, lblMonthData1, lblMonthData2, lblMonthData3, lblMonthData4, lblMonthData5, lblMonthData6, lblMonthData7, lblMonthData8, lblMonthData9, lblMonthData10, lblMonthData11 };
+            
+            //Priming fields
             foreach(Label label in labels) label.Text = String.Empty;
             List<int> years = new List<int>();
             for (int i = Config.MinDate.Year; i <= DateTime.Now.Year; i++)
@@ -41,8 +45,6 @@ namespace EMS_Client.Forms
         /// <summary>
         /// Button for selecting employee.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void btnSelect_Click(object sender, EventArgs e)
         {
             selectEmployee select_Employee = new selectEmployee(this);
@@ -53,8 +55,6 @@ namespace EMS_Client.Forms
         /// <summary>
         /// Triggered when selecting a year.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void yearPicker_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (!firtsOpen) Fill();

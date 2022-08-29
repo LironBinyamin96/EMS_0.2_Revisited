@@ -122,39 +122,50 @@ namespace EMS_Client.Forms
         }
         #endregion
 
+        /// <summary>
+        /// Prefforms validation of data provided by the user.
+        /// </summary>
+        /// <returns></returns>
         private bool CheckingDataFields()
         {
+            //Aggrigation of the controlls and their vilidity status into singular collection.
             Dictionary<Control, bool> test = new Dictionary<Control, bool>() {
-                { panelID, txtID.Text.Parsable(typeof(int)) },
+                { panelID, txtID.Text.IsStateID()},
                 { panelFname, txtFirstName.Text.Length > 1 },
                 { panelLname, txtLastName.Text.Length > 1 },
-                { panelDate, txtDateOfBirth.Text.Parsable(typeof(DateTime)) },
+                { panelDate, txtDateOfBirth.Text.Parsable(typeof(DateTime)) && (DateTime.Now - DateTime.Parse(txtDateOfBirth.Text)).TotalDays / 365 >= 18 },
                 { panelAddres, txtAddres.Text.Length > 1 },
                 { panelPhone, txtPhone.Text.Parsable(typeof(int)) },
-                { panelEmail, txtEmail.Text.Parsable(typeof(System.Net.Mail.MailAddress)) && (!txtEmail.Text.Contains(".") || txtEmail.Text.Trim().EndsWith(".")) },
-                { panelBaseSalary, txtBaseSalary.Text.Parsable(typeof(int)) && int.Parse(txtBaseSalary.Text)>0 },
-                { panelSalaryModifire, txtSalaryModifire.Text.Parsable(typeof(double)) && int.Parse(txtSalaryModifire.Text)>0},
+                { panelEmail, txtEmail.Text.Parsable(typeof(System.Net.Mail.MailAddress)) && (txtEmail.Text.Contains(".")) },
+                { panelBaseSalary, txtBaseSalary.Text.Parsable(typeof(int))&& int.Parse(txtBaseSalary.Text)>0 },
+                { panelSalaryModifire, txtSalaryModifire.Text.Parsable(typeof(double))&& double.Parse(txtSalaryModifire.Text)>0},
                 { panelPosition, positionBox.Text != "" },
                 { btnUpload,pictureBox1.Image != null }
-            
             };
+
+            //Prefoms scan through the collection and changing field colors appropriately while aggregating validity status.
+            bool check = true;
             foreach (KeyValuePair<Control, bool> item in test)
             {
                 if (item.Key is Button)
                 {
-                    if (!item.Value) item.Key.ForeColor = Color.FromArgb(255, 102, 102);
-                    else { item.Key.ForeColor = Color.FromArgb(0, 126, 249); }
+                    if (!item.Value) { item.Key.ForeColor = Color.Red; check = false; }
+                    else { item.Key.ForeColor = Color.DodgerBlue; check &= true; }
                 }
                 else
                 {
-                    if (!item.Value) item.Key.BackColor = Color.FromArgb(255, 102, 102);
-                    else { item.Key.BackColor = Color.FromArgb(0, 126, 249); }
+                    if (!item.Value) { item.Key.BackColor = Color.Red; check = false; }
+                    else { item.Key.BackColor = Color.DodgerBlue; check &= true; }
                 }
             }
-            return !test.Values.Contains(false);
+            return check;
         }
 
         #region Supplimental
+
+        /// <summary>
+        /// Clears fields
+        /// </summary>
         public void Clear()
         {
             txtID.Text = "";
@@ -172,9 +183,12 @@ namespace EMS_Client.Forms
             txtEmail.Text = "";
             pictureBox1.Image = null;
         }
+
+        /// <summary>
+        /// Fills fields
+        /// </summary>
         public void Fill()
         {
-            //Clear();
             if (EMS_ClientMainScreen.employee != null)
             {
                 txtID.Text = EMS_ClientMainScreen.employee.StateId.ToString();

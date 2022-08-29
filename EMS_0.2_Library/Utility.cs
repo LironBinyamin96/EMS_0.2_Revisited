@@ -80,8 +80,8 @@ namespace EMS_Library
         /// Generates random DateTime object.
         /// </summary>
         /// <returns></returns>
-        public static DateTime RandomDateTime() => new DateTime(RandomInt(1800, 2022), RandomInt(1, 13), RandomInt(1, 29), RandomInt(0,24), RandomInt(0, 60), RandomInt(0, 60));
-        
+        public static DateTime RandomDateTime() => new DateTime(RandomInt(1800, 2022), RandomInt(1, 13), RandomInt(1, 29), RandomInt(0, 24), RandomInt(0, 60), RandomInt(0, 60));
+
         /// <summary>
         /// Rescales image to appropriate size for FR
         /// (see EMS_Library.Config->FR & Images)
@@ -180,9 +180,9 @@ namespace EMS_Library
         /// </param>
         public static bool ContainsAnyOf(this string str, string[] arr)
         {
-            if(arr == null || arr.Length==0) return false;
-            foreach(string item in arr)
-                if(str.Contains(item))return true;
+            if (arr == null || arr.Length == 0) return false;
+            foreach (string item in arr)
+                if (str.Contains(item)) return true;
             return false;
         }
 
@@ -195,11 +195,11 @@ namespace EMS_Library
         /// <returns></returns>
         public static bool Parsable(this string str, Type type)
         {
-            if (type == typeof(int))                                  return int.TryParse(str, out _);
-            else if (type == typeof(DateTime))                        return DateTime.TryParse(str, out _);
-            else if (type == typeof(TimeSpan))                        return TimeSpan.TryParse(str, out _);
+            if (type == typeof(int)) return int.TryParse(str, out _);
+            else if (type == typeof(DateTime)) return DateTime.TryParse(str, out _);
+            else if (type == typeof(TimeSpan)) return TimeSpan.TryParse(str, out _);
             else if (type == typeof(float) || type == typeof(double)) return double.TryParse(str, out _);
-            else if (type == typeof(System.Net.Mail.MailAddress))     return System.Net.Mail.MailAddress.TryCreate(str, out _);
+            else if (type == typeof(System.Net.Mail.MailAddress)) return System.Net.Mail.MailAddress.TryCreate(str, out _);
             return true;
         }
 
@@ -211,8 +211,8 @@ namespace EMS_Library
         /// <returns></returns>
         public static bool AllParsable(this string[] arr, Type type)
         {
-            foreach(string item in arr)
-                if(!item.Parsable(type)) return false;
+            foreach (string item in arr)
+                if (!item.Parsable(type)) return false;
             return true;
         }
 
@@ -223,9 +223,9 @@ namespace EMS_Library
         /// <param name="collection"></param>
         public static void DebugPrint<T>(this IEnumerable<T> collection)
         {
-            if(collection == null || collection.Count() == 0) return;
+            if (collection == null || collection.Count() == 0) return;
             foreach (T item in collection)
-                if(item!=null) Console.WriteLine(item.ToString());
+                if (item != null) Console.WriteLine(item.ToString());
         }
 
         /// <summary>
@@ -259,9 +259,37 @@ namespace EMS_Library
         public static T Find<T>(this IEnumerable<T> collection, Predicate<T> predicate)
         {
             foreach (T item in collection)
-                if(predicate(item)) return item;
+                if (predicate(item)) return item;
             return default(T);
         }
 
+        public static bool IsStateID(this string id)
+        {
+            int[] id_12_digits = { 1, 2, 1, 2, 1, 2, 1, 2, 1 };
+            int count = 0;
+
+            if (id == null || id == "" || id.Length > 9) return false;
+            id = id.PadLeft(9, '0'); // מוסיף את הספרה 0 מצד שמאל עד לאורך 9 ספרות
+            for (int i = 0; i < 9; i++)
+            {
+                int num = int.Parse(id.Substring(i, 1)) * id_12_digits[i];
+                if (num > 9)
+                    num = (num / 10) + (num % 10);
+                count += num;
+            }
+            return count % 10 == 0;
+        }
+
+        /// <summary>
+        /// Counting didgits in an integer using a while iteration
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns>
+        public static int CountDidgits(this int x)
+        {
+            byte digits = 0;
+            while ((x /= 10) != 0) ++digits;
+            return digits;
+        }
     }
 }

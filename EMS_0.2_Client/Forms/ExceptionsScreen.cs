@@ -13,25 +13,42 @@ namespace EMS_Client.Forms
 {
     public partial class ExceptionsScreen : Form
     {
-        string[] _data;
+        string[] _data; //Exceptions data reference
         public ExceptionsScreen()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Close Form
+        /// </summary>
         private void btnClose_Click(object sender, EventArgs e) => Close();
 
+        /// <summary>
+        /// Method called by OnLoad event
+        /// </summary>
         private void ExceptionsScreen_Load(object sender, EventArgs e)
         {
+            //Request all entries with invalid data from DB
             _data = Requests.RequestFromServer(Requests.GetAllExceptions(), 8);
             if (_data != null)
-            {
                 try
                 {
                     foreach (string item in _data)
                         exceptionsTable.Rows.Add(item.Split(','));
                 }
                 catch { }
+        }
+        /// <summary>
+        /// Opens EditHours screen by double clicking on appropriate cell.
+        /// </summary>
+        private void exceptionsTable_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (_data != null)
+            {
+                Point cellCoordinates = exceptionsTable.CurrentCellAddress;
+                EditHours editHours = new EditHours(new EMS_Library.MyEmployee.HoursLog.HoursLogEntry(_data[cellCoordinates.Y]));
+                editHours.Show();
             }
         }
 
@@ -56,14 +73,5 @@ namespace EMS_Client.Forms
         private void ExceptionsScreen_MouseDown(object sender, MouseEventArgs e) => Drag(e);
         #endregion
 
-        private void exceptionsTable_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
-        {
-            if (_data != null)
-            {
-                Point cellCoordinates = exceptionsTable.CurrentCellAddress;
-                EditHours editHours = new EditHours(new EMS_Library.MyEmployee.HoursLog.HoursLogEntry(_data[cellCoordinates.Y]));
-                editHours.Show();
-            }
-        }
     }
 }

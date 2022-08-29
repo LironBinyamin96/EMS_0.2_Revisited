@@ -15,25 +15,26 @@ namespace EMS_Client.Forms
     public partial class EditHours : Form
     {
         HoursLogEntry _entry;
-        public EditHours()
-        {
-            InitializeComponent();
-        }
         public EditHours(HoursLogEntry entry)
         {
             InitializeComponent();
             _entry = entry;
             bool startCheck = _entry.Start < dateTimeEntey.MinDate || _entry.Start > dateTimeEntey.MaxDate;
             bool endCheck = _entry.End > dateTimeEntey.MaxDate || _entry.End < dateTimeEntey.MinDate;
-            dateTimeEntey.Value = startCheck? dateTimeEntey.MinDate : _entry.Start;
+            dateTimeEntey.Value = startCheck ? dateTimeEntey.MinDate : _entry.Start;
             dateTimeExit.Value = endCheck ? dateTimeEntey.MaxDate : _entry.End;
         }
 
         #region Buttons
+
+        /// <summary>
+        /// Saves the data
+        /// </summary>
         private void btnSave_Click(object sender, EventArgs e)
         {
-            //MessageBox.Show($"entry: {dateTimeEntey.Value}\n exit: {dateTimeExit.Value}");
             DateTime newEntry = dateTimeEntey.Value, newExit = dateTimeExit.Value;
+
+            //Aggrigation of the controlls and their vilidity status into singular collection.
             Dictionary<Label, bool> invalidation = new Dictionary<Label, bool>()
             {
                 { lblEntry, newEntry>EMS_Library.Config.MinDate && newEntry < newExit },
@@ -41,26 +42,28 @@ namespace EMS_Client.Forms
             };
 
 
-
-
             if (invalidation.Values.Contains(false))
             {
-                foreach(KeyValuePair<Label,bool> label in invalidation)
+                //Coloring fields with appropriate colors
+                foreach (KeyValuePair<Label, bool> label in invalidation)
                 {
-                    if(label.Value) label.Key.ForeColor = Color.DodgerBlue;
+                    if (label.Value) label.Key.ForeColor = Color.DodgerBlue;
                     else label.Key.ForeColor = Color.Red;
                 }
             }
             else
             {
-                string querry = Requests.UpdateEntry(_entry.IntId.ToString(), newEntry, newExit);
-                string[] x = Requests.RequestFromServer(querry, 7);
+                //Make a request to the to update data
+                Requests.RequestFromServer(Requests.UpdateEntry(_entry.IntId.ToString(), newEntry, newExit), 7);
                 Close();
             }
         }
+
+        /// <summary>
+        /// Close form
+        /// </summary>
         private void btnX_Click(object sender, EventArgs e) => Close();
         #endregion
-
 
         #region Drag Window
         /// <summary>

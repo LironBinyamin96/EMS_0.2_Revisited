@@ -44,7 +44,6 @@ namespace EMS_Client.Forms
             string[] buffer = Requests.RequestFromServer(querry, 1);
 
             //Credentials check
-
             if (buffer.Length == 0 || buffer[0] == "-1")
             {
                 Employee emp = Employee.ActivateEmployee(buffer[0].Split(','));
