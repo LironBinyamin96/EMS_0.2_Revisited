@@ -30,10 +30,10 @@ namespace EMS_Server
                     connection.ClientFinished += OnClientFinished;
 
                     connections.Add(connection);
+                    EMS_ServerMainScreen.serverForm.ReRenderConnections(Array.ConvertAll(connections.ToArray(), x => x._tcpClient.Client?.RemoteEndPoint.ToString()));
                     connection.ReadData();
                 });
             }
-
         }
 
         /// <summary>
@@ -45,18 +45,23 @@ namespace EMS_Server
         {
             if (sender is MyConnection)
             {
-                //Search for all connections from the same ip.
-                List<MyConnection> arr = connections.FindAll(x => x._tcpClient.Client != null && (sender as MyConnection)._tcpClient.Client.RemoteEndPoint.ToString().Split(':')[0] == x._tcpClient.Client.RemoteEndPoint.ToString().Split(":")[0]);
-
-                //Dispose of the found connections.
-                while (arr.Count > 0)
-                    foreach (MyConnection connection in arr)
-                    { connection.Terminate(); arr.Remove(connection); break; }
-                return;
+                //Dispose of the connections.
+                for (int i = 0; i < connections.Count; i++)
+                {
+                    if (connections[i]._tcpClient.Client != null &&
+                       (sender as MyConnection)._tcpClient.Client != null &&
+                       (sender as MyConnection)._tcpClient.Client.RemoteEndPoint.ToString().Split(':')[0] == connections[i]._tcpClient.Client.RemoteEndPoint.ToString().Split(":")[0])
+                    
+                    {
+                        connections[i].Terminate();
+                        connections.Remove(connections[i--]);
+                    }
+                }
+                EMS_ServerMainScreen.serverForm.ReRenderConnections(Array.ConvertAll(connections.ToArray(), x => x._tcpClient.Client?.RemoteEndPoint.ToString()));
             }
         }
 
-        class MyConnection
+        internal class MyConnection
         {
             public TcpClient _tcpClient;
             protected DataPacket _request;
@@ -116,7 +121,6 @@ namespace EMS_Server
             {
                 if (_tcpClient.Client != null)
                     EMS_ServerMainScreen.serverForm.WriteToServerConsole("Terminating: " + _tcpClient.Client.RemoteEndPoint);
-                EMS_ServerMainScreen.serverForm.WriteToServerConsole("Terminating: " + _tcpClient.Client.RemoteEndPoint);
                 _stream.Dispose();
                 _tcpClient.Dispose();
 

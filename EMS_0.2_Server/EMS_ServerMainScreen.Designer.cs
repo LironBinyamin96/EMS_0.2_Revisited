@@ -30,6 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             this.panelLeft = new System.Windows.Forms.Panel();
+            this.connectionsList = new System.Windows.Forms.ListView();
             this.centerPic = new System.Windows.Forms.PictureBox();
             this.btnSimExit = new System.Windows.Forms.Button();
             this.btnSimEnter = new System.Windows.Forms.Button();
@@ -38,6 +39,7 @@
             this.listnerTimer = new System.Windows.Forms.Timer(this.components);
             this.panelRight = new System.Windows.Forms.Panel();
             this.btnExit = new System.Windows.Forms.Button();
+            this.columnHeaderConnections = new System.Windows.Forms.ColumnHeader();
             this.panelLeft.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.centerPic)).BeginInit();
             this.panel1.SuspendLayout();
@@ -47,6 +49,7 @@
             // panelLeft
             // 
             this.panelLeft.BackColor = System.Drawing.Color.Transparent;
+            this.panelLeft.Controls.Add(this.connectionsList);
             this.panelLeft.Controls.Add(this.centerPic);
             this.panelLeft.Controls.Add(this.btnSimExit);
             this.panelLeft.Controls.Add(this.btnSimEnter);
@@ -55,6 +58,22 @@
             this.panelLeft.Name = "panelLeft";
             this.panelLeft.Size = new System.Drawing.Size(185, 715);
             this.panelLeft.TabIndex = 0;
+            // 
+            // connectionsList
+            // 
+            this.connectionsList.AutoArrange = false;
+            this.connectionsList.BackColor = System.Drawing.SystemColors.MenuText;
+            this.connectionsList.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.connectionsList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeaderConnections});
+            this.connectionsList.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.connectionsList.ForeColor = System.Drawing.SystemColors.Menu;
+            this.connectionsList.Location = new System.Drawing.Point(0, 183);
+            this.connectionsList.Name = "connectionsList";
+            this.connectionsList.Size = new System.Drawing.Size(185, 486);
+            this.connectionsList.TabIndex = 2;
+            this.connectionsList.UseCompatibleStateImageBehavior = false;
+            this.connectionsList.View = System.Windows.Forms.View.List;
             // 
             // centerPic
             // 
@@ -179,5 +198,7 @@
         private Button btnExit;
         private Button btnSimExit;
         private Button btnSimEnter;
+        public ListView connectionsList;
+        private ColumnHeader columnHeaderConnections;
     }
 }

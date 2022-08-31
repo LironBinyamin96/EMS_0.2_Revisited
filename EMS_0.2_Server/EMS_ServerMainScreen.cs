@@ -60,7 +60,7 @@ namespace EMS_Server
             listnerTimer.Start();
             if (!Directory.Exists(EMS_Library.Config.RootDirectory)) Directory.CreateDirectory(EMS_Library.Config.RootDirectory);
             if (!Directory.Exists(EMS_Library.Config.FR_Images)) Directory.CreateDirectory(EMS_Library.Config.FR_Images);
-
+            
         }
 
         private void listnerTimer_Tick(object sender, EventArgs e)
@@ -71,6 +71,7 @@ namespace EMS_Server
                 ForceExits(); //Automated exit enforcer
                 BackupDB();   //Automated Database Backup
             }
+
 
             void BackupDB()
             {
@@ -148,10 +149,6 @@ namespace EMS_Server
             FacialRecognition.Dispose();
         }
 
-        private void OnClockTick(object sender, EventArgs e)
-        {
-
-        }
 
         #endregion
 
@@ -227,6 +224,17 @@ namespace EMS_Server
                 }
                 WriteToConfigFile();
             }, SQLLookup_CXL);
+        }
+
+        public void ReRenderConnections(string[] data)
+        {
+            this.Invoke((MethodInvoker)delegate
+            {
+                connectionsList.Items.Clear();
+                foreach (string connection in data)
+                    connectionsList.Items.Add(connection);
+                connectionsList.Invalidate();
+            });
         }
 
         /// <summary>

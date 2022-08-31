@@ -57,6 +57,12 @@ namespace EMS_Library
         public const string ImageFormat = ".jpg";
         #endregion
 
+        #region Email config
+        public const string EMS_EmailAddress = "employee.management.system010@gmail.com";
+        public const string EMA_EmailPassword = "wcvyicyfscoiqfgr";
+
+        #endregion
+
         //Development Mode
         public const bool DevelopmentMode = true;
     }
