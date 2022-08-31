@@ -28,11 +28,9 @@ namespace EMS_Server
                 /*Get Picture*/       case 6: { return new DataPacket(GetPicture()); }
                 /*Update entry*/      case 7: { return new DataPacket(SQLBridge.UpdateEntry(data.StringData)); };
                 /*Get Exceptions*/    case 8: { return new DataPacket(SQLBridge.TwoWayCommand(SQLBridge.GetAllExceptions(data.StringData))); }
-                /* Get all emails*/   case 9: { return new DataPacket(SQLBridge.TwoWayCommand("select _email from Employees;")); }
+                /*Get all emails*/    case 9: { return new DataPacket(SQLBridge.TwoWayCommand("select _email from Employees;")); }
 
-
-                /*Get free ID*/
-                case 252: { return new DataPacket(SQLBridge.GetFreeID(), 255); }
+                /*Get free ID*/       case 252: { return new DataPacket(SQLBridge.GetFreeID(), 255); }
                 /*Direct querry*/     case 253: { return new DataPacket(SQLBridge.OneWayCommand(data.StringData)); }
                 /*Direct querry*/     case 254: { return new DataPacket(SQLBridge.TwoWayCommand(data.StringData)); }
                 /*Out*/               case 255: { return data; }
