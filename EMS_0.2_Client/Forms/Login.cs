@@ -11,11 +11,16 @@ using System.Net.Sockets;
 using EMS_Library;
 using EMS_Library.Network;
 using EMS_Library.MyEmployee;
+using System.Net;
+using System.Net.Mail;
+
 
 namespace EMS_Client.Forms
 {
     public partial class Login : Form
     {
+        int passcode;
+
         public Login()
         {
             InitializeComponent();
@@ -26,6 +31,18 @@ namespace EMS_Client.Forms
             }
         }
 
+        //private int passcodeForMail(string email)
+        //{
+        //    Random rnd = new Random();
+        //    int passcode = rnd.Next(100000, 999999);
+        //    SmtpClient Smtp = new SmtpClient("smtp.gmail.com", 587);
+        //    MailMessage mail = new MailMessage(Config.EMS_EmailAddress,email,"Verification code from employee management system",passcode.ToString());
+        //    Smtp.EnableSsl = true;
+        //    Smtp.Credentials = new NetworkCredential(Config.EMS_EmailAddress, Config.EMA_EmailPassword);
+        //    Smtp.Send(mail);
+
+        //    return passcode;
+        //}
         #region Buttons
 
         /// <summary>
@@ -54,12 +71,17 @@ namespace EMS_Client.Forms
                     MessageBox.Show("Wrong credentials");
                     return;
                 }
+                //passcode = passcodeForMail(emp.Email);
             }
-
             //Build an Employee object from the data recieved from the server.
             EMS_ClientMainScreen.CurEmployee = Employee.ActivateEmployee(buffer[0].Split(','));
+
+            panelLogin.Visible = false;
+            panelPasscode.Visible = true;
+
             Close();
         }
+
 
         /// <summary>
         /// Method for closing programm from login screen. (Called by X button)
@@ -104,6 +126,18 @@ namespace EMS_Client.Forms
         private void lblProgrammName_MouseDown(object sender, MouseEventArgs e) => Drag(e);
         private void Login_MouseDown(object sender, MouseEventArgs e) => Drag(e);
         #endregion
+
+        private void Login_Load(object sender, EventArgs e)
+        {
+            panel1.BackColor = Color.FromArgb(100, 0, 0, 0);
+        }
+
+        private void btnLoginPasscode_Click(object sender, EventArgs e)
+        {
+           // if (passcode.ToString() == btnLoginPasscode.Text)
+                //Close();
+          //  else MessageBox.Show("Incorrect passcode");
+        }
     }
 
 }

@@ -203,7 +203,7 @@ namespace EMS_Client.Forms
                 positionBox.Text = EMS_ClientMainScreen.employee.Type.Name;
                 txtBaseSalary.Text = EMS_ClientMainScreen.employee.BaseSalary.ToString();
                 txtSalaryModifire.Text = EMS_ClientMainScreen.employee.SalaryModifire.ToString();
-                try { pictureBox1.Image = new Bitmap(Config.FR_Images + $"\\{EMS_ClientMainScreen.employee.IntId}{Config.ImageFormat}"); } catch { }
+                try { pictureBox1.Image = new ImageConverter().ConvertFrom(Requests.GetImage(new DataPacket($"get image #{EMS_ClientMainScreen.employee.IntId}", 6))) as Bitmap; } catch { }
             }
         }
         #endregion

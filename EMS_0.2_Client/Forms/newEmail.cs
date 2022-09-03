@@ -77,10 +77,7 @@ namespace EMS_Client.Forms
         /// </summary>
         public void Fill() => txtTo.Text = EMS_ClientMainScreen.employee.Email;
 
-        /// <summary>
-        /// Method for mass email sending.
-        /// </summary>
-        private void btnSendToAll_Click(object sender, EventArgs e) => txtTo.Text = Requests.RequestFromServer(Requests.GetAllEmails(), 9).ArrayToString();
+
 
         #region Buttons
         /// <summary>
@@ -124,6 +121,11 @@ namespace EMS_Client.Forms
             selectEmployee se = new selectEmployee(this);
             se.Show();
         }
+
+        /// <summary>
+        /// Method for mass email sending.
+        /// </summary>
+        private void btnSendToAll_Click(object sender, EventArgs e) => txtTo.Text = Requests.RequestFromServer(Requests.GetAllEmails(), 9).ArrayToString();
         private void btnX_Click(object sender, EventArgs e) => Close();
 
         #endregion

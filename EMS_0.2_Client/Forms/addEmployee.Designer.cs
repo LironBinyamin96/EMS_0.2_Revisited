@@ -32,6 +32,10 @@
             this.btnX = new System.Windows.Forms.Button();
             this.lblAddEmployee = new System.Windows.Forms.Label();
             this.gBoxRegistration = new System.Windows.Forms.GroupBox();
+            this.panelPicture = new System.Windows.Forms.Panel();
+            this.pictureBoxCamera = new System.Windows.Forms.PictureBox();
+            this.btnPictureTaking = new System.Windows.Forms.Button();
+            this.btnCamera = new System.Windows.Forms.Button();
             this.positionBox = new System.Windows.Forms.ComboBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.btnUpload = new System.Windows.Forms.Button();
@@ -41,6 +45,7 @@
             this.lblSalaryModifire = new System.Windows.Forms.Label();
             this.txtBaseSalary = new System.Windows.Forms.TextBox();
             this.panelBaseSalary = new System.Windows.Forms.Panel();
+            this.PBpictureTaking = new System.Windows.Forms.PictureBox();
             this.lblBaseSalary = new System.Windows.Forms.Label();
             this.panelPosition = new System.Windows.Forms.Panel();
             this.lblPosition = new System.Windows.Forms.Label();
@@ -75,7 +80,10 @@
             this.btnClear = new System.Windows.Forms.Button();
             this.panelAddEmployee.SuspendLayout();
             this.gBoxRegistration.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCamera)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.panelBaseSalary.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.PBpictureTaking)).BeginInit();
             this.SuspendLayout();
             // 
             // panelAddEmployee
@@ -118,6 +126,10 @@
             // 
             // gBoxRegistration
             // 
+            this.gBoxRegistration.Controls.Add(this.panelPicture);
+            this.gBoxRegistration.Controls.Add(this.pictureBoxCamera);
+            this.gBoxRegistration.Controls.Add(this.btnPictureTaking);
+            this.gBoxRegistration.Controls.Add(this.btnCamera);
             this.gBoxRegistration.Controls.Add(this.positionBox);
             this.gBoxRegistration.Controls.Add(this.pictureBox1);
             this.gBoxRegistration.Controls.Add(this.btnUpload);
@@ -161,10 +173,56 @@
             this.gBoxRegistration.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
             this.gBoxRegistration.Location = new System.Drawing.Point(12, 91);
             this.gBoxRegistration.Name = "gBoxRegistration";
-            this.gBoxRegistration.Size = new System.Drawing.Size(657, 266);
+            this.gBoxRegistration.Size = new System.Drawing.Size(647, 285);
             this.gBoxRegistration.TabIndex = 4;
             this.gBoxRegistration.TabStop = false;
             this.gBoxRegistration.Text = "Registration";
+            // 
+            // panelPicture
+            // 
+            this.panelPicture.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
+            this.panelPicture.Location = new System.Drawing.Point(416, 68);
+            this.panelPicture.Name = "panelPicture";
+            this.panelPicture.Size = new System.Drawing.Size(205, 1);
+            this.panelPicture.TabIndex = 47;
+            // 
+            // pictureBoxCamera
+            // 
+            this.pictureBoxCamera.Location = new System.Drawing.Point(416, 72);
+            this.pictureBoxCamera.Name = "pictureBoxCamera";
+            this.pictureBoxCamera.Size = new System.Drawing.Size(200, 201);
+            this.pictureBoxCamera.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBoxCamera.TabIndex = 46;
+            this.pictureBoxCamera.TabStop = false;
+            // 
+            // btnPictureTaking
+            // 
+            this.btnPictureTaking.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPictureTaking.Font = new System.Drawing.Font("Bahnschrift SemiLight", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btnPictureTaking.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
+            this.btnPictureTaking.Location = new System.Drawing.Point(520, 40);
+            this.btnPictureTaking.Name = "btnPictureTaking";
+            this.btnPictureTaking.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.btnPictureTaking.Size = new System.Drawing.Size(98, 26);
+            this.btnPictureTaking.TabIndex = 45;
+            this.btnPictureTaking.Text = "Picture Taking";
+            this.btnPictureTaking.UseVisualStyleBackColor = true;
+            this.btnPictureTaking.Visible = false;
+            this.btnPictureTaking.Click += new System.EventHandler(this.btnPictureTaking_Click);
+            // 
+            // btnCamera
+            // 
+            this.btnCamera.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCamera.Font = new System.Drawing.Font("Bahnschrift SemiLight", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btnCamera.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
+            this.btnCamera.Location = new System.Drawing.Point(520, 40);
+            this.btnCamera.Name = "btnCamera";
+            this.btnCamera.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.btnCamera.Size = new System.Drawing.Size(98, 26);
+            this.btnCamera.TabIndex = 44;
+            this.btnCamera.Text = "Camera";
+            this.btnCamera.UseVisualStyleBackColor = true;
+            this.btnCamera.Click += new System.EventHandler(this.btnCamera_Click);
             // 
             // positionBox
             // 
@@ -187,9 +245,9 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(452, 93);
+            this.pictureBox1.Location = new System.Drawing.Point(416, 72);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(164, 165);
+            this.pictureBox1.Size = new System.Drawing.Size(200, 201);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 38;
             this.pictureBox1.TabStop = false;
@@ -199,7 +257,7 @@
             this.btnUpload.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnUpload.Font = new System.Drawing.Font("Bahnschrift SemiLight", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btnUpload.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
-            this.btnUpload.Location = new System.Drawing.Point(482, 40);
+            this.btnUpload.Location = new System.Drawing.Point(416, 40);
             this.btnUpload.Name = "btnUpload";
             this.btnUpload.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.btnUpload.Size = new System.Drawing.Size(98, 26);
@@ -249,7 +307,7 @@
             this.txtBaseSalary.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
             this.txtBaseSalary.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtBaseSalary.ForeColor = System.Drawing.SystemColors.Menu;
-            this.txtBaseSalary.Location = new System.Drawing.Point(289, 172);
+            this.txtBaseSalary.Location = new System.Drawing.Point(289, 174);
             this.txtBaseSalary.Name = "txtBaseSalary";
             this.txtBaseSalary.Size = new System.Drawing.Size(80, 17);
             this.txtBaseSalary.TabIndex = 32;
@@ -257,10 +315,19 @@
             // panelBaseSalary
             // 
             this.panelBaseSalary.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
+            this.panelBaseSalary.Controls.Add(this.PBpictureTaking);
             this.panelBaseSalary.Location = new System.Drawing.Point(202, 191);
             this.panelBaseSalary.Name = "panelBaseSalary";
             this.panelBaseSalary.Size = new System.Drawing.Size(170, 1);
             this.panelBaseSalary.TabIndex = 31;
+            // 
+            // PBpictureTaking
+            // 
+            this.PBpictureTaking.Location = new System.Drawing.Point(102, -83);
+            this.PBpictureTaking.Name = "PBpictureTaking";
+            this.PBpictureTaking.Size = new System.Drawing.Size(164, 165);
+            this.PBpictureTaking.TabIndex = 42;
+            this.PBpictureTaking.TabStop = false;
             // 
             // lblBaseSalary
             // 
@@ -576,7 +643,10 @@
             this.panelAddEmployee.PerformLayout();
             this.gBoxRegistration.ResumeLayout(false);
             this.gBoxRegistration.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCamera)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.panelBaseSalary.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.PBpictureTaking)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -628,5 +698,10 @@
         private Button btnSave;
         private Button btnClear;
         private ComboBox positionBox;
+        private PictureBox PBpictureTaking;
+        private Button btnCamera;
+        private Button btnPictureTaking;
+        private PictureBox pictureBoxCamera;
+        private Panel panelPicture;
     }
 }

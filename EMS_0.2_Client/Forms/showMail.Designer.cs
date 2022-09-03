@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.panelMail = new System.Windows.Forms.Panel();
+            this.btnX = new System.Windows.Forms.Button();
             this.lblMail = new System.Windows.Forms.Label();
             this.btnReply = new System.Windows.Forms.Button();
             this.panel6 = new System.Windows.Forms.Panel();
@@ -43,7 +44,6 @@
             this.txtForm = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.lblForm = new System.Windows.Forms.Label();
-            this.btnX = new System.Windows.Forms.Button();
             this.panelMail.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -57,6 +57,21 @@
             this.panelMail.Name = "panelMail";
             this.panelMail.Size = new System.Drawing.Size(676, 85);
             this.panelMail.TabIndex = 2;
+            this.panelMail.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panelMail_MouseDown_1);
+            // 
+            // btnX
+            // 
+            this.btnX.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnX.Font = new System.Drawing.Font("Bahnschrift SemiLight", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btnX.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
+            this.btnX.Location = new System.Drawing.Point(645, 3);
+            this.btnX.Name = "btnX";
+            this.btnX.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.btnX.Size = new System.Drawing.Size(23, 27);
+            this.btnX.TabIndex = 42;
+            this.btnX.Text = "X";
+            this.btnX.UseVisualStyleBackColor = true;
+            this.btnX.Click += new System.EventHandler(this.btnX_Click);
             // 
             // lblMail
             // 
@@ -68,6 +83,7 @@
             this.lblMail.Size = new System.Drawing.Size(87, 35);
             this.lblMail.TabIndex = 0;
             this.lblMail.Text = "Email";
+            this.lblMail.MouseDown += new System.Windows.Forms.MouseEventHandler(this.lblMail_MouseDown_1);
             // 
             // btnReply
             // 
@@ -197,20 +213,6 @@
             this.lblForm.Size = new System.Drawing.Size(46, 18);
             this.lblForm.TabIndex = 15;
             this.lblForm.Text = "Form :";
-            // 
-            // btnX
-            // 
-            this.btnX.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnX.Font = new System.Drawing.Font("Bahnschrift SemiLight", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btnX.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
-            this.btnX.Location = new System.Drawing.Point(645, 3);
-            this.btnX.Name = "btnX";
-            this.btnX.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.btnX.Size = new System.Drawing.Size(23, 27);
-            this.btnX.TabIndex = 42;
-            this.btnX.Text = "X";
-            this.btnX.UseVisualStyleBackColor = true;
-            this.btnX.Click += new System.EventHandler(this.btnX_Click);
             // 
             // showMail
             // 

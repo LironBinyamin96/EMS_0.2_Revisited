@@ -18,7 +18,6 @@ def ParseConfig():
     return config
 
 config = ParseConfig()
-print(config)
 
 conn = pyodbc.connect(
     "Driver={SQL Server Native Client 11.0};"+
@@ -78,7 +77,6 @@ def TimeToEmployee(listDict,formatData):
          hold = listDict[employeeID]
          dateTimeToString = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
          sum = datetime.strptime(hold, '%Y-%m-%d %H:%M:%S') - datetime.strptime(dateTimeToString, '%Y-%m-%d %H:%M:%S')
-         print(int(abs(sum.total_seconds())))
          if int(abs(sum.total_seconds())) > 10:
              timestampCheck(employeeID)
 

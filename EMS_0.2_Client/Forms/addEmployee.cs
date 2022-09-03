@@ -10,6 +10,8 @@ using System.Windows.Forms;
 using System.Drawing.Drawing2D;
 using EMS_Library.MyEmployee;
 using EMS_Library;
+//using AForge.Video;
+//using AForge.Video.DirectShow;
 
 namespace EMS_Client.Forms
 {
@@ -21,6 +23,8 @@ namespace EMS_Client.Forms
         #endregion
         public addEmployee()
         {
+   
+
             InitializeComponent();
             activeControls = new Control[]
             {
@@ -89,9 +93,10 @@ namespace EMS_Client.Forms
         }
         private void btnUpload_Click(object sender, EventArgs e)
         {
-            OpenFileDialog a = new OpenFileDialog();
-            a.ShowDialog();
-            string file = a.FileName;
+            pictureBoxCamera.Visible = false;
+            OpenFileDialog openGalery = new OpenFileDialog();
+            openGalery.ShowDialog();
+            string file = openGalery.FileName;
             try
             {
                 employeeImage = new Bitmap(file);
@@ -102,6 +107,45 @@ namespace EMS_Client.Forms
         private void btnX_Click(object sender, EventArgs e) => Close();
         #endregion
 
+        #region camera
+        //VideoCaptureDevice videoCapture;
+        //FilterInfoCollection filterInfo;
+        //void StartCamera()
+        //{
+        //    try
+        //    {
+        //        filterInfo = new FilterInfoCollection(FilterCategory.VideoInputDevice);
+        //        videoCapture = new VideoCaptureDevice(filterInfo[0].MonikerString);
+        //        videoCapture.NewFrame += new NewFrameEventHandler(Camera_on);
+        //        videoCapture.Start();
+        //    }
+        //    catch (Exception ex) { throw ex;}
+        //}
+        //private void Camera_on(object sender, NewFrameEventArgs eventArgs) => pictureBoxCamera.Image = (Bitmap)eventArgs.Frame.Clone();
+        //private void btnCamera_Click(object sender, EventArgs e)
+        //{
+        //    StartCamera();
+        //    btnCamera.Visible = false;
+        //    pictureBoxCamera.Visible = true;
+        //    btnPictureTaking.Visible = true;
+        //}
+
+        //private void btnPictureTaking_Click(object sender, EventArgs e)
+        //{
+        //    pictureBox1.Image = pictureBoxCamera.Image;
+            
+        //    btnCamera.Visible = true;
+        //    pictureBoxCamera.Visible = false;
+        //    btnPictureTaking.Visible = false;
+        //    try
+        //    {
+        //        employeeImage = new Bitmap(pictureBox1.Image);
+        //        pictureBox1.Image = employeeImage;
+        //    }
+        //    catch { MessageBox.Show("Failed"); }
+        //}
+
+        #endregion
 
         /// <summary>
         /// Prefforms validation of data provided by the user.
@@ -121,7 +165,7 @@ namespace EMS_Client.Forms
                 { panelBaseSalary, txtBaseSalary.Text.Parsable(typeof(int))&& int.Parse(txtBaseSalary.Text)>0 },
                 { panelSalaryModifire, txtSalaryModifire.Text.Parsable(typeof(double))&& double.Parse(txtSalaryModifire.Text)>0},
                 { panelPosition, positionBox.Text != "" },
-                { btnUpload,pictureBox1.Image != null }
+                { panelPicture,pictureBox1.Image != null }
             };
 
             //Prefoms serach for fields with invalid data and coloring them appropriately while aggregating validity status
@@ -162,6 +206,13 @@ namespace EMS_Client.Forms
         public static extern bool ReleaseCapture();
         private void panelAddEmployee_MouseDown(object sender, MouseEventArgs e) => Drag(e);
         private void lblAddEmployee_MouseDown(object sender, MouseEventArgs e) => Drag(e);
+
+
+
+
+
+
         #endregion
+
     }
 }
