@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             this.panelLeft = new System.Windows.Forms.Panel();
             this.connectionsList = new System.Windows.Forms.ListView();
+            this.columnHeaderConnections = new System.Windows.Forms.ColumnHeader();
             this.centerPic = new System.Windows.Forms.PictureBox();
             this.btnSimExit = new System.Windows.Forms.Button();
             this.btnSimEnter = new System.Windows.Forms.Button();
@@ -39,7 +40,6 @@
             this.listnerTimer = new System.Windows.Forms.Timer(this.components);
             this.panelRight = new System.Windows.Forms.Panel();
             this.btnExit = new System.Windows.Forms.Button();
-            this.columnHeaderConnections = new System.Windows.Forms.ColumnHeader();
             this.panelLeft.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.centerPic)).BeginInit();
             this.panel1.SuspendLayout();
@@ -74,6 +74,10 @@
             this.connectionsList.TabIndex = 2;
             this.connectionsList.UseCompatibleStateImageBehavior = false;
             this.connectionsList.View = System.Windows.Forms.View.List;
+            // 
+            // columnHeaderConnections
+            // 
+            this.columnHeaderConnections.Width = 185;
             // 
             // centerPic
             // 

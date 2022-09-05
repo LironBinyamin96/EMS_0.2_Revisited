@@ -44,6 +44,20 @@ namespace EMS_Client
         public static string GetHourLogs(int _intId, int year, int month) => $"get log #{_intId}, {year}, {month}";
         public static string GetAllExceptions() => "get all exceptions #";
 
+        public static void SaveImmage(Bitmap image, int intId, ref string[] buffer)
+        {
+            TcpClient tcpClient = new TcpClient(Config.ServerIP, Config.ServerPort);
+            NetworkStream stream = tcpClient.GetStream();
+            byte[] imagePlusId = new ImageConverter().ConvertTo(image, typeof(byte[])) as byte[];
+            if (imagePlusId != null)
+            {
+                DataPacket packet = new DataPacket(imagePlusId.Concat(BitConverter.GetBytes(intId)).ToArray(), 9);
+                stream.Write(packet.Write(), 0, packet.GetTotalSize());
+                buffer = new DataPacket(stream).StringData.Split('|');
+            }
+            else throw new ArgumentException("Clould not parse the image to byte[].");
+            tcpClient.Close();
+        }
 
         /// <summary>
         /// Requests an image from the server
@@ -61,11 +75,7 @@ namespace EMS_Client
                 stream.Write(data.Write(), 0, data.GetTotalSize());
                 DataPacket packet = new DataPacket(stream);
                 result = packet.ByteData;
-
-                //Notify server that you're done reading the responce.
-                stream = new TcpClient(Config.ServerIP, Config.ServerPort).GetStream();
-                DataPacket done = new DataPacket("done");
-                stream.Write(done.Write(), 0, done.GetTotalSize());
+                tcpClient.Close();
             }
             catch { }
             return result;
@@ -80,22 +90,15 @@ namespace EMS_Client
         public static string[] RequestFromServer(string querry, byte routingFunctionNum = 255)
         {
             string[] result = null;
-            //request data from the server
-            DataPacket request = new DataPacket(querry, routingFunctionNum);
             try //In case server doesn't respond
             {
                 TcpClient client = new TcpClient(Config.ServerIP, Config.ServerPort);
                 NetworkStream stream = client.GetStream();
-                //NetworkStream stream = new TcpClient(Config.ServerIP, Config.ServerPort).GetStream();
+                DataPacket request = new DataPacket(querry, routingFunctionNum);
                 stream.Write(request.Write(), 0, request.GetTotalSize());
                 DataPacket responce = new DataPacket(stream);
                 result = responce.StringData.Split('|');
-
-                //Notify the server that you're done reading the responce
-                stream = new TcpClient(Config.ServerIP, Config.ServerPort).GetStream();
-                DataPacket done = new DataPacket("done");
-                stream.Write(done.Write(), 0, done.GetTotalSize());
-                Thread.Sleep(5); //Give a moment to the server to read the "done" packet. (Unnecessary. Just a precaution.)
+                client.Close();
             }
             catch (Exception e) { throw e; }
 

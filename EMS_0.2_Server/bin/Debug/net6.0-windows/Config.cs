@@ -43,6 +43,7 @@ namespace EMS_Library
         #endregion
 
         #region General
+        public const int InternalIDDigitAmount = 9; //represents amount of didgits in ID number (must be above 0)
         public const int WorkDaysInWeek = 5;
         public const int MinEmployeeAge = 18;
         public static readonly TimeSpan NormalShiftLength = new TimeSpan(0, 8, 0, 0);

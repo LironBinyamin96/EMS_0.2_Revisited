@@ -36,6 +36,12 @@
       "AForge.Video.DirectShow/2.2.5": {
         "dependencies": {
           "AForge.Video": "2.2.5"
+        },
+        "runtime": {
+          "lib/AForge.Video.DirectShow.dll": {
+            "assemblyVersion": "2.2.5.0",
+            "fileVersion": "2.2.5.0"
+          }
         }
       },
       "Microsoft.Chart.Controls/4.7.2046": {

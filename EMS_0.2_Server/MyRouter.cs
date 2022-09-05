@@ -29,6 +29,7 @@ namespace EMS_Server
                 /*Update entry*/      case 7: { return new DataPacket(SQLBridge.UpdateEntry(data.StringData)); };
                 /*Get Exceptions*/    case 8: { return new DataPacket(SQLBridge.TwoWayCommand(SQLBridge.GetAllExceptions(data.StringData))); }
                 /*Get all emails*/    case 9: { return new DataPacket(SQLBridge.TwoWayCommand("select _email from Employees;")); }
+                /*Save image sent*/   case 10: { return new DataPacket(SavePucture(data.ByteData)); }
 
                 /*Get free ID*/       case 252: { return new DataPacket(SQLBridge.GetFreeID(), 255); }
                 /*Direct querry*/     case 253: { return new DataPacket(SQLBridge.OneWayCommand(data.StringData)); }
@@ -49,6 +50,27 @@ namespace EMS_Server
                     return File.ReadAllBytes(imagePath);
                 }
                 else return new byte[0];
+            }
+
+            string SavePucture(byte[] picData)
+            {
+                if (picData == null || picData.Length == 0) return "Data packet contining the picture was empty or null";
+                try
+                {
+                    int num = 0;
+                    for (int i = 0; i < Config.InternalIDDigitAmount; i++)
+                        num = (num * 10) + 1;
+                    byte[] temp = BitConverter.GetBytes(num);
+                    int intID = BitConverter.ToInt32(temp.TakeLast(temp.Length).ToArray());
+                    Array.Resize(ref picData, picData.Length - temp.Length);
+                    Bitmap image = (Bitmap)new ImageConverter().ConvertFrom(picData);
+                    if (image != null) { image.Save(Config.FR_Images + $"\\{intID}{Config.ImageFormat}"); return "saved"; }
+                    else return "Could not convert data recieved to image.";
+                }
+                catch (Exception ex)
+                {
+                    return ex.Message;
+                }
             }
         }
     }

@@ -226,14 +226,11 @@ namespace EMS_Server
             }, SQLLookup_CXL);
         }
 
-        public void ReRenderConnections(string[] data)
+        public void AddConnection(string data)
         {
             this.Invoke((MethodInvoker)delegate
             {
-                connectionsList.Items.Clear();
-                foreach (string connection in data)
-                    connectionsList.Items.Add(connection);
-                connectionsList.Invalidate();
+                    connectionsList.Items.Add(data);
             });
         }
 

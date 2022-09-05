@@ -10,8 +10,8 @@ using System.Windows.Forms;
 using System.Drawing.Drawing2D;
 using EMS_Library.MyEmployee;
 using EMS_Library;
-//using AForge.Video;
-//using AForge.Video.DirectShow;
+using AForge.Video;
+using AForge.Video.DirectShow;
 
 namespace EMS_Client.Forms
 {
@@ -70,9 +70,10 @@ namespace EMS_Client.Forms
                 string querry = Requests.AddEmployee(emp);
                 buffer = Requests.RequestFromServer(querry, 2);
 
-                //Rescaling image
-                Utility.RescaleImage(employeeImage).Save(Config.FR_Images + $"\\{emp.IntId}{Config.ImageFormat}");
-                if(buffer[0]=="1") MessageBox.Show($"{emp.FName} {emp.LName} saved");
+                //Send image to the server
+                string[] picBuffer = new string[0];
+                Requests.SaveImmage(Utility.RescaleImage(employeeImage), emp.IntId, ref buffer);
+                if (buffer[0].ToLower() == "saved") MessageBox.Show($"{emp.FName} {emp.LName} saved");
             }
             else MessageBox.Show("Incorrect format!");
         }
@@ -108,43 +109,42 @@ namespace EMS_Client.Forms
         #endregion
 
         #region camera
-        //VideoCaptureDevice videoCapture;
-        //FilterInfoCollection filterInfo;
-        //void StartCamera()
-        //{
-        //    try
-        //    {
-        //        filterInfo = new FilterInfoCollection(FilterCategory.VideoInputDevice);
-        //        videoCapture = new VideoCaptureDevice(filterInfo[0].MonikerString);
-        //        videoCapture.NewFrame += new NewFrameEventHandler(Camera_on);
-        //        videoCapture.Start();
-        //    }
-        //    catch (Exception ex) { throw ex;}
-        //}
-        //private void Camera_on(object sender, NewFrameEventArgs eventArgs) => pictureBoxCamera.Image = (Bitmap)eventArgs.Frame.Clone();
-        //private void btnCamera_Click(object sender, EventArgs e)
-        //{
-        //    StartCamera();
-        //    btnCamera.Visible = false;
-        //    pictureBoxCamera.Visible = true;
-        //    btnPictureTaking.Visible = true;
-        //}
+        VideoCaptureDevice videoCapture;
+        FilterInfoCollection filterInfo;
+        void StartCamera()
+        {
+            try
+            {
+                filterInfo = new FilterInfoCollection(FilterCategory.VideoInputDevice);
+                videoCapture = new VideoCaptureDevice(filterInfo[0].MonikerString);
+                videoCapture.NewFrame += new NewFrameEventHandler(Camera_on);
+                videoCapture.Start();
+            }
+            catch (Exception ex) { throw ex; }
+        }
+        private void Camera_on(object sender, NewFrameEventArgs eventArgs) => pictureBoxCamera.Image = (Bitmap)eventArgs.Frame.Clone();
+        private void btnCamera_Click(object sender, EventArgs e)
+        {
+            StartCamera();
+            btnCamera.Visible = false;
+            pictureBoxCamera.Visible = true;
+            btnPictureTaking.Visible = true;
+        }
 
-        //private void btnPictureTaking_Click(object sender, EventArgs e)
-        //{
-        //    pictureBox1.Image = pictureBoxCamera.Image;
-            
-        //    btnCamera.Visible = true;
-        //    pictureBoxCamera.Visible = false;
-        //    btnPictureTaking.Visible = false;
-        //    try
-        //    {
-        //        employeeImage = new Bitmap(pictureBox1.Image);
-        //        pictureBox1.Image = employeeImage;
-        //    }
-        //    catch { MessageBox.Show("Failed"); }
-        //}
+        private void btnPictureTaking_Click(object sender, EventArgs e)
+        {
+            pictureBox1.Image = pictureBoxCamera.Image;
 
+            btnCamera.Visible = true;
+            pictureBoxCamera.Visible = false;
+            btnPictureTaking.Visible = false;
+            try
+            {
+                employeeImage = new Bitmap(pictureBox1.Image);
+                pictureBox1.Image = employeeImage;
+            }
+            catch { MessageBox.Show("Failed"); }
+        }
         #endregion
 
         /// <summary>

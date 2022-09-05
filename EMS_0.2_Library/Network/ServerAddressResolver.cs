@@ -61,7 +61,7 @@ namespace EMS_Library.Network
 
                                 //If you managed to connect try to send request in EMS format to double-check that this is EMS server. (ping)
                                 NetworkStream stream = tcp.GetStream();
-                                DataPacket ping = new DataPacket("Ping", 255);
+                                DataPacket ping = new DataPacket("ping");
                                 stream.Write(ping.Write(), 0, ping.GetTotalSize());
                                 DataPacket responce = new DataPacket(stream);
                                 if (responce.StringData.ToLower() == "ping") //If responce is "ping", you've found the server.
