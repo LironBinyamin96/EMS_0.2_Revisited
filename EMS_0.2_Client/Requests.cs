@@ -44,16 +44,18 @@ namespace EMS_Client
         public static string GetHourLogs(int _intId, int year, int month) => $"get log #{_intId}, {year}, {month}";
         public static string GetAllExceptions() => "get all exceptions #";
 
-        public static void SaveImmage(Bitmap image, int intId, ref string[] buffer)
+        public static string[] SaveImmage(Bitmap image, int intId)
         {
             TcpClient tcpClient = new TcpClient(Config.ServerIP, Config.ServerPort);
             NetworkStream stream = tcpClient.GetStream();
             byte[] imagePlusId = new ImageConverter().ConvertTo(image, typeof(byte[])) as byte[];
             if (imagePlusId != null)
             {
-                DataPacket packet = new DataPacket(imagePlusId.Concat(BitConverter.GetBytes(intId)).ToArray(), 9);
+                DataPacket packet = new DataPacket(imagePlusId.Concat(BitConverter.GetBytes(intId)).ToArray(), 10);
                 stream.Write(packet.Write(), 0, packet.GetTotalSize());
-                buffer = new DataPacket(stream).StringData.Split('|');
+                string[] responce = new DataPacket(stream).StringData.Split('|');
+                tcpClient.Close();
+                return responce;
             }
             else throw new ArgumentException("Clould not parse the image to byte[].");
             tcpClient.Close();

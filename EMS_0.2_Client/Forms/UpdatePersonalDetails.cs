@@ -38,6 +38,7 @@ namespace EMS_Client.Forms
 
         #endregion
         Control[] activeControls; //Collection of controlls for user interaction.
+        Bitmap empPicture;
         public UpdatePersonalDetails()
         {
             InitializeComponent();
@@ -73,11 +74,12 @@ namespace EMS_Client.Forms
                     });
 
                 Employee hold = tempEmp;
-                if(tempEmp.ToString()!=EMS_ClientMainScreen.employee.ToString())
+                if (tempEmp.ToString() != EMS_ClientMainScreen.employee.ToString())
                 {
                     string querry = Requests.UpdateEmployee(tempEmp.ProvideFieldsAndValues(), new Dictionary<string, string> { { "_intId", EMS_ClientMainScreen.employee.IntId.ToString() } });
-                    string[] buffer = Requests.RequestFromServer(querry, 3);
-                    MessageBox.Show("Updated: " + buffer[0]);
+                    if (Requests.RequestFromServer(querry, 3)[0] != "1") MessageBox.Show("Failed to update employee data!");
+                    else if (Requests.SaveImmage(empPicture, hold.IntId)[0] != "-1") MessageBox.Show("Failed to update picture!");
+                    else MessageBox.Show("Updaded!");
                 }
             }
             else MessageBox.Show("Incorrect format!");
@@ -92,20 +94,19 @@ namespace EMS_Client.Forms
             DialogResult delete = MessageBox.Show("Are you sure?", "", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
             if (delete == DialogResult.OK)
             {
-                
+
                 string querry = Requests.DeleteEmployee(EMS_ClientMainScreen.employee.IntId);
-                string[] buffer = Requests.RequestFromServer(querry,4);
+                string[] buffer = Requests.RequestFromServer(querry, 4);
                 Clear();
             }
         }
         private void btnUpload_Click(object sender, EventArgs e)
         {
-            string employeePicturePath = "";
             openFileDialog1.Filter = $"picture |*{Config.ImageFormat}| all files|*.*";
             openFileDialog1.FilterIndex = 2;
             openFileDialog1.InitialDirectory = "c:\\";
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
-                employeePicturePath = openFileDialog1.FileName;
+            { empPicture = new Bitmap(openFileDialog1.FileName); }
         }
         private void btnX_Click(object sender, EventArgs e)
         {

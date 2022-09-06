@@ -35,10 +35,10 @@
             // 
             // picStandbySphere
             // 
-            this.picStandbySphere.Image = global::EMS_Client.Properties.Resources.its_not_a_tumor;
-            this.picStandbySphere.Location = new System.Drawing.Point(42, 83);
+            this.picStandbySphere.Image = global::EMS_Client.Properties.Resources.ff360755f2e909116ab4e2686befd58d;
+            this.picStandbySphere.Location = new System.Drawing.Point(24, 83);
             this.picStandbySphere.Name = "picStandbySphere";
-            this.picStandbySphere.Size = new System.Drawing.Size(175, 175);
+            this.picStandbySphere.Size = new System.Drawing.Size(209, 175);
             this.picStandbySphere.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.picStandbySphere.TabIndex = 1;
             this.picStandbySphere.TabStop = false;

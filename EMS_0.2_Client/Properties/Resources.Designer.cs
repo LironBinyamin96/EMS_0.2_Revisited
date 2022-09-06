@@ -83,6 +83,16 @@ namespace EMS_Client.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap ff360755f2e909116ab4e2686befd58d {
+            get {
+                object obj = ResourceManager.GetObject("ff360755f2e909116ab4e2686befd58d", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap global_data_and_hand {
             get {
                 object obj = ResourceManager.GetObject("global_data_and_hand", resourceCulture);

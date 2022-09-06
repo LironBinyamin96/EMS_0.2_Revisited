@@ -30,10 +30,13 @@
         {
             this.lblExceptions = new System.Windows.Forms.Label();
             this.exceptionsTable = new System.Windows.Forms.DataGridView();
+            this.btnClose = new System.Windows.Forms.Button();
+            this.LastName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FirstName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Divison = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this._intId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this._entry = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this._exit = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btnClose = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.exceptionsTable)).BeginInit();
             this.SuspendLayout();
             // 
@@ -52,40 +55,25 @@
             // 
             // exceptionsTable
             // 
+            this.exceptionsTable.AllowUserToAddRows = false;
+            this.exceptionsTable.AllowUserToDeleteRows = false;
             this.exceptionsTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.exceptionsTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.LastName,
+            this.FirstName,
+            this.Divison,
             this._intId,
             this._entry,
             this._exit});
             this.exceptionsTable.Location = new System.Drawing.Point(12, 47);
+            this.exceptionsTable.MultiSelect = false;
             this.exceptionsTable.Name = "exceptionsTable";
             this.exceptionsTable.ReadOnly = true;
             this.exceptionsTable.RowTemplate.Height = 25;
             this.exceptionsTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.exceptionsTable.Size = new System.Drawing.Size(569, 743);
+            this.exceptionsTable.Size = new System.Drawing.Size(570, 743);
             this.exceptionsTable.TabIndex = 44;
             this.exceptionsTable.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.exceptionsTable_CellMouseDoubleClick);
-            // 
-            // _intId
-            // 
-            this._intId.HeaderText = "Internal ID";
-            this._intId.Name = "_intId";
-            this._intId.ReadOnly = true;
-            this._intId.Width = 120;
-            // 
-            // _entry
-            // 
-            this._entry.HeaderText = "Entry";
-            this._entry.Name = "_entry";
-            this._entry.ReadOnly = true;
-            this._entry.Width = 200;
-            // 
-            // _exit
-            // 
-            this._exit.HeaderText = "Exit";
-            this._exit.Name = "_exit";
-            this._exit.ReadOnly = true;
-            this._exit.Width = 200;
             // 
             // btnClose
             // 
@@ -98,6 +86,48 @@
             this.btnClose.Text = "X";
             this.btnClose.UseVisualStyleBackColor = true;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
+            // 
+            // LastName
+            // 
+            this.LastName.HeaderText = "Last Name";
+            this.LastName.Name = "LastName";
+            this.LastName.ReadOnly = true;
+            this.LastName.Width = 90;
+            // 
+            // FirstName
+            // 
+            this.FirstName.HeaderText = "First Name";
+            this.FirstName.Name = "FirstName";
+            this.FirstName.ReadOnly = true;
+            this.FirstName.Width = 90;
+            // 
+            // Divison
+            // 
+            this.Divison.HeaderText = "Division";
+            this.Divison.Name = "Divison";
+            this.Divison.ReadOnly = true;
+            this.Divison.Width = 90;
+            // 
+            // _intId
+            // 
+            this._intId.HeaderText = "Internal ID";
+            this._intId.Name = "_intId";
+            this._intId.ReadOnly = true;
+            this._intId.Width = 90;
+            // 
+            // _entry
+            // 
+            this._entry.HeaderText = "Entry";
+            this._entry.Name = "_entry";
+            this._entry.ReadOnly = true;
+            this._entry.Width = 90;
+            // 
+            // _exit
+            // 
+            this._exit.HeaderText = "Exit";
+            this._exit.Name = "_exit";
+            this._exit.ReadOnly = true;
+            this._exit.Width = 90;
             // 
             // ExceptionsScreen
             // 
@@ -125,6 +155,9 @@
         private Label lblExceptions;
         private DataGridView exceptionsTable;
         private Button btnClose;
+        private DataGridViewTextBoxColumn LastName;
+        private DataGridViewTextBoxColumn FirstName;
+        private DataGridViewTextBoxColumn Divison;
         private DataGridViewTextBoxColumn _intId;
         private DataGridViewTextBoxColumn _entry;
         private DataGridViewTextBoxColumn _exit;

@@ -61,7 +61,7 @@ namespace EMS_Server
                     for (int i = 0; i < Config.InternalIDDigitAmount; i++)
                         num = (num * 10) + 1;
                     byte[] temp = BitConverter.GetBytes(num);
-                    int intID = BitConverter.ToInt32(temp.TakeLast(temp.Length).ToArray());
+                    int intID = BitConverter.ToInt32(picData.TakeLast(temp.Length).ToArray());
                     Array.Resize(ref picData, picData.Length - temp.Length);
                     Bitmap image = (Bitmap)new ImageConverter().ConvertFrom(picData);
                     if (image != null) { image.Save(Config.FR_Images + $"\\{intID}{Config.ImageFormat}"); return "saved"; }

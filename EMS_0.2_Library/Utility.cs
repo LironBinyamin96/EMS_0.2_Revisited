@@ -81,36 +81,6 @@ namespace EMS_Library
         /// </summary>
         /// <returns></returns>
         public static DateTime RandomDateTime() => new DateTime(RandomInt(1800, 2022), RandomInt(1, 13), RandomInt(1, 29), RandomInt(0, 24), RandomInt(0, 60), RandomInt(0, 60));
-
-        /// <summary>
-        /// Rescales image to appropriate size for FR
-        /// (see EMS_Library.Config->FR & Images)
-        /// </summary>
-        /// <param name="image"></param>
-        /// <returns></returns>
-        public static Bitmap RescaleImage(Bitmap image)
-        {
-            float width = Config.FRImmageWidth;
-            float height = Config.FRImmageHeight;
-            SolidBrush brush = new SolidBrush(Color.Black);
-
-            float scale = Math.Min(width / image.Width, height / image.Height);
-
-            Bitmap bmp = new Bitmap((int)width, (int)height);
-            Graphics graph = Graphics.FromImage(bmp);
-
-            graph.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.High;
-            graph.CompositingQuality = System.Drawing.Drawing2D.CompositingQuality.HighQuality;
-            graph.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
-
-            int scaleWidth = (int)(image.Width * scale);
-            int scaleHeight = (int)(image.Height * scale);
-
-            graph.FillRectangle(brush, new RectangleF(0, 0, width, height));
-            graph.DrawImage(image, ((int)width - scaleWidth) / 2, ((int)height - scaleHeight) / 2, scaleWidth, scaleHeight);
-
-            return bmp;
-        }
     }
 
 
@@ -300,6 +270,34 @@ namespace EMS_Library
             byte digits = 0;
             while ((x /= 10) != 0) ++digits;
             return digits;
+        }
+
+        /// <summary>
+        /// Rescales image to appropriate size for FR
+        /// (see EMS_Library.Config->FR & Images)
+        /// </summary>
+        /// <param name="image"></param>
+        /// <returns></returns>
+        public static Bitmap Rescale(this Bitmap image, float width, float height)
+        {
+            SolidBrush brush = new SolidBrush(Color.Black);
+
+            float scale = Math.Min(width / image.Width, height / image.Height);
+
+            Bitmap bmp = new Bitmap((int)width, (int)height);
+            Graphics graph = Graphics.FromImage(bmp);
+
+            graph.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.High;
+            graph.CompositingQuality = System.Drawing.Drawing2D.CompositingQuality.HighQuality;
+            graph.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+
+            int scaleWidth = (int)(image.Width * scale);
+            int scaleHeight = (int)(image.Height * scale);
+
+            graph.FillRectangle(brush, new RectangleF(0, 0, width, height));
+            graph.DrawImage(image, ((int)width - scaleWidth) / 2, ((int)height - scaleHeight) / 2, scaleWidth, scaleHeight);
+
+            return bmp;
         }
     }
 }

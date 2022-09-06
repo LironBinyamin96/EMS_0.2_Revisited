@@ -66,14 +66,11 @@ namespace EMS_Client.Forms
 
                 Employee emp = Employee.ActivateEmployee(empParts);
                 if (emp == null) { MessageBox.Show("Failed to create employee!"); return; }
-
-                string querry = Requests.AddEmployee(emp);
-                buffer = Requests.RequestFromServer(querry, 2);
+                buffer = Requests.RequestFromServer(Requests.AddEmployee(emp), 2);
 
                 //Send image to the server
-                string[] picBuffer = new string[0];
-                Requests.SaveImmage(Utility.RescaleImage(employeeImage), emp.IntId, ref buffer);
-                if (buffer[0].ToLower() == "saved") MessageBox.Show($"{emp.FName} {emp.LName} saved");
+                string[] picBuffer = Requests.SaveImmage(employeeImage.Rescale(Config.FRImmageWidth, Config.FRImmageHeight), emp.IntId);
+                if (picBuffer[0].ToLower() == "saved") MessageBox.Show($"{emp.FName} {emp.LName} saved");
             }
             else MessageBox.Show("Incorrect format!");
         }

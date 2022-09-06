@@ -8,12 +8,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using EMS_Library;
+using EMS_Library.MyEmployee;
 
 namespace EMS_Client.Forms
 {
     public partial class ExceptionsScreen : Form
     {
         string[] _data; //Exceptions data reference
+        Employee[] _empsData;
         public ExceptionsScreen()
         {
             InitializeComponent();
@@ -31,13 +33,27 @@ namespace EMS_Client.Forms
         {
             //Request all entries with invalid data from DB
             _data = Requests.RequestFromServer(Requests.GetAllExceptions(), 8);
-            if (_data != null)
-                try
-                {
-                    foreach (string item in _data)
-                        exceptionsTable.Rows.Add(item.Split(','));
-                }
-                catch { }
+            if (_data[0] != "-1")
+            {
+                Dictionary<string, string> clauses = _data.ToHashSet().ToDictionary(k => k = "_intId", v => v.Split(',')[0]);
+                string[] tempData = Requests.RequestFromServer(Requests.SelectEmployee(clauses), 1);
+                _empsData = Array.ConvertAll(tempData, x => Employee.ActivateEmployee(x.Split(',')));
+                if (_data != null)
+                    try
+                    {
+                        foreach (string item in _data)
+                        {
+                            Employee emp = Array.Find(_empsData, x => x.IntId == int.Parse(item.Split(',')[0]));
+                            if (emp != null)
+                            {
+                                string[] entryData = item.Split(',');
+                                exceptionsTable.Rows.Add(new string[] { emp.LName, emp.FName, emp.Type.Name, entryData[0], entryData[1], entryData[2] });
+                            }
+                        }
+                    }
+                    catch { }
+            }
+
         }
         /// <summary>
         /// Opens EditHours screen by double clicking on appropriate cell.

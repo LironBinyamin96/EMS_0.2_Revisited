@@ -35,6 +35,7 @@ namespace EMS_Client.Forms
             InitializeComponent();
             this.to = to;
             this.subject = subject;
+            EMS_ClientMainScreen.PrimaryForms.Push(this);
         }
 
         /// <summary>
@@ -104,6 +105,7 @@ namespace EMS_Client.Forms
             txtSubject.Clear();
             richTextBody.Clear();
             lblFile.Text = "";
+            EMS_ClientMainScreen.PrimaryForms.Pop().Close();
         }
 
         /// <summary>
