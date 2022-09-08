@@ -114,10 +114,10 @@ namespace EMS_Library.MyEmployee
         }
 
         /// <summary>
-        /// Creates an instance of Employee of specified subtype
+        /// Creates an instance of Employee of specific subtype.
         /// </summary>
         /// <param name="data"></param>
-        /// <returns></returns>
+        /// <returns>Employee or null if cration failed.</returns>
         public static Employee ActivateEmployee(object[] data)
         {
             string[] hold = Array.ConvertAll(data, x => x.ToString());

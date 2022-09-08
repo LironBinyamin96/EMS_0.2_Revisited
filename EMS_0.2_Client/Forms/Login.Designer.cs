@@ -109,7 +109,7 @@
             this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(11, -3);
+            this.pictureBox1.Location = new System.Drawing.Point(11, 0);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(247, 171);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
@@ -119,11 +119,13 @@
             // txtPasscode
             // 
             this.txtPasscode.BackColor = System.Drawing.SystemColors.Window;
-            this.txtPasscode.Location = new System.Drawing.Point(54, 63);
+            this.txtPasscode.ForeColor = System.Drawing.Color.LightCyan;
+            this.txtPasscode.Location = new System.Drawing.Point(56, 64);
             this.txtPasscode.Name = "txtPasscode";
             this.txtPasscode.PlaceholderText = "Passcode";
             this.txtPasscode.Size = new System.Drawing.Size(122, 23);
             this.txtPasscode.TabIndex = 8;
+            this.txtPasscode.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPasscode_KeyPress);
             // 
             // panel1
             // 
@@ -152,18 +154,18 @@
             // 
             this.lblPasscode.AutoSize = true;
             this.lblPasscode.BackColor = System.Drawing.Color.Transparent;
-            this.lblPasscode.ForeColor = System.Drawing.Color.OrangeRed;
-            this.lblPasscode.Location = new System.Drawing.Point(16, 25);
+            this.lblPasscode.ForeColor = System.Drawing.Color.LightCyan;
+            this.lblPasscode.Location = new System.Drawing.Point(23, 18);
             this.lblPasscode.Name = "lblPasscode";
-            this.lblPasscode.Size = new System.Drawing.Size(228, 15);
+            this.lblPasscode.Size = new System.Drawing.Size(192, 30);
             this.lblPasscode.TabIndex = 10;
-            this.lblPasscode.Text = "Enter the login code sent to you by e-mail";
+            this.lblPasscode.Text = "The verification code has been sent\r\nto your email address.";
             // 
             // btnLoginPasscode
             // 
             this.btnLoginPasscode.BackColor = System.Drawing.Color.Transparent;
             this.btnLoginPasscode.ForeColor = System.Drawing.Color.DeepSkyBlue;
-            this.btnLoginPasscode.Location = new System.Drawing.Point(75, 105);
+            this.btnLoginPasscode.Location = new System.Drawing.Point(75, 101);
             this.btnLoginPasscode.Name = "btnLoginPasscode";
             this.btnLoginPasscode.Size = new System.Drawing.Size(87, 23);
             this.btnLoginPasscode.TabIndex = 9;

@@ -19,7 +19,10 @@ namespace EMS_Client.Forms
 {
     public partial class Login : Form
     {
-        int passcode;
+        #region Variables
+        private string passcode;
+        private Employee logingInEmp;
+        #endregion
 
         public Login()
         {
@@ -31,22 +34,14 @@ namespace EMS_Client.Forms
             }
         }
 
-        //private int passcodeForMail(string email)
-        //{
-        //    Random rnd = new Random();
-        //    int passcode = rnd.Next(100000, 999999);
-        //    SmtpClient Smtp = new SmtpClient("smtp.gmail.com", 587);
-        //    MailMessage mail = new MailMessage(Config.EMS_EmailAddress,email,"Verification code from employee management system",passcode.ToString());
-        //    Smtp.EnableSsl = true;
-        //    Smtp.Credentials = new NetworkCredential(Config.EMS_EmailAddress, Config.EMA_EmailPassword);
-        //    Smtp.Send(mail);
+        private void Login_Load(object sender, EventArgs e)
+        {
+            panel1.BackColor = Color.FromArgb(100, 0, 0, 0);
+        }
 
-        //    return passcode;
-        //}
         #region Buttons
-
         /// <summary>
-        /// Login button
+        /// Handles user authentication. (Called by btnLogin button).
         /// </summary>
         private void btnLogin_Click(object sender, EventArgs e)
         {
@@ -62,26 +57,57 @@ namespace EMS_Client.Forms
             });
             string[] buffer = Requests.RequestFromServer(querry, 1);
 
-            //Credentials check
-            if (buffer.Length == 0 || buffer[0] == "-1")
+            //Try to reconstruct employee from recieved data. If failed to verify with DB for any
+            //reason (failed connection, wrong cridentials, etc.) employee activator will fail and return null. 
+            logingInEmp = Employee.ActivateEmployee(buffer[0].Split(','));
+            if (logingInEmp == null)
             {
-                Employee emp = Employee.ActivateEmployee(buffer[0].Split(','));
-                if (!(emp is EMS_Library.MyEmployee.IAccess.IExtendedAccess))
-                {
-                    MessageBox.Show("Wrong credentials");
-                    return;
-                }
-                //passcode = passcodeForMail(emp.Email);
+                MessageBox.Show("Wrong credentials.");
+                return;
             }
-            //Build an Employee object from the data recieved from the server.
-            EMS_ClientMainScreen.CurEmployee = Employee.ActivateEmployee(buffer[0].Split(','));
 
+            //Checking if the employee has access to the system.
+            if (!(logingInEmp is EMS_Library.MyEmployee.IAccess.IExtendedAccess))
+            {
+                MessageBox.Show("You do not have propper access to use this software.\nAccess denied.");
+                return;
+            }
+
+            //Second phase in two-factor authentication.
             panelLogin.Visible = false;
             panelPasscode.Visible = true;
 
-            Close();
+            //Generate passcode.
+            passcode = Utility.RandomNumericString(6);
+            if (Config.DevelopmentMode) //Bypasses two-factor autentication
+            {
+                txtPasscode.Text = passcode;
+                return;
+            }
+
+            //Send the passcode to employee's email address.
+            SmtpClient Smtp = new SmtpClient("smtp.gmail.com", 587);
+            MailMessage mail = new MailMessage(Config.EMS_EmailAddress, logingInEmp.Email, "Verification code from employee management system", passcode);
+            Smtp.EnableSsl = true;
+            Smtp.Credentials = new NetworkCredential(Config.EMS_EmailAddress, Config.EMA_EmailPassword);
+            Smtp.Send(mail);
         }
 
+        /// <summary>
+        /// Compare user provided and system generated passcodes. (Called by btnLoginPasscode button.)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnLoginPasscode_Click(object sender, EventArgs e)
+        {
+            if (passcode == txtPasscode.Text) { EMS_ClientMainScreen.CurEmployee = logingInEmp; Close(); }
+            else
+            {
+                MessageBox.Show("Incorrect passcode");
+                panelLogin.Visible = true;
+                panelPasscode.Visible = false;
+            }
+        }
 
         /// <summary>
         /// Method for closing programm from login screen. (Called by X button)
@@ -102,6 +128,11 @@ namespace EMS_Client.Forms
         {
             if (e.KeyChar == 13) //KeyChar 13 is the Enter key
                 btnLogin.PerformClick();
+        }
+        private void txtPasscode_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == 13) //KeyChar 13 is the Enter key
+                btnLoginPasscode.PerformClick();
         }
         #endregion
 
@@ -127,17 +158,6 @@ namespace EMS_Client.Forms
         private void Login_MouseDown(object sender, MouseEventArgs e) => Drag(e);
         #endregion
 
-        private void Login_Load(object sender, EventArgs e)
-        {
-            panel1.BackColor = Color.FromArgb(100, 0, 0, 0);
-        }
-
-        private void btnLoginPasscode_Click(object sender, EventArgs e)
-        {
-           // if (passcode.ToString() == btnLoginPasscode.Text)
-                //Close();
-          //  else MessageBox.Show("Incorrect passcode");
-        }
     }
 
 }

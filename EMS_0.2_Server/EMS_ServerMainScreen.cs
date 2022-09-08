@@ -181,7 +181,7 @@ namespace EMS_Server
                 $"FR_Location#{EMS_Library.Config.FR_Location}\n" + Environment.NewLine +
                 $"PythonDBConnection#{EMS_Library.Config.PythonDBConnection}\n" + Environment.NewLine +
                 $"NormalShiftLength#{EMS_Library.Config.NormalShiftLength}\n" + Environment.NewLine +
-                $"MaxShiftLength#{ EMS_Library.Config.MaxShiftLength}";
+                $"MaxShiftLength#{EMS_Library.Config.MaxShiftLength}";
             System.IO.File.WriteAllText(Directory.GetCurrentDirectory() + "\\Config.txt", str);
         }
         public Task BuildServerTask()
@@ -230,7 +230,9 @@ namespace EMS_Server
         {
             this.Invoke((MethodInvoker)delegate
             {
-                    connectionsList.Items.Add(data);
+                if (connectionsList.Items.Count > 30)
+                    connectionsList.Items.RemoveAt(0);
+                connectionsList.Items.Add(data);
             });
         }
 
