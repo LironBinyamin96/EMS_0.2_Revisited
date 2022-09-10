@@ -94,10 +94,10 @@ namespace EMS_Client.Forms
         {
             pictureBoxCamera.Visible = false;
             OpenFileDialog openGalery = new OpenFileDialog();
-            openGalery.ShowDialog();
-            string file = openGalery.FileName;
+            if(openGalery.ShowDialog()==DialogResult.OK)
             try
             {
+                string file = openGalery.FileName;
                 employeeImage = new Bitmap(file);
                 pictureBox1.Image = employeeImage;
             }
@@ -148,7 +148,6 @@ namespace EMS_Client.Forms
         /// <summary>
         /// Prefforms validation of data provided by the user.
         /// </summary>
-        /// <returns></returns>
         private bool CheckingDataFields()
         {
             //Aggrigation of the controlls and their vilidity status into singular collection.

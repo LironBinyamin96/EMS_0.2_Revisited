@@ -74,13 +74,10 @@ namespace EMS_Client.Forms
                     });
 
                 Employee hold = tempEmp;
-                if (tempEmp.ToString() != EMS_ClientMainScreen.employee.ToString())
-                {
                     string querry = Requests.UpdateEmployee(tempEmp.ProvideFieldsAndValues(), new Dictionary<string, string> { { "_intId", EMS_ClientMainScreen.employee.IntId.ToString() } });
                     if (Requests.RequestFromServer(querry, 3)[0] != "1") MessageBox.Show("Failed to update employee data!");
-                    else if (Requests.SaveImmage(empPicture, hold.IntId)[0] != "-1") MessageBox.Show("Failed to update picture!");
+                    else if (Requests.SaveImmage(empPicture, hold.IntId)[0] == "-1") MessageBox.Show("Failed to update picture!");
                     else MessageBox.Show("Updaded!");
-                }
             }
             else MessageBox.Show("Incorrect format!");
         }
@@ -106,7 +103,10 @@ namespace EMS_Client.Forms
             openFileDialog1.FilterIndex = 2;
             openFileDialog1.InitialDirectory = "c:\\";
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
-            { empPicture = new Bitmap(openFileDialog1.FileName); }
+            {
+                empPicture = new Bitmap(openFileDialog1.FileName);
+                pictureBox1.Image = empPicture;
+            }
         }
         private void btnX_Click(object sender, EventArgs e)
         {

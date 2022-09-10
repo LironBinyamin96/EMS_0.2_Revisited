@@ -182,7 +182,7 @@ namespace EMS_Server
                 $"PythonDBConnection#{EMS_Library.Config.PythonDBConnection}\n" + Environment.NewLine +
                 $"NormalShiftLength#{EMS_Library.Config.NormalShiftLength}\n" + Environment.NewLine +
                 $"MaxShiftLength#{EMS_Library.Config.MaxShiftLength}";
-            System.IO.File.WriteAllText(Directory.GetCurrentDirectory() + "\\Config.txt", str);
+            File.WriteAllText(Directory.GetCurrentDirectory() + "\\Config.txt", str);
         }
         public Task BuildServerTask()
         {

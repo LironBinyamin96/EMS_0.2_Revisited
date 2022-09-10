@@ -25,19 +25,20 @@ namespace EMS_Server
                 /*Update employee*/   case 3: { return new DataPacket(SQLBridge.OneWayCommand(SQLBridge.Update(data.StringData))); }
                 /*Delete employee*/   case 4: { return new DataPacket(SQLBridge.OneWayCommand(SQLBridge.DeleteEmployee(data.StringData))); }
                 /*Get employee log*/  case 5: { return new DataPacket(SQLBridge.TwoWayCommand(SQLBridge.GetMonthLog(data.StringData)));}
-                /*Get Picture*/       case 6: { return new DataPacket(GetPicture()); }
-                /*Update entry*/      case 7: { return new DataPacket(SQLBridge.UpdateEntry(data.StringData)); };
                 /*Get Exceptions*/    case 8: { return new DataPacket(SQLBridge.TwoWayCommand(SQLBridge.GetAllExceptions(data.StringData))); }
                 /*Get all emails*/    case 9: { return new DataPacket(SQLBridge.TwoWayCommand("select _email from Employees;")); }
+                /*Update entry*/      case 7: { return new DataPacket(SQLBridge.UpdateEntry(data.StringData)); };
+                /*Get Picture*/       case 6: { return new DataPacket(GetPicture()); }
                 /*Save image sent*/   case 10: { return new DataPacket(SavePucture(data.ByteData)); }
 
                 /*Get free ID*/       case 252: { return new DataPacket(SQLBridge.GetFreeID(), 255); }
                 /*Direct querry*/     case 253: { return new DataPacket(SQLBridge.OneWayCommand(data.StringData)); }
                 /*Direct querry*/     case 254: { return new DataPacket(SQLBridge.TwoWayCommand(data.StringData)); }
-                /*Out*/               case 255: { return data; }
+                /*Return recieved*/   case 255: { return data; }
             }
+
             
-            //Retrieves picture and returns it as byte[]
+            //Retrieves the picture from file system. Returns image as byte array.
             byte[] GetPicture()
             {
                 //"get picture of #_intid"
@@ -52,6 +53,7 @@ namespace EMS_Server
                 else return new byte[0];
             }
 
+            // Saves picture into appropriate folder. Returns string representing outcome of the operation.
             string SavePucture(byte[] picData)
             {
                 if (picData == null || picData.Length == 0) return "Data packet contining the picture was empty or null";

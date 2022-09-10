@@ -11,7 +11,6 @@ namespace EMS_Library.Network
 {
     public struct DataPacket
     {
-        private static int counter = 0;
         public readonly DataPacketHeader _header;
         public readonly string StringData;
         readonly byte[] _byteData;

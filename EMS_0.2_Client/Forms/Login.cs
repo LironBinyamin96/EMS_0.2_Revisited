@@ -80,6 +80,7 @@ namespace EMS_Client.Forms
 
             //Generate passcode.
             passcode = Utility.RandomNumericString(6);
+
             if (Config.DevelopmentMode) //Bypasses two-factor autentication
             {
                 txtPasscode.Text = passcode;
