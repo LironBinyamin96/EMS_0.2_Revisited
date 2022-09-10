@@ -76,6 +76,7 @@ namespace EMS_Client.Forms
             //Second phase in two-factor authentication.
             panelLogin.Visible = false;
             panelPasscode.Visible = true;
+            txtPasscode.Focus();
 
             //Generate passcode.
             passcode = Utility.RandomNumericString(6);
@@ -119,21 +120,7 @@ namespace EMS_Client.Forms
         }
 
         //Allowing for use of Enter key for switching to the next field.
-        private void txtIntId_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (e.KeyChar == 13) //KeyChar 13 is the Enter key
-                txtPassword.Focus();
-        }
-        private void txtPassword_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (e.KeyChar == 13) //KeyChar 13 is the Enter key
-                btnLogin.PerformClick();
-        }
-        private void txtPasscode_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (e.KeyChar == 13) //KeyChar 13 is the Enter key
-                btnLoginPasscode.PerformClick();
-        }
+
         #endregion
 
         #region Drag Window
@@ -156,8 +143,35 @@ namespace EMS_Client.Forms
         public static extern bool ReleaseCapture();
         private void lblProgrammName_MouseDown(object sender, MouseEventArgs e) => Drag(e);
         private void Login_MouseDown(object sender, MouseEventArgs e) => Drag(e);
+
         #endregion
 
+        private void txtIntId_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true;
+                txtPassword.Focus();
+            }
+        }
+
+        private void txtPassword_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true;
+                btnLogin.PerformClick();
+            }
+        }
+
+        private void txtPasscode_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true;
+                btnLoginPasscode.PerformClick();
+            }
+        }
     }
 
 }

@@ -33,6 +33,7 @@ namespace EMS_Library.MyEmployee
         private string _phoneNumber;
         private string _address;
         #endregion
+
         #region Employee properties
         public Type Type => _type;
         public int IntId => _intId;
@@ -60,8 +61,8 @@ namespace EMS_Library.MyEmployee
             _fName = fName.CapitalizeFirst().Replace(" ", "_");
             _lName = lName.CapitalizeFirst().Replace(" ", "_");
             _mName = mName.CapitalizeFirst().Replace(" ", "_");
-            _password = password;
             _email = email;
+            _password = password;
             _gender = gender.Replace(" ", "_");
             _birthDate = birthDate;
             _created = created;

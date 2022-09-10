@@ -246,6 +246,7 @@ namespace EMS_Library
         /// <returns></returns>
         public static bool IsStateID(this string id)
         {
+            if(!id.Parsable(typeof(int))) return false;
             int[] id_12_digits = { 1, 2, 1, 2, 1, 2, 1, 2, 1 };
             int count = 0;
 

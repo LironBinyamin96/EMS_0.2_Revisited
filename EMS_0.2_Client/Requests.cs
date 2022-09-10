@@ -44,6 +44,13 @@ namespace EMS_Client
         public static string GetHourLogs(int _intId, int year, int month) => $"get log #{_intId}, {year}, {month}";
         public static string GetAllExceptions() => "get all exceptions #";
 
+        /// <summary>
+        /// Sends picture to the server to be saved.
+        /// </summary>
+        /// <param name="image"></param>
+        /// <param name="intId"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentException"></exception>
         public static string[] SaveImmage(Bitmap image, int intId)
         {
             TcpClient tcpClient = new TcpClient(Config.ServerIP, Config.ServerPort);

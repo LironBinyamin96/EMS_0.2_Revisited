@@ -37,14 +37,14 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.txtPasscode = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.panelLogin = new System.Windows.Forms.Panel();
             this.panelPasscode = new System.Windows.Forms.Panel();
             this.lblPasscode = new System.Windows.Forms.Label();
             this.btnLoginPasscode = new System.Windows.Forms.Button();
-            this.panelLogin = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
-            this.panelPasscode.SuspendLayout();
             this.panelLogin.SuspendLayout();
+            this.panelPasscode.SuspendLayout();
             this.SuspendLayout();
             // 
             // txtIntId
@@ -55,7 +55,7 @@
             this.txtIntId.PlaceholderText = "Internal ID";
             this.txtIntId.Size = new System.Drawing.Size(139, 23);
             this.txtIntId.TabIndex = 0;
-            this.txtIntId.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtIntId_KeyPress);
+            this.txtIntId.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtIntId_KeyDown);
             // 
             // txtPassword
             // 
@@ -65,7 +65,7 @@
             this.txtPassword.Size = new System.Drawing.Size(141, 23);
             this.txtPassword.TabIndex = 1;
             this.txtPassword.UseSystemPasswordChar = true;
-            this.txtPassword.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPassword_KeyPress);
+            this.txtPassword.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtPassword_KeyDown);
             // 
             // btnLogin
             // 
@@ -125,12 +125,11 @@
             this.txtPasscode.PlaceholderText = "Passcode";
             this.txtPasscode.Size = new System.Drawing.Size(122, 23);
             this.txtPasscode.TabIndex = 8;
-            this.txtPasscode.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPasscode_KeyPress);
+            this.txtPasscode.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtPasscode_KeyDown);
             // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.White;
-            this.panel1.Controls.Add(this.panelPasscode);
             this.panel1.Controls.Add(this.panelLogin);
             this.panel1.Controls.Add(this.pictureBox1);
             this.panel1.Location = new System.Drawing.Point(12, 12);
@@ -138,13 +137,24 @@
             this.panel1.Size = new System.Drawing.Size(273, 373);
             this.panel1.TabIndex = 9;
             // 
+            // panelLogin
+            // 
+            this.panelLogin.BackColor = System.Drawing.Color.Transparent;
+            this.panelLogin.Controls.Add(this.txtIntId);
+            this.panelLogin.Controls.Add(this.btnLogin);
+            this.panelLogin.Controls.Add(this.txtPassword);
+            this.panelLogin.Location = new System.Drawing.Point(11, 156);
+            this.panelLogin.Name = "panelLogin";
+            this.panelLogin.Size = new System.Drawing.Size(247, 194);
+            this.panelLogin.TabIndex = 6;
+            // 
             // panelPasscode
             // 
             this.panelPasscode.BackColor = System.Drawing.Color.Transparent;
             this.panelPasscode.Controls.Add(this.lblPasscode);
             this.panelPasscode.Controls.Add(this.btnLoginPasscode);
             this.panelPasscode.Controls.Add(this.txtPasscode);
-            this.panelPasscode.Location = new System.Drawing.Point(11, 156);
+            this.panelPasscode.Location = new System.Drawing.Point(451, 245);
             this.panelPasscode.Name = "panelPasscode";
             this.panelPasscode.Size = new System.Drawing.Size(247, 198);
             this.panelPasscode.TabIndex = 10;
@@ -173,17 +183,6 @@
             this.btnLoginPasscode.UseVisualStyleBackColor = false;
             this.btnLoginPasscode.Click += new System.EventHandler(this.btnLoginPasscode_Click);
             // 
-            // panelLogin
-            // 
-            this.panelLogin.BackColor = System.Drawing.Color.Transparent;
-            this.panelLogin.Controls.Add(this.txtIntId);
-            this.panelLogin.Controls.Add(this.btnLogin);
-            this.panelLogin.Controls.Add(this.txtPassword);
-            this.panelLogin.Location = new System.Drawing.Point(11, 156);
-            this.panelLogin.Name = "panelLogin";
-            this.panelLogin.Size = new System.Drawing.Size(247, 194);
-            this.panelLogin.TabIndex = 6;
-            // 
             // Login
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -193,6 +192,7 @@
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(744, 501);
             this.ControlBox = false;
+            this.Controls.Add(this.panelPasscode);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.lblExit);
             this.Controls.Add(this.lblProgrammName);
@@ -204,10 +204,10 @@
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Login_MouseDown);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel1.ResumeLayout(false);
-            this.panelPasscode.ResumeLayout(false);
-            this.panelPasscode.PerformLayout();
             this.panelLogin.ResumeLayout(false);
             this.panelLogin.PerformLayout();
+            this.panelPasscode.ResumeLayout(false);
+            this.panelPasscode.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
