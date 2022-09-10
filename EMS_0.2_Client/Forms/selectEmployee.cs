@@ -25,7 +25,7 @@ namespace EMS_Client.Forms
             InitializeComponent();
             callerForm = caller;
         }
-        
+
         /// <summary>
         /// Method called by OnLoad event.
         /// </summary>
@@ -49,12 +49,14 @@ namespace EMS_Client.Forms
         /// </summary>
         private void employeesTable_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            int indexRow = employeesTable.CurrentCell.RowIndex;
-            EMS_ClientMainScreen.employee = Employee.ActivateEmployee(buffer[indexRow].Remove(buffer[indexRow].Length - 1).Split(','));
+            string empId = employeesTable.Rows[employeesTable.CurrentCell.RowIndex].Cells[1].Value.ToString();
+            string empData = Array.Find(buffer, x => x.Contains(empId));
+            if (empData == null || empData == default) return;
+            EMS_ClientMainScreen.employee = Employee.ActivateEmployee(empData.Remove(empData.Length - 1).Split(','));
 
             //Invoke Fill() method of callerForm if available
             System.Reflection.MethodInfo fillMethod = callerForm.GetType().GetMethod("Fill");
-            if (fillMethod != null) fillMethod.Invoke(callerForm,null);
+            if (fillMethod != null) fillMethod.Invoke(callerForm, null);
 
             callerForm.Activate();
             Close();

@@ -119,7 +119,7 @@
             // txtPasscode
             // 
             this.txtPasscode.BackColor = System.Drawing.SystemColors.Window;
-            this.txtPasscode.ForeColor = System.Drawing.Color.LightCyan;
+            this.txtPasscode.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.txtPasscode.Location = new System.Drawing.Point(56, 64);
             this.txtPasscode.Name = "txtPasscode";
             this.txtPasscode.PlaceholderText = "Passcode";
