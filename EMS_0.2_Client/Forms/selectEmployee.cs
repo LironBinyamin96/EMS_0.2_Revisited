@@ -72,13 +72,13 @@ namespace EMS_Client.Forms
                 /*All*/
                 case 0: { querry = Requests.SelectEmployee(); break; }
                 /*ID*/
-                case 1: { querry = Requests.SelectEmployee(new Dictionary<string, string>() { { "_intId", $"{txtSaerch.Text}" } }); break; }
+                case 1: { querry = Requests.SelectEmployee("and", new string[][] { new string[] { "_intId", $"{txtSaerch.Text}" } }); break; }
                 /*_fName*/
-                case 2: { querry = Requests.SelectEmployee(new Dictionary<string, string>() { { "_fName", $"'{txtSaerch.Text}'" } }); break; }
+                case 2: { querry = Requests.SelectEmployee("and", new string[][] { new string[] { "_fName", $"'{txtSaerch.Text}'" } }); break; }
                 /*_lName*/
-                case 3: { querry = Requests.SelectEmployee(new Dictionary<string, string>() { { "_lName", $"'{txtSaerch.Text}'" } }); break; }
+                case 3: { querry = Requests.SelectEmployee("and", new string[][] { new string[] { "_lName", $"'{txtSaerch.Text}'" } }); break; }
                 /*type*/
-                case 4: { querry = Requests.SelectEmployee(new Dictionary<string, string>() { { "type", $"'{txtSaerch.Text}'" } }); break; }
+                case 4: { querry = Requests.SelectEmployee("and", new string[][] { new string[] { "type", $"'{txtSaerch.Text}'" } }); break; }
 
 
             }

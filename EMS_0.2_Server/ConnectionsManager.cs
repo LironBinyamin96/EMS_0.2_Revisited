@@ -32,7 +32,7 @@ namespace EMS_Server
                     DataPacket request = new DataPacket(stream);
                     EMS_ServerMainScreen.serverForm.WriteToServerConsole($"Request: {request}");
                     DataPacket responce = new MyRouter().Router(request);
-                    EMS_ServerMainScreen.serverForm.WriteToServerConsole($"Responce: {request}");
+                    EMS_ServerMainScreen.serverForm.WriteToServerConsole($"Responce: {responce}");
                     stream.Write(responce.Write(), 0, responce.GetTotalSize());
                     EMS_ServerMainScreen.serverForm.AddConnection(client.Client.RemoteEndPoint.ToString());
                     while (client.Connected) { Thread.Sleep(1); } //Wait until client finishes.

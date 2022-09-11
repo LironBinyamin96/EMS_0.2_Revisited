@@ -164,9 +164,13 @@ while True:
     facesLocation = face_recognition.face_locations(imgS) # Finding all the faces in the picture
     encodingForCap = face_recognition.face_encodings(imgS,facesLocation) # encoding
 
+    # Running over a list of images and comparing to the current image using the encoding and location
     for encodeFace, faceLocation in zip(encodingForCap,facesLocation):
+        # Comparing faces between a list of encodings and the encoding of the camera image
         match = face_recognition.compare_faces(encodingListfinal,encodeFace)
+        # test for the best match in case there are employees with a similar appearance
         faceDistance = face_recognition.face_distance(encodingListfinal,encodeFace)
+        # Finding the minimum value of an image by index
         theBastMatchIndex = np.argmin(faceDistance)
 
         if match[theBastMatchIndex] and faceDistance[theBastMatchIndex] < 0.5:
@@ -176,6 +180,6 @@ while True:
             y1,x2,y2,x1= y1*4,x2*4,y2*4,x1*4
             cv2.rectangle(img,(x1,y1),(x2,y2),(0,255,0),1)
             cv2.rectangle(img,(x1,y2-35),(x2,y2),(0,255,0),cv2.FILLED)
-            cv2.putText(img,getFullNameOfEmployee(conn,Employee),(x1+6,y2-6),cv2.FONT_HERSHEY_COMPLEX,1,(0,0,0),2)
+            cv2.putText(img,getFullNameOfEmployee(conn,Employee),(x1+6,y2-6),cv2.FONT_HERSHEY_COMPLEX,2,(0,0,0),2)
     cv2.imshow("Camera", img)
     cv2.waitKey(1)

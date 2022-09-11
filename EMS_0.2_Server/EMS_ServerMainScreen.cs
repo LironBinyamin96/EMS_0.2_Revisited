@@ -186,7 +186,7 @@ namespace EMS_Server
         }
         public Task BuildServerTask()
         {
-            return new Task(async () =>
+            return new Task(() =>
             {
                 if (!SQLServerLookup.IsCompleted) SQLServerLookup.Wait();
                 WriteToServerConsole("Server started");

@@ -50,10 +50,10 @@ namespace EMS_Client.Forms
             { MessageBox.Show("Wrong credentials"); return; }
 
             //Request employee data from the server.
-            string querry = Requests.SelectEmployee(new Dictionary<string, string>
+            string querry = Requests.SelectEmployee("and",new string[][]
             {
-                {"_intId", txtIntId.Text},
-                {"_password",$"'{txtPassword.Text}'" }
+                new string[]{"_intId", txtIntId.Text},
+                new string[]{"_password",$"'{txtPassword.Text}'" }
             });
             string[] buffer = Requests.RequestFromServer(querry, 1);
 

@@ -13,17 +13,18 @@ namespace EMS_Client
     static class Requests
     {
         //Mothods that provide querries for comunicating with SQL db through EMS server.
-        public static string SelectEmployee(Dictionary<string, string> data = null)
+        public static string SelectEmployee(string gate, string[][] clause)
         {
             string querry = $"get employee #";
-            if (data != null)
+            if (clause != null)
             {
-                foreach (KeyValuePair<string, string> kvp in data)
-                    querry += $"{kvp.Key}={kvp.Value} and ";
-                return querry.Remove(querry.Length - 5) + ';';
+                foreach (string[] item in clause)
+                    querry += $"{item[0]}={item[1]} {gate} ";
+                return querry.Remove(querry.Length - gate.Length+2) + ';';
             }
             return querry;
         }
+        public static string SelectEmployee() => "get employee #";
         public static string GetAllEmails() => "get all emails #";
         public static string UpdateEntry(string id, DateTime entry, DateTime exit) => $"update entry #{id}, {entry.ToString("yyyy-MM-dd HH:mm:ss")}, {exit.ToString("yyyy-MM-dd HH:mm:ss")}";
         public static string UpdateEmployee(Dictionary<string, string> data, Dictionary<string, string> clause)

@@ -35,9 +35,10 @@ namespace EMS_Client.Forms
             _data = Requests.RequestFromServer(Requests.GetAllExceptions(), 8);
             if (_data[0] != "-1")
             {
-                Dictionary<string, string> clauses = _data.ToHashSet().ToDictionary(k => k = "_intId", v => v.Split(',')[0]);
-                string[] tempData = Requests.RequestFromServer(Requests.SelectEmployee(clauses), 1);
-                _empsData = Array.ConvertAll(tempData, x => Employee.ActivateEmployee(x.Split(',')));
+                string[] ids = Array.ConvertAll(_data, x => x.Split(',')[0]).ToHashSet().ToArray();
+                //string[][] clauses = Array.ConvertAll(, x=>new string[] {x, "_intId"});
+
+                
                 if (_data != null)
                     try
                     {
