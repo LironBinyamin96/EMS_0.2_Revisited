@@ -20,7 +20,7 @@ namespace EMS_Client
             {
                 foreach (string[] item in clause)
                     querry += $"{item[0]}={item[1]} {gate} ";
-                return querry.Remove(querry.Length - gate.Length+2) + ';';
+                return querry.Remove(querry.Length - (gate.Length+2)) + ';';
             }
             return querry;
         }

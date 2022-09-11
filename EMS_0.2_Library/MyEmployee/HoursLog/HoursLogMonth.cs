@@ -79,7 +79,6 @@ namespace EMS_Library.MyEmployee.HoursLog
             _year = tempDate.Year;
             int daysInMonth = DateTime.DaysInMonth(_year, _month);
             _days = new HoursLogDay[daysInMonth];
-
             for (int i = 0; i < daysInMonth; i++)
                 _days[i] = new HoursLogDay(Array.FindAll(entries, x => x.Start.Day == i + 1), new DateTime(_year, _month, i + 1));
         }
