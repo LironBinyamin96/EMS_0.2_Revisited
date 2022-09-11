@@ -173,6 +173,48 @@ namespace EMS_Client.Forms
                 btnLoginPasscode.PerformClick();
             }
         }
+
+        private void txtIntId_Click(object sender, EventArgs e)
+        {
+            txtIntId.BackColor = Color.White;
+            panelUser.BackColor = Color.White;
+            panelPassword.BackColor = Color.LightGray;
+            txtPassword.BackColor = Color.LightGray;
+        }
+
+        private void txtPassword_Click(object sender, EventArgs e)
+        {
+            txtPassword.BackColor = Color.White;
+            panelPassword.BackColor = Color.White;
+            panelUser.BackColor = Color.LightGray;
+            txtIntId.BackColor = Color.LightGray;
+        }
+
+        private void pictureBoxEye_MouseDown(object sender, MouseEventArgs e)
+        {
+            txtPassword.UseSystemPasswordChar = false;
+        }
+
+        private void pictureBoxEye_MouseUp(object sender, MouseEventArgs e)
+        {
+            txtPassword.UseSystemPasswordChar = true;
+        }
+
+        private void txtPasscode_Click(object sender, EventArgs e)
+        {
+            txtPasscode.BackColor = Color.White;
+            panelPasscodeText.BackColor = Color.White;
+        }
+
+        private void btnSendAgain_Click(object sender, EventArgs e)
+        {
+            //Send the passcode to employee's email address.
+            SmtpClient Smtp = new SmtpClient("smtp.gmail.com", 587);
+            MailMessage mail = new MailMessage(Config.EMS_EmailAddress, logingInEmp.Email, "Verification code from employee management system", passcode);
+            Smtp.EnableSsl = true;
+            Smtp.Credentials = new NetworkCredential(Config.EMS_EmailAddress, Config.EMA_EmailPassword);
+            Smtp.Send(mail);
+        }
     }
 
 }
