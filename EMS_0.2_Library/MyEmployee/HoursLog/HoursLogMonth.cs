@@ -30,6 +30,7 @@ namespace EMS_Library.MyEmployee.HoursLog
             get
             {
                 TimeSpan sum = TimeSpan.Zero;
+                if (Days == null) return TimeSpan.Zero;
                 foreach (HoursLogDay day in Days)
                 {
                     if (day != null)
@@ -70,6 +71,7 @@ namespace EMS_Library.MyEmployee.HoursLog
             }
         }
 
+        public HoursLogMonth(Employee employee) => _employee = employee;
         public HoursLogMonth(string[] data, Employee employee)
         {
             _employee = employee;
@@ -81,6 +83,25 @@ namespace EMS_Library.MyEmployee.HoursLog
             _days = new HoursLogDay[daysInMonth];
             for (int i = 0; i < daysInMonth; i++)
                 _days[i] = new HoursLogDay(Array.FindAll(entries, x => x.Start.Day == i + 1), new DateTime(_year, _month, i + 1));
+        }
+
+        /// <summary>
+        /// Adds an entry to monthly log.
+        /// </summary>
+        /// <param name="entry"></param>
+        public void Add(HoursLogEntry entry)
+        {
+            if (_days == null) 
+            { 
+                _days = new HoursLogDay[DateTime.DaysInMonth(entry.Start.Year, entry.Start.Month)];
+                _days[entry.Start.Day] = new HoursLogDay(new HoursLogEntry[] { entry }, entry.Start.Date); 
+                _month = entry.Start.Month;
+                _year = entry.Start.Year;
+            }
+            else if(_days[entry.Start.Day]==null)
+                _days[entry.Start.Day] = new HoursLogDay(new HoursLogEntry[] { entry }, entry.Start.Date);
+            else 
+                _days[entry.Start.Day].Add(entry);
         }
 
         /// <summary>

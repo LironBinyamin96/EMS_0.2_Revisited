@@ -43,6 +43,7 @@ namespace EMS_Client
         public static string AddEmployee(EMS_Library.MyEmployee.Employee employee) => "add employee #" + employee.ToString();
         public static string UpdateEmployee(EMS_Library.MyEmployee.Employee employee) => "update employee #" + employee.ToString();
         public static string GetHourLogs(int _intId, int year, int month) => $"get log #{_intId}, {year}, {month}";
+        public static string GetYearlyHourLog(int _intId, int year) => $"get log #{_intId}, {year}";
         public static string GetAllExceptions() => "get all exceptions #";
 
         /// <summary>

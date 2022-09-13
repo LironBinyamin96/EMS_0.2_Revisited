@@ -32,6 +32,18 @@ namespace EMS_Library.MyEmployee.HoursLog
             _entries = entries;
             _date = date;
         }
+
+        /// <summary>
+        /// Adds an entry to daily log.
+        /// </summary>
+        /// <param name="entry"></param>
+        public void Add(HoursLogEntry entry)
+        {
+            HoursLogEntry[] temp = new HoursLogEntry[_entries.Length + 1];
+            Array.Copy(_entries, temp, _entries.Length);
+            temp[temp.Length - 1] = entry;
+            _entries = temp;
+        }
         public override string ToString()
         {
             if (_entries == null || _entries.Length == 0) return "";

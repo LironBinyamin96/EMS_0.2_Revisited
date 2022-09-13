@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.Data.OleDb;
 using EMS_Library.MyEmployee.HoursLog;
 using EMS_Library;
+using System.Windows.Forms.VisualStyles;
 
 namespace EMS_Client.Forms
 {
@@ -31,9 +32,9 @@ namespace EMS_Client.Forms
             //Aggregating controlls into collections for later use
             progressBars = new ProgressBar[] { monthBar0, monthBar1, monthBar2, monthBar3, monthBar4, monthBar5, monthBar6, monthBar7, monthBar8, monthBar9, monthBar10, monthBar11 };
             labels = new Label[] { lblMonthData0, lblMonthData1, lblMonthData2, lblMonthData3, lblMonthData4, lblMonthData5, lblMonthData6, lblMonthData7, lblMonthData8, lblMonthData9, lblMonthData10, lblMonthData11 };
-            
+
             //Priming fields
-            foreach(Label label in labels) label.Text = String.Empty;
+            foreach (Label label in labels) label.Text = String.Empty;
             List<int> years = new List<int>();
             for (int i = Config.MinDate.Year; i <= DateTime.Now.Year; i++)
                 years.Add(i);
@@ -68,19 +69,26 @@ namespace EMS_Client.Forms
             // Retrieves selected employee data from the server
             if (EMS_ClientMainScreen.employee == null) { MessageBox.Show("No employee selected!"); return; }
             data = new HoursLogMonth[12];
-            for (int i = 1; i <= 12; i++)
-            {
-                string[] responce = Requests.RequestFromServer(Requests.GetHourLogs(EMS_ClientMainScreen.employee.IntId, (int)yearPicker.SelectedValue, i), 5);
-                if (responce[0] != "-1") data[i] = new HoursLogMonth(responce, EMS_ClientMainScreen.employee);
-            }
+            string[][] responce = Array.ConvertAll(Requests.RequestFromServer(Requests.GetYearlyHourLog(EMS_ClientMainScreen.employee.IntId, (int)yearPicker.SelectedValue), 11), x => x.Split(','));
 
+            //Constructing 12 mothly logs
+            foreach (string[] x in responce)
+            {
+                HoursLogEntry entry = new HoursLogEntry(x.Aggregate((aggregate, elem) => { return aggregate + ", " + (elem != null ? elem : "NULL"); }));
+                if (data[entry.Start.Month] == null) 
+                { 
+                    data[entry.Start.Month] = new HoursLogMonth(EMS_ClientMainScreen.employee);
+                    data[entry.Start.Month].Add(entry);
+                }
+                else { data[entry.Start.Month].Add(entry); }
+            }
 
             if (data != null)
             {
                 //Fill graph data
                 for (int i = 0; i < progressBars.Length; i++)
                 {
-                    if (data[i] != null)
+                    if (data[i] != null && data[i].Days.Length!=0)
                     {
                         // = total hours worked / (Max work hours in month / 100%)
                         double value = (data[i].Total.TotalHours / (Config.MaxShiftLength.TotalHours * Config.WorkDaysInWeek * (DateTime.DaysInMonth(data[i].Year, data[i].Month) / 7) / 100));

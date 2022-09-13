@@ -103,7 +103,12 @@ namespace EMS_Client.Forms
                 Address
             });
             foreach (string item in buffer)
-                employeesTable.Rows.Add(item.Split(','));
+            {
+                List<string> empData = item.Split(',').ToList();
+                empData.RemoveAt(7);
+                empData.RemoveAt(9);
+                employeesTable.Rows.Add(empData.ToArray());
+            }
 
         }
         private void btnX_Click(object sender, EventArgs e) => Close();

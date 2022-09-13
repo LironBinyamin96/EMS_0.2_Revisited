@@ -144,14 +144,11 @@ namespace EMS_Server
         public static string GetMonthLog(string clientQuerry) //get log #_intId, year, month
         {
             string[] data = clientQuerry.Substring(clientQuerry.IndexOf('#') + 1).Split(',');
-            DateTime time = DateTime.Parse($"{data[1].Trim()}-{data[2].Trim()}-01");
-            string debug =
-                $"select * from HourLogs" +
-                $" where " +
-                $"((_entry between '{data[1]}-{data[2]}-01' and '{data[1]}-{data[2]}-{DateTime.DaysInMonth(int.Parse(data[1]), int.Parse(data[2]))}') or" +
-                $"(_exit between '{data[1]}-{data[2]}-01' and '{data[1]}-{data[2]}-{DateTime.DaysInMonth(int.Parse(data[1]), int.Parse(data[2]))}'))" +
-                $" and _intId = {data[0]}; ";
-            return debug;
+            return $"select * from {Config.EmployeeHourLogsTable}" +
+                   $" where " +
+                   $"((_entry between '{data[1]}-{data[2]}-01' and '{data[1]}-{data[2]}-{DateTime.DaysInMonth(int.Parse(data[1]), int.Parse(data[2]))}') or" +
+                   $"(_exit between '{data[1]}-{data[2]}-01' and '{data[1]}-{data[2]}-{DateTime.DaysInMonth(int.Parse(data[1]), int.Parse(data[2]))}'))" +
+                   $" and _intId = {data[0]}; ";
         }
 
         /// <summary>
@@ -184,7 +181,7 @@ namespace EMS_Server
         /// <param name="clientQuerry"></param>
         /// <returns></returns>
         public static string GetAllExceptions(string clientQuerry = "") => $"select * from {Config.EmployeeHourLogsTable} where _entry<'{Config.MinDate}' or _exit<'{Config.MinDate}' or _exit<_entry or _entry is NULL or _exit is NULL";
-        
+
         //Following two methods are for simulating entries and exits during developement.
         public static string Departure(string _intId)
         {
@@ -204,5 +201,15 @@ namespace EMS_Server
             catch (Exception ex) { return ex.Source + Environment.NewLine + ex.Message; }
         }
         public static string Arrival(string _intId) => $"insert into {Config.EmployeeHourLogsTable} (_intId ,_entry) values ({_intId},'{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}');";
+
+        public static string GetYearLog(string clientQuerry) //get log #_intId, year
+        {
+            string[] data = clientQuerry.Substring(clientQuerry.IndexOf('#') + 1).Split(',');
+            return $"select * from {Config.EmployeeHourLogsTable} where " +
+                   $"((_entry between '{data[1]}-01-01' and '{int.Parse(data[1])+1}-01-01') or " +
+                   $"(_exit between '{data[1]}-01-01' and '{int.Parse(data[1]) + 1}-01-01'))" +
+                   $" and _intId = {data[0]} order by _entry ASC;";
+
+        }
     }
 }

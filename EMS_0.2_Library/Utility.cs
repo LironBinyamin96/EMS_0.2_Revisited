@@ -226,6 +226,21 @@ namespace EMS_Library
         }
 
         /// <summary>
+        /// Provides a subarray starting from "startIndex" and with length "lenght" 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="arr"></param>
+        /// <param name="startIndex"></param>
+        /// <param name="length"></param>
+        public static T[] SubArray<T>(this T[] arr, int startIndex, int endIndex)
+        {
+            T[] result = new T[endIndex-startIndex];
+            for (int i = startIndex, j=0; i < endIndex; i++,j++)
+                result[j] = arr[i];
+            return result;
+        }
+
+        /// <summary>
         /// Search for an object in the collection.
         /// </summary>
         /// <typeparam name="T"></typeparam>
