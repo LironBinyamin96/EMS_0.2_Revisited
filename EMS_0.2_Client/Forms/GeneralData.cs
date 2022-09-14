@@ -66,52 +66,66 @@ namespace EMS_Client.Forms
         /// </summary>
         public void Fill()
         {
+            if (employeeChanged) //Only request picture if employee changed to reduce traffic
+            {
+                pictureBox1.Image = (Bitmap)new ImageConverter().ConvertFrom(Requests.GetImage(new EMS_Library.Network.DataPacket(EMS_ClientMainScreen.employee.IntId.ToString(), 6)));
+                employeeChanged = false;
+                Array.ConvertAll(progressBars, x => x.Value = 0);
+                Array.ConvertAll(labels, x => x.Text = "");
+                data = null;
+                lblEmpData.Text = "";
+            }
+
             // Retrieves selected employee data from the server
             if (EMS_ClientMainScreen.employee == null) { MessageBox.Show("No employee selected!"); return; }
             data = new HoursLogMonth[12];
             string[][] responce = Array.ConvertAll(Requests.RequestFromServer(Requests.GetYearlyHourLog(EMS_ClientMainScreen.employee.IntId, (int)yearPicker.SelectedValue), 11), x => x.Split(','));
 
-            //Constructing 12 mothly logs
-            foreach (string[] x in responce)
+            //If data is available
+            if (responce[0][0] != "-1")
             {
-                HoursLogEntry entry = new HoursLogEntry(x.Aggregate((aggregate, elem) => { return aggregate + ", " + (elem != null ? elem : "NULL"); }));
-                if (data[entry.Start.Month] == null) 
-                { 
-                    data[entry.Start.Month] = new HoursLogMonth(EMS_ClientMainScreen.employee);
-                    data[entry.Start.Month].Add(entry);
-                }
-                else { data[entry.Start.Month].Add(entry); }
-            }
-
-            if (data != null)
-            {
-                //Fill graph data
-                for (int i = 0; i < progressBars.Length; i++)
+                //Constructing 12 mothly logs
+                foreach (string[] x in responce)
                 {
-                    if (data[i] != null && data[i].Days.Length!=0)
+                    HoursLogEntry entry = new HoursLogEntry(x.Aggregate((aggregate, elem) => { return aggregate + ", " + (elem != null ? elem : "NULL"); }));
+                    if (data[entry.Start.Month] == null)
                     {
-                        // = total hours worked / (Max work hours in month / 100%)
-                        double value = (data[i].Total.TotalHours / (Config.MaxShiftLength.TotalHours * Config.WorkDaysInWeek * (DateTime.DaysInMonth(data[i].Year, data[i].Month) / 7) / 100));
-                        progressBars[i].Value = (int)value;
-                        labels[i].Text = $"{value:F2}";
+                        data[entry.Start.Month] = new HoursLogMonth(EMS_ClientMainScreen.employee);
+                        data[entry.Start.Month].Add(entry);
+                    }
+                    else { data[entry.Start.Month].Add(entry); }
+                }
+
+                if (data != null)
+                {
+                    //Fill graph data
+                    for (int i = 0; i < progressBars.Length; i++)
+                    {
+                        if (data[i] != null && data[i].Days.Length != 0)
+                        {
+                            // = total hours worked / (Max work hours in month / 100%)
+                            double value = (data[i].Total.TotalHours / (Config.MaxShiftLength.TotalHours * Config.WorkDaysInWeek * (DateTime.DaysInMonth(data[i].Year, data[i].Month) / 7) / 100));
+                            progressBars[i].Value = (int)value;
+                            labels[i].Text = $"{value:F2}";
+                        }
+                        else progressBars[i].Value = 0;
                     }
 
-                    else progressBars[i].Value = 0;
                 }
 
+                string temptot = $"{(float)data.Sum(x => x?.Total.TotalHours):F2}";
+                string Total = $"overtime: {(float)data.Sum(x => x?.TotalOvertime.TotalHours):F2}\n";
+                string Daily = $"average: {(float)data.Sum(x => x?.Average.TotalHours) / 12:F2} hours";
+
+                string empData = $"{EMS_ClientMainScreen.employee.LName} " +
+                    $"{EMS_ClientMainScreen.employee.FName}:\n" +
+                    $"Total hours worked: {(float)data.Sum(x => x?.Total.TotalHours):F2}\n" +
+                    $"Total overtime: {(float)data.Sum(x => x?.TotalOvertime.TotalHours):F2}\n" +
+                    $"Daily average: {(float)data.Sum(x => x?.Average.TotalHours) / data.Sum(x => x == null ? 0 : 1):F2} hours";
+                lblEmpData.Text = empData;
             }
 
-
-            string empData = $"{EMS_ClientMainScreen.employee.LName} " +
-                $"{EMS_ClientMainScreen.employee.FName}:\n" +
-                $"Total: {(float)data.Sum(x => x?.Average.Hours):F2}\n" +
-                $"Daily average: {(float)data.Sum(x => x?.Average.Hours) / 12:F2} hours";
-            lblEmpData.Text = empData;
-            if (employeeChanged) //Only request picture if employee changed to reduce traffic
-            {
-                pictureBox1.Image = (Bitmap)new ImageConverter().ConvertFrom(Requests.GetImage(new EMS_Library.Network.DataPacket(EMS_ClientMainScreen.employee.IntId.ToString(), 6)));
-                employeeChanged = false;
-            }
+            
         }
     }
 }
