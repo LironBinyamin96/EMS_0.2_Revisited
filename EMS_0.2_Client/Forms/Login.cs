@@ -42,14 +42,15 @@ namespace EMS_Client.Forms
         #region Buttons
         /// <summary>
         /// Handles user authentication. (Called by btnLogin button).
+        /// אימות משתמש
         /// </summary>
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            //Credentials format check
+            //Credentials format check | בדיקה שתעודת זהות היא מספר 
             if (!txtIntId.Text.Parsable(typeof(int)))
             { MessageBox.Show("Wrong credentials"); return; }
 
-            //Request employee data from the server.
+            //Request employee data from the server. | בקשת נתוני העובד מהשרת
             string querry = Requests.SelectEmployee("and",new string[][]
             {
                 new string[]{"_intId", txtIntId.Text},
@@ -59,6 +60,7 @@ namespace EMS_Client.Forms
 
             //Try to reconstruct employee from recieved data. If failed to verify with DB for any
             //reason (failed connection, wrong cridentials, etc.) employee activator will fail and return null. 
+            // 
             logingInEmp = Employee.ActivateEmployee(buffer[0].Split(','));
             if (logingInEmp == null)
             {

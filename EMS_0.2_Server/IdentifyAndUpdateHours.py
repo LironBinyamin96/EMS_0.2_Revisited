@@ -37,11 +37,11 @@ def GetFormatForReturningTimeOfDay(currentTime):
     # format currentTime is '%Y-%m-%d %H:%M:%S'
     dataTime = currentTime.split(" ")
     finalDataTime = dataTime[1].split(":")
-    if(1<(int(finalDataTime[0])<10)):
+    if(1<(int(finalDataTime[0]))<10):
         return "Good Morning"
-    elif (10<(int(finalDataTime[0])<14)):
+    elif (10<(int(finalDataTime[0]))<14):
         return "Good Day"
-    elif (14<(int(finalDataTime[0])<18)):
+    elif (14<(int(finalDataTime[0]))<18):
         return "Good Afternoon"
     else:
         return "Good Evening"

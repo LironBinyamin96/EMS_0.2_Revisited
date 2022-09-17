@@ -94,14 +94,14 @@ namespace EMS_Library.MyEmployee.HoursLog
             if (_days == null) 
             { 
                 _days = new HoursLogDay[DateTime.DaysInMonth(entry.Start.Year, entry.Start.Month)];
-                _days[entry.Start.Day] = new HoursLogDay(new HoursLogEntry[] { entry }, entry.Start.Date); 
+                _days[entry.Start.Day-1] = new HoursLogDay(new HoursLogEntry[] { entry }, entry.Start.Date); 
                 _month = entry.Start.Month;
                 _year = entry.Start.Year;
             }
-            else if(_days[entry.Start.Day]==null)
-                _days[entry.Start.Day] = new HoursLogDay(new HoursLogEntry[] { entry }, entry.Start.Date);
+            else if(_days[entry.Start.Day-1]==null)
+                _days[entry.Start.Day-1] = new HoursLogDay(new HoursLogEntry[] { entry }, entry.Start.Date);
             else 
-                _days[entry.Start.Day].Add(entry);
+                _days[entry.Start.Day-1].Add(entry);
         }
 
         /// <summary>
