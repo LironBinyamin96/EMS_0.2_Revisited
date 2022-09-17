@@ -21,18 +21,21 @@ namespace EMS_Client
         {
             InitializeComponent();
             PrimaryForms.Push(this);
-            // סימון הכפתורים
+            //Marking the buttons | סימון הכפתורים
             Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 25, 25));
         }
 
         /// <summary>
         /// Method called on form loading
+        ///טעינת מסך ראשי
         /// </summary>
         private void EMS_ClientMainScreen_Load(object sender, EventArgs e)
         {
-            if (!Directory.Exists(Config.RootDirectory)) //Create working directory if it doesn't exist
+            //Create working directory if it doesn't exist
+            // יצירת ספריית עבודה אם היא לא קיימת
+            if (!Directory.Exists(Config.RootDirectory)) 
                 Directory.CreateDirectory(Config.RootDirectory);
-            Action serverLookup = () => //Lambda method to look for the server.
+            Action serverLookup = () => //Lambda method to look for the server. | חיפוש השרת
             {
                 EMS_Library.Network.ServerAddressResolver.ServerIP(false);
                 (Array.Find(PrimaryForms.ToArray(), x => x is EMS_ClientMainScreen) as EMS_ClientMainScreen).Invoke(() => PrimaryForms.Pop().Close());
@@ -47,7 +50,7 @@ namespace EMS_Client
             PrimaryForms.Push(login);
             login.ShowDialog();
 
-            if (PrimaryForms.Count == 0) return; //App was closed at login screen
+            if (PrimaryForms.Count == 0) return; //App was closed at login screen | סגירת התוכנה במסך הכניסה
 
             EMS_Library.Network.DataPacket packet = new EMS_Library.Network.DataPacket($"get image #{CurEmployee.IntId}", 6);
             byte[] buffer = Requests.GetImage(packet);
@@ -62,7 +65,7 @@ namespace EMS_Client
         #region Subscreens
         //This region contains methods needed for the subscreens rendering
 
-        // סימון הכפתורים
+        //Marking the buttons | סימון הכפתורים
         [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
         private static extern IntPtr CreateRoundRectRgn(int nLeftRect, int nTopRect, int nRightRect, int nBottomRect, int nWidthEllipse, int nHeightEllipse);
 
@@ -109,7 +112,8 @@ namespace EMS_Client
 
         #region Drag Window
         /// <summary>
-        /// Controlls form movement during drag.
+        /// Code from the Internet-  Controlls form movement during drag.
+        /// הזזת חלונות במהלך גרירה
         /// </summary>
         void Drag(MouseEventArgs e)
         {
@@ -133,6 +137,7 @@ namespace EMS_Client
         #region Cleanup
         /// <summary>
         /// Cleans temporarry files created by the programm
+        /// מנקה קבצים זמניים שנוצרו על ידי התוכנית
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -141,6 +146,7 @@ namespace EMS_Client
             string[] employeeLogs = Directory.GetFiles(Config.RootDirectory);
 
             //Delete all .xlsx files with numeric names (employee logs)
+            // עם שמות מספריים xlsx מחק את כל קבצי
             foreach (string employeeLog in employeeLogs)
                 if (employeeLog.Split("\\").Last().Substring(0, employeeLog.Split("\\").Last().IndexOf('.')).Parsable(typeof(int)))
                     File.Delete(employeeLog);

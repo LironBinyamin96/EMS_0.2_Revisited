@@ -60,7 +60,7 @@ namespace EMS_Client.Forms
 
             //Try to reconstruct employee from recieved data. If failed to verify with DB for any
             //reason (failed connection, wrong cridentials, etc.) employee activator will fail and return null. 
-            // 
+            // בדיקה האם עובד קיים ואם נתונים שהזין נכונים
             logingInEmp = Employee.ActivateEmployee(buffer[0].Split(','));
             if (logingInEmp == null)
             {
@@ -68,19 +68,19 @@ namespace EMS_Client.Forms
                 return;
             }
 
-            //Checking if the employee has access to the system.
+            //Checking if the employee has access to the system. | בדיקת הרשאות התחברות
             if (!(logingInEmp is EMS_Library.MyEmployee.IAccess.IExtendedAccess))
             {
                 MessageBox.Show("You do not have propper access to use this software.\nAccess denied.");
                 return;
             }
 
-            //Second phase in two-factor authentication.
+            //Second phase in two-factor authentication. | מעבר לאימות דו שלבי
             panelLogin.Visible = false;
             panelPasscode.Visible = true;
             txtPasscode.Focus();
 
-            //Generate passcode.
+            //Generate passcode. | יצירת קוד רנדומלי
             passcode = Utility.RandomNumericString(6);
 
             if (Config.DevelopmentMode) //Bypasses two-factor autentication
@@ -88,8 +88,17 @@ namespace EMS_Client.Forms
                 txtPasscode.Text = passcode;
                 return;
             }
-
+            //Send the passcode to employee's email address. | שליחת הקוד למייל
+            SmtpClient Smtp = new SmtpClient("smtp.gmail.com", 587);
+            MailMessage mail = new MailMessage(Config.EMS_EmailAddress, logingInEmp.Email, "Verification code from employee management system", passcode);
+            Smtp.EnableSsl = true;
+            Smtp.Credentials = new NetworkCredential(Config.EMS_EmailAddress, Config.EMA_EmailPassword);
+            Smtp.Send(mail);
+        }
+        private void btnSendAgain_Click(object sender, EventArgs e)
+        {
             //Send the passcode to employee's email address.
+            //שלח את קוד הגישה לכתובת המייל של העובד.
             SmtpClient Smtp = new SmtpClient("smtp.gmail.com", 587);
             MailMessage mail = new MailMessage(Config.EMS_EmailAddress, logingInEmp.Email, "Verification code from employee management system", passcode);
             Smtp.EnableSsl = true;
@@ -99,12 +108,16 @@ namespace EMS_Client.Forms
 
         /// <summary>
         /// Compare user provided and system generated passcodes. (Called by btnLoginPasscode button.)
+        /// השוואה בין קוד רנדומלי שסופק לקוד שהוזן על ידי המשתמש
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void btnLoginPasscode_Click(object sender, EventArgs e)
         {
-            if (passcode == txtPasscode.Text) { EMS_ClientMainScreen.CurEmployee = logingInEmp; Close(); }
+            if (passcode == txtPasscode.Text)
+            { EMS_ClientMainScreen.CurEmployee = logingInEmp;
+              Close();
+            }
             else
             {
                 MessageBox.Show("Incorrect passcode");
@@ -115,17 +128,14 @@ namespace EMS_Client.Forms
 
         /// <summary>
         /// Method for closing programm from login screen. (Called by X button)
+        /// סגירת תוכנית ממסך הכניסה.
         /// </summary>
         private void lblExit_Click(object sender, EventArgs e)
         {
             while (EMS_ClientMainScreen.PrimaryForms.TryPop(out Form result))
                 result.Close();
         }
-
-        //Allowing for use of Enter key for switching to the next field.
-
         #endregion
-
         #region Drag Window
         /// <summary>
         /// Controlls form movement during drag.
@@ -149,6 +159,8 @@ namespace EMS_Client.Forms
 
         #endregion
 
+        //Allowing for use of "Enter" key for switching to the next field.
+        //בשביל לעבור לשדה הבא "Enter" שימוש בכפתור  
         private void txtIntId_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -157,7 +169,6 @@ namespace EMS_Client.Forms
                 txtPassword.Focus();
             }
         }
-
         private void txtPassword_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -166,7 +177,6 @@ namespace EMS_Client.Forms
                 btnLogin.PerformClick();
             }
         }
-
         private void txtPasscode_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -175,7 +185,8 @@ namespace EMS_Client.Forms
                 btnLoginPasscode.PerformClick();
             }
         }
-
+        // Change the background color in the relevant field
+        // שינוי צבע הרקע בשדה הרלוונטי
         private void txtIntId_Click(object sender, EventArgs e)
         {
             txtIntId.BackColor = Color.White;
@@ -191,32 +202,26 @@ namespace EMS_Client.Forms
             panelUser.BackColor = Color.LightGray;
             txtIntId.BackColor = Color.LightGray;
         }
-
-        private void pictureBoxEye_MouseDown(object sender, MouseEventArgs e)
-        {
-            txtPassword.UseSystemPasswordChar = false;
-        }
-
-        private void pictureBoxEye_MouseUp(object sender, MouseEventArgs e)
-        {
-            txtPassword.UseSystemPasswordChar = true;
-        }
-
         private void txtPasscode_Click(object sender, EventArgs e)
         {
             txtPasscode.BackColor = Color.White;
             panelPasscodeText.BackColor = Color.White;
         }
 
-        private void btnSendAgain_Click(object sender, EventArgs e)
+        // View password
+        // צפייה בסיסמא
+        private void pictureBoxEye_MouseDown(object sender, MouseEventArgs e)
         {
-            //Send the passcode to employee's email address.
-            SmtpClient Smtp = new SmtpClient("smtp.gmail.com", 587);
-            MailMessage mail = new MailMessage(Config.EMS_EmailAddress, logingInEmp.Email, "Verification code from employee management system", passcode);
-            Smtp.EnableSsl = true;
-            Smtp.Credentials = new NetworkCredential(Config.EMS_EmailAddress, Config.EMA_EmailPassword);
-            Smtp.Send(mail);
+            txtPassword.UseSystemPasswordChar = false;
         }
+        //Stop viewing the password
+        // הפסקת צפייה בסיסמא
+        private void pictureBoxEye_MouseUp(object sender, MouseEventArgs e)
+        {
+            txtPassword.UseSystemPasswordChar = true;
+        }
+
+
     }
 
 }

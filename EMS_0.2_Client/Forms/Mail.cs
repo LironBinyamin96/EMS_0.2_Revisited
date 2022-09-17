@@ -21,6 +21,7 @@ namespace EMS_Client.Forms
         #region Supplemental
 
         /// <summary>
+        /// Email login
         /// התחברות למייל
         /// </summary>
         private void Mail_Load(object sender, EventArgs e)
@@ -48,6 +49,7 @@ namespace EMS_Client.Forms
         #endregion
 
         /// <summary>
+        /// Opening a new email window
         /// פתיחת חלון של מייל חדש
         /// </summary>
         private void btnNewEmail_Click(object sender, EventArgs e)
@@ -57,6 +59,7 @@ namespace EMS_Client.Forms
         }
 
         /// <summary>
+        /// Opening an email to read
         /// פתיחת מייל לקריאה
         /// </summary>
         private void inbox_MouseDoubleClick(object sender, MouseEventArgs e)

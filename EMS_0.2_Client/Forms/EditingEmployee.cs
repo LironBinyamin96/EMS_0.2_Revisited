@@ -20,6 +20,7 @@ namespace EMS_Client.Forms
         #region Buttons
         /// <summary>
         /// Opens Add Worker screen
+        /// פתח מסך הוספת עובד
         /// </summary>
         private void btnAddWorker_Click(object sender, EventArgs e)
         {
@@ -29,6 +30,7 @@ namespace EMS_Client.Forms
 
         /// <summary>
         /// Opens Update Personal Details screen
+        /// פתח מסך עדכון פרטים אישיים של עובד
         /// </summary>
         private void btnUpdatePersonalDetails_Click(object sender, EventArgs e)
         {

@@ -37,6 +37,7 @@ namespace EMS_Client.Forms
         private void lblUpdatePersonalDetails_MouseDown(object sender, MouseEventArgs e) => Drag(e);
 
         #endregion
+
         Control[] activeControls; //Collection of controlls for user interaction.
         Bitmap empPicture;
         public UpdatePersonalDetails()
@@ -52,6 +53,7 @@ namespace EMS_Client.Forms
         #region Buttons
         private void btnSave_Click(object sender, EventArgs e)
         {
+            //Format validation | אימות פורמט
             if (CheckingDataFields())
             {
                 Employee tempEmp = Employee.ActivateEmployee(new object[] {
@@ -74,18 +76,22 @@ namespace EMS_Client.Forms
                     });
 
                 Employee hold = tempEmp;
-                    string querry = Requests.UpdateEmployee(tempEmp.ProvideFieldsAndValues(), new Dictionary<string, string> { { "_intId", EMS_ClientMainScreen.employee.IntId.ToString() } });
+                    string querry = Requests.UpdateEmployee(tempEmp.ProvideFieldsAndValues(), new Dictionary<string, string> {
+                        { "_intId", EMS_ClientMainScreen.employee.IntId.ToString() } });
                     if (Requests.RequestFromServer(querry, 3)[0] != "1") MessageBox.Show("Failed to update employee data!");
                     else if (Requests.SaveImmage(empPicture, hold.IntId)[0] == "-1") MessageBox.Show("Failed to update picture!");
                     else MessageBox.Show("Updaded!");
             }
             else MessageBox.Show("Incorrect format!");
         }
+
+        // employee selection | בחירת עובד
         private void btnSelect_Click(object sender, EventArgs e)
         {
             selectEmployee select_Employee = new selectEmployee(this);
             select_Employee.ShowDialog();
         }
+        // Deleting an employee | מחיקת עובד
         private void btnDelete_Click(object sender, EventArgs e)
         {
             DialogResult delete = MessageBox.Show("Are you sure?", "", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
@@ -97,6 +103,7 @@ namespace EMS_Client.Forms
                 Clear();
             }
         }
+        // Upload a picture | העלאת תמונה
         private void btnUpload_Click(object sender, EventArgs e)
         {
             openFileDialog1.Filter = $"picture |*{Config.ImageFormat}| all files|*.*";
@@ -113,6 +120,7 @@ namespace EMS_Client.Forms
             EMS_ClientMainScreen.employee = null;
             Close();
         }
+        // Undoing the changes | ביטול השינויים
         private void btnCancel_Click(object sender, EventArgs e)
         {
             Panel[] panelArr = new Panel[] { panelID, panelFname, panelLname, panelDate, panelAddres, panelPhone, panelEmail, panelBaseSalary
@@ -125,11 +133,13 @@ namespace EMS_Client.Forms
 
         /// <summary>
         /// Prefforms validation of data provided by the user.
+        /// אימות הנתונים שהוקלדו על ידי המשתמש
         /// </summary>
         /// <returns></returns>
         private bool CheckingDataFields()
         {
             //Aggrigation of the controlls and their vilidity status into singular collection.
+            // בדיקת תקינות הנתונים באמצעות מיליון פאנלים ובדיקות
             Dictionary<Control, bool> test = new Dictionary<Control, bool>() {
                 { panelID, txtID.Text.IsStateID()},
                 { panelFname, txtFirstName.Text.Length > 1 },
@@ -145,6 +155,7 @@ namespace EMS_Client.Forms
             };
 
             //Prefoms scan through the collection and changing field colors appropriately while aggregating validity status.
+            // חיפוש שדות עם נתונים לא חוקיים ושינוי צבע הפאנל שלהם לאדום
             bool check = true;
             foreach (KeyValuePair<Control, bool> item in test)
             {
@@ -166,6 +177,7 @@ namespace EMS_Client.Forms
 
         /// <summary>
         /// Clears fields
+        /// ניקוי השדות
         /// </summary>
         public void Clear()
         {
@@ -187,6 +199,7 @@ namespace EMS_Client.Forms
 
         /// <summary>
         /// Fills fields
+        /// מילוי השדות
         /// </summary>
         public void Fill()
         {
@@ -204,7 +217,9 @@ namespace EMS_Client.Forms
                 positionBox.Text = EMS_ClientMainScreen.employee.Type.Name;
                 txtBaseSalary.Text = EMS_ClientMainScreen.employee.BaseSalary.ToString();
                 txtSalaryModifire.Text = EMS_ClientMainScreen.employee.SalaryModifire.ToString();
-                try { pictureBox1.Image = new ImageConverter().ConvertFrom(Requests.GetImage(new DataPacket($"get image #{EMS_ClientMainScreen.employee.IntId}", 6))) as Bitmap; } catch { }
+                try 
+                { pictureBox1.Image = new ImageConverter().ConvertFrom(Requests.GetImage(new DataPacket($"get image #{EMS_ClientMainScreen.employee.IntId}", 6))) as Bitmap; }
+                catch { }
             }
         }
         #endregion

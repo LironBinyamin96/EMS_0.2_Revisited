@@ -18,6 +18,10 @@ namespace EMS_Client.Forms
         {
             InitializeComponent();
         }
+        /// <summary>
+        /// Showing the email | הצגת המייל
+        /// </summary>
+        /// <param name="fullMessage"></param>
         public showMail(string[] fullMessage)
         {
             InitializeComponent();
@@ -35,6 +39,8 @@ namespace EMS_Client.Forms
 
         #region Buttons
         private void btnX_Click(object sender, EventArgs e) => Close();
+
+        // Reply to sender | השב לשולח
         private void btnReply_Click(object sender, EventArgs e)
         {
             newEmail newEmail = new newEmail(form, sub);

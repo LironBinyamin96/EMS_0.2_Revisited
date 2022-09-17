@@ -19,8 +19,7 @@ namespace EMS_Client.Forms
         string subject;
 
         /// <summary>
-        /// NewEmail constructor
-        /// בנאי להודעה חדשה
+        /// NewEmail constructor | בנאי להודעה חדשה
         /// </summary>
         public newEmail()
         {
@@ -28,7 +27,7 @@ namespace EMS_Client.Forms
         }
 
         /// <summary>
-        /// NewEmail constructor בנאי להשיב למייל
+        /// NewEmail constructor | בנאי להשיב למייל
         /// </summary>
         public newEmail(string to, string subject)
         {
@@ -54,15 +53,18 @@ namespace EMS_Client.Forms
 
         /// <summary>
         /// Validating relevant fields and changing thier colors appropriately.
+        /// אימות שדות רלוונטיים ושינוי הצבעים שלהם כראוי.
         /// </summary>
         private bool CheckingDataFields()
         {
             //Aggrigation of the controlls and their vilidity status into singular collection.
+            // בדיקת תקינות הנתונים באמצעות מיליון פאנלים ובדיקות
             Dictionary<Panel, bool> test = new Dictionary<Panel, bool>();
             test.Add(panelTo, txtTo.Text.Parsable(typeof(MailAddress)));
             test.Add(panelSubject, txtSubject.Text.Length > 2);
 
             //Prefoms serach for fields with invalid data and coloring them appropriately while aggregating validity status.
+            // חיפוש שדות עם נתונים לא חוקיים ושינוי צבע הפאנל שלהם לאדום
             bool res = true;
             foreach (KeyValuePair<Panel, bool> item in test)
             {
@@ -75,6 +77,7 @@ namespace EMS_Client.Forms
 
         /// <summary>
         /// Filling fields with data.
+        /// מילוי השדות בנתונים
         /// </summary>
         public void Fill() => txtTo.Text = EMS_ClientMainScreen.employee.Email;
 
@@ -82,13 +85,15 @@ namespace EMS_Client.Forms
 
         #region Buttons
         /// <summary>
-        /// כפתור שליחת מייל
+        ///Sending the email | שליחת המייל
         /// </summary>
         private void btnSend_Click(object sender, EventArgs e)
         {
+            // Checking that the recipient and subject fields of the email are not empty
             // בדיקה ששדות נמען ונושא המייל לא ריקים
             if (!CheckingDataFields()) return;
 
+            //Creating the email and sending it
             // יצירת ההמייל ושליחתו
             //user - "employee.management.system010@gmail.com", pass - "employee.management.system!!@" "generated: wcvyicyfscoiqfgr"
             SmtpClient Smtp = new SmtpClient("smtp.gmail.com", 587);
@@ -110,6 +115,7 @@ namespace EMS_Client.Forms
 
         /// <summary>
         /// הוספת קובץ למייל
+        /// Adding a file to an email
         /// </summary>
         private void btnAddFile_Click(object sender, EventArgs e)
         {
@@ -125,7 +131,7 @@ namespace EMS_Client.Forms
         }
 
         /// <summary>
-        /// Method for mass email sending.
+        /// Method for mass email sending. | שליחת הודעת תפוצה
         /// </summary>
         private void btnSendToAll_Click(object sender, EventArgs e) => txtTo.Text = Requests.RequestFromServer(Requests.GetAllEmails(), 9).ArrayToString();
         private void btnX_Click(object sender, EventArgs e) => Close();
