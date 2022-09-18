@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using EMS_Library.MyEmployee.HoursLog;
 using EMS_Library;
 using System.Diagnostics;
+using System.Data.Common;
 
 namespace EMS_Client.Forms
 {
@@ -30,7 +31,6 @@ namespace EMS_Client.Forms
         public void GridViewAttrndance_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             if (hoursLogTableStructure == null) return;
-
             //Reconstructing Entry object from celected cell data
             Point coordinates = GridViewAttrndance.CurrentCellAddress;
             string entryData = EMS_ClientMainScreen.employee.IntId.ToString();
@@ -44,7 +44,7 @@ namespace EMS_Client.Forms
                     $"{log.Days[coordinates.Y].Date.ToString().Split(' ')[0]} {hoursLogTableStructure[coordinates.Y][coordinates.X]}";
 
             //Checking if reconstruction failed
-            if (entryData.Length > EMS_ClientMainScreen.employee.IntId.CountDidgits())
+            if (entryData.Length > Config.InternalIDDigitAmount)
             {
                 EditHours editHours = new EditHours(new HoursLogEntry(entryData));
                 editHours.Show();

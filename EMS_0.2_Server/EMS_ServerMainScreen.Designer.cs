@@ -33,8 +33,6 @@
             this.connectionsList = new System.Windows.Forms.ListView();
             this.columnHeaderConnections = new System.Windows.Forms.ColumnHeader();
             this.centerPic = new System.Windows.Forms.PictureBox();
-            this.btnSimExit = new System.Windows.Forms.Button();
-            this.btnSimEnter = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.txtServerConsole = new System.Windows.Forms.TextBox();
             this.listnerTimer = new System.Windows.Forms.Timer(this.components);
@@ -51,8 +49,6 @@
             this.panelLeft.BackColor = System.Drawing.Color.Transparent;
             this.panelLeft.Controls.Add(this.connectionsList);
             this.panelLeft.Controls.Add(this.centerPic);
-            this.panelLeft.Controls.Add(this.btnSimExit);
-            this.panelLeft.Controls.Add(this.btnSimEnter);
             this.panelLeft.Dock = System.Windows.Forms.DockStyle.Left;
             this.panelLeft.Location = new System.Drawing.Point(0, 0);
             this.panelLeft.Name = "panelLeft";
@@ -70,7 +66,7 @@
             this.connectionsList.ForeColor = System.Drawing.SystemColors.Menu;
             this.connectionsList.Location = new System.Drawing.Point(0, 183);
             this.connectionsList.Name = "connectionsList";
-            this.connectionsList.Size = new System.Drawing.Size(185, 486);
+            this.connectionsList.Size = new System.Drawing.Size(185, 532);
             this.connectionsList.TabIndex = 2;
             this.connectionsList.UseCompatibleStateImageBehavior = false;
             this.connectionsList.View = System.Windows.Forms.View.List;
@@ -89,28 +85,6 @@
             this.centerPic.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.centerPic.TabIndex = 1;
             this.centerPic.TabStop = false;
-            // 
-            // btnSimExit
-            // 
-            this.btnSimExit.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.btnSimExit.Location = new System.Drawing.Point(0, 669);
-            this.btnSimExit.Name = "btnSimExit";
-            this.btnSimExit.Size = new System.Drawing.Size(185, 23);
-            this.btnSimExit.TabIndex = 1;
-            this.btnSimExit.Text = "Simulate Exit";
-            this.btnSimExit.UseVisualStyleBackColor = true;
-            this.btnSimExit.Click += new System.EventHandler(this.btnSimExit_Click);
-            // 
-            // btnSimEnter
-            // 
-            this.btnSimEnter.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.btnSimEnter.Location = new System.Drawing.Point(0, 692);
-            this.btnSimEnter.Name = "btnSimEnter";
-            this.btnSimEnter.Size = new System.Drawing.Size(185, 23);
-            this.btnSimEnter.TabIndex = 0;
-            this.btnSimEnter.Text = "Simulate Enter";
-            this.btnSimEnter.UseVisualStyleBackColor = true;
-            this.btnSimEnter.Click += new System.EventHandler(this.btnSimEnter_Click);
             // 
             // panel1
             // 
@@ -200,8 +174,6 @@
         private System.Windows.Forms.Timer listnerTimer;
         private Panel panelRight;
         private Button btnExit;
-        private Button btnSimExit;
-        private Button btnSimEnter;
         public ListView connectionsList;
         private ColumnHeader columnHeaderConnections;
     }

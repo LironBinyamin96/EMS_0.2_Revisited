@@ -35,6 +35,6 @@ namespace EMS_Library.Network
         /// Provides string representing the header.
         /// </summary>
         /// <returns></returns>
-        public override string ToString() => DataIntLength + " " + Act.ToString();
+        public override string ToString() => $"Size: {DataIntLength}Bytes, Routing: {Act}";
     }
 }

@@ -88,12 +88,12 @@ namespace EMS_Client.Forms
                 foreach (string[] x in responce)
                 {
                     HoursLogEntry entry = new HoursLogEntry(x.Aggregate((aggregate, elem) => { return aggregate + ", " + (elem != null ? elem : "NULL"); }));
-                    if (data[entry.Start.Month] == null)
+                    if (data[entry.Start.Month - 1] == null)
                     {
-                        data[entry.Start.Month] = new HoursLogMonth(EMS_ClientMainScreen.employee);
-                        data[entry.Start.Month].Add(entry);
+                        data[entry.Start.Month - 1] = new HoursLogMonth(EMS_ClientMainScreen.employee);
+                        data[entry.Start.Month - 1].Add(entry);
                     }
-                    else { data[entry.Start.Month].Add(entry); }
+                    else { data[entry.Start.Month - 1].Add(entry); }
                 }
 
                 if (data != null)
@@ -104,7 +104,7 @@ namespace EMS_Client.Forms
                         if (data[i] != null && data[i].Days.Length != 0)
                         {
                             // = total hours worked / (Max work hours in month / 100%)
-                            double value = (data[i].Total.TotalHours / (Config.MaxShiftLength.TotalHours * Config.WorkDaysInWeek * (DateTime.DaysInMonth(data[i].Year, data[i].Month) / 7) / 100));
+                            double value = (data[i].Total.TotalHours / (Config.MaxShiftLength.TotalHours * Config.WorkDaysInWeek.Length * (DateTime.DaysInMonth(data[i].Year, data[i].Month) / 7) / 100));
                             progressBars[i].Value = (int)value;
                             labels[i].Text = $"{value:F2}";
                         }

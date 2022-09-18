@@ -80,7 +80,7 @@ namespace EMS_Library
         /// Generates random DateTime object.
         /// </summary>
         /// <returns></returns>
-        public static DateTime RandomDateTime() => new DateTime(RandomInt(1800, 2022), RandomInt(1, 13), RandomInt(1, 29), RandomInt(0, 24), RandomInt(0, 60), RandomInt(0, 60));
+        public static DateTime RandomDateTime() => new DateTime(RandomInt(Config.MinDate.Year, DateTime.Now.Year), RandomInt(1, 13), RandomInt(1, 29), RandomInt(0, 24), RandomInt(0, 60), RandomInt(0, 60));
     }
 
 
@@ -284,7 +284,7 @@ namespace EMS_Library
         public static int CountDidgits(this int x)
         {
             byte digits = 0;
-            while ((x /= 10) != 0) ++digits;
+            do ++digits; while ((x /= 10) != 0);
             return digits;
         }
 
@@ -315,5 +315,8 @@ namespace EMS_Library
 
             return bmp;
         }
+
+        /// <returns>Total amount of days in that year.</returns>
+        public static int TotalAmountOfDays(this DateTime date) => DateTime.IsLeapYear(date.Year) ? 366 : 365;
     }
 }

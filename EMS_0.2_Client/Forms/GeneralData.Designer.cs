@@ -598,9 +598,9 @@ namespace EMS_Client.Forms
             this.lblDilyAvgHours.ForeColor = System.Drawing.Color.DodgerBlue;
             this.lblDilyAvgHours.Location = new System.Drawing.Point(278, 143);
             this.lblDilyAvgHours.Name = "lblDilyAvgHours";
-            this.lblDilyAvgHours.Size = new System.Drawing.Size(136, 15);
+            this.lblDilyAvgHours.Size = new System.Drawing.Size(107, 15);
             this.lblDilyAvgHours.TabIndex = 23;
-            this.lblDilyAvgHours.Text = "Daily average per month";
+            this.lblDilyAvgHours.Text = "Total hours worked";
             // 
             // GeneralData
             // 

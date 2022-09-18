@@ -8,7 +8,7 @@ using EMS_Library.MyEmployee;
 using EMS_Library.MyEmployee.HoursLog;
 using EMS_Library.MyEmployee.Divisions;
 using EMS_Library.Network;
-
+using EMS_Library;
 
 namespace EMS_Server
 {
@@ -107,6 +107,7 @@ namespace EMS_Server
             if (e.KeyChar == 13)
             {
                 string[] temp = txtServerConsole.Text.Split(Environment.NewLine);
+                txtServerConsole.AppendText(Environment.NewLine);
                 if (SQLQuerryInput)
                 {
                     if (temp[temp.Length - 1].ToLower() == "sql querry stop")
@@ -134,6 +135,28 @@ namespace EMS_Server
                         case "sql querry begin": { SQLQuerryInput = true; WriteToServerConsole(Environment.NewLine + "Listening for querry:"); break; }
                         case "fr powerup": { try { FRProcess.Start(); } catch { } break; }
                         case "fr shutdown": { try { FRProcess.Kill(); WriteToServerConsole(FRProcess.ProcessName + " " + FRProcess.HasExited); } catch { } break; }
+                        case "simmulate":
+                            {
+                                string id = SQLBridge.TwoWayCommand($"SELECT TOP 1 _intId FROM {Config.EmployeeDataTable} ORDER BY _created DESC; ");
+                                WriteToServerConsole("Pupulating log for " + id);
+                                DateTime curDate = DateTime.Now;
+                                int count = 0;
+                                for (int j = 1; j <= 12; j++)
+                                    for (int i = 1; i <= DateTime.DaysInMonth(curDate.Year, j); i++)
+                                    {
+                                        if (Config.WorkDaysInWeek.Contains((int)new DateTime(curDate.Year, j, i).DayOfWeek))
+                                        {
+                                            string querry = $"insert into {Config.EmployeeHourLogsTable} values " +
+                                                $"({id}, " +
+                                                $"'{new DateTime(curDate.Year, j, i, Utility.RandomInt(7, 9), 0, 0).ToString("yyyy-MM-dd HH:mm:ss")}', " +
+                                                $"'{new DateTime(curDate.Year, j, i, Utility.RandomInt(15, 17), 0, 0).ToString("yyyy-MM-dd HH:mm:ss")}');";
+                                            count += int.Parse(SQLBridge.OneWayCommand(querry));
+                                        }
+                                    }
+                                WriteToServerConsole($"Max: {curDate.TotalAmountOfDays()}, Added: {count}");
+                                break; 
+                            }
+                    
                     }
             }
         }
@@ -254,16 +277,6 @@ namespace EMS_Server
         #endregion
 
         #region Debug
-        private void btnSimExit_Click(object sender, EventArgs e)
-        {
-            WriteToServerConsole(SQLBridge.Departure("111111111"));
-            WriteToServerConsole(SQLBridge.OneWayCommand(SQLBridge.Departure("111111111")));
-        }
-        private void btnSimEnter_Click(object sender, EventArgs e)
-        {
-            WriteToServerConsole(SQLBridge.Arrival("111111111"));
-            WriteToServerConsole(SQLBridge.OneWayCommand(SQLBridge.Arrival("111111111")));
-        }
         private Task TestingTaskBuilder()
         {
             return new Task(() =>

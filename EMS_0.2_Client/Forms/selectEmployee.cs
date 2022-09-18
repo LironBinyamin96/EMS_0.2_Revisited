@@ -69,18 +69,11 @@ namespace EMS_Client.Forms
             switch (comboBoxSelect.SelectedIndex)
             {
                 default: return;
-                /*All*/
-                case 0: { querry = Requests.SelectEmployee(); break; }
-                /*ID*/
-                case 1: { querry = Requests.SelectEmployee("and", new string[][] { new string[] { "_intId", $"{txtSaerch.Text}" } }); break; }
-                /*_fName*/
-                case 2: { querry = Requests.SelectEmployee("and", new string[][] { new string[] { "_fName", $"'{txtSaerch.Text}'" } }); break; }
-                /*_lName*/
-                case 3: { querry = Requests.SelectEmployee("and", new string[][] { new string[] { "_lName", $"'{txtSaerch.Text}'" } }); break; }
-                /*type*/
-                case 4: { querry = Requests.SelectEmployee("and", new string[][] { new string[] { "type", $"'{txtSaerch.Text}'" } }); break; }
-
-
+                /*All*/    case 0: { querry = Requests.SelectEmployee(); break; }
+                /*ID*/     case 1: { querry = txtSaerch.Text != "" ? Requests.SelectEmployee("and", new string[][] { new string[] { "_intId", $"{txtSaerch.Text}" } }) : Requests.SelectEmployee(); break; }
+                /*_fName*/ case 2: { querry = txtSaerch.Text != "" ? Requests.SelectEmployee("and", new string[][] { new string[] { "_fName", $"'{txtSaerch.Text}'" } }) : Requests.SelectEmployee(); break; }
+                /*_lName*/ case 3: { querry = txtSaerch.Text != "" ? Requests.SelectEmployee("and", new string[][] { new string[] { "_lName", $"'{txtSaerch.Text}'" } }) : Requests.SelectEmployee(); break; }
+                /*type*/   case 4: { querry = txtSaerch.Text != "" ? Requests.SelectEmployee("and", new string[][] { new string[] { "type", $"'{txtSaerch.Text}'" } }) : Requests.SelectEmployee(); break; }
             }
             buffer = Requests.RequestFromServer(querry, 1);
             employeesTable.Rows.Clear();
