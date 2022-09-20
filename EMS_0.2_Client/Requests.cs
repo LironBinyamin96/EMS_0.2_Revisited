@@ -109,7 +109,8 @@ namespace EMS_Client
                 stream.Write(request.Write(), 0, request.GetTotalSize());
                 DataPacket responce = new DataPacket(stream);
                 result = responce.StringData.Split('|');
-                client.Close();
+                client.Client.Close();
+                Console.WriteLine("Client connected to the server: "+client.Connected);
             }
             catch (Exception e) { throw e; }
 

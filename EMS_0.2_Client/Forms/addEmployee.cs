@@ -103,7 +103,7 @@ namespace EMS_Client.Forms
             }
             catch { MessageBox.Show("Failed"); }
         }
-        private void btnX_Click(object sender, EventArgs e) => Close();
+        private void btnX_Click(object sender, EventArgs e) { EMS_ClientMainScreen.PrimaryForms.Remove(this); Close(); Dispose(); }
         #endregion
 
 
@@ -137,7 +137,7 @@ namespace EMS_Client.Forms
         private void btnPictureTaking_Click(object sender, EventArgs e)
         {
             pictureBox1.Image = pictureBoxCamera.Image;
-
+            videoCapture.SignalToStop();
             btnCamera.Visible = true;
             pictureBoxCamera.Visible = false;
             btnPictureTaking.Visible = false;
@@ -147,6 +147,10 @@ namespace EMS_Client.Forms
                 pictureBox1.Image = employeeImage;
             }
             catch { MessageBox.Show("Failed"); }
+            finally
+            {
+
+            }
         }
         #endregion
 

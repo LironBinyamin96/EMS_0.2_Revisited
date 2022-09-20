@@ -35,11 +35,14 @@ namespace EMS_Client.Forms
 
                     foreach (var mail in messages)
                     {
-                        string subject = mail.Subject;
-                        string body = mail.Body;
-                        string from = Convert.ToString(mail.From);
-                        string output = from.Substring(from.IndexOf("<") + 1, from.IndexOf(">") - from.IndexOf("<") - 1);
-                        try { this.Invoke((MethodInvoker)delegate { inbox.Rows.Add(output, subject, body); }); }
+                        try
+                        {
+                            string subject = mail.Subject;
+                            string body = mail.Body;
+                            string from = Convert.ToString(mail.From);
+                            string output = from.Substring(from.IndexOf("<") + 1, from.IndexOf(">") - from.IndexOf("<") - 1);
+                            Invoke((MethodInvoker)delegate { inbox.Rows.Add(output, subject, body); });
+                        }
                         catch { }
                     }
                 }

@@ -52,7 +52,7 @@
             this.panelLeft.Dock = System.Windows.Forms.DockStyle.Left;
             this.panelLeft.Location = new System.Drawing.Point(0, 0);
             this.panelLeft.Name = "panelLeft";
-            this.panelLeft.Size = new System.Drawing.Size(185, 715);
+            this.panelLeft.Size = new System.Drawing.Size(275, 715);
             this.panelLeft.TabIndex = 0;
             // 
             // connectionsList
@@ -64,16 +64,16 @@
             this.columnHeaderConnections});
             this.connectionsList.Dock = System.Windows.Forms.DockStyle.Fill;
             this.connectionsList.ForeColor = System.Drawing.SystemColors.Menu;
-            this.connectionsList.Location = new System.Drawing.Point(0, 183);
+            this.connectionsList.Location = new System.Drawing.Point(0, 275);
             this.connectionsList.Name = "connectionsList";
-            this.connectionsList.Size = new System.Drawing.Size(185, 532);
+            this.connectionsList.Size = new System.Drawing.Size(275, 440);
             this.connectionsList.TabIndex = 2;
             this.connectionsList.UseCompatibleStateImageBehavior = false;
             this.connectionsList.View = System.Windows.Forms.View.List;
             // 
             // columnHeaderConnections
             // 
-            this.columnHeaderConnections.Width = 185;
+            this.columnHeaderConnections.Width = 300;
             // 
             // centerPic
             // 
@@ -81,7 +81,7 @@
             this.centerPic.Image = global::EMS_0._2_Server.Properties.Resources.eb8ca4cab565c0f5fb036988856bf906;
             this.centerPic.Location = new System.Drawing.Point(0, 0);
             this.centerPic.Name = "centerPic";
-            this.centerPic.Size = new System.Drawing.Size(185, 183);
+            this.centerPic.Size = new System.Drawing.Size(275, 275);
             this.centerPic.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.centerPic.TabIndex = 1;
             this.centerPic.TabStop = false;
@@ -90,9 +90,9 @@
             // 
             this.panel1.Controls.Add(this.txtServerConsole);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(185, 0);
+            this.panel1.Location = new System.Drawing.Point(275, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(953, 273);
+            this.panel1.Size = new System.Drawing.Size(863, 273);
             this.panel1.TabIndex = 1;
             // 
             // txtServerConsole
@@ -109,7 +109,7 @@
             this.txtServerConsole.Multiline = true;
             this.txtServerConsole.Name = "txtServerConsole";
             this.txtServerConsole.PlaceholderText = "Server Console";
-            this.txtServerConsole.Size = new System.Drawing.Size(953, 273);
+            this.txtServerConsole.Size = new System.Drawing.Size(863, 273);
             this.txtServerConsole.TabIndex = 0;
             this.txtServerConsole.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtServerConsole_KeyPress);
             // 

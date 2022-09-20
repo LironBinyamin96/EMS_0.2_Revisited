@@ -14,6 +14,7 @@ namespace EMS_Library
         public static readonly string RootDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\EMS_Root";
         public static readonly string FR_Location = RootDirectory + "\\FR_Boot.cmd";
         public static readonly string FR_Images = RootDirectory + "\\Images";
+        public const int ClientRequestTimeout = 10000; //In milliseconds.
         #endregion
 
         #region SQL_server_config

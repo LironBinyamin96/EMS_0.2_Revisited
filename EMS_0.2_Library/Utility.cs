@@ -234,8 +234,8 @@ namespace EMS_Library
         /// <param name="length"></param>
         public static T[] SubArray<T>(this T[] arr, int startIndex, int endIndex)
         {
-            T[] result = new T[endIndex-startIndex];
-            for (int i = startIndex, j=0; i < endIndex; i++,j++)
+            T[] result = new T[endIndex - startIndex];
+            for (int i = startIndex, j = 0; i < endIndex; i++, j++)
                 result[j] = arr[i];
             return result;
         }
@@ -261,7 +261,7 @@ namespace EMS_Library
         /// <returns></returns>
         public static bool IsStateID(this string id)
         {
-            if(!id.Parsable(typeof(int))) return false;
+            if (!id.Parsable(typeof(int))) return false;
             int[] id_12_digits = { 1, 2, 1, 2, 1, 2, 1, 2, 1 };
             int count = 0;
 
@@ -318,5 +318,17 @@ namespace EMS_Library
 
         /// <returns>Total amount of days in that year.</returns>
         public static int TotalAmountOfDays(this DateTime date) => DateTime.IsLeapYear(date.Year) ? 366 : 365;
+
+        public static void Remove<T>(this Stack<T> stack, T item)
+        {
+            void Cascade(Stack<T> stack)
+            {
+                if (stack.Count == 0) return;
+                T hold = stack.Pop();
+                if (hold.Equals(item)) return;
+                Cascade(stack);
+                stack.Push(hold);
+            }
+        }
     }
 }

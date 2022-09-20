@@ -118,6 +118,7 @@ namespace EMS_Client.Forms
         private void btnX_Click(object sender, EventArgs e)
         {
             EMS_ClientMainScreen.employee = null;
+            EMS_ClientMainScreen.PrimaryForms.Remove(this);
             Close();
         }
         // Undoing the changes | ביטול השינויים

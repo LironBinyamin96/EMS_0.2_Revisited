@@ -25,12 +25,8 @@ namespace EMS_Server
 
         #region Tasks&Tokens
         public Task listeningTask;
-        public CancellationTokenSource listner_CXL_Src = new CancellationTokenSource();
-        CancellationToken listner_CXL;
 
         public Task SQLServerLookup;
-        public CancellationTokenSource SQLLookup_CXL_Src = new CancellationTokenSource();
-        CancellationToken SQLLookup_CXL;
 
         public Task TestingTask;
 
@@ -40,9 +36,7 @@ namespace EMS_Server
         {
             InitializeComponent();
             listeningTask = BuildServerTask();
-            listner_CXL = listner_CXL_Src.Token;
             SQLServerLookup = BuildSQLServerLookup();
-            SQLLookup_CXL = SQLLookup_CXL_Src.Token;
             FacialRecognition = BuildFRTask();
             TestingTask = TestingTaskBuilder();
             serverForm = this;
@@ -58,15 +52,14 @@ namespace EMS_Server
             FacialRecognition.Start();
             listnerTimer.Interval = 6000;
             listnerTimer.Start();
-            if (!Directory.Exists(EMS_Library.Config.RootDirectory)) Directory.CreateDirectory(EMS_Library.Config.RootDirectory);
-            if (!Directory.Exists(EMS_Library.Config.FR_Images)) Directory.CreateDirectory(EMS_Library.Config.FR_Images);
+            if (!Directory.Exists(Config.RootDirectory)) Directory.CreateDirectory(Config.RootDirectory);
+            if (!Directory.Exists(Config.FR_Images)) Directory.CreateDirectory(Config.FR_Images);
             
         }
-
         private void listnerTimer_Tick(object sender, EventArgs e)
         {
 
-            if (EMS_Library.Config.SQLConnectionString != default)
+            if (Config.SQLConnectionString != default)
             {
                 ForceExits(); //Automated exit enforcer
                 BackupDB();   //Automated Database Backup
@@ -79,8 +72,8 @@ namespace EMS_Server
                 {
                     if (scheduleBackup)
                     {
-                        if (!Directory.Exists(EMS_Library.Config.RootDirectory + "\\Backups")) Directory.CreateDirectory(EMS_Library.Config.RootDirectory + "\\Backups");
-                        SQLBridge.OneWayCommand($"backup database {EMS_Library.Config.SQLDatabaseName } to disk=N'{ EMS_Library.Config.RootDirectory}\\Backups\\DB_Backup.{DateTime.Now.Date.ToString("yyyy-MM-dd HH-mm-ss")}.bak' WITH NOFORMAT, NOINIT,  NAME = N'data-Full Database Backup', SKIP, NOREWIND, NOUNLOAD,  STATS = 10");
+                        if (!Directory.Exists(Config.RootDirectory + "\\Backups")) Directory.CreateDirectory(EMS_Library.Config.RootDirectory + "\\Backups");
+                        SQLBridge.OneWayCommand($"backup database {Config.SQLDatabaseName } to disk=N'{ Config.RootDirectory}\\Backups\\DB_Backup.{DateTime.Now.Date.ToString("yyyy-MM-dd HH-mm-ss")}.bak' WITH NOFORMAT, NOINIT,  NAME = N'data-Full Database Backup', SKIP, NOREWIND, NOUNLOAD,  STATS = 10");
                         scheduleBackup = false;
                     }
                 }
@@ -135,8 +128,7 @@ namespace EMS_Server
                         case "sql querry begin": { SQLQuerryInput = true; WriteToServerConsole(Environment.NewLine + "Listening for querry:"); break; }
                         case "fr powerup": { try { FRProcess.Start(); } catch { } break; }
                         case "fr shutdown": { try { FRProcess.Kill(); WriteToServerConsole(FRProcess.ProcessName + " " + FRProcess.HasExited); } catch { } break; }
-                        case "simmulate":
-                            {
+                        case "simmulate": {
                                 string id = SQLBridge.TwoWayCommand($"SELECT TOP 1 _intId FROM {Config.EmployeeDataTable} ORDER BY _created DESC; ");
                                 WriteToServerConsole("Pupulating log for " + id);
                                 DateTime curDate = DateTime.Now;
@@ -154,25 +146,19 @@ namespace EMS_Server
                                         }
                                     }
                                 WriteToServerConsole($"Max: {curDate.TotalAmountOfDays()}, Added: {count}");
-                                break; 
-                            }
-                    
+                                break; }
                     }
             }
         }
-
         private void FRStoped(object sender, EventArgs e)
         {
             WriteToServerConsole("fr stoped");
         }
-
         private void EMS_ServerMainScreen_FormClosing(object sender, FormClosingEventArgs e)
         {
             FRProcess.Kill();
             FacialRecognition.Dispose();
         }
-
-
         #endregion
 
         #region NonEvent Methods
@@ -223,8 +209,8 @@ namespace EMS_Server
                 while (true)
                 {
                     string SQLConnectionString = $"" +
-                        $"server={EMS_Library.Config.SQLServerName};" +
-                        $"database={EMS_Library.Config.SQLDatabaseName};" +
+                        $"server={Config.SQLServerName};" +
+                        $"database={Config.SQLDatabaseName};" +
                         $"Integrated Security=SSPI;" +
                         $"Connection Timeout=1";
                     SqlConnection connenction = new SqlConnection(SQLConnectionString);
@@ -233,7 +219,7 @@ namespace EMS_Server
                     try { connenction.Open(); }
                     catch
                     {
-                        if (EMS_Library.Config.ServerNamesIterator > EMS_Library.Config.SQLServerNames.Length)
+                        if (EMS_Library.Config.ServerNamesIterator > Config.SQLServerNames.Length)
                         { MessageBox.Show("Couldn't find sql server!"); Close(); }
                     }
                     if (connenction.State == System.Data.ConnectionState.Open)
@@ -241,14 +227,13 @@ namespace EMS_Server
                         WriteToServerConsole("SQL Server Found.");
                         connenction.Close();
                         connenction.Dispose();
-                        EMS_Library.Config.SQLConnectionString = SQLConnectionString;
+                        Config.SQLConnectionString = SQLConnectionString;
                         break;
                     }
                 }
                 WriteToConfigFile();
-            }, SQLLookup_CXL);
+            });
         }
-
         public void AddConnection(string data)
         {
             this.Invoke((MethodInvoker)delegate
@@ -328,7 +313,6 @@ namespace EMS_Server
                 //FR().Start();
             });
         }
-
         #endregion
 
 
