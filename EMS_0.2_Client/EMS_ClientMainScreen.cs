@@ -71,6 +71,7 @@ namespace EMS_Client
 
         public void openChildForm(Form child, object btnSender)
         {
+            GC.Collect();
             if (activeForm != null)
                 activeForm.Close();
 

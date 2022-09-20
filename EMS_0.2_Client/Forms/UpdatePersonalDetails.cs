@@ -10,6 +10,8 @@ using System.Windows.Forms;
 using EMS_Library;
 using EMS_Library.Network;
 using EMS_Library.MyEmployee;
+using AForge.Video.DirectShow;
+using AForge.Video;
 
 namespace EMS_Client.Forms
 {
@@ -222,6 +224,52 @@ namespace EMS_Client.Forms
                 { pictureBox1.Image = new ImageConverter().ConvertFrom(Requests.GetImage(new DataPacket($"get image #{EMS_ClientMainScreen.employee.IntId}", 6))) as Bitmap; }
                 catch { }
             }
+        }
+        #endregion
+
+        #region camera
+        // Activating the camera to take a picture of the employee
+        // הפעלת המצלמה לצילום תמונה של העובד
+
+        VideoCaptureDevice videoCapture;
+        FilterInfoCollection filterInfo;
+        byte frameCount = 0;
+        void StartCamera()
+        {
+            try
+            {
+                filterInfo = new FilterInfoCollection(FilterCategory.VideoInputDevice);
+                videoCapture = new VideoCaptureDevice(filterInfo[0].MonikerString);
+                videoCapture.NewFrame += new NewFrameEventHandler(Camera_on);
+                videoCapture.Start();
+            }
+            catch (Exception ex) { throw ex; }
+        }
+
+        private void Camera_on(object sender, NewFrameEventArgs eventArgs)
+        {
+            pictureBox1.Image = (Bitmap)eventArgs.Frame.Clone();
+            unchecked { frameCount++; }
+            if (frameCount % 10 == 0) GC.Collect();
+        }
+
+        private void btnCamera_Click_1(object sender, EventArgs e)
+        {
+            StartCamera();
+            btnCamera.Visible = false;
+            btnTakePicture.Visible = true;
+        }
+
+        private void btnTakePicture_Click(object sender, EventArgs e)
+        {
+            videoCapture.SignalToStop();
+            btnCamera.Visible = true;
+            btnTakePicture.Visible = false;
+            try
+            {
+                empPicture = new Bitmap(pictureBox1.Image).Rescale(Config.FRImmageWidth,Config.FRImmageHeight);
+            }
+            catch { MessageBox.Show("Image could not be captured!"); }
         }
         #endregion
 

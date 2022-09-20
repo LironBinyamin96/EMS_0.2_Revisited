@@ -32,6 +32,8 @@
             this.btnX = new System.Windows.Forms.Button();
             this.lblUpdatePersonalDetails = new System.Windows.Forms.Label();
             this.gUpdatePersonalDetails = new System.Windows.Forms.GroupBox();
+            this.btnTakePicture = new System.Windows.Forms.Button();
+            this.btnCamera = new System.Windows.Forms.Button();
             this.positionBox = new System.Windows.Forms.ComboBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.btnUpload = new System.Windows.Forms.Button();
@@ -121,6 +123,8 @@
             // 
             // gUpdatePersonalDetails
             // 
+            this.gUpdatePersonalDetails.Controls.Add(this.btnTakePicture);
+            this.gUpdatePersonalDetails.Controls.Add(this.btnCamera);
             this.gUpdatePersonalDetails.Controls.Add(this.positionBox);
             this.gUpdatePersonalDetails.Controls.Add(this.pictureBox1);
             this.gUpdatePersonalDetails.Controls.Add(this.btnUpload);
@@ -168,6 +172,35 @@
             this.gUpdatePersonalDetails.TabIndex = 5;
             this.gUpdatePersonalDetails.TabStop = false;
             // 
+            // btnTakePicture
+            // 
+            this.btnTakePicture.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnTakePicture.Font = new System.Drawing.Font("Bahnschrift SemiLight", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btnTakePicture.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
+            this.btnTakePicture.Location = new System.Drawing.Point(529, 40);
+            this.btnTakePicture.Name = "btnTakePicture";
+            this.btnTakePicture.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.btnTakePicture.Size = new System.Drawing.Size(87, 26);
+            this.btnTakePicture.TabIndex = 44;
+            this.btnTakePicture.Text = "Take Picture";
+            this.btnTakePicture.UseVisualStyleBackColor = true;
+            this.btnTakePicture.Visible = false;
+            this.btnTakePicture.Click += new System.EventHandler(this.btnTakePicture_Click);
+            // 
+            // btnCamera
+            // 
+            this.btnCamera.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCamera.Font = new System.Drawing.Font("Bahnschrift SemiLight", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btnCamera.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
+            this.btnCamera.Location = new System.Drawing.Point(536, 40);
+            this.btnCamera.Name = "btnCamera";
+            this.btnCamera.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.btnCamera.Size = new System.Drawing.Size(80, 26);
+            this.btnCamera.TabIndex = 43;
+            this.btnCamera.Text = "Camera";
+            this.btnCamera.UseVisualStyleBackColor = true;
+            this.btnCamera.Click += new System.EventHandler(this.btnCamera_Click_1);
+            // 
             // positionBox
             // 
             this.positionBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
@@ -202,10 +235,10 @@
             this.btnUpload.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnUpload.Font = new System.Drawing.Font("Bahnschrift SemiLight", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btnUpload.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
-            this.btnUpload.Location = new System.Drawing.Point(482, 40);
+            this.btnUpload.Location = new System.Drawing.Point(452, 40);
             this.btnUpload.Name = "btnUpload";
             this.btnUpload.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.btnUpload.Size = new System.Drawing.Size(98, 26);
+            this.btnUpload.Size = new System.Drawing.Size(68, 26);
             this.btnUpload.TabIndex = 37;
             this.btnUpload.Text = "Upload";
             this.btnUpload.UseVisualStyleBackColor = true;
@@ -668,5 +701,7 @@
         private Button btnDelete;
         private OpenFileDialog openFileDialog1;
         private ComboBox positionBox;
+        private Button btnTakePicture;
+        private Button btnCamera;
     }
 }

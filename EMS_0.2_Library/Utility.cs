@@ -321,14 +321,11 @@ namespace EMS_Library
 
         public static void Remove<T>(this Stack<T> stack, T item)
         {
-            void Cascade(Stack<T> stack)
-            {
-                if (stack.Count == 0) return;
-                T hold = stack.Pop();
-                if (hold.Equals(item)) return;
-                Cascade(stack);
-                stack.Push(hold);
-            }
+            if (stack.Count == 0) return;
+            T hold = stack.Pop();
+            if (hold.Equals(item)) return;
+            Remove(stack, item);
+            stack.Push(hold);
         }
     }
 }
