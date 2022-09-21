@@ -3,6 +3,7 @@ namespace EMS_Library
 {
     /// <summary>
     /// Class containing user defined configurations for the programm.
+    /// מחלקה המכילה תצורות מוגדרות על ידי המשתמש עבור התוכנית.
     /// </summary>
     public static class Config
     {
@@ -30,7 +31,7 @@ namespace EMS_Library
         public const string DefaultId = "111111111";
         public const string DefaultPassword = "111111111";
 
-        //Variables
+        //Variables | משתנים
         public static byte ServerNamesIterator = 0;
         public static string SQLConnectionString = default;
         #endregion
@@ -65,7 +66,7 @@ namespace EMS_Library
 
         #endregion
 
-        //Development Mode
+        //Development Mode | מצב פיתוח
         public const bool DevelopmentMode = true;
     }
 }

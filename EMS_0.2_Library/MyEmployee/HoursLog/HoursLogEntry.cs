@@ -9,6 +9,7 @@ namespace EMS_Library.MyEmployee.HoursLog
 {
     /// <summary>
     /// Handling of daily entries in the log.
+    /// בניית פורמט כניסה ויציאה של עובד
     /// </summary>
     public class HoursLogEntry
     {

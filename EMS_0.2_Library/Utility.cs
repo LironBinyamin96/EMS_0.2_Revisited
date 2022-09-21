@@ -11,6 +11,7 @@ namespace EMS_Library
 {
     /// <summary>
     /// Class containing utility methods for the programm.
+    /// מחלקה המכילה פונקציות עזר עבור התוכנית.
     /// </summary>
     public static class Utility
     {
@@ -18,14 +19,16 @@ namespace EMS_Library
 
         /// <summary>
         /// Generates random number in specified range.
+        /// יוצר מספר אקראי בטווח שצוין.
         /// </summary>
         /// <param name="floor"></param>
         /// <param name="ceiling"></param>
-        /// <returns>Random number</returns>
+        /// <returns>Random number | מספר אקראי</returns>
         public static int RandomInt(int floor, int ceiling) => rnd.Next(floor, ceiling);
 
         /// <summary>
         /// Generates random nuber with specified number of didgits.
+        ///  יוצר מספר אקראי עם מספר מוגדר של ספרות.
         /// </summary>
         /// <param name="numOfDigits"></param>
         /// <returns></returns>
@@ -33,24 +36,28 @@ namespace EMS_Library
 
         /// <summary>
         /// Generates random boolean value.
+        /// יוצר ערך בוליאני אקראי.
         /// </summary>
         /// <returns></returns>
         public static bool RandomBool() => rnd.Next(2) == 1;
 
         /// <summary>
         /// Generates random char.
+        /// יוצר תו אקראי
         /// </summary>
         /// <returns></returns>
         public static char RandomChar() => (char)rnd.Next((int)'a', (int)'z' + 1);
 
         /// <summary>
         /// Generates random numeric char.
+        /// יוצר תו מספרי אקראי.
         /// </summary>
         /// <returns></returns>
         public static char RandomNumericChar() => (char)rnd.Next((int)'0', (int)'9' + 1);
 
         /// <summary>
         /// Generates random string of specified length.
+        /// יוצר מחרוזת אקראית באורך שצוין.
         /// </summary>
         /// <param name="len"></param>
         /// <returns></returns>
@@ -64,6 +71,7 @@ namespace EMS_Library
 
         /// <summary>
         /// Generates random string of specified length that contains only numbers.
+        /// יוצר מחרוזת אקראית באורך שצוין המכילה רק מספרים.
         /// </summary>
         /// <param name="len"></param>
         /// <returns></returns>
@@ -78,6 +86,7 @@ namespace EMS_Library
 
         /// <summary>
         /// Generates random DateTime object.
+        /// יוצר אובייקט DateTime אקראי.
         /// </summary>
         /// <returns></returns>
         public static DateTime RandomDateTime() => new DateTime(RandomInt(Config.MinDate.Year, DateTime.Now.Year), RandomInt(1, 13), RandomInt(1, 29), RandomInt(0, 24), RandomInt(0, 60), RandomInt(0, 60));
@@ -89,6 +98,7 @@ namespace EMS_Library
     {
         /// <summary>
         /// Converts an object to a byte array.
+        /// המרת אובייקט למערך בתים.
         /// </summary>
         /// <param name="obj"></param>
         /// <returns></returns>
@@ -107,6 +117,7 @@ namespace EMS_Library
 
         /// <summary>
         /// Prefoms "bit by bit" comparison between two objects.
+        /// השוואת ביטים בין שני אובייקטים
         /// </summary>
         /// <param name="obj"></param>
         /// <param name="other"></param>
@@ -122,6 +133,7 @@ namespace EMS_Library
 
         /// <summary>
         /// Checks if enumerable collection consists of only it's default values.
+        /// בודק אם האוסף הניתן לספור מורכב רק מערכי ברירת המחדל שלו.
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="collection"></param>
@@ -143,9 +155,10 @@ namespace EMS_Library
 
         /// <summary>
         /// Checks if string contains any of substrings from provided array.
+        ///  בודק אם מחרוזת מכילה מחרוזות משנה מהמערך שסופק.
         /// </summary>
         /// <param name="arr">
-        /// Array of strings.
+        /// Array of strings. | מערך מחרוזות
         /// </param>
         public static bool ContainsAnyOf(this string str, string[] arr)
         {
@@ -174,6 +187,7 @@ namespace EMS_Library
 
         /// <summary>
         /// Checks if all strings in provided array are parsable into given type.
+        /// בודק אם כל המחרוזות במערך שסופק ניתנות לניתוח לסוג נתון.
         /// </summary>
         /// <param name="arr"></param>
         /// <param name="type"></param>
@@ -187,6 +201,7 @@ namespace EMS_Library
 
         /// <summary>
         /// Prints any enumerable collection into console.
+        /// מדפיס ערכים לקונסול
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="collection"></param>
@@ -199,6 +214,7 @@ namespace EMS_Library
 
         /// <summary>
         /// Capitalizing first letter in the string.
+        /// שימוש באות רישיות באות הראשונה במחרוזת.
         /// </summary>
         /// <param name="s"></param>
         /// <returns></returns>
@@ -214,6 +230,7 @@ namespace EMS_Library
 
         /// <summary>
         /// Converts provided string array to contineous string
+        /// ממיר את מערך המחרוזות שסופק למחרוזת רציפה
         /// </summary>
         /// <param name="arr"></param>
         /// <returns></returns>
@@ -227,6 +244,7 @@ namespace EMS_Library
 
         /// <summary>
         /// Provides a subarray starting from "startIndex" and with length "lenght" 
+        ///"length" ובאורך "startIndex" מספק תת-מערך שמתחיל מ  
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="arr"></param>
@@ -242,6 +260,7 @@ namespace EMS_Library
 
         /// <summary>
         /// Search for an object in the collection.
+        /// חיפוש אובייקט באוסף
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="collection"></param>
@@ -256,6 +275,7 @@ namespace EMS_Library
 
         /// <summary>
         /// Checks if a string represents Israeli internal ID number.
+        ///  בודק אם מחרוזת מייצגת מספר תעודת זהות ישראלי.
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -279,6 +299,7 @@ namespace EMS_Library
 
         /// <summary>
         /// Counting didgits in an integer using a while iteration.
+        /// ספירת ספרות במספר שלם
         /// </summary>
         /// <param name="x"></param>
         public static int CountDidgits(this int x)
@@ -291,6 +312,7 @@ namespace EMS_Library
         /// <summary>
         /// Rescales image to appropriate size for FR
         /// (see EMS_Library.Config->FR & Images)
+        /// שינוי קנה מידה של התמונה
         /// </summary>
         /// <param name="image"></param>
         /// <returns></returns>
@@ -316,7 +338,7 @@ namespace EMS_Library
             return bmp;
         }
 
-        /// <returns>Total amount of days in that year.</returns>
+        /// <returns>Total amount of days in that year | כמות הימים הכוללת באותה שנה</returns>
         public static int TotalAmountOfDays(this DateTime date) => DateTime.IsLeapYear(date.Year) ? 366 : 365;
 
         public static void Remove<T>(this Stack<T> stack, T item)

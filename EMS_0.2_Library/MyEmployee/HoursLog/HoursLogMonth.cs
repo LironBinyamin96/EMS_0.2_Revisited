@@ -10,6 +10,7 @@ namespace EMS_Library.MyEmployee.HoursLog
 {
     /// <summary>
     /// Monthly work-hours log handling.
+    ///  בניית פורמט נוכחות חודשי של עובד
     /// </summary>
     public class HoursLogMonth
     {
@@ -24,6 +25,7 @@ namespace EMS_Library.MyEmployee.HoursLog
 
         /// <summary>
         /// Provides total amount of hours worked.
+        /// מספק את כמות שעות העבודה הכוללת.
         /// </summary>
         public TimeSpan Total
         {
@@ -43,6 +45,7 @@ namespace EMS_Library.MyEmployee.HoursLog
 
         /// <summary>
         /// Provides total amount of overtime.
+        /// מספק כמות כוללת של שעות נוספות.
         /// </summary>
         public TimeSpan TotalOvertime
         {
@@ -58,6 +61,7 @@ namespace EMS_Library.MyEmployee.HoursLog
 
         /// <summary>
         /// Provides average amount of daily hours worked
+        /// מספק כמות ממוצעת של שעות עבודה יומיות
         /// </summary>
         public TimeSpan Average
         {
@@ -87,6 +91,7 @@ namespace EMS_Library.MyEmployee.HoursLog
 
         /// <summary>
         /// Adds an entry to monthly log.
+        /// הוספת ערך לפורמט החודשי
         /// </summary>
         /// <param name="entry"></param>
         public void Add(HoursLogEntry entry)
@@ -106,6 +111,7 @@ namespace EMS_Library.MyEmployee.HoursLog
 
         /// <summary>
         /// Provides string representing the log in JSON format.
+        /// JSON מספק מחרוזת המייצגת את היומן בפורמט 
         /// </summary>
         public string JSON()
         {
@@ -128,6 +134,7 @@ namespace EMS_Library.MyEmployee.HoursLog
 
         /// <summary>
         /// Provides the log in format that is suitable for the WinForms Table component.
+        /// פורמט מתאים לטבלה של דוח נוכחות
         /// </summary>
         /// <returns></returns>
         public string[][] GetHoursLogTableStructure()

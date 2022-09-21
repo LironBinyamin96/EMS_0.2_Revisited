@@ -12,6 +12,7 @@ namespace EMS_Library.MyEmployee
 {
     /// <summary>
     /// Base class for all employees
+    /// מחלקה בסיסית לכל העובדים
     /// </summary>
     public abstract class Employee
     {
@@ -116,6 +117,7 @@ namespace EMS_Library.MyEmployee
 
         /// <summary>
         /// Creates an instance of Employee of specific subtype.
+        /// יצירת עובד לפי טיפוס ספציפי
         /// </summary>
         /// <param name="data"></param>
         /// <returns>Employee or null if cration failed.</returns>
@@ -131,6 +133,7 @@ namespace EMS_Library.MyEmployee
 
         /// <summary>
         /// Provides string representing the employee.
+        /// מספק מחרוזת המייצגת את העובד
         /// </summary>
         /// <returns></returns>
         public override string ToString()
@@ -156,6 +159,7 @@ namespace EMS_Library.MyEmployee
 
         /// <summary>
         /// Provides dictionary of fields and their values.
+        /// מילון של שדות והערכים שלהם
         /// </summary>
         /// <returns></returns>
         public Dictionary<string, string> ProvideFieldsAndValues()

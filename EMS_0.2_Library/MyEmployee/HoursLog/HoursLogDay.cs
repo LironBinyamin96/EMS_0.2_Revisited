@@ -7,12 +7,19 @@ using System.Threading.Tasks;
 
 namespace EMS_Library.MyEmployee.HoursLog
 {
+    /// <summary>
+    /// Class describing day part of hours logs.
+    /// בניית פורמט נוכחות יומי של עובד
+    /// </summary>
     public class HoursLogDay
     {
         HoursLogEntry[] _entries;
         DateTime _date;
 
-
+        /// <summary>
+        /// Gets total hours worked in that day.
+        /// קבלת סכום שעות יומי מצטבר של העובד
+        /// </summary>
         public TimeSpan Total
         {
             get
@@ -23,7 +30,17 @@ namespace EMS_Library.MyEmployee.HoursLog
                 return sum;
             }
         }
+
+        /// <summary>
+        /// Gets total overtime hours worked in that day.
+        ///  קבלת סכום שעות נוספות יומי מצטבר של העובד
+        /// </summary>
         public TimeSpan TotalOvertime => Total - Config.NormalShiftLength > TimeSpan.Zero ? Total - Config.NormalShiftLength : TimeSpan.Zero;
+
+        /// <summary>
+        /// Get array of entryes from that day.
+        /// קבלת מערך כניסות ויציאות של יום אחד
+        /// </summary>
         public HoursLogEntry[] Entries { get => _entries; set => _entries = value; }
         public DateTime Date => _date;
 
@@ -35,6 +52,7 @@ namespace EMS_Library.MyEmployee.HoursLog
 
         /// <summary>
         /// Adds an entry to daily log.
+        /// הוספת זמן כניסה ליום
         /// </summary>
         /// <param name="entry"></param>
         public void Add(HoursLogEntry entry)
@@ -52,7 +70,11 @@ namespace EMS_Library.MyEmployee.HoursLog
                 hold += entry.ToString() + '|';
             return hold.Remove(hold.Length - 1);
         }
-        
+
+        /// <summary>
+        /// Get JSON representation of the log.
+        ///של יום  JSON בניית פורמט 
+        /// </summary>
         public string JSON()
         {
             TimeSpan overtime = Total - Config.NormalShiftLength > TimeSpan.Zero ? (Total - Config.NormalShiftLength) : TimeSpan.Zero;
@@ -71,18 +93,5 @@ namespace EMS_Library.MyEmployee.HoursLog
             hold += "]}";
             return hold;
         }
-
-        //public string[] attendanceTable() => new string[]
-        //{
-        //    _entries[0].Start.Date.ToString(),
-        //    _entries[0].Start.Date.DayOfWeek.ToString(),
-        //    _entries[0].Start.TimeOfDay.ToString(),
-        //    _entries[0].End.TimeOfDay.ToString(),
-        //    _entries[0].Total.ToString()
-        //};
-
-
-
-
     }
 }
