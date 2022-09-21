@@ -1,4 +1,4 @@
-import json
+﻿import json
 import datetime
 from openpyxl import load_workbook
 from win32com import client
@@ -17,6 +17,7 @@ path = pathConfig[1]+'\\'
 f = open(f"{path}log.json", "r")
 jsonFile = json.load(f)
 
+# למשתנים JSON פירוק קובץ  
 month = jsonFile["Month"]
 year = jsonFile["Year"]
 name = jsonFile["Full Name"]
@@ -25,6 +26,7 @@ InternalID = jsonFile["InternalID"]
 MonthlyHours = jsonFile["MonthlyHours"]
 TotalOvertime = jsonFile["TotalOvertime"]
 
+# מילוי שדות פרטיי העובד
 def returnDetails():
     sheet["C1"] = f"       Monthly employee report {month}/{year}"
     sheet["D3"] = f"Employee name: {name}"
@@ -33,7 +35,7 @@ def returnDetails():
     sheet["J39"] = MonthlyHours
     sheet["K39"] = TotalOvertime
 
-
+# יצירת פורמט של דוח נוכחות לפי חודש
 def returnDatePerMount(rangeMonth):
     c = 0
     for i in range(8, rangeMonth+8):
@@ -44,7 +46,7 @@ def returnDatePerMount(rangeMonth):
         sheet[f"B{i}"] = f"{calendar.day_name[d.weekday()]}"
         if calendar.day_name[d.weekday()] != 'Friday' and calendar.day_name[d.weekday()] != 'Saturday':
             sheet[f"C{i}"] = "08:00"
-
+# מילוי דוח בנתוני שעות העבודה של העובד
 def returnHours():
     day = jsonFile["Days"]
     c = 7
@@ -91,7 +93,7 @@ def forOne(data,c):
 day = jsonFile["Days"]
 
 
-
+#xlsx שמירת הקובץ בפורמט 
 workbook = load_workbook(filename=f'{path}Hours_Report.xlsx')
 sheet = workbook.active
 rangeMonth = calendar.monthrange(int(year), int(month))
@@ -101,7 +103,7 @@ returnDetails()
 returnHours()
 
 workbook.save(filename=f"{path}{InternalID}.xlsx")
-
+#PDF המרת הקובץ לפורמט 
 excel = client.Dispatch("Excel.Application")
 sheets = excel.Workbooks.Open(f"{path}{InternalID}.xlsx")
 work_sheets = sheets.Worksheets[0]
