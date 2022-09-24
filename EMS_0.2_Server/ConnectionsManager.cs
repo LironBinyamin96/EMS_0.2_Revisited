@@ -15,11 +15,13 @@ namespace EMS_Server
 {
     /// <summary>
     /// Class for managing connections.
+    /// מחלקה לניהול חיבורים
     /// </summary>
     internal class ConnectionsManager
     {
         /// <summary>
         /// Main listening method.
+        /// פונקציה להאזנה
         /// </summary>
         public static void Listen()
         {
@@ -64,11 +66,12 @@ namespace EMS_Server
 
             /// <summary>
             /// Check if server should maintain the connection
+            ///  בדוק אם השרת צריך לשמור על החיבור
             /// </summary>
             public bool MaintainConnection() => TestConnection() && !_timedout;
 
             /// <summary>
-            /// Handeling of connection timeout event.
+            /// Handeling of connection timeout event. | הפסקת חיבור
             /// </summary>
             /// <param name="source"></param>
             /// <param name="e"></param>
@@ -80,13 +83,15 @@ namespace EMS_Server
             }
 
             /// <summary>
-            /// Tests if client is still connected.
+            /// Tests if client is still connected. | בדיקה שהלקוח עדיין מחובר
             /// </summary>
             private bool TestConnection()
             {
-                if (_client.Client.Poll(0, SelectMode.SelectRead)) //true if last operation was succesfull.
+                //true if last operation was succesfull. | אמת אם הפעולה האחרונה הצליחה
+                if (_client.Client.Poll(0, SelectMode.SelectRead)) 
                 {
                     //Attempts to recieve an empty message. If it can't then client is disconnected.
+                    //ניסיון לקבל הודעה ריקה. אם זה לא יכול אז הלקוח מנותק.
                     if (_client.Client.Receive(new byte[1], SocketFlags.Peek) == 0) 
                          return false;
                     else return true;
@@ -96,6 +101,7 @@ namespace EMS_Server
 
             /// <summary>
             /// Method for releasing resourses.
+            /// פעולה לשחרור משאבים
             /// </summary>
             public void Dispose()
             {

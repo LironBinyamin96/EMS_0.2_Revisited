@@ -89,7 +89,10 @@ namespace EMS_Library
         /// יוצר אובייקט DateTime אקראי.
         /// </summary>
         /// <returns></returns>
-        public static DateTime RandomDateTime() => new DateTime(RandomInt(Config.MinDate.Year, DateTime.Now.Year), RandomInt(1, 13), RandomInt(1, 29), RandomInt(0, 24), RandomInt(0, 60), RandomInt(0, 60));
+        public static DateTime RandomDateTime()
+        {
+            return new DateTime(RandomInt(Config.MinDate.Year, DateTime.Now.Year), RandomInt(1, 13), RandomInt(1, 29), RandomInt(0, 24), RandomInt(0, 60), RandomInt(0, 60));
+        }
     }
 
 
@@ -338,7 +341,7 @@ namespace EMS_Library
             return bmp;
         }
 
-        /// <returns>Total amount of days in that year | כמות הימים הכוללת באותה שנה</returns>
+        /// <returns>Total amount of days in that year | כמות הימים שיש באותה שנה</returns>
         public static int TotalAmountOfDays(this DateTime date) => DateTime.IsLeapYear(date.Year) ? 366 : 365;
 
         public static void Remove<T>(this Stack<T> stack, T item)

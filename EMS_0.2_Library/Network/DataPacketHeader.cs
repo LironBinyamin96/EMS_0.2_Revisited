@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Collections.Generic;A
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,7 +14,7 @@ namespace EMS_Library.Network
         public readonly byte Act;
 
         /// <summary>
-        /// Constructor
+        /// Constructor | בנאי
         /// </summary>
         /// <param name="length"></param>
         /// <param name="act"></param>
@@ -27,12 +27,14 @@ namespace EMS_Library.Network
 
         /// <summary>
         /// Provides header in byte[] format.
+        /// []byte מספק כותרת בפורמט .
         /// </summary>
         /// <returns></returns>
         public byte[] GetHeader() => BitConverter.GetBytes(DataIntLength).Concat(new byte[] { Act }).ToArray();
 
         /// <summary>
         /// Provides string representing the header.
+        /// מספק מחרוזת המייצגת את הכותרת.
         /// </summary>
         /// <returns></returns>
         public override string ToString() => $"Size: {DataIntLength}Bytes, Routing: {Act}";

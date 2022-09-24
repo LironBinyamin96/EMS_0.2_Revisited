@@ -16,14 +16,15 @@ namespace EMS_Server
     {
         #region Variables
         Task FacialRecognition;
-        bool scheduleForceExits = true;
-        bool scheduleBackup = true;
-        bool SQLQuerryInput = false;
-        Process FRProcess = null;
-        public static EMS_ServerMainScreen serverForm;
+        bool scheduleForceExits = true; //Insuring that force exits occures only once. (this value is false during execution of ForceExits() method);
+        bool scheduleBackup = true; //Insuring that DB backup occures only once. (this value is false during execution of BackupDB() method);
+        bool SQLQuerryInput = false; //Tracking of console state for direct SQL injection.
+        Process FRProcess = null; //Pointer to FR process. (Used for it's propper termination.)
+        public static EMS_ServerMainScreen serverForm; //Pointer to the main server screen.
         #endregion
 
         #region Tasks&Tokens
+        //Variables for various server treads.
         public Task listeningTask;
 
         public Task SQLServerLookup;
@@ -31,7 +32,9 @@ namespace EMS_Server
         public Task TestingTask;
 
         #endregion
-
+        /// <summary>
+        /// EMS_Server Form constructor.
+        /// </summary>
         public EMS_ServerMainScreen()
         {
             InitializeComponent();
@@ -43,6 +46,11 @@ namespace EMS_Server
         }
 
         #region Event Methods
+        /// <summary>
+        /// Use for starting threads that must be executed on load. (Triggered by Load event)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void EMS_ServerMainScreen_Load(object sender, EventArgs e)
         {
             SQLServerLookup.Start();
@@ -56,6 +64,11 @@ namespace EMS_Server
             if (!Directory.Exists(Config.FR_Images)) Directory.CreateDirectory(Config.FR_Images);
             
         }
+        /// <summary>
+        /// Method for executing time dependant logic. (Triggered by listnerTimer_Tick event)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void listnerTimer_Tick(object sender, EventArgs e)
         {
 
@@ -65,7 +78,7 @@ namespace EMS_Server
                 BackupDB();   //Automated Database Backup
             }
 
-
+            //DB backup method
             void BackupDB()
             {
                 if ((DateTime.Now + new TimeSpan(60000)).Day >= DateTime.Now.Day + 1)
@@ -94,7 +107,19 @@ namespace EMS_Server
                 else scheduleForceExits = true;
             }
         }
+
+        /// <summary>
+        /// Triggering propper Close() method. (Triggered by X button)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnExit_Click_1(object sender, EventArgs e) => Close();
+
+        /// <summary>
+        /// Handeling console commands. (Triggered by txtServerConsole_KeyPress event)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void txtServerConsole_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == 13)
@@ -150,10 +175,21 @@ namespace EMS_Server
                     }
             }
         }
+
+        /// <summary>
+        /// Notification on Facial recognition stopped.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void FRStoped(object sender, EventArgs e)
         {
             WriteToServerConsole("fr stoped");
         }
+        /// <summary>
+        /// Method for terminating EMS_Server subprocesses. (Triggered by FormClosing event)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void EMS_ServerMainScreen_FormClosing(object sender, FormClosingEventArgs e)
         {
             FRProcess.Kill();
@@ -162,6 +198,10 @@ namespace EMS_Server
         #endregion
 
         #region NonEvent Methods
+        /// <summary>
+        /// Outputs provided texts to server's console.
+        /// </summary>
+        /// <param name="text"></param>
         public void WriteToServerConsole(string text)
         {
             this.Invoke((MethodInvoker)delegate
@@ -170,11 +210,18 @@ namespace EMS_Server
                 Console.WriteLine(text + "\n");
             });
         }
+        /// <summary>
+        /// Outputs provided text to server's console.
+        /// </summary>
+        /// <param name="text"></param>
         public void WriteToServerConsole(string[] text)
         {
             foreach (string s in text)
                 WriteToServerConsole(s);
         }
+        /// <summary>
+        /// Generates config.txt file for FR consumption.
+        /// </summary>
         private void WriteToConfigFile()
         {
             EMS_Library.Config.PythonDBConnection =
@@ -193,6 +240,9 @@ namespace EMS_Server
                 $"MaxShiftLength#{EMS_Library.Config.MaxShiftLength}";
             File.WriteAllText(Directory.GetCurrentDirectory() + "\\Config.txt", str);
         }
+        /// <summary>
+        /// Provides primary listening tread for the server.
+        /// </summary>
         public Task BuildServerTask()
         {
             return new Task(() =>
@@ -202,6 +252,9 @@ namespace EMS_Server
                 ConnectionsManager.Listen();
             });
         }
+        /// <summary>
+        /// Provides thread for SQLServer lookup.
+        /// </summary>
         public Task BuildSQLServerLookup()
         {
             return new Task(() =>
@@ -234,6 +287,10 @@ namespace EMS_Server
                 WriteToConfigFile();
             });
         }
+        /// <summary>
+        /// Populates Connsections list.
+        /// </summary>
+        /// <param name="data"></param>
         public void AddConnection(string data)
         {
             this.Invoke((MethodInvoker)delegate
@@ -245,9 +302,8 @@ namespace EMS_Server
         }
 
         /// <summary>
-        /// Build facial recognition task
+        /// Provides thread for facial recognition.
         /// </summary>
-        /// <returns></returns>
         public Task BuildFRTask()
         {
             return new Task(() =>
@@ -262,6 +318,9 @@ namespace EMS_Server
         #endregion
 
         #region Debug
+        /// <summary>
+        /// Provides thread for testing and devolopement purposes.
+        /// </summary>
         private Task TestingTaskBuilder()
         {
             return new Task(() =>
