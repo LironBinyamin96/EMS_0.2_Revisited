@@ -32,6 +32,7 @@ namespace EMS_Server
         public Task TestingTask;
 
         #endregion
+
         /// <summary>
         /// EMS_Server Form constructor.
         /// </summary>
@@ -57,7 +58,7 @@ namespace EMS_Server
             ServerAddressResolver.ServerIP(true);
             listeningTask.Start();
             TestingTask.Start();
-            FacialRecognition.Start();
+            if (Config.AutoStartFR) FacialRecognition.Start();
             listnerTimer.Interval = 6000;
             listnerTimer.Start();
             if (!Directory.Exists(Config.RootDirectory)) Directory.CreateDirectory(Config.RootDirectory);
@@ -151,11 +152,22 @@ namespace EMS_Server
                         case "exit": { Close(); break; }
                         case "shutdown": { Close(); break; }
                         case "sql querry begin": { SQLQuerryInput = true; WriteToServerConsole(Environment.NewLine + "Listening for querry:"); break; }
-                        case "fr powerup": { try { FRProcess.Start(); } catch { } break; }
+                        case "fr powerup": { try { FacialRecognition.Start(); } catch { } break; }
                         case "fr shutdown": { try { FRProcess.Kill(); WriteToServerConsole(FRProcess.ProcessName + " " + FRProcess.HasExited); } catch { } break; }
-                        case "simmulate": {
+                        case "simmulate":
+                            {
                                 string id = SQLBridge.TwoWayCommand($"SELECT TOP 1 _intId FROM {Config.EmployeeDataTable} ORDER BY _created DESC; ");
                                 WriteToServerConsole("Pupulating log for " + id);
+
+                                //Check existance of entries for this employee. (Preventing excessive amount of hours.)
+                                if (int.TryParse(SQLBridge.TwoWayCommand($"select count(*) from {Config.EmployeeHourLogsTable} where _intId={id}"), out int entryIntcount) && entryIntcount > 0)
+                                {
+                                    WriteToServerConsole(
+                                        $"This employee already have some entries.\n" +
+                                        $"Running this simulation might result in employee ``working`` for more than {Config.MaxShiftLength.Hours} hours a day.\n");
+                                    break;
+                                }
+
                                 DateTime curDate = DateTime.Now;
                                 int count = 0;
                                 for (int j = 1; j <= 12; j++)
@@ -171,7 +183,8 @@ namespace EMS_Server
                                         }
                                     }
                                 WriteToServerConsole($"Max: {curDate.TotalAmountOfDays()}, Added: {count}");
-                                break; }
+                                break;
+                            }
                     }
             }
         }
@@ -192,8 +205,7 @@ namespace EMS_Server
         /// <param name="e"></param>
         private void EMS_ServerMainScreen_FormClosing(object sender, FormClosingEventArgs e)
         {
-            FRProcess.Kill();
-            FacialRecognition.Dispose();
+            FRProcess?.Kill();
         }
         #endregion
 
@@ -372,8 +384,18 @@ namespace EMS_Server
                 //FR().Start();
             });
         }
+
         #endregion
 
-
+        /// <summary>
+        /// Prevents storage of excessive amounts of text.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void txtServerConsole_TextChanged(object sender, EventArgs e)
+        {
+            string[] temp = txtServerConsole.Text.Split(Environment.NewLine);
+            if (temp.Length > 30) txtServerConsole.Text = temp.TakeLast(30).ToArray().ArrayToString();
+        }
     }
 }

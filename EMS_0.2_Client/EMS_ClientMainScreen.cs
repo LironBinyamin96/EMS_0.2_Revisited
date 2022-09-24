@@ -39,7 +39,7 @@ namespace EMS_Client
             {
                 EMS_Library.Network.ServerAddressResolver.ServerIP(false);
                 (Array.Find(PrimaryForms.ToArray(), x => x is EMS_ClientMainScreen) as EMS_ClientMainScreen).Invoke(() => PrimaryForms.Pop().Close());
-                if (EMS_Library.Network.ServerAddressResolver.LookedUp) //Message reminding to update ServerIp configurations
+                if (EMS_Library.Network.ServerAddressResolver.LookedUp && !Config.DevelopmentMode) //Message reminding to update ServerIp configurations
                     MessageBox.Show($"Had to serach for the server!\nServer ip is {Config.ServerIP}\nPlease update client config files to reduce boot time");
             };
             StandbyScreen standby = new StandbyScreen(serverLookup);

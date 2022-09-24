@@ -52,6 +52,9 @@ namespace EMS_Library
         public static readonly TimeSpan MaxShiftLength = new TimeSpan(0, 12, 0, 0);
         public static readonly string[] NullableEmployeeData = { "MName", "MiddleName", "_mName", "Gender", "_gender" };
         public static readonly DateTime MinDate = DateTime.Parse("2000-01-01 00:00:00");
+
+        public const bool AutoStartFR = false;
+
         #endregion
 
         #region FR & Imaging

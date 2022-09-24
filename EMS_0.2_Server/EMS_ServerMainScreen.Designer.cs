@@ -111,6 +111,7 @@
             this.txtServerConsole.PlaceholderText = "Server Console";
             this.txtServerConsole.Size = new System.Drawing.Size(863, 273);
             this.txtServerConsole.TabIndex = 0;
+            this.txtServerConsole.TextChanged += new System.EventHandler(this.txtServerConsole_TextChanged);
             this.txtServerConsole.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtServerConsole_KeyPress);
             // 
             // listnerTimer

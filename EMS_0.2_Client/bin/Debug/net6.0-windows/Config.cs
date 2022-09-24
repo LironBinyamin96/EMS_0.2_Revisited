@@ -3,6 +3,7 @@ namespace EMS_Library
 {
     /// <summary>
     /// Class containing user defined configurations for the programm.
+    /// מחלקה המכילה תצורות מוגדרות על ידי המשתמש עבור התוכנית.
     /// </summary>
     public static class Config
     {
@@ -30,7 +31,7 @@ namespace EMS_Library
         public const string DefaultId = "111111111";
         public const string DefaultPassword = "111111111";
 
-        //Variables
+        //Variables | משתנים
         public static byte ServerNamesIterator = 0;
         public static string SQLConnectionString = default;
         #endregion
@@ -51,6 +52,9 @@ namespace EMS_Library
         public static readonly TimeSpan MaxShiftLength = new TimeSpan(0, 12, 0, 0);
         public static readonly string[] NullableEmployeeData = { "MName", "MiddleName", "_mName", "Gender", "_gender" };
         public static readonly DateTime MinDate = DateTime.Parse("2000-01-01 00:00:00");
+
+        public const bool AutoStartFR = false;
+
         #endregion
 
         #region FR & Imaging
@@ -65,7 +69,7 @@ namespace EMS_Library
 
         #endregion
 
-        //Development Mode
+        //Development Mode | מצב פיתוח
         public const bool DevelopmentMode = true;
     }
 }
