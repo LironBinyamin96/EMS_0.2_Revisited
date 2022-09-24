@@ -9,6 +9,7 @@ using EMS_Library.MyEmployee.HoursLog;
 using EMS_Library.MyEmployee.Divisions;
 using EMS_Library.Network;
 using EMS_Library;
+using static System.ComponentModel.Design.ObjectSelectorEditor;
 
 namespace EMS_Server
 {
@@ -154,8 +155,7 @@ namespace EMS_Server
                         case "sql querry begin": { SQLQuerryInput = true; WriteToServerConsole(Environment.NewLine + "Listening for querry:"); break; }
                         case "fr powerup": { try { FacialRecognition.Start(); } catch { } break; }
                         case "fr shutdown": { try { FRProcess.Kill(); WriteToServerConsole(FRProcess.ProcessName + " " + FRProcess.HasExited); } catch { } break; }
-                        case "simmulate":
-                            {
+                        case "simmulate": {
                                 string id = SQLBridge.TwoWayCommand($"SELECT TOP 1 _intId FROM {Config.EmployeeDataTable} ORDER BY _created DESC; ");
                                 WriteToServerConsole("Pupulating log for " + id);
 
@@ -163,8 +163,9 @@ namespace EMS_Server
                                 if (int.TryParse(SQLBridge.TwoWayCommand($"select count(*) from {Config.EmployeeHourLogsTable} where _intId={id}"), out int entryIntcount) && entryIntcount > 0)
                                 {
                                     WriteToServerConsole(
-                                        $"This employee already have some entries.\n" +
-                                        $"Running this simulation might result in employee ``working`` for more than {Config.MaxShiftLength.Hours} hours a day.\n");
+                                        $"This employee already have some entries.{Environment.NewLine}" +
+                                        $"Running this simulation might result in employee \"working\" for more than {Config.MaxShiftLength.Hours} hours a day.{Environment.NewLine}" +
+                                        $"Terminated.");
                                     break;
                                 }
 
@@ -183,6 +184,12 @@ namespace EMS_Server
                                         }
                                     }
                                 WriteToServerConsole($"Max: {curDate.TotalAmountOfDays()}, Added: {count}");
+                                break;
+                            }
+                        case "clear before simmulation": {
+                                WriteToServerConsole("Cleared: " + SQLBridge.OneWayCommand(
+                                    $"delete from {Config.EmployeeHourLogsTable} " +
+                                    $"where  _intId=(SELECT TOP 1 _intId FROM {Config.EmployeeDataTable} ORDER BY _created DESC);"));
                                 break;
                             }
                     }
