@@ -22,7 +22,7 @@ namespace EMS_Client.Forms
         }
 
         /// <summary>
-        /// Close Form
+        /// Close Form | סגירת חלון
         /// </summary>
         private void btnClose_Click(object sender, EventArgs e) => Close();
 
@@ -32,6 +32,7 @@ namespace EMS_Client.Forms
         private void ExceptionsScreen_Load(object sender, EventArgs e)
         {
             //Request all entries with invalid data from DB
+            // בקש את כל הערכים עם נתונים לא חוקיים מבסיס הנתונים
             _data = Requests.RequestFromServer(Requests.GetAllExceptions(), 8);
             if (_data[0] != "-1")
             {
@@ -57,6 +58,7 @@ namespace EMS_Client.Forms
         }
         /// <summary>
         /// Opens EditHours screen by double clicking on appropriate cell.
+        /// פתיחת מסך עריכת שעות על ידי לחיצה כפולה על התא המתאים
         /// </summary>
         private void exceptionsTable_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {

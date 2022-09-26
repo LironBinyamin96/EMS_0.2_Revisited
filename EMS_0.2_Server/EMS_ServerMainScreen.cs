@@ -1,4 +1,4 @@
-using System.Net.Sockets;
+﻿using System.Net.Sockets;
 using System.Diagnostics;
 using System.Data.SqlClient;
 using System.Data.Sql;
@@ -35,7 +35,7 @@ namespace EMS_Server
         #endregion
 
         /// <summary>
-        /// EMS_Server Form constructor.
+        /// EMS_Server Form constructor. | בנאי
         /// </summary>
         public EMS_ServerMainScreen()
         {
@@ -49,10 +49,9 @@ namespace EMS_Server
 
         #region Event Methods
         /// <summary>
-        /// Use for starting threads that must be executed on load. (Triggered by Load event)
+        /// Used for starting threads that must be executed on load. (Triggered by Load event)
+        /// משתמש להפעלת תהליכים שצריכים להיות מופעלים בעת הפעלת התוכנית
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void EMS_ServerMainScreen_Load(object sender, EventArgs e)
         {
             SQLServerLookup.Start();
@@ -68,9 +67,8 @@ namespace EMS_Server
         }
         /// <summary>
         /// Method for executing time dependant logic. (Triggered by listnerTimer_Tick event)
+        /// פעולה לביצוע לוגיקה שתלויה בזמן
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void listnerTimer_Tick(object sender, EventArgs e)
         {
 
@@ -80,7 +78,7 @@ namespace EMS_Server
                 BackupDB();   //Automated Database Backup
             }
 
-            //DB backup method
+            //DB backup method | גיבוי
             void BackupDB()
             {
                 if ((DateTime.Now + new TimeSpan(60000)).Day >= DateTime.Now.Day + 1)
@@ -99,7 +97,7 @@ namespace EMS_Server
             {
                 if ((DateTime.Now + new TimeSpan(60000)).Day >= DateTime.Now.Day + 1)
                 {
-                    //Auto exit if none present
+                    //Auto exit if none present | יציאה אוטומטית אם לא קיים
                     if (scheduleForceExits)
                     {
                         scheduleForceExits = false;
@@ -113,15 +111,12 @@ namespace EMS_Server
         /// <summary>
         /// Triggering propper Close() method. (Triggered by X button)
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void btnExit_Click_1(object sender, EventArgs e) => Close();
 
         /// <summary>
         /// Handeling console commands. (Triggered by txtServerConsole_KeyPress event)
+        /// טיפול בפקודות הקונסול
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void txtServerConsole_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == 13)
@@ -160,6 +155,7 @@ namespace EMS_Server
                                 WriteToServerConsole("Pupulating log for " + id);
 
                                 //Check existance of entries for this employee. (Preventing excessive amount of hours.)
+                                // (בדוק את קיומם של ערכים עבור עובד זה. (מניעת כמות מוגזמת של שעות
                                 if (int.TryParse(SQLBridge.TwoWayCommand($"select count(*) from {Config.EmployeeHourLogsTable} where _intId={id}"), out int entryIntcount) && entryIntcount > 0)
                                 {
                                     WriteToServerConsole(
@@ -198,18 +194,16 @@ namespace EMS_Server
 
         /// <summary>
         /// Notification on Facial recognition stopped.
+        /// עצירת זיהוי פנים
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void FRStoped(object sender, EventArgs e)
         {
             WriteToServerConsole("fr stoped");
         }
         /// <summary>
         /// Method for terminating EMS_Server subprocesses. (Triggered by FormClosing event)
+        /// פעולה לסיום תהליכי משנה של השרת
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void EMS_ServerMainScreen_FormClosing(object sender, FormClosingEventArgs e)
         {
             FRProcess?.Kill();
@@ -219,8 +213,8 @@ namespace EMS_Server
         #region NonEvent Methods
         /// <summary>
         /// Outputs provided texts to server's console.
+        /// הדפסת טקסטים בקונסול
         /// </summary>
-        /// <param name="text"></param>
         public void WriteToServerConsole(string text)
         {
             this.Invoke((MethodInvoker)delegate
@@ -231,8 +225,8 @@ namespace EMS_Server
         }
         /// <summary>
         /// Outputs provided text to server's console.
+        /// הדפסת טקסטים בקונסול
         /// </summary>
-        /// <param name="text"></param>
         public void WriteToServerConsole(string[] text)
         {
             foreach (string s in text)
@@ -240,6 +234,7 @@ namespace EMS_Server
         }
         /// <summary>
         /// Generates config.txt file for FR consumption.
+        /// יצירת קובץ התחברות בשביל מערכת זיהוי פנים
         /// </summary>
         private void WriteToConfigFile()
         {
@@ -261,6 +256,7 @@ namespace EMS_Server
         }
         /// <summary>
         /// Provides primary listening tread for the server.
+        /// האזנה של השרת
         /// </summary>
         public Task BuildServerTask()
         {
@@ -273,6 +269,7 @@ namespace EMS_Server
         }
         /// <summary>
         /// Provides thread for SQLServer lookup.
+        /// פעולה לחיפוש בסיס הנתונים
         /// </summary>
         public Task BuildSQLServerLookup()
         {
@@ -308,8 +305,8 @@ namespace EMS_Server
         }
         /// <summary>
         /// Populates Connsections list.
+        /// שמירה של רשימת החיבורים
         /// </summary>
-        /// <param name="data"></param>
         public void AddConnection(string data)
         {
             this.Invoke((MethodInvoker)delegate
@@ -322,6 +319,7 @@ namespace EMS_Server
 
         /// <summary>
         /// Provides thread for facial recognition.
+        /// תהליך להפעלת זיהוי פנים
         /// </summary>
         public Task BuildFRTask()
         {
@@ -335,6 +333,18 @@ namespace EMS_Server
             });
         }
         #endregion
+
+        /// <summary>
+        /// Prevents storage of excessive amounts of text.
+        /// מונע אחסון של כמויות מופרזות של טקסט
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void txtServerConsole_TextChanged(object sender, EventArgs e)
+        {
+            string[] temp = txtServerConsole.Text.Split(Environment.NewLine);
+            if (temp.Length > 30) txtServerConsole.Text = temp.TakeLast(30).ToArray().ArrayToString();
+        }
 
         #region Debug
         /// <summary>
@@ -394,15 +404,6 @@ namespace EMS_Server
 
         #endregion
 
-        /// <summary>
-        /// Prevents storage of excessive amounts of text.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void txtServerConsole_TextChanged(object sender, EventArgs e)
-        {
-            string[] temp = txtServerConsole.Text.Split(Environment.NewLine);
-            if (temp.Length > 30) txtServerConsole.Text = temp.TakeLast(30).ToArray().ArrayToString();
-        }
+
     }
 }

@@ -32,6 +32,7 @@ namespace EMS_Client.Forms
         private void selectEmployee_Load(object sender, EventArgs e)
         {
             //In "Developement mode" request all employees from the DB on screen load.
+            // ב"מצב פיתוח" בקש את כל העובדים מבסיס הנתונים בטעינת המסך
             if (Config.DevelopmentMode)
             {
                 string querry = Requests.SelectEmployee();
@@ -46,6 +47,7 @@ namespace EMS_Client.Forms
 
         /// <summary>
         /// Requests chosen employee from the server and stores in as global variable.
+        /// מבקש את העובד הנבחר מהשרת ומאחסן אותו כמשתנה גלובלי.
         /// </summary>
         private void employeesTable_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {

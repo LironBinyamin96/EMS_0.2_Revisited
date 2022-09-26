@@ -15,6 +15,7 @@ namespace EMS_Server
 
         /// <summary>
         /// Method used to pass one way command to the SQL DB.
+        /// פונקציה המשמשת להעברת פקודה חד כיוונית לבסיס נתונים
         /// </summary>
         /// <param name="IncomingCommand"></param>
         /// <returns></returns>
@@ -37,8 +38,8 @@ namespace EMS_Server
         }
 
         /// <summary>
-        /// שאילתה דו כיווני
         /// Sends provided querry to the server.
+        ///  פונקציה המשמשת להעברת פקודה דו כיוונית לבסיס נתונים
         /// </summary>
         /// <returns> Responce from the server (string where each object is separated by | ). </returns>
         public static string TwoWayCommand(string querry)
@@ -74,6 +75,7 @@ namespace EMS_Server
 
         /// <summary>
         /// Generates randomized free id for a new employee.
+        /// יצירת מספר זהות אקראי וייחודי לעובד חדש
         /// </summary>
         /// <returns></returns>
         public static string GetFreeID()
@@ -87,6 +89,7 @@ namespace EMS_Server
 
         /// <summary>
         /// Generates a "select" querry from provided data.
+        /// יוצר שאילתת "בחירה" מהנתונים שסופקו
         /// </summary>
         /// <param name="clientQuerry"></param>
         /// <returns></returns>
@@ -105,6 +108,7 @@ namespace EMS_Server
 
         /// <summary>
         /// Generates a "add" querry from provided data.
+        ///  יוצר שאילתת "הוספה" מהנתונים שסופקו
         /// </summary>
         /// <param name="clientQuerry"></param>
         /// <returns></returns>
@@ -112,6 +116,7 @@ namespace EMS_Server
 
         /// <summary>
         /// Generates a "update" querry from provided data.
+        ///  יוצר שאילתת "עדכון" מהנתונים שסופקו
         /// </summary>
         /// <param name="clientQuerry"></param>
         /// <returns></returns>
@@ -125,6 +130,7 @@ namespace EMS_Server
 
         /// <summary>
         /// Generates a "delete" querry from provided data.
+        ///  יוצר שאילתת "מחיקה" מהנתונים שסופקו
         /// </summary>
         /// <param name="clientQuerry"></param>
         /// <returns></returns>
@@ -138,6 +144,7 @@ namespace EMS_Server
 
         /// <summary>
         /// Generates a querry for retrieving hour logs.
+        /// יוצר שאילתה ליצירת יומן שעות נוכחות
         /// </summary>
         /// <param name="clientQuerry"></param>
         /// <returns></returns>
@@ -153,6 +160,7 @@ namespace EMS_Server
 
         /// <summary>
         /// Generates a querry for updating entries from provided data.
+        /// יוצר שאילתה לעדכון ערכים מהנתונים שסופקו
         /// </summary>
         /// <param name="clientQuerry"></param>
         /// <returns></returns>
@@ -177,30 +185,11 @@ namespace EMS_Server
 
         /// <summary>
         /// Generates a querry for retrieving entries with the wrong format. The parameter is unnecesery and is there only for consistency across the class.
+        /// יוצר שאילתה שמחזירה את כל שעות הכניסה והיציאה שבפורמט לא תקין או שחסרות 
         /// </summary>
         /// <param name="clientQuerry"></param>
         /// <returns></returns>
         public static string GetAllExceptions(string clientQuerry = "") => $"select * from {Config.EmployeeHourLogsTable} where _entry<'{Config.MinDate}' or _exit<'{Config.MinDate}' or _exit<_entry or _entry is NULL or _exit is NULL";
-
-        //Following two methods are for simulating entries and exits during developement.
-        public static string Departure(string _intId)
-        {
-            string lastArrival = TwoWayCommand($"select top (1) _entry from HourLogs where _intId = {_intId} and _entry is not NULL order by _entry DESC");
-            DateTime lastArrTime = DateTime.Parse(lastArrival);
-            try
-            {
-                DateTime arrivalDate = DateTime.Parse(lastArrival);
-                if (arrivalDate.Day == DateTime.Now.Day)
-                    return $"update HourLogs" +
-                           $" set _exit='{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}' " +
-                           $"where _intId={_intId} and _entry = '{lastArrTime.ToString("yyyy-MM-dd HH:mm:ss")}';";
-                else
-                    return $"insert into HourLogs (_intId, _exit)" +
-                           $" values ({_intId}, '{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}');";
-            }
-            catch (Exception ex) { return ex.Source + Environment.NewLine + ex.Message; }
-        }
-        public static string Arrival(string _intId) => $"insert into {Config.EmployeeHourLogsTable} (_intId ,_entry) values ({_intId},'{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}');";
 
         public static string GetYearLog(string clientQuerry) //get log #_intId, year
         {
