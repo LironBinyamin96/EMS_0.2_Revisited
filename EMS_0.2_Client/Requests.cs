@@ -13,14 +13,14 @@ namespace EMS_Client
     static class Requests
     {
         //Mothods that provide querries for comunicating with SQL db through EMS server.
-        public static string SelectEmployee(string gate, string[][] clause)
+        public static string SelectEmployee(string[][] clause, string gate="")
         {
             string querry = $"get employee #";
             if (clause != null)
             {
                 foreach (string[] item in clause)
                     querry += $"{item[0]}={item[1]} {gate} ";
-                return querry.Remove(querry.Length - (gate.Length+2)) + ';';
+                return querry.Remove(querry.Length - (gate.Length + 2)) + ';';
             }
             return querry;
         }
@@ -45,6 +45,7 @@ namespace EMS_Client
         public static string GetHourLogs(int _intId, int year, int month) => $"get log #{_intId}, {year}, {month}";
         public static string GetYearlyHourLog(int _intId, int year) => $"get log #{_intId}, {year}";
         public static string GetAllExceptions() => "get all exceptions #";
+        public static string GetAllOfStatus(byte status) => SelectEmployee(new string[][] { new string[] { "_employmentStatus", status.ToString() } });
 
         /// <summary>
         /// Sends picture to the server to be saved.

@@ -53,14 +53,13 @@ namespace EMS_Library
         public static readonly string[] NullableEmployeeData = { "MName", "MiddleName", "_mName", "Gender", "_gender" };
         public static readonly DateTime MinDate = DateTime.Parse("2000-01-01 00:00:00");
 
-        public const bool AutoStartFR = false;
-
         #endregion
 
         #region FR & Imaging
         public const int FRImmageHeight = 164;
         public const int FRImmageWidth = 164;
         public const string ImageFormat = ".jpg";
+        public const bool AutoStartFR = true;
         #endregion
 
         #region Email config

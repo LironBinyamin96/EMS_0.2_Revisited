@@ -3,6 +3,8 @@ using System.Runtime.InteropServices;
 using EMS_Library.MyEmployee;
 using EMS_Library.MyEmployee.HoursLog;
 using EMS_Library;
+using System;
+
 namespace EMS_Client
 {
     public partial class EMS_ClientMainScreen : Form
@@ -51,6 +53,8 @@ namespace EMS_Client
             login.ShowDialog();
 
             if (PrimaryForms.Count == 0) return; //App was closed at login screen | סגירת התוכנה במסך הכניסה
+
+            lblCurrentOnShift.Text = "Current employees on site: " + Requests.RequestFromServer($"select count(_intId) from {Config.EmployeeDataTable} where _employmentStatus=1;", 254)[0];
 
             EMS_Library.Network.DataPacket packet = new EMS_Library.Network.DataPacket($"get image #{CurEmployee.IntId}", 6);
             byte[] buffer = Requests.GetImage(packet);
@@ -157,5 +161,12 @@ namespace EMS_Client
 
         }
         #endregion
+
+        private void btnViewOnSite_Click(object sender, EventArgs e)
+        {
+            EmpsByStatus empsByStatus = new EmpsByStatus();
+            empsByStatus.Location = new Point(Location.X + Size.Width, Location.Y);
+            empsByStatus.Show();
+        }
     }
 }

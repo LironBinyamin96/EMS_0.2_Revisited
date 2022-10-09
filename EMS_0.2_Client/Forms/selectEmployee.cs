@@ -72,10 +72,10 @@ namespace EMS_Client.Forms
             {
                 default: return;
                 /*All*/    case 0: { querry = Requests.SelectEmployee(); break; }
-                /*ID*/     case 1: { querry = txtSaerch.Text != "" ? Requests.SelectEmployee("and", new string[][] { new string[] { "_intId", $"{txtSaerch.Text}" } }) : Requests.SelectEmployee(); break; }
-                /*_fName*/ case 2: { querry = txtSaerch.Text != "" ? Requests.SelectEmployee("and", new string[][] { new string[] { "_fName", $"'{txtSaerch.Text}'" } }) : Requests.SelectEmployee(); break; }
-                /*_lName*/ case 3: { querry = txtSaerch.Text != "" ? Requests.SelectEmployee("and", new string[][] { new string[] { "_lName", $"'{txtSaerch.Text}'" } }) : Requests.SelectEmployee(); break; }
-                /*type*/   case 4: { querry = txtSaerch.Text != "" ? Requests.SelectEmployee("and", new string[][] { new string[] { "type", $"'{txtSaerch.Text}'" } }) : Requests.SelectEmployee(); break; }
+                /*ID*/     case 1: { querry = txtSaerch.Text != "" ? Requests.SelectEmployee(new string[][] { new string[] { "_intId", $"{txtSaerch.Text}" } }, "and") : Requests.SelectEmployee(); break; }
+                /*_fName*/ case 2: { querry = txtSaerch.Text != "" ? Requests.SelectEmployee(new string[][] { new string[] { "_fName", $"'{txtSaerch.Text}'" } }, "and") : Requests.SelectEmployee(); break; }
+                /*_lName*/ case 3: { querry = txtSaerch.Text != "" ? Requests.SelectEmployee(new string[][] { new string[] { "_lName", $"'{txtSaerch.Text}'" } }, "and") : Requests.SelectEmployee(); break; }
+                /*type*/   case 4: { querry = txtSaerch.Text != "" ? Requests.SelectEmployee(new string[][] { new string[] { "type", $"'{txtSaerch.Text}'" } }, "and") : Requests.SelectEmployee(); break; }
             }
             buffer = Requests.RequestFromServer(querry, 1);
             employeesTable.Rows.Clear();

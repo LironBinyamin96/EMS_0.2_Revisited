@@ -19,6 +19,9 @@
     <Compile Update="Forms\ExceptionsScreen.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Forms\EmpsByStatus.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Forms\GeneralData.cs">
       <SubType>Form</SubType>
     </Compile>

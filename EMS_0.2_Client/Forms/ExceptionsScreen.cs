@@ -37,7 +37,7 @@ namespace EMS_Client.Forms
             if (_data[0] != "-1")
             {
                 string[] ids = Array.ConvertAll(_data, x => x.Split(',')[0]).ToHashSet().ToArray();
-                string[] empsData=Requests.RequestFromServer( Requests.SelectEmployee("or", Array.ConvertAll(ids, x => new string[] { "_intId", x })),1);
+                string[] empsData = Requests.RequestFromServer(Requests.SelectEmployee(Array.ConvertAll(ids, x => new string[] { "_intId", x }), "or"), 1);
                 _empsData = Array.ConvertAll(empsData, x => Employee.ActivateEmployee(x.Split(',')));
                 if (_data != null)
                     try

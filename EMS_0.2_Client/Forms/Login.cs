@@ -51,11 +51,11 @@ namespace EMS_Client.Forms
             { MessageBox.Show("Wrong credentials"); return; }
 
             //Request employee data from the server. | בקשת נתוני העובד מהשרת
-            string querry = Requests.SelectEmployee("and",new string[][]
+            string querry = Requests.SelectEmployee(new string[][]
             {
                 new string[]{"_intId", txtIntId.Text},
                 new string[]{"_password",$"'{txtPassword.Text}'" }
-            });
+            }, "and");
             string[] buffer = Requests.RequestFromServer(querry, 1);
 
             //Try to reconstruct employee from recieved data. If failed to verify with DB for any
