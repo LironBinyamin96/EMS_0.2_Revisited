@@ -73,7 +73,7 @@ namespace EMS_Client
         [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
         private static extern IntPtr CreateRoundRectRgn(int nLeftRect, int nTopRect, int nRightRect, int nBottomRect, int nWidthEllipse, int nHeightEllipse);
 
-        public void openChildForm(Form child, object btnSender)
+        public void openChildForm(Form child)
         {
             GC.Collect();
             if (activeForm != null)
@@ -88,24 +88,25 @@ namespace EMS_Client
             child.BringToFront();
             child.Show();
         }
-        private void changeButton(Button x, Form form, object sender)
+        private void changeButton(Button x, Form form)
         {
             panelStyle.Height = x.Height;
             panelStyle.Top = x.Top;
             x.BackColor = Color.FromArgb(46, 51, 73);
-            openChildForm(form, sender);
+            openChildForm(form);
             x.BackColor = Color.FromArgb(46, 51, 73);
             if (panelDesktop.BackgroundImage != null)
                 panelDesktop.BackgroundImage = null;
         }
 
-        private void btnEditingEmployee_Leave(object sender, EventArgs e) => btnEditingEmployee.BackColor = Color.FromArgb(24, 30, 54);
-        private void btnEditingEmployee_Click(object sender, EventArgs e) => changeButton(btnEditingEmployee, new EditingEmployee(), sender);
-        private void btnMail_Click(object sender, EventArgs e) => changeButton(btnMail, new Mail(), sender);
-        private void btnData_Click(object sender, EventArgs e) => changeButton(btnData, new GeneralData(), sender);
-        private void btnAttendence_Click(object sender, EventArgs e) => changeButton(btnAttendence, new AttendanceTable(), sender);
+      
+        private void btnEditingEmployee_Click(object sender, EventArgs e) => changeButton(btnEditingEmployee, new EditingEmployee());
+        private void btnMail_Click(object sender, EventArgs e) => changeButton(btnMail, new Mail());
+        private void btnData_Click(object sender, EventArgs e) => changeButton(btnData, new GeneralData());
+        private void btnAttendence_Click(object sender, EventArgs e) => changeButton(btnAttendence, new AttendanceTable());
         private void btnMail_Leave(object sender, EventArgs e) => btnMail.BackColor = Color.FromArgb(24, 30, 54);
         private void btnData_Leave(object sender, EventArgs e) => btnData.BackColor = Color.FromArgb(24, 30, 54);
+        private void btnEditingEmployee_Leave(object sender, EventArgs e) => btnEditingEmployee.BackColor = Color.FromArgb(24, 30, 54);
         private void btnAttendence_Leave(object sender, EventArgs e) => btnAttendence.BackColor = Color.FromArgb(24, 30, 54);
 
         #endregion
@@ -167,6 +168,12 @@ namespace EMS_Client
             EmpsByStatus empsByStatus = new EmpsByStatus();
             empsByStatus.Location = new Point(Location.X + Size.Width, Location.Y);
             empsByStatus.Show();
+        }
+
+        private void btnHome_Click(object sender, EventArgs e)
+        {
+            activeForm?.Close();
+            panelDesktop.BackgroundImage = Properties.Resources.HR1;
         }
     }
 }

@@ -68,21 +68,33 @@ def getEntryTime(connection,employeeId):
 def entry (connection,entryTime):
     data = entryTime.split("|")
     cursor = connection.cursor()
-    sql = 'insert INTO HourLogs(_intId,_entry) VALUES(?,?);'
-    val = (data[0], data[1])
-    cursor.execute(sql, val)
-    connection.commit()
-    print(GetFormatForReturningTimeOfDay(data[1]) +" "+ data[2]+ "!\nyour entry time is : " + data[1])
+    EmployeeStatus(connection,data[0])
+    if EmployeeStatus(connection,data[0]) != 0: 
+        sql = 'insert INTO HourLogs(_intId,_entry) VALUES(?,?); update Employees set _employmentStatus = 1 where _IntId = ?;'
+        val = (data[0], data[1],data[0])
+        cursor.execute(sql, val)
+        connection.commit()
+        print(GetFormatForReturningTimeOfDay(data[1]) +" "+ data[2]+ "!\nyour entry time is : " + data[1])
 
 # insert exit time to SQL server
 def exitTime (connection,exitTime,entryTime):
     data = exitTime.split("|")
     cursor = connection.cursor()
-    sql = 'update HourLogs set _exit = ? where _intId = ? and _entry = ?;'
-    val = (data[1], data[0], entryTime)
-    cursor.execute(sql, val)
-    connection.commit()
-    print(GetFormatForReturningTimeOfDay(data[1]) +" "+ data[2]+ "!\nyour exit time is : " + data[1])
+    EmployeeStatus(connection,data[0])
+    if EmployeeStatus(connection,data[0]) != 0: 
+        sql = 'update HourLogs set _exit = ? where _intId = ? and _entry = ?;update Employees set _employmentStatus = 2 where _IntId = ?;'
+        val = (data[1], data[0], entryTime,data[0])
+        cursor.execute(sql, val)
+        connection.commit()
+        print(GetFormatForReturningTimeOfDay(data[1]) +" "+ data[2]+ "!\nyour exit time is : " + data[1])
+
+def EmployeeStatus (connection,employeeId):
+    cursor = connection.cursor()
+    cursor.execute(f'select _employmentStatus from Employees where _intId = {employeeId} ;')
+    x= cursor.fetchone()
+    for row in x:
+        return(row)
+
 
 
 # Employees dictionry - for checking time differences between entry time and exit time 

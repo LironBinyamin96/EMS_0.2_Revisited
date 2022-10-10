@@ -121,8 +121,8 @@ namespace EMS_Library.MyEmployee.HoursLog
                 $"\"Full Name\":\"{_employee.FName} {_employee.LName}\"," +
                 $"\"Year\":\"{_year}\"," +
                 $"\"Month\":\"{_month}\"," +
-                $"\"MonthlyHours\":\"{Total}\"," +
-                $"\"TotalOvertime\":\"{Config.NormalShiftLength}\"," +
+                $"\"MonthlyHours\":\"{Total.Hours+Total.Days*24}:{Total.Minutes}:{Total.Seconds}\"," +
+                $"\"TotalOvertime\":\"{TotalOvertime}\"," +
                 $"\"Days\":[";
             foreach (HoursLogDay day in _days)
                 hold += (day != null ? day.JSON() : "{}") + ',';

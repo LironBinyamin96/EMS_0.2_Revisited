@@ -39,8 +39,9 @@
             this.btnEditingEmployee = new System.Windows.Forms.Button();
             this.panelForUser = new System.Windows.Forms.Panel();
             this.panelDesktop = new System.Windows.Forms.Panel();
-            this.lblCurrentOnShift = new System.Windows.Forms.Label();
             this.btnViewOnSite = new System.Windows.Forms.Button();
+            this.lblCurrentOnShift = new System.Windows.Forms.Label();
+            this.btnHome = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.userPicture)).BeginInit();
             this.panelDesktop.SuspendLayout();
@@ -49,6 +50,7 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(30)))), ((int)(((byte)(54)))));
+            this.panel1.Controls.Add(this.btnHome);
             this.panel1.Controls.Add(this.userPicture);
             this.panel1.Controls.Add(this.panelStyle);
             this.panel1.Controls.Add(this.btnExit);
@@ -88,9 +90,9 @@
             this.btnExit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnExit.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btnExit.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnExit.Location = new System.Drawing.Point(0, 535);
+            this.btnExit.Location = new System.Drawing.Point(0, 568);
             this.btnExit.Name = "btnExit";
-            this.btnExit.Size = new System.Drawing.Size(178, 59);
+            this.btnExit.Size = new System.Drawing.Size(178, 26);
             this.btnExit.TabIndex = 5;
             this.btnExit.Text = "Exit";
             this.btnExit.UseVisualStyleBackColor = true;
@@ -105,7 +107,7 @@
             this.btnAttendence.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btnAttendence.Image = global::EMS_Client.Properties.Resources.schedule;
             this.btnAttendence.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnAttendence.Location = new System.Drawing.Point(0, 299);
+            this.btnAttendence.Location = new System.Drawing.Point(0, 306);
             this.btnAttendence.Name = "btnAttendence";
             this.btnAttendence.Size = new System.Drawing.Size(178, 59);
             this.btnAttendence.TabIndex = 4;
@@ -124,7 +126,7 @@
             this.btnData.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btnData.Image = global::EMS_Client.Properties.Resources.statistic;
             this.btnData.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnData.Location = new System.Drawing.Point(0, 240);
+            this.btnData.Location = new System.Drawing.Point(0, 247);
             this.btnData.Name = "btnData";
             this.btnData.Size = new System.Drawing.Size(178, 59);
             this.btnData.TabIndex = 3;
@@ -143,7 +145,7 @@
             this.btnMail.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btnMail.Image = global::EMS_Client.Properties.Resources.gmail_logo;
             this.btnMail.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnMail.Location = new System.Drawing.Point(0, 181);
+            this.btnMail.Location = new System.Drawing.Point(0, 188);
             this.btnMail.Name = "btnMail";
             this.btnMail.Size = new System.Drawing.Size(178, 59);
             this.btnMail.TabIndex = 2;
@@ -162,7 +164,7 @@
             this.btnEditingEmployee.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btnEditingEmployee.Image = global::EMS_Client.Properties.Resources.imgEdit;
             this.btnEditingEmployee.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnEditingEmployee.Location = new System.Drawing.Point(0, 122);
+            this.btnEditingEmployee.Location = new System.Drawing.Point(0, 129);
             this.btnEditingEmployee.Name = "btnEditingEmployee";
             this.btnEditingEmployee.Size = new System.Drawing.Size(178, 59);
             this.btnEditingEmployee.TabIndex = 1;
@@ -179,7 +181,7 @@
             this.panelForUser.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelForUser.Location = new System.Drawing.Point(0, 0);
             this.panelForUser.Name = "panelForUser";
-            this.panelForUser.Size = new System.Drawing.Size(178, 122);
+            this.panelForUser.Size = new System.Drawing.Size(178, 129);
             this.panelForUser.TabIndex = 1;
             this.panelForUser.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panelForUser_MouseDown);
             // 
@@ -196,17 +198,6 @@
             this.panelDesktop.TabIndex = 1;
             this.panelDesktop.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panelDesktop_MouseDown);
             // 
-            // lblCurrentOnShift
-            // 
-            this.lblCurrentOnShift.BackColor = System.Drawing.Color.Transparent;
-            this.lblCurrentOnShift.Font = new System.Drawing.Font("Segoe UI", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblCurrentOnShift.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.lblCurrentOnShift.Location = new System.Drawing.Point(6, 38);
-            this.lblCurrentOnShift.Name = "lblCurrentOnShift";
-            this.lblCurrentOnShift.Size = new System.Drawing.Size(228, 53);
-            this.lblCurrentOnShift.TabIndex = 24;
-            this.lblCurrentOnShift.Text = "Current employees on site:";
-            // 
             // btnViewOnSite
             // 
             this.btnViewOnSite.BackColor = System.Drawing.Color.Transparent;
@@ -222,6 +213,33 @@
             this.btnViewOnSite.Text = "View";
             this.btnViewOnSite.UseVisualStyleBackColor = false;
             this.btnViewOnSite.Click += new System.EventHandler(this.btnViewOnSite_Click);
+            // 
+            // lblCurrentOnShift
+            // 
+            this.lblCurrentOnShift.BackColor = System.Drawing.Color.Transparent;
+            this.lblCurrentOnShift.Font = new System.Drawing.Font("Segoe UI", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblCurrentOnShift.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblCurrentOnShift.Location = new System.Drawing.Point(6, 38);
+            this.lblCurrentOnShift.Name = "lblCurrentOnShift";
+            this.lblCurrentOnShift.Size = new System.Drawing.Size(528, 53);
+            this.lblCurrentOnShift.TabIndex = 24;
+            this.lblCurrentOnShift.Text = "Current employees on site:";
+            // 
+            // btnHome
+            // 
+            this.btnHome.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btnHome.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.btnHome.FlatAppearance.BorderSize = 0;
+            this.btnHome.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnHome.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnHome.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnHome.Location = new System.Drawing.Point(0, 542);
+            this.btnHome.Name = "btnHome";
+            this.btnHome.Size = new System.Drawing.Size(178, 26);
+            this.btnHome.TabIndex = 7;
+            this.btnHome.Text = "Home";
+            this.btnHome.UseVisualStyleBackColor = true;
+            this.btnHome.Click += new System.EventHandler(this.btnHome_Click);
             // 
             // EMS_ClientMainScreen
             // 
@@ -258,5 +276,6 @@
         private PictureBox userPicture;
         private Button btnViewOnSite;
         private Label lblCurrentOnShift;
+        private Button btnHome;
     }
 }
