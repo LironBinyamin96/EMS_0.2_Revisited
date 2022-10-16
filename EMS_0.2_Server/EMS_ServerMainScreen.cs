@@ -58,13 +58,14 @@ namespace EMS_Server
             ServerAddressResolver.ServerIP(true);
             listeningTask.Start();
             TestingTask.Start();
-            if (Config.AutoStartFR) FacialRecognition.Start();
+            if (Config.AutoStartFR) FacialRecognition?.Start(); else WriteToServerConsole("FR Autostart disabled in the config!");
             listnerTimer.Interval = 6000;
             listnerTimer.Start();
             if (!Directory.Exists(Config.RootDirectory)) Directory.CreateDirectory(Config.RootDirectory);
             if (!Directory.Exists(Config.FR_Images)) Directory.CreateDirectory(Config.FR_Images);
             
         }
+
         /// <summary>
         /// Method for executing time dependant logic. (Triggered by listnerTimer_Tick event)
         /// פעולה לביצוע לוגיקה שתלויה בזמן
@@ -148,7 +149,7 @@ namespace EMS_Server
                         case "exit": { Close(); break; }
                         case "shutdown": { Close(); break; }
                         case "sql querry begin": { SQLQuerryInput = true; WriteToServerConsole(Environment.NewLine + "Listening for querry:"); break; }
-                        case "fr powerup": { try { FacialRecognition.Start(); } catch { } break; }
+                        case "fr powerup": { try { if (FacialRecognition.Status == TaskStatus.RanToCompletion) FRProcess.Start(); else FacialRecognition.Start(); WriteToServerConsole(FRProcess.ProcessName + " powering up"); } catch { } break; }
                         case "fr shutdown": { try { FRProcess.Kill(); WriteToServerConsole(FRProcess.ProcessName + " " + FRProcess.HasExited); } catch { } break; }
                         case "simmulate": {
                                 string id = SQLBridge.TwoWayCommand($"SELECT TOP 1 _intId FROM {Config.EmployeeDataTable} ORDER BY _created DESC; ");
@@ -200,11 +201,21 @@ namespace EMS_Server
         {
             WriteToServerConsole("fr stoped");
         }
+
         /// <summary>
         /// Method for terminating EMS_Server subprocesses. (Triggered by FormClosing event)
         /// פעולה לסיום תהליכי משנה של השרת
         /// </summary>
         private void EMS_ServerMainScreen_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            FRProcess?.Kill();
+        }
+
+        /// <summary>
+        /// Method for terminating EMS_Server subprocesses. (Triggered by FormClosing event)
+        /// פעולה לסיום תהליכי משנה של השרת
+        /// </summary>
+        private void EMS_ServerMainScreen_FormClosed(object sender, FormClosedEventArgs e)
         {
             FRProcess?.Kill();
         }
@@ -401,6 +412,7 @@ namespace EMS_Server
                 //FR().Start();
             });
         }
+
 
         #endregion
 

@@ -54,7 +54,7 @@ namespace EMS_Client
 
             if (PrimaryForms.Count == 0) return; //App was closed at login screen | סגירת התוכנה במסך הכניסה
 
-            lblCurrentOnShift.Text = "Current employees on site: " + Requests.RequestFromServer($"select count(_intId) from {Config.EmployeeDataTable} where _employmentStatus=1;", 254)[0];
+            lblCurrentOnShift.Text = "Current employees on site: " + Requests.RequestFromServer($"select count(_intId) from {Config.EmployeeDataTable} where _employmentStatus='1';", 254)[0];
 
             EMS_Library.Network.DataPacket packet = new EMS_Library.Network.DataPacket($"get image #{CurEmployee.IntId}", 6);
             byte[] buffer = Requests.GetImage(packet);
@@ -167,6 +167,11 @@ namespace EMS_Client
             EmpsByStatus empsByStatus = new EmpsByStatus();
             empsByStatus.Location = new Point(Location.X + Size.Width, Location.Y);
             empsByStatus.Show();
+        }
+
+        private void panelForUser_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

@@ -39,8 +39,8 @@
             this.btnEditingEmployee = new System.Windows.Forms.Button();
             this.panelForUser = new System.Windows.Forms.Panel();
             this.panelDesktop = new System.Windows.Forms.Panel();
-            this.lblCurrentOnShift = new System.Windows.Forms.Label();
             this.btnViewOnSite = new System.Windows.Forms.Button();
+            this.lblCurrentOnShift = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.userPicture)).BeginInit();
             this.panelDesktop.SuspendLayout();
@@ -181,6 +181,7 @@
             this.panelForUser.Name = "panelForUser";
             this.panelForUser.Size = new System.Drawing.Size(178, 122);
             this.panelForUser.TabIndex = 1;
+            this.panelForUser.Paint += new System.Windows.Forms.PaintEventHandler(this.panelForUser_Paint);
             this.panelForUser.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panelForUser_MouseDown);
             // 
             // panelDesktop
@@ -195,17 +196,6 @@
             this.panelDesktop.Size = new System.Drawing.Size(759, 594);
             this.panelDesktop.TabIndex = 1;
             this.panelDesktop.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panelDesktop_MouseDown);
-            // 
-            // lblCurrentOnShift
-            // 
-            this.lblCurrentOnShift.BackColor = System.Drawing.Color.Transparent;
-            this.lblCurrentOnShift.Font = new System.Drawing.Font("Segoe UI", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblCurrentOnShift.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.lblCurrentOnShift.Location = new System.Drawing.Point(6, 38);
-            this.lblCurrentOnShift.Name = "lblCurrentOnShift";
-            this.lblCurrentOnShift.Size = new System.Drawing.Size(228, 53);
-            this.lblCurrentOnShift.TabIndex = 24;
-            this.lblCurrentOnShift.Text = "Current employees on site:";
             // 
             // btnViewOnSite
             // 
@@ -222,6 +212,17 @@
             this.btnViewOnSite.Text = "View";
             this.btnViewOnSite.UseVisualStyleBackColor = false;
             this.btnViewOnSite.Click += new System.EventHandler(this.btnViewOnSite_Click);
+            // 
+            // lblCurrentOnShift
+            // 
+            this.lblCurrentOnShift.BackColor = System.Drawing.Color.Transparent;
+            this.lblCurrentOnShift.Font = new System.Drawing.Font("Segoe UI", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblCurrentOnShift.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblCurrentOnShift.Location = new System.Drawing.Point(6, 38);
+            this.lblCurrentOnShift.Name = "lblCurrentOnShift";
+            this.lblCurrentOnShift.Size = new System.Drawing.Size(228, 53);
+            this.lblCurrentOnShift.TabIndex = 24;
+            this.lblCurrentOnShift.Text = "Current employees on site:";
             // 
             // EMS_ClientMainScreen
             // 

@@ -89,12 +89,13 @@ namespace EMS_Client.Forms
             string[][] responce = Array.ConvertAll(Requests.RequestFromServer(Requests.GetYearlyHourLog(EMS_ClientMainScreen.employee.IntId, (int)yearPicker.SelectedValue), 11), x => x.Split(','));
 
             //If data is available | אם הנתונים לא זמינים
-            if (responce[0][0] != "-1")
+            //if (responce[0][0] != "-1")
             {
                 //Constructing 12 mothly logs | בניית 12 נתוני חודשים
                 data = new HoursLogMonth[12];
                 foreach (string[] x in responce)
                 {
+                    if (x[0] == "-1") break;
                     HoursLogEntry entry = new HoursLogEntry(x.Aggregate((aggregate, elem) => { return aggregate + ", " + (elem != null ? elem : "NULL"); }));
                     if (data[entry.Start.Month - 1] == null)
                     {
@@ -129,7 +130,7 @@ namespace EMS_Client.Forms
                     $"Daily average: {(float)data.Sum(x => x?.Average.TotalHours) / data.Sum(x => x == null ? 0 : 1):F2} hours";
                 lblEmpData.Text = empData;
             }
-
+            
             
         }
     }

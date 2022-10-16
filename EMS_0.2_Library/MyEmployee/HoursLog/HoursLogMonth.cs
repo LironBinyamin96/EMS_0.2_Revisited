@@ -121,7 +121,7 @@ namespace EMS_Library.MyEmployee.HoursLog
                 $"\"Full Name\":\"{_employee.FName} {_employee.LName}\"," +
                 $"\"Year\":\"{_year}\"," +
                 $"\"Month\":\"{_month}\"," +
-                $"\"MonthlyHours\":\"{Total}\"," +
+                $"\"MonthlyHours\":\"{Total.Hours+Total.Days*24}:{Total.Minutes}:{Total.Seconds}\"," +
                 $"\"TotalOvertime\":\"{Config.NormalShiftLength}\"," +
                 $"\"Days\":[";
             foreach (HoursLogDay day in _days)
