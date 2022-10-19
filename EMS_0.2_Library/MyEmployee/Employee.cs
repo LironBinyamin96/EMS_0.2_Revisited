@@ -103,8 +103,8 @@ namespace EMS_Library.MyEmployee
             _fName = hold[3];
             _lName = hold[4];
             _mName = hold[5];
-            _password = hold[6];
-            _email = hold[7];
+            _email = hold[6];
+            _password = hold[7];
             _gender = hold[8];
             _birthDate = DateTime.Parse(hold[9]);
             _created = DateTime.Parse(hold[10]);

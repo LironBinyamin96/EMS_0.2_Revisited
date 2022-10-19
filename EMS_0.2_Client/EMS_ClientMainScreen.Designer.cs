@@ -183,7 +183,6 @@
             this.panelForUser.Name = "panelForUser";
             this.panelForUser.Size = new System.Drawing.Size(178, 129);
             this.panelForUser.TabIndex = 1;
-            this.panelForUser.Paint += new System.Windows.Forms.PaintEventHandler(this.panelForUser_Paint);
             this.panelForUser.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panelForUser_MouseDown);
             // 
             // panelDesktop

@@ -13,7 +13,7 @@ using EMS_Library.Network;
 using EMS_Library.MyEmployee;
 using System.Net;
 using System.Net.Mail;
-
+using EMS_Library.MyEmployee.IAccess;
 
 namespace EMS_Client.Forms
 {
@@ -29,8 +29,13 @@ namespace EMS_Client.Forms
             InitializeComponent();
             if (Config.DevelopmentMode)
             {
-                txtIntId.Text = Config.DefaultId;
-                txtPassword.Text = Config.DefaultPassword;
+                Employee randomEmp = null;
+                do
+                {
+                    randomEmp = Employee.ActivateEmployee(Requests.RequestFromServer($"SELECT TOP 1 * FROM {Config.EmployeeDataTable} ORDER BY NEWID();", 254)[0].Split(','));
+                } while (randomEmp == null && !(randomEmp is IRootAccess || randomEmp is IExtendedAccess));
+                txtIntId.Text = randomEmp.IntId.ToString();
+                txtPassword.Text = randomEmp.Password;
             }
         }
 
