@@ -200,3 +200,4 @@ C:\Users\levkh\Documents\GitHub\EMS_0.2_Revisited\EMS_0.2_Client\bin\Debug\net6.
 C:\Users\levkh\Documents\GitHub\EMS_0.2_Revisited\EMS_0.2_Client\bin\Debug\net6.0-windows\AForge.Video.dll
 C:\Users\levkh\Documents\GitHub\EMS_0.2_Revisited\EMS_0.2_Client\bin\Debug\net6.0-windows\AForge.Video.DirectShow.dll
 C:\Users\levkh\Documents\GitHub\EMS_0.2_Revisited\EMS_0.2_Client\obj\Debug\net6.0-windows\EMS_Client.Forms.EmpsByStatus.resources
+C:\Users\liron\Desktop\EMS\EMS_0.2_Client\obj\Debug\net6.0-windows\EMS_Client.Forms.EmpsByStatus.resources

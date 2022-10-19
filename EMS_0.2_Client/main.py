@@ -40,7 +40,9 @@ def returnDatePerMount(rangeMonth):
     c = 0
     for i in range(8, rangeMonth+8):
         if c != rangeMonth + 1: c += 1
-        formatDay, formatMonth, formatYear = str(f"{c}"), str(f"0{month}"), str(f"{year}")
+        dataforFormatMonth = str(f"{month}")
+        if int(dataforFormatMonth) < 10: dataforFormatMonth = str(f"0{month}")
+        formatDay, formatMonth, formatYear = str(f"{c}"), dataforFormatMonth, str(f"{year}")
         sheet[f"A{i}"] = f"{formatDay}/{formatMonth}/{formatYear}"
         d = datetime.date(int(formatYear), int(formatMonth), int(formatDay))
         sheet[f"B{i}"] = f"{calendar.day_name[d.weekday()]}"

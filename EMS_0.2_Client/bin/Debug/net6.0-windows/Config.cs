@@ -28,8 +28,8 @@ namespace EMS_Library
             "DESKTOP-LL8D68S",
         };
 
-        public const string DefaultId = "111111111";
-        public const string DefaultPassword = "111111111";
+        public const string DefaultId = "316472570";
+        public const string DefaultPassword = "1234";
 
         //Variables | משתנים
         public static byte ServerNamesIterator = 0;
