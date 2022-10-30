@@ -54,7 +54,7 @@ namespace EMS_Client.Forms
             string empId = employeesTable.Rows[employeesTable.CurrentCell.RowIndex].Cells[1].Value.ToString();
             string empData = Array.Find(buffer, x => x.Contains(empId));
             if (empData == null || empData == default) return;
-            EMS_ClientMainScreen.employee = Employee.ActivateEmployee(empData.Remove(empData.Length - 1).Split(','));
+            EMS_ClientMainScreen.employee = Employee.ActivateEmployee(empData.Split(','));
 
             //Invoke Fill() method of callerForm if available
             System.Reflection.MethodInfo fillMethod = callerForm.GetType().GetMethod("Fill");

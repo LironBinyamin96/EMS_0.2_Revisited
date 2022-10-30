@@ -235,7 +235,6 @@
             "HR_Grunt",
             "IT_Boss",
             "IT_Grunt",
-            "Maintenance_Boss",
             "Mechanic",
             "Worker"});
             this.positionBox.Location = new System.Drawing.Point(267, 129);

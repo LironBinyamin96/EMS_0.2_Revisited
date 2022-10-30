@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using EMS_Library;
 using EMS_Library.MyEmployee.Divisions;
+using System.Runtime;
 
 
 namespace EMS_Library.MyEmployee
@@ -145,8 +146,8 @@ namespace EMS_Library.MyEmployee
                $"'{_fName}'," +
                $"'{_lName}'," +
                $"'{_mName}'," +
-               $"'{_password}'," +
                $"'{_email}'," +
+               $"'{_password}'," +
                $"'{_gender}'," +
                $"'{_birthDate}'," +
                $"'{_created}'," +
