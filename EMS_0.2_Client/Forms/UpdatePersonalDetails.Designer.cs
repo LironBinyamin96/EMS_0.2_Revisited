@@ -177,7 +177,7 @@
             this.btnTakePicture.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnTakePicture.Font = new System.Drawing.Font("Bahnschrift SemiLight", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btnTakePicture.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
-            this.btnTakePicture.Location = new System.Drawing.Point(529, 40);
+            this.btnTakePicture.Location = new System.Drawing.Point(536, 40);
             this.btnTakePicture.Name = "btnTakePicture";
             this.btnTakePicture.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.btnTakePicture.Size = new System.Drawing.Size(87, 26);
@@ -214,8 +214,7 @@
             "IT_Grunt",
             "Maintenance_Boss",
             "Mechanic",
-            "Worker",
-            "Suplementary"});
+            "Worker"});
             this.positionBox.Location = new System.Drawing.Point(267, 129);
             this.positionBox.Name = "positionBox";
             this.positionBox.Size = new System.Drawing.Size(102, 24);
@@ -642,6 +641,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "UpdatePersonalDetails";
             this.Text = "UpdatePersonalDetails";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.UpdatePersonalDetails_FormClosing);
             this.panelUpdatePersonalDetails.ResumeLayout(false);
             this.panelUpdatePersonalDetails.PerformLayout();
             this.gUpdatePersonalDetails.ResumeLayout(false);

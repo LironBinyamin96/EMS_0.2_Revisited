@@ -106,25 +106,14 @@ namespace EMS_Client.Forms
         private void btnX_Click(object sender, EventArgs e) { EMS_ClientMainScreen.PrimaryForms.Remove(this); Close(); Dispose(); }
         #endregion
 
-
-        #region camera
+        #region Camera
         // Activating the camera to take a picture of the employee
         // הפעלת המצלמה לצילום תמונה של העובד
 
         VideoCaptureDevice videoCapture;
         FilterInfoCollection filterInfo;
         byte frameCount = 0;
-        void StartCamera()
-        {
-            try
-            {
-                filterInfo = new FilterInfoCollection(FilterCategory.VideoInputDevice);
-                videoCapture = new VideoCaptureDevice(filterInfo[0].MonikerString);
-                videoCapture.NewFrame += new NewFrameEventHandler(Camera_on);
-                videoCapture.Start();
-            }
-            catch (Exception ex) { throw ex; }
-        }
+        
         private void Camera_on(object sender, NewFrameEventArgs eventArgs)
         {
             pictureBoxCamera.Image = (Bitmap)eventArgs.Frame.Clone();
@@ -133,16 +122,34 @@ namespace EMS_Client.Forms
         }
         private void btnCamera_Click(object sender, EventArgs e)
         {
-            StartCamera();
-            btnCamera.Visible = false;
-            pictureBoxCamera.Visible = true;
-            btnPictureTaking.Visible = true;
-        }
+            if (StartCamera())
+            {
+                btnCamera.Visible = false;
+                pictureBoxCamera.Visible = true;
+                btnPictureTaking.Visible = true;
+            }
 
+
+            bool StartCamera()
+            {
+                bool success = true;
+                filterInfo = new FilterInfoCollection(FilterCategory.VideoInputDevice);
+                success &= filterInfo.Capacity>0;
+                if (success) videoCapture = new VideoCaptureDevice(filterInfo[0].MonikerString);
+                success &= videoCapture != null;
+                if (success)
+                {
+                    videoCapture.NewFrame += new NewFrameEventHandler(Camera_on);
+                    videoCapture.Start();
+                    return true;
+                }
+                else { MessageBox.Show("Coudn't find a camera!\n"); return false; }
+            }
+        }
         private void btnPictureTaking_Click(object sender, EventArgs e)
         {
             pictureBox1.Image = pictureBoxCamera.Image;
-            videoCapture.SignalToStop();
+            videoCapture?.SignalToStop();
             btnCamera.Visible = true;
             pictureBoxCamera.Visible = false;
             btnPictureTaking.Visible = false;
@@ -196,6 +203,19 @@ namespace EMS_Client.Forms
             return check;
         }
 
+        /// <summary>
+        /// Finalization of running processes upon form closure.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void addEmployee_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            videoCapture?.SignalToStop();
+            btnCamera.Visible = true;
+            pictureBoxCamera.Visible = false;
+            btnPictureTaking.Visible = false;
+        }
+
         #region Drag Window
         /// <summary>
         /// Controlls form's movement during drag.
@@ -223,6 +243,5 @@ namespace EMS_Client.Forms
 
 
         #endregion
-
     }
 }

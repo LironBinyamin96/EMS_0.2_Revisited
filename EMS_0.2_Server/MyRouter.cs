@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using EMS_Library.Network;
 using EMS_Library;
+using EMS_0._2_Server.Properties;
+using System.Reflection;
 
 namespace EMS_Server
 {
@@ -48,9 +50,12 @@ namespace EMS_Server
                 {
                     string imagePath = Config.FR_Images + $"\\{id}{Config.ImageFormat}";
                     if (!File.Exists(imagePath)) //If no image found, replace with stock. | אם תמונה לא נמצאה
-                        imagePath = Config.FR_Images + $"\\StockImage{Config.ImageFormat}";
-                    if (!File.Exists(imagePath)) 
-                        throw new Exception($"Could not find neither eployee photo nor stock image. Place StockImage{Config.ImageFormat} into {Config.FR_Images} folder");
+                        return (byte[])new ImageConverter().ConvertTo(Resources.StockImage, typeof(byte[])) ?? new byte[1];
+                    if (!File.Exists(imagePath))
+                    { 
+                        EMS_ServerMainScreen.serverForm.WriteToServerConsole( $"Could not find neither eployee photo nor stock image. Place StockImage{Config.ImageFormat} into {Config.FR_Images} folder");
+                        return new byte[1];
+                    }
                     return File.ReadAllBytes(imagePath);
                 }
                 else return new byte[0];

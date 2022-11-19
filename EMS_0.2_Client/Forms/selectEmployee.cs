@@ -131,7 +131,5 @@ namespace EMS_Client.Forms
         private void lblSelectEmployee_MouseDown(object sender, MouseEventArgs e) => Drag(e);
 
         #endregion
-
-
     }
 }

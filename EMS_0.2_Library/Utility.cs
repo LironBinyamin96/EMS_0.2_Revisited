@@ -108,6 +108,7 @@ namespace EMS_Library
         /// <exception cref="ArgumentException"></exception>
         public static byte[] ObjectToByteArray(this object obj)
         {
+            if (obj == null) throw new ArgumentNullException("ObjectToByteArray method recieved null argument.");
             if (!Attribute.IsDefined(obj.GetType(), typeof(SerializableAttribute)))
                 throw new ArgumentException("The object must have the Serializable attribute.", "obj");
             BinaryFormatter bf = new BinaryFormatter();

@@ -205,7 +205,7 @@
             this.btnPictureTaking.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.btnPictureTaking.Size = new System.Drawing.Size(98, 26);
             this.btnPictureTaking.TabIndex = 45;
-            this.btnPictureTaking.Text = "Picture Taking";
+            this.btnPictureTaking.Text = "Take picture";
             this.btnPictureTaking.UseVisualStyleBackColor = true;
             this.btnPictureTaking.Visible = false;
             this.btnPictureTaking.Click += new System.EventHandler(this.btnPictureTaking_Click);
@@ -638,6 +638,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "addEmployee";
             this.Text = "addEmployee";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.addEmployee_FormClosing);
             this.panelAddEmployee.ResumeLayout(false);
             this.panelAddEmployee.PerformLayout();
             this.gBoxRegistration.ResumeLayout(false);

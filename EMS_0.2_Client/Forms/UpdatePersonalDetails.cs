@@ -134,48 +134,6 @@ namespace EMS_Client.Forms
         }
         #endregion
 
-        /// <summary>
-        /// Prefforms validation of data provided by the user.
-        /// אימות הנתונים שהוקלדו על ידי המשתמש
-        /// </summary>
-        /// <returns></returns>
-        private bool CheckingDataFields()
-        {
-            //Aggrigation of the controlls and their vilidity status into singular collection.
-            // בדיקת תקינות הנתונים באמצעות מיליון פאנלים ובדיקות
-            Dictionary<Control, bool> test = new Dictionary<Control, bool>() {
-                { panelID, txtID.Text.IsStateID()},
-                { panelFname, txtFirstName.Text.Length > 1 },
-                { panelLname, txtLastName.Text.Length > 1 },
-                { panelDate, txtDateOfBirth.Text.Parsable(typeof(DateTime)) && (DateTime.Now - DateTime.Parse(txtDateOfBirth.Text)).TotalDays / 365 >= 18 },
-                { panelAddres, txtAddres.Text.Length > 1 },
-                { panelPhone, txtPhone.Text.Parsable(typeof(int)) },
-                { panelEmail, txtEmail.Text.Parsable(typeof(System.Net.Mail.MailAddress)) && (txtEmail.Text.Contains(".")) },
-                { panelBaseSalary, txtBaseSalary.Text.Parsable(typeof(int))&& int.Parse(txtBaseSalary.Text)>0 },
-                { panelSalaryModifire, txtSalaryModifire.Text.Parsable(typeof(double))&& double.Parse(txtSalaryModifire.Text)>0},
-                { panelPosition, positionBox.Text != "" },
-                { btnUpload,pictureBox1.Image != null }
-            };
-
-            //Prefoms scan through the collection and changing field colors appropriately while aggregating validity status.
-            // חיפוש שדות עם נתונים לא חוקיים ושינוי צבע הפאנל שלהם לאדום
-            bool check = true;
-            foreach (KeyValuePair<Control, bool> item in test)
-            {
-                if (item.Key is Button)
-                {
-                    if (!item.Value) { item.Key.ForeColor = Color.Red; check = false; }
-                    else { item.Key.ForeColor = Color.DodgerBlue; check &= true; }
-                }
-                else
-                {
-                    if (!item.Value) { item.Key.BackColor = Color.Red; check = false; }
-                    else { item.Key.BackColor = Color.DodgerBlue; check &= true; }
-                }
-            }
-            return check;
-        }
-
         #region Supplimental
 
         /// <summary>
@@ -225,26 +183,58 @@ namespace EMS_Client.Forms
                 catch { }
             }
         }
+
+        /// <summary>
+        /// Prefforms validation of data provided by the user.
+        /// אימות הנתונים שהוקלדו על ידי המשתמש
+        /// </summary>
+        /// <returns></returns>
+        private bool CheckingDataFields()
+        {
+            //Aggrigation of the controlls and their vilidity status into singular collection.
+            // בדיקת תקינות הנתונים באמצעות מיליון פאנלים ובדיקות
+            Dictionary<Control, bool> test = new Dictionary<Control, bool>() {
+                { panelID, txtID.Text.IsStateID()},
+                { panelFname, txtFirstName.Text.Length > 1 },
+                { panelLname, txtLastName.Text.Length > 1 },
+                { panelDate, txtDateOfBirth.Text.Parsable(typeof(DateTime)) && (DateTime.Now - DateTime.Parse(txtDateOfBirth.Text)).TotalDays / 365 >= 18 },
+                { panelAddres, txtAddres.Text.Length > 1 },
+                { panelPhone, txtPhone.Text.Parsable(typeof(int)) },
+                { panelEmail, txtEmail.Text.Parsable(typeof(System.Net.Mail.MailAddress)) && (txtEmail.Text.Contains(".")) },
+                { panelBaseSalary, txtBaseSalary.Text.Parsable(typeof(int))&& int.Parse(txtBaseSalary.Text)>0 },
+                { panelSalaryModifire, txtSalaryModifire.Text.Parsable(typeof(double))&& double.Parse(txtSalaryModifire.Text)>0},
+                { panelPosition, positionBox.Text != "" },
+                { btnUpload,pictureBox1.Image != null }
+            };
+
+            //Prefoms scan through the collection and changing field colors appropriately while aggregating validity status.
+            // חיפוש שדות עם נתונים לא חוקיים ושינוי צבע הפאנל שלהם לאדום
+            bool check = true;
+            foreach (KeyValuePair<Control, bool> item in test)
+            {
+                if (item.Key is Button)
+                {
+                    if (!item.Value) { item.Key.ForeColor = Color.Red; check = false; }
+                    else { item.Key.ForeColor = Color.DodgerBlue; check &= true; }
+                }
+                else
+                {
+                    if (!item.Value) { item.Key.BackColor = Color.Red; check = false; }
+                    else { item.Key.BackColor = Color.DodgerBlue; check &= true; }
+                }
+            }
+            return check;
+        }
         #endregion
 
-        #region camera
+        #region Camera
         // Activating the camera to take a picture of the employee
         // הפעלת המצלמה לצילום תמונה של העובד
 
         VideoCaptureDevice videoCapture;
         FilterInfoCollection filterInfo;
         byte frameCount = 0;
-        void StartCamera()
-        {
-            try
-            {
-                filterInfo = new FilterInfoCollection(FilterCategory.VideoInputDevice);
-                videoCapture = new VideoCaptureDevice(filterInfo[0].MonikerString);
-                videoCapture.NewFrame += new NewFrameEventHandler(Camera_on);
-                videoCapture.Start();
-            }
-            catch (Exception ex) { throw ex; }
-        }
+       
 
         private void Camera_on(object sender, NewFrameEventArgs eventArgs)
         {
@@ -255,24 +245,45 @@ namespace EMS_Client.Forms
 
         private void btnCamera_Click_1(object sender, EventArgs e)
         {
-            StartCamera();
-            btnCamera.Visible = false;
-            btnTakePicture.Visible = true;
+            if (StartCamera())
+            {
+                btnCamera.Visible = false;
+                btnTakePicture.Visible = true;
+            }
+
+            bool StartCamera()
+            {
+                bool success = true;
+                filterInfo = new FilterInfoCollection(FilterCategory.VideoInputDevice);
+                success &= filterInfo.Capacity > 0;
+                if (success) videoCapture = new VideoCaptureDevice(filterInfo[0].MonikerString);
+                success &= videoCapture != null;
+                if (success)
+                {
+                    videoCapture.NewFrame += new NewFrameEventHandler(Camera_on);
+                    videoCapture.Start();
+                    return true;
+                }
+                else { MessageBox.Show("Coudn't find a camera!\n"); return false; }
+            }
         }
 
         private void btnTakePicture_Click(object sender, EventArgs e)
         {
-            videoCapture.SignalToStop();
+            videoCapture?.SignalToStop();
             btnCamera.Visible = true;
             btnTakePicture.Visible = false;
-            try
-            {
-                empPicture = new Bitmap(pictureBox1.Image).Rescale(Config.FRImmageWidth,Config.FRImmageHeight);
-            }
+            try { empPicture = new Bitmap(pictureBox1.Image).Rescale(Config.FRImmageWidth,Config.FRImmageHeight); }
             catch { MessageBox.Show("Image could not be captured!"); }
         }
+
         #endregion
 
-
+        private void UpdatePersonalDetails_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            videoCapture?.SignalToStop();
+            btnCamera.Visible = true;
+            btnTakePicture.Visible = false;
+        }
     }
 }

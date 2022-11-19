@@ -189,7 +189,7 @@ namespace EMS_Server
         /// </summary>
         /// <param name="clientQuerry"></param>
         /// <returns></returns>
-        public static string GetAllExceptions(string clientQuerry = "") => $"select * from {Config.EmployeeHourLogsTable} where _entry<'{Config.MinDate}' or _exit<'{Config.MinDate}' or _exit<_entry or _entry is NULL or _exit is NULL";
+        public static string GetAllExceptions(string clientQuerry = "") => $"select * from {Config.EmployeeHourLogsTable} where _entry<'{Config.MinDate}' or _exit<'{Config.MinDate}' or _exit<_entry or DATEDIFF(HOUR, _entry, _exit)>'{Config.MaxShiftLength.Hours}' or _entry is NULL or _exit is NULL";
 
         public static string GetYearLog(string clientQuerry) //get log #_intId, year
         {
