@@ -9,7 +9,7 @@ namespace EMS_Library
     {
         #region Server_Config
         //Do not forget to open thouse ports in server side firewall settings!
-        public const int ServerPort = 13000; 
+        public const int ServerPort = 13000;
 
         public static string ServerIP = default;
         public static readonly string RootDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\EMS_Root";
@@ -70,5 +70,6 @@ namespace EMS_Library
 
         //Development Mode | מצב פיתוח
         public const bool DevelopmentMode = true;
+        public const bool PresentationMode = false;
     }
 }

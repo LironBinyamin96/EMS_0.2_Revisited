@@ -33,9 +33,7 @@ namespace EMS_Library.Network
 
                 int i = 0;
                 while (i < _header.DataIntLength)
-                {
                     if (stream.DataAvailable) _byteData[i++] = (byte)stream.ReadByte();
-                }
 
                 StringData = Encoding.UTF8.GetString(_byteData, 0, _header.DataIntLength);
                 if (Config.DevelopmentMode)
@@ -44,10 +42,7 @@ namespace EMS_Library.Network
                     Console.WriteLine("Creation complete!\n" + ToString());
                 }
             }
-            catch
-            {
-                throw new Exception($"Failed to create data packet!");
-            }
+            catch { throw new Exception($"Failed to create data packet!"); }
 
         }
         /// <summary>
@@ -64,8 +59,7 @@ namespace EMS_Library.Network
             _header = new DataPacketHeader(data.Length, func);
             StringData = data;
             _byteData = Encoding.UTF8.GetBytes(data);
-            if (Config.DevelopmentMode)
-                Console.WriteLine("Creation complete!\n" + ToString());
+            if (Config.DevelopmentMode) Console.WriteLine("Creation complete!\n" + ToString());
         }
 
         /// <summary>
@@ -79,10 +73,7 @@ namespace EMS_Library.Network
             _header = new DataPacketHeader(data.Length, func);
             _byteData = data;
             StringData = Encoding.UTF8.GetString(data);
-            if (Config.DevelopmentMode)
-            {
-                Console.WriteLine("Creation complete!\n" + ToString());
-            }
+            if (Config.DevelopmentMode) Console.WriteLine("Creation complete!\n" + ToString());
         }
 
         /// <summary>

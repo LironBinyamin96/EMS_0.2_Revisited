@@ -16,13 +16,11 @@ namespace EMS_Client.Forms
         public Login()
         {
             InitializeComponent();
-            if (Config.DevelopmentMode)
+            if (Config.PresentationMode || Config.DevelopmentMode)
             {
                 Employee randomEmp = null;
-                do
-                {
-                    randomEmp = Employee.ActivateEmployee(Requests.RequestFromServer($"SELECT TOP 1 * FROM {Config.EmployeeDataTable} ORDER BY NEWID();", 254)[0].Split(','));
-                } while (randomEmp == null && !(randomEmp is IRootAccess || randomEmp is IExtendedAccess));
+                do randomEmp = Employee.ActivateEmployee(Requests.RequestFromServer($"SELECT TOP 1 * FROM {Config.EmployeeDataTable} ORDER BY NEWID();", 254)[0].Split(',')); 
+                while (randomEmp == null && !(randomEmp is IRootAccess || randomEmp is IExtendedAccess));
                 txtIntId.Text = randomEmp.IntId.ToString();
                 txtPassword.Text = randomEmp.Password;
             }
@@ -80,14 +78,21 @@ namespace EMS_Client.Forms
             if (Config.DevelopmentMode) //Bypasses two-factor autentication
             {
                 txtPasscode.Text = passcode;
-                return;
+                if (!Config.PresentationMode) return;
             }
+
             //Send the passcode to employee's email address. | שליחת הקוד למייל
-            SmtpClient Smtp = new SmtpClient("smtp.gmail.com", 587);
-            MailMessage mail = new MailMessage(Config.EMS_EmailAddress, logingInEmp.Email, "Verification code from employee management system", passcode);
-            Smtp.EnableSsl = true;
-            Smtp.Credentials = new NetworkCredential(Config.EMS_EmailAddress, Config.EMA_EmailPassword);
-            Smtp.Send(mail);
+            Action twoFactorAuth = () => {
+                SmtpClient Smtp = new SmtpClient("smtp.gmail.com", 587);
+                MailMessage mail = new MailMessage(Config.EMS_EmailAddress, logingInEmp.Email, "Verification code from employee management system", passcode);
+                Smtp.EnableSsl = true;
+                Smtp.Credentials = new NetworkCredential(Config.EMS_EmailAddress, Config.EMA_EmailPassword);
+                Smtp.Send(mail);
+                (Array.Find(EMS_ClientMainScreen.PrimaryForms.ToArray(), x => x is EMS_ClientMainScreen) as EMS_ClientMainScreen).Invoke(() => EMS_ClientMainScreen.PrimaryForms.Pop().Close());
+            };
+            StandbyScreen standby = new StandbyScreen(twoFactorAuth);
+            standby.ShowDialog();
+            GC.Collect();
         }
         private void btnSendAgain_Click(object sender, EventArgs e)
         {

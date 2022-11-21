@@ -70,5 +70,6 @@ namespace EMS_Library
 
         //Development Mode | מצב פיתוח
         public const bool DevelopmentMode = true;
+        public const bool PresentationMode = false;
     }
 }

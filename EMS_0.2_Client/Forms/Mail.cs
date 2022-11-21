@@ -17,7 +17,7 @@ namespace EMS_Client.Forms
         /// </summary>
         private void Mail_Load(object sender, EventArgs e)
         {
-            Task getMail = new Task(() =>
+            Action getMail = () =>
             {
                 using (ImapClient client = new ImapClient("imap.gmail.com", 993, "employee.management.system010@gmail.com", "wcvyicyfscoiqfgr", AuthMethod.Auto, true))
                 {
@@ -37,8 +37,11 @@ namespace EMS_Client.Forms
                         catch { }
                     }
                 }
-            });
-            getMail.Start();
+                (Array.Find(EMS_ClientMainScreen.PrimaryForms.ToArray(), x => x is EMS_ClientMainScreen) as EMS_ClientMainScreen).Invoke(() => EMS_ClientMainScreen.PrimaryForms.Pop().Close());
+            };
+            StandbyScreen standby = new StandbyScreen(getMail);
+            standby.Show();
+            GC.Collect();
         }
         #endregion
 
