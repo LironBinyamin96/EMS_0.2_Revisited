@@ -1,15 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Net.Sockets;
-using System.Net;
-using EMS_Library;
+﻿using EMS_Library;
 using EMS_Library.Network;
+using System.Net;
+using System.Net.Sockets;
 using System.Timers;
-using Microsoft.Win32.SafeHandles;
-using System.Runtime.InteropServices;
 
 namespace EMS_Server
 {
@@ -49,13 +42,13 @@ namespace EMS_Server
                 });
             }
         }
-        class Monitor:IDisposable
+        class Monitor : IDisposable
         {
             System.Timers.Timer _connectionTimeout = new System.Timers.Timer(Config.ClientRequestTimeout);
             bool _timedout = false;
             TcpClient _client;
             DateTime _startTime = DateTime.Now;
-            bool _disposed=false;
+            bool _disposed = false;
             public double Elapsed => (DateTime.Now - _startTime).TotalMilliseconds;
             public Monitor(TcpClient client)
             {
@@ -88,12 +81,12 @@ namespace EMS_Server
             private bool TestConnection()
             {
                 //true if last operation was succesfull. | אמת אם הפעולה האחרונה הצליחה
-                if (_client.Client.Poll(0, SelectMode.SelectRead)) 
+                if (_client.Client.Poll(0, SelectMode.SelectRead))
                 {
                     //Attempts to recieve an empty message. If it can't then client is disconnected.
                     //ניסיון לקבל הודעה ריקה. אם זה לא יכול אז הלקוח מנותק.
-                    if (_client.Client.Receive(new byte[1], SocketFlags.Peek) == 0) 
-                         return false;
+                    if (_client.Client.Receive(new byte[1], SocketFlags.Peek) == 0)
+                        return false;
                     else return true;
                 }
                 return false;

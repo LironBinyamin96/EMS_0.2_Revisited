@@ -1,16 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.Data.OleDb;
+﻿using EMS_Library;
 using EMS_Library.MyEmployee.HoursLog;
-using EMS_Library;
-using System.Windows.Forms.VisualStyles;
 
 namespace EMS_Client.Forms
 {
@@ -130,8 +119,8 @@ namespace EMS_Client.Forms
                     $"Daily average: {(float)data.Sum(x => x?.Average.TotalHours) / data.Sum(x => x == null ? 0 : 1):F2} hours";
                 lblEmpData.Text = empData;
             }
-            
-            
+
+
         }
     }
 }

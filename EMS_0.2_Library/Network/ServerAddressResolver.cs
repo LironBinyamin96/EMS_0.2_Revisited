@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Net.NetworkInformation;
+﻿using System.Net.NetworkInformation;
 using System.Net.Sockets;
 
 namespace EMS_Library.Network
@@ -16,7 +11,7 @@ namespace EMS_Library.Network
     {
         //(true if had to look for the server) Notify user that he should update server ip in the config.
         // מחזיר אמת אם היה צריך לחפש את השרת - מודיע למשתמש שעליו לעדכן את האיי פי של השרת בתצורה
-        public static bool LookedUp=false;
+        public static bool LookedUp = false;
 
         /// <summary>
         /// Mothod for resolving IP addresses for both client and server.

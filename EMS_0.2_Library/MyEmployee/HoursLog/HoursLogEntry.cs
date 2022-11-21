@@ -1,11 +1,4 @@
-﻿using System;
-using System.IO;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace EMS_Library.MyEmployee.HoursLog
+﻿namespace EMS_Library.MyEmployee.HoursLog
 {
     /// <summary>
     /// Handling of daily entries in the log.

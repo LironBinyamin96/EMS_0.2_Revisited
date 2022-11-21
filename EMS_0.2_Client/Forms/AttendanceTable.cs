@@ -1,16 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using EMS_Library;
 using EMS_Library.MyEmployee.HoursLog;
-using EMS_Library;
 using System.Diagnostics;
-using System.Data.Common;
 
 namespace EMS_Client.Forms
 {
@@ -162,7 +152,7 @@ namespace EMS_Client.Forms
                 while (!writingXlsx.HasExited) { }
 
                 Process PDFProcess = new Process();
-                PDFProcess.StartInfo.FileName = $"{EMS_Library.Config.RootDirectory}\\{ EMS_ClientMainScreen.employee.IntId}.pdf";
+                PDFProcess.StartInfo.FileName = $"{EMS_Library.Config.RootDirectory}\\{EMS_ClientMainScreen.employee.IntId}.pdf";
                 PDFProcess.StartInfo.UseShellExecute = true;
                 PDFProcess.Start();
 

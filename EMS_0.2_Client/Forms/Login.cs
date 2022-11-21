@@ -1,19 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.Net.Sockets;
-using EMS_Library;
-using EMS_Library.Network;
+﻿using EMS_Library;
 using EMS_Library.MyEmployee;
+using EMS_Library.MyEmployee.IAccess;
 using System.Net;
 using System.Net.Mail;
-using EMS_Library.MyEmployee.IAccess;
 
 namespace EMS_Client.Forms
 {
@@ -120,8 +109,9 @@ namespace EMS_Client.Forms
         private void btnLoginPasscode_Click(object sender, EventArgs e)
         {
             if (passcode == txtPasscode.Text)
-            { EMS_ClientMainScreen.CurEmployee = logingInEmp;
-              Close();
+            {
+                EMS_ClientMainScreen.CurEmployee = logingInEmp;
+                Close();
             }
             else
             {

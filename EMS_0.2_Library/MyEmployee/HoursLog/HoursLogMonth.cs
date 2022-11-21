@@ -1,12 +1,4 @@
-﻿using System;
-using System.IO;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Runtime.Serialization;
-
-namespace EMS_Library.MyEmployee.HoursLog
+﻿namespace EMS_Library.MyEmployee.HoursLog
 {
     /// <summary>
     /// Monthly work-hours log handling.
@@ -96,17 +88,17 @@ namespace EMS_Library.MyEmployee.HoursLog
         /// <param name="entry"></param>
         public void Add(HoursLogEntry entry)
         {
-            if (_days == null) 
-            { 
+            if (_days == null)
+            {
                 _days = new HoursLogDay[DateTime.DaysInMonth(entry.Start.Year, entry.Start.Month)];
-                _days[entry.Start.Day-1] = new HoursLogDay(new HoursLogEntry[] { entry }, entry.Start.Date); 
+                _days[entry.Start.Day - 1] = new HoursLogDay(new HoursLogEntry[] { entry }, entry.Start.Date);
                 _month = entry.Start.Month;
                 _year = entry.Start.Year;
             }
-            else if(_days[entry.Start.Day-1]==null)
-                _days[entry.Start.Day-1] = new HoursLogDay(new HoursLogEntry[] { entry }, entry.Start.Date);
-            else 
-                _days[entry.Start.Day-1].Add(entry);
+            else if (_days[entry.Start.Day - 1] == null)
+                _days[entry.Start.Day - 1] = new HoursLogDay(new HoursLogEntry[] { entry }, entry.Start.Date);
+            else
+                _days[entry.Start.Day - 1].Add(entry);
         }
 
         /// <summary>
@@ -121,7 +113,7 @@ namespace EMS_Library.MyEmployee.HoursLog
                 $"\"Full Name\":\"{_employee.FName} {_employee.LName}\"," +
                 $"\"Year\":\"{_year}\"," +
                 $"\"Month\":\"{_month}\"," +
-                $"\"MonthlyHours\":\"{Total.Hours+Total.Days*24}:{Total.Minutes}:{Total.Seconds}\"," +
+                $"\"MonthlyHours\":\"{Total.Hours + Total.Days * 24}:{Total.Minutes}:{Total.Seconds}\"," +
                 $"\"TotalOvertime\":\"{TotalOvertime}\"," +
                 $"\"Days\":[";
             foreach (HoursLogDay day in _days)
@@ -140,7 +132,7 @@ namespace EMS_Library.MyEmployee.HoursLog
         public string[][] GetHoursLogTableStructure()
         {
             string[][] Data = new string[DateTime.DaysInMonth(Year, Month)][];
-            
+
             foreach (var day in _days)
                 if (day.Entries.IsEmpty())
                     Data[day.Date.Day - 1] = new string[] { $"{day.Date.Date.ToString().Substring(0, 10)}", $"{day.Date.DayOfWeek}", "", "", "" };

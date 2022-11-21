@@ -1,17 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using EMS_Library;
-using EMS_Library.Network;
-using EMS_Library.MyEmployee;
+﻿using AForge.Video;
 using AForge.Video.DirectShow;
-using AForge.Video;
+using EMS_Library;
+using EMS_Library.MyEmployee;
+using EMS_Library.Network;
 
 namespace EMS_Client.Forms
 {
@@ -78,11 +69,11 @@ namespace EMS_Client.Forms
                     });
 
                 Employee hold = tempEmp;
-                    string querry = Requests.UpdateEmployee(tempEmp.ProvideFieldsAndValues(), new Dictionary<string, string> {
+                string querry = Requests.UpdateEmployee(tempEmp.ProvideFieldsAndValues(), new Dictionary<string, string> {
                         { "_intId", EMS_ClientMainScreen.employee.IntId.ToString() } });
-                    if (Requests.RequestFromServer(querry, 3)[0] != "1") MessageBox.Show("Failed to update employee data!");
-                    else if (Requests.SaveImmage(empPicture, hold.IntId)[0] == "-1") MessageBox.Show("Failed to update picture!");
-                    else MessageBox.Show("Updaded!");
+                if (Requests.RequestFromServer(querry, 3)[0] != "1") MessageBox.Show("Failed to update employee data!");
+                else if (Requests.SaveImmage(empPicture, hold.IntId)[0] == "-1") MessageBox.Show("Failed to update picture!");
+                else MessageBox.Show("Updaded!");
             }
             else MessageBox.Show("Incorrect format!");
         }
@@ -178,7 +169,7 @@ namespace EMS_Client.Forms
                 positionBox.Text = EMS_ClientMainScreen.employee.Type.Name;
                 txtBaseSalary.Text = EMS_ClientMainScreen.employee.BaseSalary.ToString();
                 txtSalaryModifire.Text = EMS_ClientMainScreen.employee.SalaryModifire.ToString();
-                try 
+                try
                 { pictureBox1.Image = new ImageConverter().ConvertFrom(Requests.GetImage(new DataPacket($"get image #{EMS_ClientMainScreen.employee.IntId}", 6))) as Bitmap; }
                 catch { }
             }
@@ -234,7 +225,7 @@ namespace EMS_Client.Forms
         VideoCaptureDevice videoCapture;
         FilterInfoCollection filterInfo;
         byte frameCount = 0;
-       
+
 
         private void Camera_on(object sender, NewFrameEventArgs eventArgs)
         {
@@ -273,7 +264,7 @@ namespace EMS_Client.Forms
             videoCapture?.SignalToStop();
             btnCamera.Visible = true;
             btnTakePicture.Visible = false;
-            try { empPicture = new Bitmap(pictureBox1.Image).Rescale(Config.FRImmageWidth,Config.FRImmageHeight); }
+            try { empPicture = new Bitmap(pictureBox1.Image).Rescale(Config.FRImmageWidth, Config.FRImmageHeight); }
             catch { MessageBox.Show("Image could not be captured!"); }
         }
 

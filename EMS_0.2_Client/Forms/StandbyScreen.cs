@@ -1,14 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-
-namespace EMS_Client.Forms
+﻿namespace EMS_Client.Forms
 {
     /// <summary>
     /// Preforms an provided action while dispalying standby screen.
@@ -24,7 +14,7 @@ namespace EMS_Client.Forms
             action = act;
             EMS_ClientMainScreen.PrimaryForms.Push(this);
             System.Drawing.Drawing2D.GraphicsPath shape = new System.Drawing.Drawing2D.GraphicsPath();
-            shape.AddEllipse(5, 5, this.Width-15, this.Height-15);
+            shape.AddEllipse(5, 5, this.Width - 15, this.Height - 15);
             this.Region = new Region(shape);
         }
 

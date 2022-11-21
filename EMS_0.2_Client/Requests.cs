@@ -1,19 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.Net.Sockets;
+﻿using EMS_Library;
 using EMS_Library.Network;
-using EMS_Library;
+using System.Net.Sockets;
 
 namespace EMS_Client
 {
     static class Requests
     {
         //Mothods that provide querries for comunicating with SQL db through EMS server.
-        public static string SelectEmployee(string[][] clause, string gate="")
+        public static string SelectEmployee(string[][] clause, string gate = "")
         {
             string querry = $"get employee #";
             if (clause != null)
@@ -41,7 +35,6 @@ namespace EMS_Client
         }
         public static string DeleteEmployee(int _intId) => "delete employee #" + _intId;
         public static string AddEmployee(EMS_Library.MyEmployee.Employee employee) => "add employee #" + employee.ToString();
-        public static string UpdateEmployee(EMS_Library.MyEmployee.Employee employee) => "update employee #" + employee.ToString();
         public static string GetHourLogs(int _intId, int year, int month) => $"get log #{_intId}, {year}, {month}";
         public static string GetYearlyHourLog(int _intId, int year) => $"get log #{_intId}, {year}";
         public static string GetAllExceptions() => "get all exceptions #";
@@ -111,7 +104,7 @@ namespace EMS_Client
                 DataPacket responce = new DataPacket(stream);
                 result = responce.StringData.Split('|');
                 client.Client.Close();
-                Console.WriteLine("Client connected to the server: "+client.Connected);
+                Console.WriteLine("Client connected to the server: " + client.Connected);
             }
             catch (Exception e) { throw e; }
 

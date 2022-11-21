@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using EMS_Library;
 using System.Data.SqlClient;
-using EMS_Library;
+using System.Text;
 
 namespace EMS_Server
 {
@@ -195,7 +191,7 @@ namespace EMS_Server
         {
             string[] data = clientQuerry.Substring(clientQuerry.IndexOf('#') + 1).Split(',');
             return $"select * from {Config.EmployeeHourLogsTable} where " +
-                   $"((_entry between '{data[1]}-01-01' and '{int.Parse(data[1])+1}-01-01') or " +
+                   $"((_entry between '{data[1]}-01-01' and '{int.Parse(data[1]) + 1}-01-01') or " +
                    $"(_exit between '{data[1]}-01-01' and '{int.Parse(data[1]) + 1}-01-01'))" +
                    $" and _intId = {data[0]} order by _entry ASC;";
 

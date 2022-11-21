@@ -1,17 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.Drawing.Drawing2D;
-using EMS_Library.MyEmployee;
-using EMS_Library;
-using AForge.Video;
+﻿using AForge.Video;
 using AForge.Video.DirectShow;
+using EMS_Library;
+using EMS_Library.MyEmployee;
 
 namespace EMS_Client.Forms
 {
@@ -113,7 +103,7 @@ namespace EMS_Client.Forms
         VideoCaptureDevice videoCapture;
         FilterInfoCollection filterInfo;
         byte frameCount = 0;
-        
+
         private void Camera_on(object sender, NewFrameEventArgs eventArgs)
         {
             pictureBoxCamera.Image = (Bitmap)eventArgs.Frame.Clone();
@@ -134,7 +124,7 @@ namespace EMS_Client.Forms
             {
                 bool success = true;
                 filterInfo = new FilterInfoCollection(FilterCategory.VideoInputDevice);
-                success &= filterInfo.Capacity>0;
+                success &= filterInfo.Capacity > 0;
                 if (success) videoCapture = new VideoCaptureDevice(filterInfo[0].MonikerString);
                 success &= videoCapture != null;
                 if (success)

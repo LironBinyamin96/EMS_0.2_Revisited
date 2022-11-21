@@ -1,15 +1,4 @@
-﻿using System;
-using System.IO;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using EMS_Library;
-using EMS_Library.MyEmployee.Divisions;
-using System.Runtime;
-
-
-namespace EMS_Library.MyEmployee
+﻿namespace EMS_Library.MyEmployee
 {
     /// <summary>
     /// Base class for all employees

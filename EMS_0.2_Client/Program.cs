@@ -1,4 +1,3 @@
-using System.Data.OleDb;
 namespace EMS_Client
 {
     internal static class Program

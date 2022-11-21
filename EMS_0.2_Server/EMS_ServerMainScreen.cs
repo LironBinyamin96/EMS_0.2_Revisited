@@ -1,15 +1,7 @@
-﻿using System.Net.Sockets;
-using System.Diagnostics;
-using System.Data.SqlClient;
-using System.Data.Sql;
-using System.Text.RegularExpressions;
-using System.Drawing;
-using EMS_Library.MyEmployee;
-using EMS_Library.MyEmployee.HoursLog;
-using EMS_Library.MyEmployee.Divisions;
+﻿using EMS_Library;
 using EMS_Library.Network;
-using EMS_Library;
-using static System.ComponentModel.Design.ObjectSelectorEditor;
+using System.Data.SqlClient;
+using System.Diagnostics;
 
 namespace EMS_Server
 {
@@ -64,7 +56,7 @@ namespace EMS_Server
             listnerTimer.Start();
             if (!Directory.Exists(Config.RootDirectory)) Directory.CreateDirectory(Config.RootDirectory);
             if (!Directory.Exists(Config.FR_Images)) Directory.CreateDirectory(Config.FR_Images);
-            
+
         }
 
         /// <summary>
@@ -88,7 +80,7 @@ namespace EMS_Server
                     if (scheduleBackup)
                     {
                         if (!Directory.Exists(Config.RootDirectory + "\\Backups")) Directory.CreateDirectory(EMS_Library.Config.RootDirectory + "\\Backups");
-                        SQLBridge.OneWayCommand($"backup database {Config.SQLDatabaseName } to disk=N'{ Config.RootDirectory}\\Backups\\DB_Backup.{DateTime.Now.Date.ToString("yyyy-MM-dd HH-mm-ss")}.bak' WITH NOFORMAT, NOINIT,  NAME = N'data-Full Database Backup', SKIP, NOREWIND, NOUNLOAD,  STATS = 10");
+                        SQLBridge.OneWayCommand($"backup database {Config.SQLDatabaseName} to disk=N'{Config.RootDirectory}\\Backups\\DB_Backup.{DateTime.Now.Date.ToString("yyyy-MM-dd HH-mm-ss")}.bak' WITH NOFORMAT, NOINIT,  NAME = N'data-Full Database Backup', SKIP, NOREWIND, NOUNLOAD,  STATS = 10");
                         scheduleBackup = false;
                     }
                 }
@@ -152,7 +144,8 @@ namespace EMS_Server
                         case "sql querry begin": { SQLQuerryInput = true; WriteToServerConsole(Environment.NewLine + "Listening for querry:"); break; }
                         case "fr powerup": { try { if (FacialRecognition.Status == TaskStatus.RanToCompletion) FRProcess.Start(); else FacialRecognition.Start(); WriteToServerConsole(FRProcess.ProcessName + " powering up"); } catch { } break; }
                         case "fr shutdown": { try { FRProcess.Kill(); WriteToServerConsole(FRProcess.ProcessName + " " + FRProcess.HasExited); } catch { } break; }
-                        case "simmulate": {
+                        case "simmulate":
+                            {
                                 string id = SQLBridge.TwoWayCommand($"SELECT TOP 1 _intId FROM {Config.EmployeeDataTable} ORDER BY _created DESC; ");
                                 WriteToServerConsole("Pupulating log for " + id);
 
@@ -184,7 +177,8 @@ namespace EMS_Server
                                 WriteToServerConsole($"Max: {curDate.TotalAmountOfDays()}, Added: {count}");
                                 break;
                             }
-                        case "clear before simmulation": {
+                        case "clear before simmulation":
+                            {
                                 WriteToServerConsole("Cleared: " + SQLBridge.OneWayCommand(
                                     $"delete from {Config.EmployeeHourLogsTable} " +
                                     $"where  _intId=(SELECT TOP 1 _intId FROM {Config.EmployeeDataTable} ORDER BY _created DESC);"));
@@ -413,8 +407,6 @@ namespace EMS_Server
                 //FR().Start();
             });
         }
-
-
         #endregion
 
 

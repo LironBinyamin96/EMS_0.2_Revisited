@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Net.Sockets;
 using System.Text;
-using System.Threading.Tasks;
-using System.IO;
-using System.Net;
-using System.Net.Sockets;
 
 namespace EMS_Library.Network
 {
@@ -36,7 +30,7 @@ namespace EMS_Library.Network
                 catch (ArgumentOutOfRangeException) { length = int.MaxValue; Console.WriteLine($"DataPacket length {BitConverter.ToInt32(temp, 0)}! setting to {int.MaxValue}"); }
                 _header = new DataPacketHeader(length, (byte)stream.ReadByte());
                 _byteData = new byte[_header.DataIntLength];
-                
+
                 int i = 0;
                 while (i < _header.DataIntLength)
                 {

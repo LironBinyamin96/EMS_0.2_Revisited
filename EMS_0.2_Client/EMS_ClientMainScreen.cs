@@ -1,9 +1,7 @@
 ﻿using EMS_Client.Forms;
-using System.Runtime.InteropServices;
-using EMS_Library.MyEmployee;
-using EMS_Library.MyEmployee.HoursLog;
 using EMS_Library;
-using System;
+using EMS_Library.MyEmployee;
+using System.Runtime.InteropServices;
 
 namespace EMS_Client
 {
@@ -35,7 +33,7 @@ namespace EMS_Client
         {
             //Create working directory if it doesn't exist
             // יצירת ספריית עבודה אם היא לא קיימת
-            if (!Directory.Exists(Config.RootDirectory)) 
+            if (!Directory.Exists(Config.RootDirectory))
                 Directory.CreateDirectory(Config.RootDirectory);
             Action serverLookup = () => //Lambda method to look for the server. | חיפוש השרת
             {
@@ -99,7 +97,7 @@ namespace EMS_Client
                 panelDesktop.BackgroundImage = null;
         }
 
-      
+
         private void btnEditingEmployee_Click(object sender, EventArgs e) => changeButton(btnEditingEmployee, new EditingEmployee());
         private void btnMail_Click(object sender, EventArgs e) => changeButton(btnMail, new Mail());
         private void btnData_Click(object sender, EventArgs e) => changeButton(btnData, new GeneralData());
