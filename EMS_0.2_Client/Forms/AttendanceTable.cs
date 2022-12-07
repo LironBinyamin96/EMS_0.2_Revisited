@@ -109,8 +109,11 @@ namespace EMS_Client.Forms
         /// </summary>
         public void Fill()
         {
-            txtName.Text = EMS_ClientMainScreen.employee.LName.ToString() + " " + EMS_ClientMainScreen.employee.FName.ToString();
-            txtID.Text = EMS_ClientMainScreen.employee.IntId.ToString();
+            if (EMS_ClientMainScreen.employee != null)
+            {
+                txtName.Text = EMS_ClientMainScreen.employee.LName.ToString() + " " + EMS_ClientMainScreen.employee.FName.ToString();
+                txtID.Text = EMS_ClientMainScreen.employee.IntId.ToString();
+            }
         }
 
         /// <summary>

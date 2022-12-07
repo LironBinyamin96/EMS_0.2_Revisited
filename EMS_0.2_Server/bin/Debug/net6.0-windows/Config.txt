@@ -10,3 +10,8 @@ PythonDBConnection#Driver={SQL Server Native Client 11.0};|Server=LEV-STATPC\LEV
 NormalShiftLength#08:00:00
 
 MaxShiftLength#12:00:00
+
+EmployeeDataTable#Employees
+
+EmployeeLogsTable#HourLogs
+

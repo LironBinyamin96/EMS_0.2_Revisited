@@ -10,6 +10,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="IdentifyAndUpdateHours.py" />
+  </ItemGroup>
+
+  <ItemGroup>
     <COMReference Include="TxDataConvert">
       <WrapperTool>tlbimp</WrapperTool>
       <VersionMinor>0</VersionMinor>
@@ -45,7 +49,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="IdentifyAndUpdateHours.py">
+    <None Update="EMS_FacialRecognition.py">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>

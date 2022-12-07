@@ -142,8 +142,8 @@ namespace EMS_Server
                         case "exit": { Close(); break; }
                         case "shutdown": { Close(); break; }
                         case "sql querry begin": { SQLQuerryInput = true; WriteToServerConsole(Environment.NewLine + "Listening for querry:"); break; }
-                        case "fr powerup": { try { if (FacialRecognition.Status == TaskStatus.RanToCompletion) FRProcess.Start(); else FacialRecognition.Start(); WriteToServerConsole(FRProcess.ProcessName + " powering up"); } catch { } break; }
-                        case "fr shutdown": { try { FRProcess.Kill(); WriteToServerConsole(FRProcess.ProcessName + " " + FRProcess.HasExited); } catch { } break; }
+                        case "fr powerup": { try { if (FacialRecognition.Status == TaskStatus.RanToCompletion) FRProcess.Start(); else FacialRecognition.Start(); WriteToServerConsole(FRProcess?.ProcessName + " Powering up"); } catch { } break; }
+                        case "fr shutdown": { try { FRProcess.Kill(); WriteToServerConsole(FRProcess?.ProcessName + " Powering down"); } catch { } break; }
                         case "simmulate":
                             {
                                 string id = SQLBridge.TwoWayCommand($"SELECT TOP 1 _intId FROM {Config.EmployeeDataTable} ORDER BY _created DESC; ");
@@ -244,21 +244,24 @@ namespace EMS_Server
         /// </summary>
         private void WriteToConfigFile()
         {
-            EMS_Library.Config.PythonDBConnection =
+            Config.PythonDBConnection =
                 $"Driver={{SQL Server Native Client 11.0}};|" +
-                $"Server={EMS_Library.Config.SQLServerNames[EMS_Library.Config.ServerNamesIterator < 1 ? 0 : EMS_Library.Config.ServerNamesIterator - 1]};|" +
+                $"Server={Config.SQLServerNames[Config.ServerNamesIterator < 1 ? 0 : Config.ServerNamesIterator - 1]};|" +
                 $"Database=EmployeeManagmentDataBase;|" +
                 $"Trusted_Connection=yes;";
 
             string str = $"" +
-                $"ServerIP#{EMS_Library.Config.ServerIP}" + Environment.NewLine +
-                $"ServerPort#{EMS_Library.Config.ServerPort}\n" + Environment.NewLine +
-                $"RootDirectory#{EMS_Library.Config.RootDirectory}\n" + Environment.NewLine +
-                $"FR_Location#{EMS_Library.Config.FR_Location}\n" + Environment.NewLine +
-                $"PythonDBConnection#{EMS_Library.Config.PythonDBConnection}\n" + Environment.NewLine +
-                $"NormalShiftLength#{EMS_Library.Config.NormalShiftLength}\n" + Environment.NewLine +
-                $"MaxShiftLength#{EMS_Library.Config.MaxShiftLength}";
+                $"ServerIP#{Config.ServerIP}" + Environment.NewLine +
+                $"ServerPort#{Config.ServerPort}\n" + Environment.NewLine +
+                $"RootDirectory#{Config.RootDirectory}\n" + Environment.NewLine +
+                $"FR_Location#{Config.FR_Location}\n" + Environment.NewLine +
+                $"PythonDBConnection#{Config.PythonDBConnection}\n" + Environment.NewLine +
+                $"NormalShiftLength#{Config.NormalShiftLength}\n" + Environment.NewLine +
+                $"MaxShiftLength#{Config.MaxShiftLength}\n" + Environment.NewLine +
+                $"EmployeeDataTable#{Config.EmployeeDataTable}\n" + Environment.NewLine +
+                $"EmployeeLogsTable#{Config.EmployeeHourLogsTable}\n" + Environment.NewLine;
             File.WriteAllText(Directory.GetCurrentDirectory() + "\\Config.txt", str);
+            File.WriteAllText(Config.RootDirectory + "\\Config.txt", str);
         }
         /// <summary>
         /// Provides primary listening tread for the server.
@@ -332,7 +335,7 @@ namespace EMS_Server
             return new Task(() =>
             {
                 FRProcess = new Process();
-                FRProcess.StartInfo.FileName = "IdentifyAndUpdateHours.py";
+                FRProcess.StartInfo.FileName = "EMS_FacialRecognition.py";
                 FRProcess.StartInfo.UseShellExecute = true;
                 FRProcess.Start();
                 FRProcess.Exited += this.FRStoped;

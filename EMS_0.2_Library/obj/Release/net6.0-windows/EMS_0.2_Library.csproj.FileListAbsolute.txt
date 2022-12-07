@@ -1,0 +1,13 @@
+C:\Users\levkh\Documents\GitHub\EMS_0.2_Revisited\EMS_0.2_Library\bin\Release\net6.0-windows\Config.cs
+C:\Users\levkh\Documents\GitHub\EMS_0.2_Revisited\EMS_0.2_Library\bin\Release\net6.0-windows\EMS_0.2_Library.deps.json
+C:\Users\levkh\Documents\GitHub\EMS_0.2_Revisited\EMS_0.2_Library\bin\Release\net6.0-windows\EMS_0.2_Library.dll
+C:\Users\levkh\Documents\GitHub\EMS_0.2_Revisited\EMS_0.2_Library\bin\Release\net6.0-windows\EMS_0.2_Library.pdb
+C:\Users\levkh\Documents\GitHub\EMS_0.2_Revisited\EMS_0.2_Library\obj\Release\net6.0-windows\EMS_0.2_Library.csproj.AssemblyReference.cache
+C:\Users\levkh\Documents\GitHub\EMS_0.2_Revisited\EMS_0.2_Library\obj\Release\net6.0-windows\EMS_0.2_Library.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\levkh\Documents\GitHub\EMS_0.2_Revisited\EMS_0.2_Library\obj\Release\net6.0-windows\EMS_0.2_Library.AssemblyInfoInputs.cache
+C:\Users\levkh\Documents\GitHub\EMS_0.2_Revisited\EMS_0.2_Library\obj\Release\net6.0-windows\EMS_0.2_Library.AssemblyInfo.cs
+C:\Users\levkh\Documents\GitHub\EMS_0.2_Revisited\EMS_0.2_Library\obj\Release\net6.0-windows\EMS_0.2_Library.csproj.CoreCompileInputs.cache
+C:\Users\levkh\Documents\GitHub\EMS_0.2_Revisited\EMS_0.2_Library\obj\Release\net6.0-windows\EMS_0.2_Library.dll
+C:\Users\levkh\Documents\GitHub\EMS_0.2_Revisited\EMS_0.2_Library\obj\Release\net6.0-windows\refint\EMS_0.2_Library.dll
+C:\Users\levkh\Documents\GitHub\EMS_0.2_Revisited\EMS_0.2_Library\obj\Release\net6.0-windows\EMS_0.2_Library.pdb
+C:\Users\levkh\Documents\GitHub\EMS_0.2_Revisited\EMS_0.2_Library\obj\Release\net6.0-windows\ref\EMS_0.2_Library.dll
