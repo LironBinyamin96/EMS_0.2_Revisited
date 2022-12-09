@@ -137,3 +137,5 @@ C:\Users\levkh\Documents\GitHub\EMS_0.2_Revisited\EMS_0.2_Server\bin\Debug\net6.
 C:\Users\liron\Desktop\EMS\EMS_0.2_Server\bin\Debug\net6.0-windows\Config.cs
 C:\Users\liron\Desktop\EMS\EMS_0.2_Server\bin\Debug\net6.0-windows\IdentifyAndUpdateHours.py
 C:\Users\levkh\Documents\GitHub\EMS_0.2_Revisited\EMS_0.2_Server\bin\Debug\net6.0-windows\EMS_FacialRecognition.py
+C:\Users\levkh\Documents\GitHub\EMS_0.2_Revisited\EMS_0.2_Server\bin\Debug\net6.0-windows\Python libraries.txt
+C:\Users\levkh\Documents\GitHub\EMS_0.2_Revisited\EMS_0.2_Server\bin\Debug\net6.0-windows\Recreate DB.sql

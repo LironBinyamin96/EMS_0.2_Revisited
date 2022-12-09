@@ -14,4 +14,13 @@
     </Compile>
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Python libraries.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Recreate DB.sql">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

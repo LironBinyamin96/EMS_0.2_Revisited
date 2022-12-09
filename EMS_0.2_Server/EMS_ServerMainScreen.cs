@@ -297,8 +297,8 @@ namespace EMS_Server
                     try { connenction.Open(); }
                     catch
                     {
-                        if (EMS_Library.Config.ServerNamesIterator > Config.SQLServerNames.Length)
-                        { MessageBox.Show("Couldn't find sql server!"); Close(); }
+                        if (Config.ServerNamesIterator > Config.SQLServerNames.Length)
+                        { MessageBox.Show("Couldn't find sql server!"); serverForm.Close(); }
                     }
                     if (connenction.State == System.Data.ConnectionState.Open)
                     {
@@ -334,6 +334,7 @@ namespace EMS_Server
         {
             return new Task(() =>
             {
+                if (!SQLServerLookup.IsCompleted) SQLServerLookup.Wait();
                 FRProcess = new Process();
                 FRProcess.StartInfo.FileName = "EMS_FacialRecognition.py";
                 FRProcess.StartInfo.UseShellExecute = true;

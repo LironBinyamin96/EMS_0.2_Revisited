@@ -42,7 +42,13 @@ namespace EMS_Library.Network
                     Console.WriteLine("Creation complete!\n" + ToString());
                 }
             }
-            catch { throw new Exception($"Failed to create data packet!"); }
+            catch 
+            {
+                string brokenPacket = "Broken Packet";
+                _header = new DataPacketHeader(brokenPacket.Length, 255);
+                _byteData = Encoding.UTF8.GetBytes(brokenPacket);
+                StringData = brokenPacket;
+            }
 
         }
         /// <summary>

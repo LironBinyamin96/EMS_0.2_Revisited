@@ -26,6 +26,7 @@ namespace EMS_Library
             "LEV-STATPC\\LEVPCMSSQLSERVER",
             "DESKTOP-A6E5597\\SQLEXPRESS",
             "DESKTOP-LL8D68S",
+            "DESKTOP-64NCL55\\SQL_LEVLAPTOP"
         };
 
         public const string DefaultId = "316472570";
