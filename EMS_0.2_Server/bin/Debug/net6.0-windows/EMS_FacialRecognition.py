@@ -10,6 +10,7 @@ def OnCooldown(employeeId):
     global employeeCooldownDict
     employeeCooldownDict={key:value for (key,value) in employeeCooldownDict.items() if (datetime.now()-value).seconds<10}
     if(employeeId in employeeCooldownDict.keys()):
+        print((datetime.now()-employeeCooldownDict[employeeId]).seconds)
         return True
     else:
         employeeCooldownDict[employeeId] = datetime.now()
@@ -55,7 +56,7 @@ def StampEmployee(employeeID):
     if(OnCooldown(employeeID)): return 'Too soon.'
     #Check if employee exists
     cursor = SQLConnection.cursor()
-    existanceCheck = cursor.execute(f'select _fName from {config["EmployeeDataTable"]} where _intId={employeeID}')
+    cursor.execute(f'select _fName from {config["EmployeeDataTable"]} where _intId={employeeID}')
     if(cursor.fetchval() is None): return f'Employee {employeeID} does not exist.'
 
     #Get last log entry
@@ -133,10 +134,12 @@ while True:
             y1,x2,y2,x1= y1*4,x2*4,y2*4,x1*4
             cv2.rectangle(img,(x1,y1),(x2,y2),(0,255,0),1)
             cv2.rectangle(img,(x1,y2-35),(x2,y2),(0,255,0),cv2.FILLED)
-            cv2.putText(img,empName,(x1+6,y2-25),cv2.FONT_HERSHEY_COMPLEX,0.5,(0,0,0),2)  
-            if(StampEmployee(Employee)=='Too soon.'):
+            cv2.putText(img,empName,(x1+6,y2-25),cv2.FONT_HERSHEY_COMPLEX,0.5,(0,0,0),2)
+            result = StampEmployee(Employee)
+            if(result =='Too soon.'):
                 print(f'{empName} already stamped')
             else: 
+                print(result)
                 cv2.putText(img,greeting,(x1+6,y2-6),cv2.FONT_HERSHEY_COMPLEX,0.5,(0,0,0),2)
     cv2.imshow("Camera", img)
     cv2.waitKey(1)

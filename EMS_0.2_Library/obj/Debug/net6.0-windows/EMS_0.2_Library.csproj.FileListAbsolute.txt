@@ -63,3 +63,5 @@ C:\Users\liron\Desktop\EMS\EMS_0.2_Library\bin\Debug\net6.0-windows\Config.cs
 C:\Users\Lev's_Laptop\Desktop\Git\EMS_0.2_Revisited\EMS_0.2_Library\bin\Debug\net6.0-windows\Config.cs
 C:\Users\levkh\Documents\GitHub\EMS_0.2_Revisited\EMS_0.2_Library\bin\Debug\net6.0-windows\Python libraries.txt
 C:\Users\levkh\Documents\GitHub\EMS_0.2_Revisited\EMS_0.2_Library\bin\Debug\net6.0-windows\Recreate DB.sql
+C:\Users\liron\Desktop\EMS\EMS_0.2_Library\bin\Debug\net6.0-windows\Python libraries.txt
+C:\Users\liron\Desktop\EMS\EMS_0.2_Library\bin\Debug\net6.0-windows\Recreate DB.sql
