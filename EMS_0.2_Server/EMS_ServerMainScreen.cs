@@ -265,6 +265,7 @@ namespace EMS_Server
                 $"MaxShiftLength#{Config.MaxShiftLength}\n" + Environment.NewLine +
                 $"EmployeeDataTable#{Config.EmployeeDataTable}\n" + Environment.NewLine +
                 $"EmployeeLogsTable#{Config.EmployeeHourLogsTable}\n" + Environment.NewLine +
+                $"DataBaseName#{Config.SQLDatabaseName}\n"+Environment.NewLine +
                 $"ImageFormat#{Config.ImageFormat}\n" + Environment.NewLine;
             File.WriteAllText(Directory.GetCurrentDirectory() + "\\Config.txt", str);
             File.WriteAllText(Config.RootDirectory + "\\Config.txt", str);

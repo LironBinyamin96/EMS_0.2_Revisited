@@ -23,33 +23,27 @@ config = ParseConfig()
 conn = pyodbc.connect(
     "Driver={SQL Server Native Client 11.0};"+
     config["PythonDBConnection"].split('|')[1]+
-    "Database=EmployeeManagmentDataBase;"+
+    f'Database={config["DataBaseName"]};'+
     "Trusted_Connection=yes;")
 
 def getFullNameOfEmployee(connection,employeeId):
     cursor = connection.cursor()
-    cursor.execute(f'select _fName,_lName from Employees where _intId = {employeeId} ;')
+    cursor.execute(f'select _fName,_lName from {config["EmployeeDataTable"]} where _intId = {employeeId} ;')
     fullNameOfEmployee= cursor.fetchone()
     fullNameString = fullNameOfEmployee[0] + " " + fullNameOfEmployee[1] 
     return fullNameString
 
-def GetFormatForReturningTimeOfDay(currentTime):
-    # format currentTime is '%Y-%m-%d %H:%M:%S'
-    dataTime = currentTime.split(" ")
-    finalDataTime = dataTime[1].split(":")
-    if(1<(int(finalDataTime[0]))<10):
-        return "Good Morning"
-    elif (10<(int(finalDataTime[0]))<14):
-        return "Good Day"
-    elif (14<(int(finalDataTime[0]))<18):
-        return "Good Afternoon"
-    else:
-        return "Good Evening"
+def GetTimedGreeting():
+    hours = int(datetime.today().strftime('%H')) #Get hours from the time object
+    if(hours>22 or hours<4): return "Greetings. Are you in need of coffie?"
+    elif(hours>18): return "Good Evening"
+    elif(hours>13): return "Good Afternoon"
+    else: return "Good Morning"
 
 # Checking the last login status of the employee
 def read(connection,employeeId):
     cursor = connection.cursor()
-    cursor.execute(f'select top (1) _entry,_exit from HourLogs where _intId = {employeeId} order by _entry DESC;')
+    cursor.execute(f'select top (1) _entry,_exit from {config["EmployeeLogsTable"]} where _intId = {employeeId} order by _entry DESC;')
     x=cursor.fetchone()
     if x == None: return False # If the employee does not exist yet
     if x[1] == None: return True # If the worker printed an entry but did not print an exit
@@ -58,7 +52,7 @@ def read(connection,employeeId):
 # Getting the login time - auxiliary function for printing a logout
 def getEntryTime(connection,employeeId):
     cursor = connection.cursor()
-    cursor.execute(f'select top (1) _entry from HourLogs where _intId = {employeeId} order by _entry DESC;')
+    cursor.execute(f'select top (1) _entry from {config["EmployeeLogsTable"]} where _intId = {employeeId} order by _entry DESC;')
     x = cursor.fetchone()
     for row in x:
         return row
@@ -69,26 +63,26 @@ def entry (connection,entryTime):
     data = entryTime.split("|")
     cursor = connection.cursor()
     #if EmployeeStatus(connection,data[0]) != 0:  ----------
-    sql = 'insert INTO HourLogs(_intId,_entry) VALUES(?,?); update Employees set _employmentStatus = 1 where _IntId = ?;'
+    sql = f'insert INTO {config["EmployeeLogsTable"]}(_intId,_entry) VALUES(?,?); update {config["EmployeeDataTable"]} set _employmentStatus = 1 where _IntId = ?;'
     val = (data[0], data[1],data[0])
     cursor.execute(sql, val)
     connection.commit()
-    print(GetFormatForReturningTimeOfDay(data[1]) +" "+ data[2]+ "!\nyour entry time is : " + data[1])
+    print(GetTimedGreeting() +" "+ data[2]+ "!\nyour entry time is : " + data[1])
 
 # insert exit time to SQL server
 def exitTime (connection,exitTime,entryTime):
     data = exitTime.split("|")
     cursor = connection.cursor()
     #if EmployeeStatus(connection,data[0]) != 0: --------
-    sql = 'update HourLogs set _exit = ? where _intId = ? and _entry = ?;update Employees set _employmentStatus = 2 where _IntId = ?;'
+    sql = f'update {config["EmployeeLogsTable"]} set _exit = ? where _intId = ? and _entry = ?;update {config["EmployeeDataTable"]} set _employmentStatus = 2 where _IntId = ?;'
     val = (data[1], data[0], entryTime,data[0])
     cursor.execute(sql, val)
     connection.commit()
-    print(GetFormatForReturningTimeOfDay(data[1]) +" "+ data[2]+ "!\nyour exit time is : " + data[1])
+    print(GetTimedGreeting() +" "+ data[2]+ "!\nyour exit time is : " + data[1])
 
 def EmployeeStatus (connection,employeeId):
     cursor = connection.cursor()
-    cursor.execute(f'select _employmentStatus from Employees where _intId = {employeeId} ;')
+    cursor.execute(f'select _employmentStatus from {config["EmployeeDataTable"]} where _intId = {employeeId} ;')
     x= cursor.fetchone()
     for row in x:
         return(row)
@@ -183,13 +177,16 @@ while True:
         # Finding the minimum value of an image by index
         theBastMatchIndex = np.argmin(faceDistance)
 
-        if match[theBastMatchIndex] and faceDistance[theBastMatchIndex] < 0.5:
+        if match[theBastMatchIndex] and faceDistance[theBastMatchIndex] < 0.45:
             Employee = EmployeeIdentity[theBastMatchIndex].upper()
             EntryOrExitTime(Employee)
+            empName = getFullNameOfEmployee(conn,Employee)
+            greeting = GetTimedGreeting()
             y1,x2,y2,x1= faceLocation
             y1,x2,y2,x1= y1*4,x2*4,y2*4,x1*4
             cv2.rectangle(img,(x1,y1),(x2,y2),(0,255,0),1)
             cv2.rectangle(img,(x1,y2-35),(x2,y2),(0,255,0),cv2.FILLED)
-            cv2.putText(img,getFullNameOfEmployee(conn,Employee),(x1+6,y2-6),cv2.FONT_HERSHEY_COMPLEX,2,(0,0,0),2)
+            cv2.putText(img,greeting,(x1+6,y2-6),cv2.FONT_HERSHEY_COMPLEX,0.5,(0,0,0),2)
+            cv2.putText(img,empName,(x1+6,y2-25),cv2.FONT_HERSHEY_COMPLEX,0.5,(0,0,0),2)
     cv2.imshow("Camera", img)
     cv2.waitKey(1)

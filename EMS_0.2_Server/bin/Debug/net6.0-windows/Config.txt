@@ -15,3 +15,7 @@ EmployeeDataTable#Employees
 
 EmployeeLogsTable#HourLogs
 
+DataBaseName#EmployeeManagmentDataBase
+
+ImageFormat#.jpg
+

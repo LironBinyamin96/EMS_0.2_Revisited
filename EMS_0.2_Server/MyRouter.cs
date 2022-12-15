@@ -62,7 +62,7 @@ namespace EMS_Server
             // שומר תמונה בתיקייה המתאימה. מחזיר מחרוזת המייצגת את התוצאה של הפעולה.
             string SavePucture(byte[] picData)
             {
-                if (picData == null || picData.Length == 0) return "Data packet contining the picture was empty or null";
+                if (picData == null || picData.Length == 0) return "Data packet containing the picture was empty or null";
                 try
                 {
                     int num = 0;
@@ -87,6 +87,8 @@ namespace EMS_Server
                 }
                 catch (Exception ex) { return ex.Message; }
             }
+
+            //Used for differentiating between faces and not faces
             string IsFace(Bitmap image)
             {
                 image.Save(Config.RootDirectory + $"\\Is_Face{Config.ImageFormat}");
