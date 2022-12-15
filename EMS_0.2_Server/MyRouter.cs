@@ -1,6 +1,8 @@
 ﻿using EMS_0._2_Server.Properties;
 using EMS_Library;
 using EMS_Library.Network;
+using System;
+using System.Diagnostics;
 
 namespace EMS_Server
 {
@@ -72,12 +74,57 @@ namespace EMS_Server
                     Bitmap image = (Bitmap)new ImageConverter().ConvertFrom(picData);
                     if (image != null)
                     {
-                        image.Save(Config.FR_Images + $"\\{intID}{Config.ImageFormat}");
-                        return "saved";
+                        string isFace = IsFace(image);
+                        if (isFace == "true")
+                        {
+                            image.Save(Config.FR_Images + $"\\{intID}{Config.ImageFormat}");
+                            return "saved";
+                        }
+                        else if (isFace == "false") return "Provided picture was not recognized as a valid picture of a face";
+                        else return isFace;
                     }
                     else return "Could not convert data recieved to image.";
                 }
                 catch (Exception ex) { return ex.Message; }
+            }
+            string IsFace(Bitmap image)
+            {
+                image.Save(Config.RootDirectory + $"\\Is_Face{Config.ImageFormat}");
+                
+                Process isFace = new Process
+                {
+                    StartInfo = new ProcessStartInfo
+                    {
+                        FileName = "IsFace.py",
+                        UseShellExecute = true,
+                        RedirectStandardOutput = true,
+                        CreateNoWindow = true
+                    }
+                };
+                try
+                {
+                    isFace.Start();
+                    string output = isFace.StandardOutput.ReadToEnd();
+                    //May need manual closure.
+                    isFace.WaitForExit();
+                    isFace.Dispose();
+                    return output;
+                }
+                catch
+                {
+                    return new InvalidDataException("Face check failed").Message;
+                }
+                finally
+                {
+                    Directory.Delete(Config.RootDirectory + $"\\Is_Face{Config.ImageFormat}");
+                    GC.Collect();
+                }
+            }
+
+            static void OutputHandler(object sendingProcess, DataReceivedEventArgs outLine)
+            {
+                if(outLine.Data=="true") 
+                Console.WriteLine(outLine.Data);
             }
         }
     }

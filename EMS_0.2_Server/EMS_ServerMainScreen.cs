@@ -2,6 +2,7 @@
 using EMS_Library.Network;
 using System.Data.SqlClient;
 using System.Diagnostics;
+using System.Security.Cryptography.X509Certificates;
 
 namespace EMS_Server
 {
@@ -186,6 +187,10 @@ namespace EMS_Server
                             }
                     }
             }
+
+           
+
+
         }
 
         /// <summary>
@@ -259,7 +264,8 @@ namespace EMS_Server
                 $"NormalShiftLength#{Config.NormalShiftLength}\n" + Environment.NewLine +
                 $"MaxShiftLength#{Config.MaxShiftLength}\n" + Environment.NewLine +
                 $"EmployeeDataTable#{Config.EmployeeDataTable}\n" + Environment.NewLine +
-                $"EmployeeLogsTable#{Config.EmployeeHourLogsTable}\n" + Environment.NewLine;
+                $"EmployeeLogsTable#{Config.EmployeeHourLogsTable}\n" + Environment.NewLine +
+                $"ImageFormat#{Config.ImageFormat}\n" + Environment.NewLine;
             File.WriteAllText(Directory.GetCurrentDirectory() + "\\Config.txt", str);
             File.WriteAllText(Config.RootDirectory + "\\Config.txt", str);
         }
@@ -336,10 +342,11 @@ namespace EMS_Server
             {
                 if (!SQLServerLookup.IsCompleted) SQLServerLookup.Wait();
                 FRProcess = new Process();
-                FRProcess.StartInfo.FileName = "EMS_FacialRecognition.py";
+                FRProcess.StartInfo.FileName = "IdentifyAndUpdateHours.py";
                 FRProcess.StartInfo.UseShellExecute = true;
                 FRProcess.Start();
-                FRProcess.Exited += this.FRStoped;
+                FRProcess.Exited += FRStoped;
+                FRProcess.Disposed += FRStoped;
             });
         }
         #endregion
