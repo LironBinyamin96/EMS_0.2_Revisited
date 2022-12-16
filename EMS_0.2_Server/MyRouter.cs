@@ -92,19 +92,21 @@ namespace EMS_Server
             string IsFace(Bitmap image)
             {
                 image.Save(Config.RootDirectory + $"\\Is_Face{Config.ImageFormat}");
-                
-                Process isFace = new Process
-                {
-                    StartInfo = new ProcessStartInfo
-                    {
-                        FileName = "IsFace.py",
-                        UseShellExecute = true,
-                        RedirectStandardOutput = true,
-                        CreateNoWindow = true
-                    }
-                };
+
+                ProcessStartInfo startInfo = new ProcessStartInfo();
+                startInfo.FileName = "python";
+                startInfo.Arguments = "Is_Face.py";
+
+                // Set up the process to redirect its output
+                startInfo.UseShellExecute = false;
+                startInfo.RedirectStandardOutput = true;
+                startInfo.CreateNoWindow = true;
                 try
                 {
+                    Process isFace = new Process()
+                    {
+                        StartInfo = startInfo
+                    };
                     isFace.Start();
                     string output = isFace.StandardOutput.ReadToEnd();
                     //May need manual closure.
