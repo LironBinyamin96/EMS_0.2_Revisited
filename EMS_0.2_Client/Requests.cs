@@ -51,17 +51,19 @@ namespace EMS_Client
         {
             TcpClient tcpClient = new TcpClient(Config.ServerIP, Config.ServerPort);
             NetworkStream stream = tcpClient.GetStream();
-            byte[] imagePlusId = new ImageConverter().ConvertTo(image, typeof(byte[])) as byte[];
-            if (imagePlusId != null)
+            //Get byte data of the image;
+            byte[] imageBytes = new ImageConverter().ConvertTo(image, typeof(byte[])) as byte[];
+            if (imageBytes != null)
             {
-                DataPacket packet = new DataPacket(imagePlusId.Concat(BitConverter.GetBytes(intId)).ToArray(), 10);
+                //Create new data packet while appending employee ID to the end of the data stream.
+                DataPacket packet = new DataPacket(imageBytes.Concat(BitConverter.GetBytes(intId)).ToArray(), 10);
+                //Send it away.
                 stream.Write(packet.Write(), 0, packet.GetTotalSize());
                 string[] responce = new DataPacket(stream).StringData.Split('|');
                 tcpClient.Close();
                 return responce;
             }
-            else throw new ArgumentException("Clould not parse the image to byte[].");
-            tcpClient.Close();
+            else { tcpClient.Close(); throw new ArgumentException("Clould not parse the image to byte[]."); }
         }
 
         /// <summary>

@@ -49,6 +49,7 @@ namespace EMS_Client.Forms
             //Format validation | אימות פורמט
             if (CheckingDataFields())
             {
+                bool validation = true;
                 Employee tempEmp = Employee.ActivateEmployee(new object[] {
                     positionBox.Text,
                     EMS_ClientMainScreen.employee.IntId,
@@ -68,12 +69,14 @@ namespace EMS_Client.Forms
                     txtAddres.Text
                     });
 
-                Employee hold = tempEmp;
                 string querry = Requests.UpdateEmployee(tempEmp.ProvideFieldsAndValues(), new Dictionary<string, string> {
                         { "_intId", EMS_ClientMainScreen.employee.IntId.ToString() } });
-                if (Requests.RequestFromServer(querry, 3)[0] != "1") MessageBox.Show("Failed to update employee data!");
-                else if (Requests.SaveImmage(empPicture, hold.IntId)[0] == "-1") MessageBox.Show("Failed to update picture!");
-                else MessageBox.Show("Updaded!");
+                validation &= Requests.RequestFromServer(querry, 3)[0] == "1";
+                if (!validation) { MessageBox.Show("Failed to update employee data!"); return; }
+                string[] picBuffer = Requests.SaveImmage(empPicture, tempEmp.IntId);
+                validation &= picBuffer[0].ToLower() == "saved";
+                if (!validation) { MessageBox.Show(picBuffer[0]); return; }
+                MessageBox.Show("Updaded!");
             }
             else MessageBox.Show("Incorrect format!");
         }
@@ -90,9 +93,7 @@ namespace EMS_Client.Forms
             DialogResult delete = MessageBox.Show("Are you sure?", "", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
             if (delete == DialogResult.OK)
             {
-
-                string querry = Requests.DeleteEmployee(EMS_ClientMainScreen.employee.IntId);
-                string[] buffer = Requests.RequestFromServer(querry, 4);
+                Requests.RequestFromServer(Requests.DeleteEmployee(EMS_ClientMainScreen.employee.IntId), 4);
                 Clear();
             }
         }

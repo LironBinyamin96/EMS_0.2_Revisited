@@ -20,13 +20,12 @@ def has_human_face(image):
     return len(faces)
 
 config = ParseConfig()
-path = config['RootDirectory']+'\\test.jpg'
+path = f'{config["RootDirectory"]}\\Is_Face{config["ImageFormat"]}'
+print(path)
 image = cv2.imread(path)
 print('face search started')
 print(has_human_face(image))
 print('end')
-
-time.sleep(10)
 exit()
 
 

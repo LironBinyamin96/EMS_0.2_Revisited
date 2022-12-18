@@ -370,9 +370,15 @@ namespace EMS_Server
         /// </summary>
         private Task TestingTaskBuilder()
         {
-            return new Task(() =>
+            return new Task(async () =>
             {
                 if (!SQLServerLookup.IsCompleted) SQLServerLookup.Wait();
+                MyRouter router = new MyRouter();
+                byte[] data = (byte[])new ImageConverter().ConvertTo(new Bitmap(Config.RootDirectory + "\\testingImage.jpg"), typeof(byte[]));
+                DataPacket dataPacket = new DataPacket(data?.Concat(BitConverter.GetBytes(111111111)).ToArray(),10);
+                DataPacket testingResponce = await router.Router(dataPacket);
+
+
                 #region Add 20 random eployees to DB
                 /*
                     for (int i = 0; i < 20; i++)
@@ -420,7 +426,5 @@ namespace EMS_Server
             });
         }
         #endregion
-
-
     }
 }

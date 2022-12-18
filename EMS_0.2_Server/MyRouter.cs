@@ -14,8 +14,9 @@ namespace EMS_Server
         /// </summary>
         /// <param name="data"></param>
         /// <exception cref="Exception"></exception>
-        public DataPacket Router(DataPacket data)
+        public async Task<DataPacket> Router(DataPacket data)
         {
+            if (data.ByteData == null) return new DataPacket("Data recieved by the server was empty!");
             switch (data._header.Act)
             {
                 /*Exception handling*/default: { return new DataPacket(new ArgumentException($"Requested action was not found! Check DataPacket._header.Act!\n_header={data._header}\nAct={data._header.Act}").Message); }
@@ -28,7 +29,7 @@ namespace EMS_Server
                 /*Update entry*/      case 7: { return new DataPacket(SQLBridge.UpdateEntry(data.StringData)); };
                 /*Get Exceptions*/    case 8: { return new DataPacket(SQLBridge.TwoWayCommand(SQLBridge.GetAllExceptions(data.StringData))); }
                 /*Get all emails*/    case 9: { return new DataPacket(SQLBridge.TwoWayCommand("select _email from Employees;")); }
-                /*Save image sent*/   case 10: { return new DataPacket(SavePucture(data.ByteData)); }
+                /*Save image sent*/   case 10: { return new DataPacket(await SavePucture(data.ByteData)); }
                 /*Get yearly log*/    case 11: { return new DataPacket(SQLBridge.TwoWayCommand(SQLBridge.GetYearLog(data.StringData))); }
                
                 /*Get free ID*/       case 252: { return new DataPacket(SQLBridge.GetFreeID(), 255); }
@@ -60,7 +61,7 @@ namespace EMS_Server
 
             // Saves picture into appropriate folder. Returns string representing outcome of the operation.
             // שומר תמונה בתיקייה המתאימה. מחזיר מחרוזת המייצגת את התוצאה של הפעולה.
-            string SavePucture(byte[] picData)
+            async Task<string> SavePucture(byte[] picData)
             {
                 if (picData == null || picData.Length == 0) return "Data packet containing the picture was empty or null";
                 try
@@ -74,14 +75,12 @@ namespace EMS_Server
                     Bitmap image = (Bitmap)new ImageConverter().ConvertFrom(picData);
                     if (image != null)
                     {
-                        string isFace = IsFace(image);
-                        if (isFace == "true")
+                        if (await IsFace(image))
                         {
                             image.Save(Config.FR_Images + $"\\{intID}{Config.ImageFormat}");
                             return "saved";
                         }
-                        else if (isFace == "false") return "Provided picture was not recognized as a valid picture of a face";
-                        else return isFace;
+                        else return "Provided picture was not recognized as a valid picture of a face";
                     }
                     else return "Could not convert data recieved to image.";
                 }
@@ -89,46 +88,53 @@ namespace EMS_Server
             }
 
             //Used for differentiating between faces and not faces
-            string IsFace(Bitmap image)
+            async Task<bool> IsFace(Bitmap image)
             {
+                //Save the image on the hardrive for Python process to read.
                 image.Save(Config.RootDirectory + $"\\Is_Face{Config.ImageFormat}");
 
-                ProcessStartInfo startInfo = new ProcessStartInfo();
-                startInfo.FileName = "python";
-                startInfo.Arguments = "Is_Face.py";
+                // Set up the recognition process
+                
 
-                // Set up the process to redirect its output
-                startInfo.UseShellExecute = false;
-                startInfo.RedirectStandardOutput = true;
-                startInfo.CreateNoWindow = true;
                 try
                 {
-                    Process isFace = new Process()
+                   
+                    string[] output = new string[0];
+
+                    //Create task for reading the Python's output
+                    Task task = new Task(() =>
                     {
-                        StartInfo = startInfo
-                    };
-                    isFace.Start();
-                    string output = isFace.StandardOutput.ReadToEnd();
-                    //May need manual closure.
-                    isFace.WaitForExit();
-                    isFace.Dispose();
-                    return output;
+                        ProcessStartInfo startInfo = new ProcessStartInfo();
+                        startInfo.FileName = "python";
+                        startInfo.Arguments = "Is_Face.py";
+                        startInfo.UseShellExecute = false;
+                        startInfo.RedirectStandardOutput = true;
+                        startInfo.CreateNoWindow = false;
+                        Process isFace = new Process() { StartInfo = startInfo };
+                        isFace.Start();
+                        output = isFace.StandardOutput.ReadToEnd().Replace("\r", "").Split('\n'); 
+                    });
+                    task.Start();
+                    //Run new task that waits either for reading task to complete or timeout task to complete
+                    if (await Task.WhenAny(task, Task.Delay(10000)) == task)
+                    {
+                        // task completed within timeout
+                        int.TryParse(Array.Find(output, x => x.Parsable(typeof(int))), out int ammountOfFaces);
+                        return ammountOfFaces == 1;
+                    }
+                    else
+                    {
+                        // timeout logic
+                        return false;
+                    }
                 }
-                catch
-                {
-                    return new InvalidDataException("Face check failed").Message;
-                }
+                catch { return false; }
                 finally
                 {
-                    Directory.Delete(Config.RootDirectory + $"\\Is_Face{Config.ImageFormat}");
+                    //Delete the image that was created
+                    File.Delete(Config.RootDirectory + $"\\Is_Face{Config.ImageFormat}");
                     GC.Collect();
                 }
-            }
-
-            static void OutputHandler(object sendingProcess, DataReceivedEventArgs outLine)
-            {
-                if(outLine.Data=="true") 
-                Console.WriteLine(outLine.Data);
             }
         }
     }

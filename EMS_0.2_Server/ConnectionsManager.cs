@@ -23,14 +23,14 @@ namespace EMS_Server
             while (true)
             {
                 TcpClient client = listener.AcceptTcpClient();
-                Task.Run(() =>
+                Task.Run(async () =>
                 {
                     EMS_ServerMainScreen.serverForm.WriteToServerConsole($"Client {client.Client.RemoteEndPoint} connected.");
                     Monitor monitor = new Monitor(client);
                     NetworkStream stream = client.GetStream();
                     DataPacket request = new DataPacket(stream);
                     EMS_ServerMainScreen.serverForm.WriteToServerConsole($"Request: {request}");
-                    DataPacket responce = new MyRouter().Router(request);
+                    DataPacket responce = await new MyRouter().Router(request);
                     EMS_ServerMainScreen.serverForm.WriteToServerConsole($"Responce: {responce}");
                     stream.Write(responce.Write(), 0, responce.GetTotalSize());
 
@@ -103,6 +103,7 @@ namespace EMS_Server
                     _client?.Dispose();
                     _connectionTimeout?.Dispose();
                     _disposed = true;
+                    GC.Collect();
                 }
             }
         }
