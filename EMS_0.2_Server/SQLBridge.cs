@@ -124,6 +124,8 @@ namespace EMS_Server
             return final;
         }
 
+
+
         /// <summary>
         /// Generates a "delete" querry from provided data.
         ///  יוצר שאילתת "מחיקה" מהנתונים שסופקו
@@ -187,6 +189,9 @@ namespace EMS_Server
         /// <returns></returns>
         public static string GetAllExceptions(string clientQuerry = "") => $"select * from {Config.EmployeeHourLogsTable} where _entry<'{Config.MinDate}' or _exit<'{Config.MinDate}' or _exit<_entry or DATEDIFF(HOUR, _entry, _exit)>'{Config.MaxShiftLength.Hours}' or _entry is NULL or _exit is NULL";
 
+        /// <summary>
+        /// Retrieves yearly hour logs info.
+        /// </summary>
         public static string GetYearLog(string clientQuerry) //get log #_intId, year
         {
             string[] data = clientQuerry.Substring(clientQuerry.IndexOf('#') + 1).Split(',');
@@ -194,7 +199,6 @@ namespace EMS_Server
                    $"((_entry between '{data[1]}-01-01' and '{int.Parse(data[1]) + 1}-01-01') or " +
                    $"(_exit between '{data[1]}-01-01' and '{int.Parse(data[1]) + 1}-01-01'))" +
                    $" and _intId = {data[0]} order by _entry ASC;";
-
         }
     }
 }

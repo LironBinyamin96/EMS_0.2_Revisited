@@ -40,6 +40,7 @@ namespace EMS_Client
         public static string GetAllExceptions() => "get all exceptions #";
         public static string GetAllOfStatus(byte status) => SelectEmployee(new string[][] { new string[] { "_employmentStatus", status.ToString() } });
 
+
         /// <summary>
         /// Sends picture to the server to be saved.
         /// </summary>
@@ -59,7 +60,7 @@ namespace EMS_Client
                 DataPacket packet = new DataPacket(imageBytes.Concat(BitConverter.GetBytes(intId)).ToArray(), 10);
                 //Send it away.
                 stream.Write(packet.Write(), 0, packet.GetTotalSize());
-                string[] responce = new DataPacket(stream).StringData.Split('|');
+                string[] responce = new DataPacket(stream).StringData.Split('|');   //([255][123][0][32])([])
                 tcpClient.Close();
                 return responce;
             }

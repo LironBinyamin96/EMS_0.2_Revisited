@@ -94,11 +94,8 @@ namespace EMS_Server
                 image.Save(Config.RootDirectory + $"\\Is_Face{Config.ImageFormat}");
 
                 // Set up the recognition process
-                
-
                 try
                 {
-                   
                     string[] output = new string[0];
 
                     //Create task for reading the Python's output
@@ -112,7 +109,7 @@ namespace EMS_Server
                         startInfo.CreateNoWindow = false;
                         Process isFace = new Process() { StartInfo = startInfo };
                         isFace.Start();
-                        output = isFace.StandardOutput.ReadToEnd().Replace("\r", "").Split('\n'); 
+                        output = isFace.StandardOutput.ReadToEnd().Replace("\r", "").Split('\n');
                     });
                     task.Start();
                     //Run new task that waits either for reading task to complete or timeout task to complete

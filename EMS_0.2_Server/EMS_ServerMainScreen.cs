@@ -51,13 +51,12 @@ namespace EMS_Server
             ServerAddressResolver.ServerIP(true);
             WriteToServerConsole($"IP in use: {Config.ServerIP}, port: {Config.ServerPort}");
             listeningTask.Start();
-            TestingTask.Start();
+            //TestingTask.Start();
             if (Config.AutoStartFR) FacialRecognition?.Start(); else WriteToServerConsole("FR Autostart disabled in the config!");
             listnerTimer.Interval = 6000;
             listnerTimer.Start();
             if (!Directory.Exists(Config.RootDirectory)) Directory.CreateDirectory(Config.RootDirectory);
             if (!Directory.Exists(Config.FR_Images)) Directory.CreateDirectory(Config.FR_Images);
-
         }
 
         /// <summary>
