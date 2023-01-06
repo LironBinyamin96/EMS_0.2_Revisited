@@ -45,7 +45,8 @@ namespace EMS_Client.Forms
             else
             {
                 //Make a request to the to update data
-                Requests.RequestFromServer(Requests.UpdateEntry(_entry.IntId.ToString(), newEntry, newExit), 7);
+                string temp = Requests.UpdateEntry(_entry.IntId.ToString(), newEntry, newExit);
+                Requests.RequestFromServer(temp, 7);
                 Close();
             }
         }

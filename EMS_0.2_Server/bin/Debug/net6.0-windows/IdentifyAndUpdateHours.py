@@ -163,30 +163,33 @@ cap = cv2.VideoCapture(0)
 # imgS = reducing the image size in order to speed up the process
 while True:
     success, img = cap.read()
-    imgS = cv2.resize(img,(0,0),None,0.25,0.25) # quarter of the size of the image
-    imgS = cv2.cvtColor(imgS, cv2.COLOR_BGR2RGB) # Change the color
-    facesLocation = face_recognition.face_locations(imgS) # Finding all the faces in the picture
-    encodingForCap = face_recognition.face_encodings(imgS,facesLocation) # encoding
+    if success:
+        imgS = cv2.resize(img,(0,0),None,0.25,0.25) # quarter of the size of the image
+        imgS = cv2.cvtColor(imgS, cv2.COLOR_BGR2RGB) # Change the color
+        facesLocation = face_recognition.face_locations(imgS) # Finding all the faces in the picture
+        encodingForCap = face_recognition.face_encodings(imgS,facesLocation) # encoding
 
-    # Running over a list of images and comparing to the current image using the encoding and location
-    for encodeFace, faceLocation in zip(encodingForCap,facesLocation):
-        # Comparing faces between a list of encodings and the encoding of the camera image
-        match = face_recognition.compare_faces(encodingListfinal,encodeFace)
-        # test for the best match in case there are employees with a similar appearance
-        faceDistance = face_recognition.face_distance(encodingListfinal,encodeFace)
-        # Finding the minimum value of an image by index
-        theBastMatchIndex = np.argmin(faceDistance)
+        # Running over a list of images and comparing to the current image using the encoding and location
+        for encodeFace, faceLocation in zip(encodingForCap,facesLocation):
+            # Comparing faces between a list of encodings and the encoding of the camera image
+            match = face_recognition.compare_faces(encodingListfinal,encodeFace)
+            # test for the best match in case there are employees with a similar appearance
+            faceDistance = face_recognition.face_distance(encodingListfinal,encodeFace)
+            # Finding the minimum value of an image by index
+            theBastMatchIndex = np.argmin(faceDistance)
 
-        if match[theBastMatchIndex] and faceDistance[theBastMatchIndex] < 0.45:
-            Employee = EmployeeIdentity[theBastMatchIndex].upper()
-            EntryOrExitTime(Employee)
-            empName = getFullNameOfEmployee(conn,Employee)
-            greeting = GetTimedGreeting()
-            y1,x2,y2,x1= faceLocation
-            y1,x2,y2,x1= y1*4,x2*4,y2*4,x1*4
-            cv2.rectangle(img,(x1,y1),(x2,y2),(0,255,0),1)
-            cv2.rectangle(img,(x1,y2-35),(x2,y2),(0,255,0),cv2.FILLED)
-            cv2.putText(img,greeting,(x1+6,y2-6),cv2.FONT_HERSHEY_COMPLEX,0.5,(0,0,0),2)
-            cv2.putText(img,empName,(x1+6,y2-25),cv2.FONT_HERSHEY_COMPLEX,0.5,(0,0,0),2)
-    cv2.imshow("Camera", img)
-    cv2.waitKey(1)
+            if match[theBastMatchIndex] and faceDistance[theBastMatchIndex] < 0.45:
+                Employee = EmployeeIdentity[theBastMatchIndex].upper()
+                EntryOrExitTime(Employee)
+                empName = getFullNameOfEmployee(conn,Employee)
+                greeting = GetTimedGreeting()
+                y1,x2,y2,x1= faceLocation
+                y1,x2,y2,x1= y1*4,x2*4,y2*4,x1*4
+                cv2.rectangle(img,(x1,y1),(x2,y2),(0,255,0),1)
+                cv2.rectangle(img,(x1,y2-35),(x2,y2),(0,255,0),cv2.FILLED)
+                cv2.putText(img,greeting,(x1+6,y2-6),cv2.FONT_HERSHEY_COMPLEX,0.5,(0,0,0),2)
+                cv2.putText(img,empName,(x1+6,y2-25),cv2.FONT_HERSHEY_COMPLEX,0.5,(0,0,0),2)
+        cv2.imshow("Camera", img)
+        cv2.waitKey(1)
+    else:
+        cap = cv2.VideoCapture(0)

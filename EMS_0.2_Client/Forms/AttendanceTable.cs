@@ -37,7 +37,8 @@ namespace EMS_Client.Forms
             if (entryData.Length > Config.InternalIDDigitAmount)
             {
                 EditHours editHours = new EditHours(new HoursLogEntry(entryData));
-                editHours.Show();
+                editHours.ShowDialog();
+                btnShowHours.PerformClick();
             }
         }
 
@@ -61,9 +62,6 @@ namespace EMS_Client.Forms
         /// </summary>
         private void btnShowHours_Click(object sender, EventArgs e)
         {
-            if (EMS_ClientMainScreen.employee == null)
-            { MessageBox.Show("Please select a employee"); return; }
-
             GridViewAttrndance.Rows.Clear();
             BuildLog();
             if (log != null)
