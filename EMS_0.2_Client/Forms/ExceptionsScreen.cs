@@ -19,7 +19,27 @@ namespace EMS_Client.Forms
         /// <summary>
         /// Method called by OnLoad event
         /// </summary>
-        private void ExceptionsScreen_Load(object sender, EventArgs e)
+        private void ExceptionsScreen_Load(object sender, EventArgs e) => PopulateExceptionsTable();
+
+        /// <summary>
+        /// Opens EditHours screen by double clicking on appropriate cell.
+        /// פתיחת מסך עריכת שעות על ידי לחיצה כפולה על התא המתאים
+        /// </summary>
+        private void exceptionsTable_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (_data != null)
+            {
+                Point cellCoordinates = exceptionsTable.CurrentCellAddress;
+                EditHours editHours = new EditHours(new EMS_Library.MyEmployee.HoursLog.HoursLogEntry(_data[cellCoordinates.Y]));
+                editHours.ShowDialog();
+                PopulateExceptionsTable();
+            }
+        }
+
+        /// <summary>
+        /// Pupulates table of exceptions.
+        /// </summary>
+        void PopulateExceptionsTable()
         {
             //Request all entries with invalid data from DB
             // בקש את כל הערכים עם נתונים לא חוקיים מבסיס הנתונים
@@ -32,6 +52,7 @@ namespace EMS_Client.Forms
                 if (_data != null)
                     try
                     {
+                        exceptionsTable.Rows.Clear();
                         foreach (string item in _data)
                         {
                             Employee emp = Array.Find(_empsData, x => x.IntId == int.Parse(item.Split(',')[0]));
@@ -44,21 +65,9 @@ namespace EMS_Client.Forms
                     }
                     catch { }
             }
+        }
 
-        }
-        /// <summary>
-        /// Opens EditHours screen by double clicking on appropriate cell.
-        /// פתיחת מסך עריכת שעות על ידי לחיצה כפולה על התא המתאים
-        /// </summary>
-        private void exceptionsTable_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
-        {
-            if (_data != null)
-            {
-                Point cellCoordinates = exceptionsTable.CurrentCellAddress;
-                EditHours editHours = new EditHours(new EMS_Library.MyEmployee.HoursLog.HoursLogEntry(_data[cellCoordinates.Y]));
-                editHours.Show();
-            }
-        }
+
 
         #region Drag Window
         /// <summary>

@@ -124,8 +124,6 @@ namespace EMS_Server
             return final;
         }
 
-
-
         /// <summary>
         /// Generates a "delete" querry from provided data.
         ///  יוצר שאילתת "מחיקה" מהנתונים שסופקו
