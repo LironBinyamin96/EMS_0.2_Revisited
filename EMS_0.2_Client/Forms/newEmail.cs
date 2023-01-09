@@ -96,12 +96,19 @@ namespace EMS_Client.Forms
             }
             Smtp.EnableSsl = true;
             Smtp.Credentials = new NetworkCredential(Config.EMS_EmailAddress, Config.EMA_EmailPassword);
-            Smtp.Send(mail);
-            txtTo.Clear();
-            txtSubject.Clear();
-            richTextBody.Clear();
-            lblFile.Text = "";
-            EMS_ClientMainScreen.PrimaryForms.Pop().Close();
+            try {
+                Smtp.Send(mail);
+                txtTo.Clear();
+                txtSubject.Clear();
+                richTextBody.Clear();
+                lblFile.Text = "";
+                EMS_ClientMainScreen.PrimaryForms.Pop().Close();
+            
+            } 
+            catch  {
+                MessageBox.Show("Oops.. something went wrong. \n If you have attached a file - check that it does not contain code."); 
+            };
+           
         }
 
         /// <summary>
@@ -111,9 +118,11 @@ namespace EMS_Client.Forms
         private void btnAddFile_Click(object sender, EventArgs e)
         {
             OpenFileDialog opdFile = new OpenFileDialog();
-            opdFile.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
+            opdFile.Filter = "All files (*.*)|*.*"; // txt files (*.txt)|*.txt|
             if (opdFile.ShowDialog() == DialogResult.OK)
                 lblFile.Text = opdFile.FileName;
+            else
+                MessageBox.Show("Invalid file");
         }
         private void btnSelect_Click(object sender, EventArgs e)
         {

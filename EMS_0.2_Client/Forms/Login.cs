@@ -72,19 +72,10 @@ namespace EMS_Client.Forms
             panelPasscode.Visible = true;
             txtPasscode.Focus();
 
-            //Generate passcode. | יצירת קוד רנדומלי
-            passcode = Utility.RandomNumericString(6);
-
-            if (Config.DevelopmentMode) //Bypasses two-factor autentication
-            {
-                txtPasscode.Text = passcode;
-                if (!Config.PresentationMode) return;
-            }
-
             //Send the passcode to employee's email address. | שליחת הקוד למייל
             Action twoFactorAuth = () => {
                 SmtpClient Smtp = new SmtpClient("smtp.gmail.com", 587);
-                MailMessage mail = new MailMessage(Config.EMS_EmailAddress, logingInEmp.Email, "Verification code from employee management system", passcode);
+                MailMessage mail = new MailMessage(Config.EMS_EmailAddress, logingInEmp.Email, "Verification code from employee management system", Generatepasscode());
                 Smtp.EnableSsl = true;
                 Smtp.Credentials = new NetworkCredential(Config.EMS_EmailAddress, Config.EMA_EmailPassword);
                 Smtp.Send(mail);
@@ -99,7 +90,7 @@ namespace EMS_Client.Forms
             //Send the passcode to employee's email address.
             //שלח את קוד הגישה לכתובת המייל של העובד.
             SmtpClient Smtp = new SmtpClient("smtp.gmail.com", 587);
-            MailMessage mail = new MailMessage(Config.EMS_EmailAddress, logingInEmp.Email, "Verification code from employee management system", passcode);
+            MailMessage mail = new MailMessage(Config.EMS_EmailAddress, logingInEmp.Email, "Verification code from employee management system", Generatepasscode());
             Smtp.EnableSsl = true;
             Smtp.Credentials = new NetworkCredential(Config.EMS_EmailAddress, Config.EMA_EmailPassword);
             Smtp.Send(mail);
@@ -159,6 +150,7 @@ namespace EMS_Client.Forms
 
         #endregion
 
+
         //Allowing for use of "Enter" key for switching to the next field.
         //בשביל לעבור לשדה הבא "Enter" שימוש בכפתור  
         private void txtIntId_KeyDown(object sender, KeyEventArgs e)
@@ -206,6 +198,19 @@ namespace EMS_Client.Forms
         {
             txtPasscode.BackColor = Color.White;
             panelPasscodeText.BackColor = Color.White;
+        }
+
+        private string Generatepasscode()
+        {
+            //Generate passcode. | יצירת קוד רנדומלי
+            passcode = Utility.RandomNumericString(6);
+
+            if (Config.DevelopmentMode) //Bypasses two-factor autentication
+            {
+                txtPasscode.Text = passcode;
+                if (!Config.PresentationMode) return default ;
+            }
+            return passcode;
         }
 
         // View password

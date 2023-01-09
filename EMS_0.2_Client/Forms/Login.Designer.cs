@@ -204,6 +204,7 @@
             // btnLoginPasscode
             // 
             this.btnLoginPasscode.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
+            this.btnLoginPasscode.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.btnLoginPasscode.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLoginPasscode.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btnLoginPasscode.ForeColor = System.Drawing.Color.White;

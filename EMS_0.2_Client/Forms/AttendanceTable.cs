@@ -62,14 +62,18 @@ namespace EMS_Client.Forms
         /// </summary>
         private void btnShowHours_Click(object sender, EventArgs e)
         {
+            if (EMS_ClientMainScreen.employee == null)
+            { MessageBox.Show("Please select a employee"); return; }
+
             GridViewAttrndance.Rows.Clear();
             BuildLog();
+           
             if (log != null)
             {
-                hoursLogTableStructure = log.GetHoursLogTableStructure();
-                if (hoursLogTableStructure != null)
-                    foreach (string[] item in hoursLogTableStructure)
-                        GridViewAttrndance.Rows.Add(item);
+              hoursLogTableStructure = log.GetHoursLogTableStructure();
+              if (hoursLogTableStructure != null)
+               foreach (string[] item in hoursLogTableStructure)
+               GridViewAttrndance.Rows.Add(item);
             }
         }
 

@@ -118,6 +118,7 @@ namespace EMS_Client.Forms
         // Undoing the changes | ביטול השינויים
         private void btnCancel_Click(object sender, EventArgs e)
         {
+            Fill();
             Panel[] panelArr = new Panel[] { panelID, panelFname, panelLname, panelDate, panelAddres, panelPhone, panelEmail, panelBaseSalary
                 ,panelSalaryModifire,panelPosition };
             foreach (Panel panel in panelArr)
@@ -142,7 +143,6 @@ namespace EMS_Client.Forms
             txtDateOfBirth.Text = "";
             txtAddres.Text = "";
             txtPhone.Text = "";
-
             positionBox.Text = "";
             txtBaseSalary.Text = "";
             txtSalaryModifire.Text = "";
