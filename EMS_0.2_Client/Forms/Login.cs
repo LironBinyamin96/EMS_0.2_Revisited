@@ -19,15 +19,15 @@ namespace EMS_Client.Forms
             if (Config.PresentationMode || Config.DevelopmentMode)
             {
                 Employee randomEmp = null;
-                do randomEmp = Employee.ActivateEmployee(Requests.RequestFromServer($"SELECT TOP 1 * FROM {Config.EmployeeDataTable} ORDER BY NEWID();", 254)[0].Split(',')); 
-                while (randomEmp == null && !(randomEmp is IRootAccess || randomEmp is IExtendedAccess));
-                txtIntId.Text = randomEmp.IntId.ToString();
-                txtPassword.Text = randomEmp.Password;
+                do randomEmp = Employee.ActivateEmployee(Requests.RequestFromServer($"SELECT TOP 1 * FROM {Config.EmployeeDataTable} ORDER BY NEWID();", 254)[0].Split(','));
+                while (randomEmp == null || !(randomEmp is IRootAccess || randomEmp is IExtendedAccess));
+                EMS_ClientMainScreen.CurEmployee = randomEmp;
             }
         }
 
         private void Login_Load(object sender, EventArgs e)
         {
+            if(Config.DevelopmentMode) Close();
             panel1.BackColor = Color.FromArgb(100, 0, 0, 0);
         }
 

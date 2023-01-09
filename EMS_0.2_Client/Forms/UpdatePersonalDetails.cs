@@ -49,7 +49,6 @@ namespace EMS_Client.Forms
             //Format validation | אימות פורמט
             if (CheckingDataFields())
             {
-                bool validation = true;
                 Employee tempEmp = Employee.ActivateEmployee(new object[] {
                     positionBox.Text,
                     EMS_ClientMainScreen.employee.IntId,
@@ -71,9 +70,9 @@ namespace EMS_Client.Forms
 
                 string querry = Requests.UpdateEmployee(tempEmp.ProvideFieldsAndValues(), new Dictionary<string, string> {
                         { "_intId", EMS_ClientMainScreen.employee.IntId.ToString() } });
-                validation &= Requests.RequestFromServer(querry, 3)[0] == "1";
+                bool validation = Requests.RequestFromServer(querry, 3)[0] == "1";
                 if (!validation) { MessageBox.Show("Failed to update employee data!"); return; }
-                string[] picBuffer = Requests.SaveImmage(empPicture, tempEmp.IntId);
+                string[] picBuffer = Requests.SaveImmage(pictureBox1.Image as Bitmap, tempEmp.IntId);
                 validation &= picBuffer[0].ToLower() == "saved";
                 if (!validation) { MessageBox.Show(picBuffer[0]); return; }
                 MessageBox.Show("Updaded!");
@@ -123,7 +122,6 @@ namespace EMS_Client.Forms
                 ,panelSalaryModifire,panelPosition };
             foreach (Panel panel in panelArr)
                 panel.BackColor = Color.FromArgb(0, 126, 249);
-
         }
         #endregion
 

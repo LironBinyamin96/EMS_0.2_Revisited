@@ -92,13 +92,14 @@ namespace EMS_Client.Forms
                 Phone,
                 Address
             });
-            foreach (string item in buffer)
-            {
-                List<string> empData = item.Split(',').ToList();
-                empData.RemoveAt(7);
-                empData.RemoveAt(9);
-                employeesTable.Rows.Add(empData.ToArray());
-            }
+            if (buffer[0] != "-1")
+                foreach (string item in buffer)
+                {
+                    List<string> empData = item.Split(',').ToList();
+                    empData.RemoveAt(7);
+                    empData.RemoveAt(9);
+                    employeesTable.Rows.Add(empData.ToArray());
+                }
 
         }
         private void btnX_Click(object sender, EventArgs e) => Close();

@@ -31,13 +31,11 @@
             this.panelEditHours = new System.Windows.Forms.Panel();
             this.btnX = new System.Windows.Forms.Button();
             this.lblEditHours = new System.Windows.Forms.Label();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.lblEntry = new System.Windows.Forms.Label();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.lblExit = new System.Windows.Forms.Label();
             this.btnSave = new System.Windows.Forms.Button();
             this.dateTimeEntey = new System.Windows.Forms.DateTimePicker();
             this.dateTimeExit = new System.Windows.Forms.DateTimePicker();
+            this.radioEntry = new System.Windows.Forms.RadioButton();
+            this.radioExit = new System.Windows.Forms.RadioButton();
             this.panelEditHours.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -78,50 +76,12 @@
             this.lblEditHours.TabIndex = 0;
             this.lblEditHours.Text = "Edit Hours";
             // 
-            // panel2
-            // 
-            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
-            this.panel2.Location = new System.Drawing.Point(157, 147);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(200, 1);
-            this.panel2.TabIndex = 10;
-            // 
-            // lblEntry
-            // 
-            this.lblEntry.AutoSize = true;
-            this.lblEntry.Font = new System.Drawing.Font("Bahnschrift SemiCondensed", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblEntry.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
-            this.lblEntry.Location = new System.Drawing.Point(157, 130);
-            this.lblEntry.Name = "lblEntry";
-            this.lblEntry.Size = new System.Drawing.Size(45, 18);
-            this.lblEntry.TabIndex = 9;
-            this.lblEntry.Text = "Entry :";
-            // 
-            // panel3
-            // 
-            this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
-            this.panel3.Location = new System.Drawing.Point(157, 217);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(200, 1);
-            this.panel3.TabIndex = 13;
-            // 
-            // lblExit
-            // 
-            this.lblExit.AutoSize = true;
-            this.lblExit.Font = new System.Drawing.Font("Bahnschrift SemiCondensed", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblExit.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
-            this.lblExit.Location = new System.Drawing.Point(157, 200);
-            this.lblExit.Name = "lblExit";
-            this.lblExit.Size = new System.Drawing.Size(36, 18);
-            this.lblExit.TabIndex = 12;
-            this.lblExit.Text = "Exit :";
-            // 
             // btnSave
             // 
             this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSave.Font = new System.Drawing.Font("Bahnschrift SemiLight", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btnSave.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
-            this.btnSave.Location = new System.Drawing.Point(212, 308);
+            this.btnSave.Location = new System.Drawing.Point(209, 308);
             this.btnSave.Name = "btnSave";
             this.btnSave.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.btnSave.Size = new System.Drawing.Size(98, 26);
@@ -132,27 +92,53 @@
             // 
             // dateTimeEntey
             // 
+            this.dateTimeEntey.CalendarTitleBackColor = System.Drawing.SystemColors.ControlText;
+            this.dateTimeEntey.CalendarTitleForeColor = System.Drawing.SystemColors.ActiveCaption;
             this.dateTimeEntey.CustomFormat = "yyyy-MM-dd HH:mm:ss";
             this.dateTimeEntey.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimeEntey.Location = new System.Drawing.Point(199, 125);
+            this.dateTimeEntey.Location = new System.Drawing.Point(198, 145);
+            this.dateTimeEntey.MaxDate = new System.DateTime(2023, 1, 9, 20, 24, 7, 449);
+            this.dateTimeEntey.MinDate = new System.DateTime(1900, 1, 1, 0, 0, 0, 0);
             this.dateTimeEntey.Name = "dateTimeEntey";
             this.dateTimeEntey.ShowUpDown = true;
             this.dateTimeEntey.Size = new System.Drawing.Size(158, 23);
             this.dateTimeEntey.TabIndex = 42;
-            this.dateTimeEntey.MaxDate = DateTime.Now;
-            this.dateTimeEntey.MinDate = EMS_Library.Config.MinDate;
+            this.dateTimeEntey.Value = new System.DateTime(2023, 1, 9, 20, 24, 7, 449);
             // 
             // dateTimeExit
             // 
             this.dateTimeExit.CustomFormat = "yyyy-MM-dd HH:mm:ss";
             this.dateTimeExit.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimeExit.Location = new System.Drawing.Point(199, 194);
+            this.dateTimeExit.Location = new System.Drawing.Point(198, 187);
             this.dateTimeExit.Name = "dateTimeExit";
             this.dateTimeExit.ShowUpDown = true;
             this.dateTimeExit.Size = new System.Drawing.Size(158, 23);
             this.dateTimeExit.TabIndex = 43;
-            this.dateTimeEntey.MaxDate = DateTime.Now;
-            this.dateTimeEntey.MinDate = EMS_Library.Config.MinDate;
+            // 
+            // radioEntry
+            // 
+            this.radioEntry.AutoSize = true;
+            this.radioEntry.ForeColor = System.Drawing.Color.DodgerBlue;
+            this.radioEntry.Location = new System.Drawing.Point(140, 149);
+            this.radioEntry.Name = "radioEntry";
+            this.radioEntry.Size = new System.Drawing.Size(52, 19);
+            this.radioEntry.TabIndex = 44;
+            this.radioEntry.TabStop = true;
+            this.radioEntry.Text = "Entry";
+            this.radioEntry.UseVisualStyleBackColor = true;
+            this.radioEntry.CheckedChanged += new System.EventHandler(this.radioEntry_CheckedChanged);
+            // 
+            // radioExit
+            // 
+            this.radioExit.AutoSize = true;
+            this.radioExit.ForeColor = System.Drawing.Color.DodgerBlue;
+            this.radioExit.Location = new System.Drawing.Point(140, 191);
+            this.radioExit.Name = "radioExit";
+            this.radioExit.Size = new System.Drawing.Size(44, 19);
+            this.radioExit.TabIndex = 45;
+            this.radioExit.TabStop = true;
+            this.radioExit.Text = "Exit";
+            this.radioExit.UseVisualStyleBackColor = true;
             // 
             // EditHours
             // 
@@ -160,13 +146,11 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
             this.ClientSize = new System.Drawing.Size(515, 369);
+            this.Controls.Add(this.radioExit);
+            this.Controls.Add(this.radioEntry);
             this.Controls.Add(this.dateTimeExit);
             this.Controls.Add(this.dateTimeEntey);
             this.Controls.Add(this.btnSave);
-            this.Controls.Add(this.panel3);
-            this.Controls.Add(this.lblExit);
-            this.Controls.Add(this.panel2);
-            this.Controls.Add(this.lblEntry);
             this.Controls.Add(this.panelEditHours);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "EditHours";
@@ -183,12 +167,10 @@
         private Panel panelEditHours;
         private Label lblEditHours;
         private Button btnX;
-        private Panel panel2;
-        private Label lblEntry;
-        private Panel panel3;
-        private Label lblExit;
         private Button btnSave;
         private DateTimePicker dateTimeEntey;
         private DateTimePicker dateTimeExit;
+        private RadioButton radioEntry;
+        private RadioButton radioExit;
     }
 }

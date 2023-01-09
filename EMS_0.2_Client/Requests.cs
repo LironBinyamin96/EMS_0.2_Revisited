@@ -50,18 +50,22 @@ namespace EMS_Client
         /// <exception cref="ArgumentException"></exception>
         public static string[] SaveImmage(Bitmap image, int intId)
         {
+            if (image == null) return new string[] { "Image was was null" };
             TcpClient tcpClient = new TcpClient(Config.ServerIP, Config.ServerPort);
             NetworkStream stream = tcpClient.GetStream();
+            Bitmap compressedImmage = image.Rescale(Config.FRImmageWidth, Config.FRImmageHeight);
             //Get byte data of the image;
-            byte[] imageBytes = new ImageConverter().ConvertTo(image, typeof(byte[])) as byte[];
+            byte[] imageBytes = new ImageConverter().ConvertTo(compressedImmage, typeof(byte[])) as byte[];
             if (imageBytes != null)
             {
+                if (imageBytes.Length > 1000000) return new string[] {"Immage is too large! Max size is 1MB after compression." };
                 //Create new data packet while appending employee ID to the end of the data stream.
                 DataPacket packet = new DataPacket(imageBytes.Concat(BitConverter.GetBytes(intId)).ToArray(), 10);
                 //Send it away.
                 stream.Write(packet.Write(), 0, packet.GetTotalSize());
-                string[] responce = new DataPacket(stream).StringData.Split('|');   //([255][123][0][32])([])
+                string[] responce = new DataPacket(stream).StringData.Split('|');
                 tcpClient.Close();
+                if (responce[0] == "Broken Packet") responce[0] = "Connecting timedout during transfer. Try reducing image size.";
                 return responce;
             }
             else { tcpClient.Close(); throw new ArgumentException("Clould not parse the image to byte[]."); }

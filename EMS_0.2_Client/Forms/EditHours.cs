@@ -1,4 +1,5 @@
-﻿using EMS_Library.MyEmployee.HoursLog;
+﻿using EMS_Library;
+using EMS_Library.MyEmployee.HoursLog;
 using System.Runtime.InteropServices;
 
 namespace EMS_Client.Forms
@@ -6,49 +7,58 @@ namespace EMS_Client.Forms
     public partial class EditHours : Form
     {
         HoursLogEntry _entry;
+        bool _changingEntry;
         public EditHours(HoursLogEntry entry)
         {
             InitializeComponent();
             _entry = entry;
-            bool startCheck = _entry.Start < dateTimeEntey.MinDate || _entry.Start > dateTimeEntey.MaxDate;
-            bool endCheck = _entry.End > dateTimeEntey.MaxDate || _entry.End < dateTimeEntey.MinDate;
-            dateTimeEntey.Value = startCheck ? dateTimeEntey.MinDate : _entry.Start;
-            dateTimeExit.Value = endCheck ? dateTimeEntey.MaxDate : _entry.End;
+            dateTimeEntey.Value = entry.Start>DateTime.MinValue&&entry.Start<DateTime.MaxValue?entry.Start: DateTimePicker.MinimumDateTime;
+            dateTimeExit.Value = entry.End > DateTime.MinValue && entry.End < DateTime.MaxValue ? entry.End : DateTimePicker.MinimumDateTime;
+            radioEntry.Checked = true;
+            
         }
 
         #region Buttons
 
         /// <summary>
-        /// Saves the data
+        /// Saves the data.
         /// </summary>
         private void btnSave_Click(object sender, EventArgs e)
         {
-            DateTime newEntry = dateTimeEntey.Value, newExit = dateTimeExit.Value;
-
-            //Aggrigation of the controlls and their vilidity status into singular collection.
-            Dictionary<Label, bool> invalidation = new Dictionary<Label, bool>()
+            if (_changingEntry)
             {
-                { lblEntry, newEntry>EMS_Library.Config.MinDate && newEntry < newExit },
-                { lblExit, newExit>EMS_Library.Config.MinDate && newEntry<newExit}
-            };
-
-
-            if (invalidation.Values.Contains(false))
-            {
-                //Coloring fields with appropriate colors
-                foreach (KeyValuePair<Label, bool> label in invalidation)
+                if (dateTimeEntey.Value>Config.MinDate && dateTimeEntey.Value<_entry.End)
                 {
-                    if (label.Value) label.Key.ForeColor = Color.DodgerBlue;
-                    else label.Key.ForeColor = Color.Red;
+                    string temp = Requests.UpdateEntry(_entry.IntId.ToString(), dateTimeEntey.Value, _entry.End);
+                    Requests.RequestFromServer(temp, 7);
+                    Close();
                 }
+                else radioEntry.ForeColor = Color.Red;
             }
             else
             {
-                //Make a request to the to update data
-                string temp = Requests.UpdateEntry(_entry.IntId.ToString(), newEntry, newExit);
-                Requests.RequestFromServer(temp, 7);
-                Close();
+                if (dateTimeExit.Value < DateTime.MaxValue && dateTimeExit.Value > _entry.Start)
+                {
+                    string temp = Requests.UpdateEntry(_entry.IntId.ToString(), _entry.Start, dateTimeExit.Value);
+                    Requests.RequestFromServer(temp, 7);
+                    Close();
+                }
+                else radioExit.ForeColor = Color.Red;
             }
+        }
+
+        /// <summary>
+        /// Switching between states.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void radioEntry_CheckedChanged(object sender, EventArgs e) 
+        {
+            _changingEntry = (sender as RadioButton).Checked;
+            if (_changingEntry) { dateTimeExit.Enabled = false; dateTimeEntey.Enabled = true; }
+            else { dateTimeExit.Enabled = true; dateTimeEntey.Enabled = false; }
+            radioExit.ForeColor = Color.DodgerBlue;
+            radioEntry.ForeColor = Color.DodgerBlue;
         }
 
         /// <summary>
@@ -78,5 +88,6 @@ namespace EMS_Client.Forms
         private void panelEditHours_MouseDown(object sender, MouseEventArgs e) => Drag(e);
         #endregion
 
+       
     }
 }
