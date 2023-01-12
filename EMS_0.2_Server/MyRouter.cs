@@ -80,6 +80,8 @@ namespace EMS_Server
                         if (await IsFace(image))
                         {
                             image.Save(Config.FR_Images + $"\\{intID}{Config.ImageFormat}");
+                            EMS_ServerMainScreen.serverForm.FRProcess.Kill();
+                            EMS_ServerMainScreen.serverForm.FRProcess.Start();
                             return "saved";
                         }
                         else return "Provided picture was not recognized as a valid picture of a face";

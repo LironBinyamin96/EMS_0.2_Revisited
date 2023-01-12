@@ -13,7 +13,7 @@ namespace EMS_Server
         bool scheduleForceExits = true; //Insuring that force exits occures only once. (this value is false during execution of ForceExits() method);
         bool scheduleBackup = true; //Insuring that DB backup occures only once. (this value is false during execution of BackupDB() method);
         bool SQLQuerryInput = false; //Tracking of console state for direct SQL injection.
-        Process FRProcess = null; //Pointer to FR process. (Used for it's propper termination.)
+        public Process FRProcess = null; //Pointer to FR process. (Used for it's propper termination.)
         public static EMS_ServerMainScreen serverForm; //Pointer to the main server screen.
         #endregion
 

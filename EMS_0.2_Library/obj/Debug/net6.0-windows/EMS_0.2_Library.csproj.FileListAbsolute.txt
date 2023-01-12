@@ -65,3 +65,18 @@ C:\Users\levkh\Documents\GitHub\EMS_0.2_Revisited\EMS_0.2_Library\bin\Debug\net6
 C:\Users\levkh\Documents\GitHub\EMS_0.2_Revisited\EMS_0.2_Library\bin\Debug\net6.0-windows\Recreate DB.sql
 C:\Users\liron\Desktop\EMS\EMS_0.2_Library\bin\Debug\net6.0-windows\Python libraries.txt
 C:\Users\liron\Desktop\EMS\EMS_0.2_Library\bin\Debug\net6.0-windows\Recreate DB.sql
+D:\GitHub\EMS_0.2_Revisited\EMS_0.2_Library\bin\Debug\net6.0-windows\Python libraries.txt
+D:\GitHub\EMS_0.2_Revisited\EMS_0.2_Library\bin\Debug\net6.0-windows\Recreate DB.sql
+D:\GitHub\EMS_0.2_Revisited\EMS_0.2_Library\bin\Debug\net6.0-windows\Config.cs
+D:\GitHub\EMS_0.2_Revisited\EMS_0.2_Library\bin\Debug\net6.0-windows\EMS_0.2_Library.deps.json
+D:\GitHub\EMS_0.2_Revisited\EMS_0.2_Library\bin\Debug\net6.0-windows\EMS_0.2_Library.dll
+D:\GitHub\EMS_0.2_Revisited\EMS_0.2_Library\bin\Debug\net6.0-windows\EMS_0.2_Library.pdb
+D:\GitHub\EMS_0.2_Revisited\EMS_0.2_Library\obj\Debug\net6.0-windows\EMS_0.2_Library.csproj.AssemblyReference.cache
+D:\GitHub\EMS_0.2_Revisited\EMS_0.2_Library\obj\Debug\net6.0-windows\EMS_0.2_Library.GeneratedMSBuildEditorConfig.editorconfig
+D:\GitHub\EMS_0.2_Revisited\EMS_0.2_Library\obj\Debug\net6.0-windows\EMS_0.2_Library.AssemblyInfoInputs.cache
+D:\GitHub\EMS_0.2_Revisited\EMS_0.2_Library\obj\Debug\net6.0-windows\EMS_0.2_Library.AssemblyInfo.cs
+D:\GitHub\EMS_0.2_Revisited\EMS_0.2_Library\obj\Debug\net6.0-windows\EMS_0.2_Library.csproj.CoreCompileInputs.cache
+D:\GitHub\EMS_0.2_Revisited\EMS_0.2_Library\obj\Debug\net6.0-windows\EMS_0.2_Library.dll
+D:\GitHub\EMS_0.2_Revisited\EMS_0.2_Library\obj\Debug\net6.0-windows\refint\EMS_0.2_Library.dll
+D:\GitHub\EMS_0.2_Revisited\EMS_0.2_Library\obj\Debug\net6.0-windows\EMS_0.2_Library.pdb
+D:\GitHub\EMS_0.2_Revisited\EMS_0.2_Library\obj\Debug\net6.0-windows\ref\EMS_0.2_Library.dll

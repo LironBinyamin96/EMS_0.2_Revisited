@@ -147,11 +147,14 @@ namespace EMS_Server
         public static string GetMonthLog(string clientQuerry) //get log #_intId, year, month
         {
             string[] data = clientQuerry.Substring(clientQuerry.IndexOf('#') + 1).Split(',');
-            return $"select * from {Config.EmployeeHourLogsTable}" +
+            if (data[2].Length == 2) data[2] = data[2].Replace(' ','0');
+            data=Array.ConvertAll(data, x => x.Trim());
+            string querry = $"select * from {Config.EmployeeHourLogsTable}" +
                    $" where " +
                    $"((_entry between '{data[1]}-{data[2]}-01' and '{data[1]}-{data[2]}-{DateTime.DaysInMonth(int.Parse(data[1]), int.Parse(data[2]))}') or" +
                    $"(_exit between '{data[1]}-{data[2]}-01' and '{data[1]}-{data[2]}-{DateTime.DaysInMonth(int.Parse(data[1]), int.Parse(data[2]))}'))" +
                    $" and _intId = {data[0]}; ";
+            return querry;
         }
 
         /// <summary>

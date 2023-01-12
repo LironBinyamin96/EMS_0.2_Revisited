@@ -187,3 +187,50 @@ C:\Users\levkh\Documents\GitHub\EMS_0.2_Revisited\EMS_0.2_Client\bin\Debug\net6.
 C:\Users\levkh\Documents\GitHub\EMS_0.2_Revisited\EMS_0.2_Client\bin\Debug\net6.0-windows\Recreate DB.sql
 C:\Users\liron\Desktop\EMS\EMS_0.2_Client\bin\Debug\net6.0-windows\Python libraries.txt
 C:\Users\liron\Desktop\EMS\EMS_0.2_Client\bin\Debug\net6.0-windows\Recreate DB.sql
+D:\GitHub\EMS_0.2_Revisited\EMS_0.2_Client\bin\Debug\net6.0-windows\Python libraries.txt
+D:\GitHub\EMS_0.2_Revisited\EMS_0.2_Client\bin\Debug\net6.0-windows\Recreate DB.sql
+D:\GitHub\EMS_0.2_Revisited\EMS_0.2_Client\bin\Debug\net6.0-windows\EMS_0.2_Client.exe
+D:\GitHub\EMS_0.2_Revisited\EMS_0.2_Client\bin\Debug\net6.0-windows\Config.cs
+D:\GitHub\EMS_0.2_Revisited\EMS_0.2_Client\bin\Debug\net6.0-windows\main.py
+D:\GitHub\EMS_0.2_Revisited\EMS_0.2_Client\bin\Debug\net6.0-windows\EMS_0.2_Client.deps.json
+D:\GitHub\EMS_0.2_Revisited\EMS_0.2_Client\bin\Debug\net6.0-windows\EMS_0.2_Client.runtimeconfig.json
+D:\GitHub\EMS_0.2_Revisited\EMS_0.2_Client\bin\Debug\net6.0-windows\EMS_0.2_Client.dll
+D:\GitHub\EMS_0.2_Revisited\EMS_0.2_Client\bin\Debug\net6.0-windows\EMS_0.2_Client.pdb
+D:\GitHub\EMS_0.2_Revisited\EMS_0.2_Client\bin\Debug\net6.0-windows\AForge.dll
+D:\GitHub\EMS_0.2_Revisited\EMS_0.2_Client\bin\Debug\net6.0-windows\AForge.Video.dll
+D:\GitHub\EMS_0.2_Revisited\EMS_0.2_Client\bin\Debug\net6.0-windows\AForge.Video.DirectShow.dll
+D:\GitHub\EMS_0.2_Revisited\EMS_0.2_Client\bin\Debug\net6.0-windows\System.Web.DataVisualization.Design.dll
+D:\GitHub\EMS_0.2_Revisited\EMS_0.2_Client\bin\Debug\net6.0-windows\System.Web.DataVisualization.dll
+D:\GitHub\EMS_0.2_Revisited\EMS_0.2_Client\bin\Debug\net6.0-windows\System.Windows.Forms.DataVisualization.Design.dll
+D:\GitHub\EMS_0.2_Revisited\EMS_0.2_Client\bin\Debug\net6.0-windows\System.Windows.Forms.DataVisualization.dll
+D:\GitHub\EMS_0.2_Revisited\EMS_0.2_Client\bin\Debug\net6.0-windows\S22.Imap.dll
+D:\GitHub\EMS_0.2_Revisited\EMS_0.2_Client\bin\Debug\net6.0-windows\EMS_0.2_Library.dll
+D:\GitHub\EMS_0.2_Revisited\EMS_0.2_Client\bin\Debug\net6.0-windows\EMS_0.2_Library.pdb
+D:\GitHub\EMS_0.2_Revisited\EMS_0.2_Client\obj\Debug\net6.0-windows\EMS_0.2_Client.csproj.AssemblyReference.cache
+D:\GitHub\EMS_0.2_Revisited\EMS_0.2_Client\obj\Debug\net6.0-windows\EMS_Client.EMS_ClientMainScreen.resources
+D:\GitHub\EMS_0.2_Revisited\EMS_0.2_Client\obj\Debug\net6.0-windows\EMS_Client.Forms.addEmployee.resources
+D:\GitHub\EMS_0.2_Revisited\EMS_0.2_Client\obj\Debug\net6.0-windows\EMS_Client.Forms.AttendanceTable.resources
+D:\GitHub\EMS_0.2_Revisited\EMS_0.2_Client\obj\Debug\net6.0-windows\EMS_Client.Forms.EditHours.resources
+D:\GitHub\EMS_0.2_Revisited\EMS_0.2_Client\obj\Debug\net6.0-windows\EMS_Client.Forms.EditingEmployee.resources
+D:\GitHub\EMS_0.2_Revisited\EMS_0.2_Client\obj\Debug\net6.0-windows\EMS_Client.Forms.EmpsByStatus.resources
+D:\GitHub\EMS_0.2_Revisited\EMS_0.2_Client\obj\Debug\net6.0-windows\EMS_Client.Forms.ExceptionsScreen.resources
+D:\GitHub\EMS_0.2_Revisited\EMS_0.2_Client\obj\Debug\net6.0-windows\EMS_Client.Forms.GeneralData.resources
+D:\GitHub\EMS_0.2_Revisited\EMS_0.2_Client\obj\Debug\net6.0-windows\EMS_Client.Forms.Login.resources
+D:\GitHub\EMS_0.2_Revisited\EMS_0.2_Client\obj\Debug\net6.0-windows\EMS_Client.Forms.Mail.resources
+D:\GitHub\EMS_0.2_Revisited\EMS_0.2_Client\obj\Debug\net6.0-windows\EMS_Client.Forms.newEmail.resources
+D:\GitHub\EMS_0.2_Revisited\EMS_0.2_Client\obj\Debug\net6.0-windows\EMS_Client.Forms.selectEmployee.resources
+D:\GitHub\EMS_0.2_Revisited\EMS_0.2_Client\obj\Debug\net6.0-windows\EMS_Client.Forms.showMail.resources
+D:\GitHub\EMS_0.2_Revisited\EMS_0.2_Client\obj\Debug\net6.0-windows\EMS_Client.Forms.StandbyScreen.resources
+D:\GitHub\EMS_0.2_Revisited\EMS_0.2_Client\obj\Debug\net6.0-windows\EMS_Client.Forms.UpdatePersonalDetails.resources
+D:\GitHub\EMS_0.2_Revisited\EMS_0.2_Client\obj\Debug\net6.0-windows\EMS_Client.Properties.Resources.resources
+D:\GitHub\EMS_0.2_Revisited\EMS_0.2_Client\obj\Debug\net6.0-windows\EMS_0.2_Client.csproj.GenerateResource.cache
+D:\GitHub\EMS_0.2_Revisited\EMS_0.2_Client\obj\Debug\net6.0-windows\EMS_0.2_Client.GeneratedMSBuildEditorConfig.editorconfig
+D:\GitHub\EMS_0.2_Revisited\EMS_0.2_Client\obj\Debug\net6.0-windows\EMS_0.2_Client.AssemblyInfoInputs.cache
+D:\GitHub\EMS_0.2_Revisited\EMS_0.2_Client\obj\Debug\net6.0-windows\EMS_0.2_Client.AssemblyInfo.cs
+D:\GitHub\EMS_0.2_Revisited\EMS_0.2_Client\obj\Debug\net6.0-windows\EMS_0.2_Client.csproj.CoreCompileInputs.cache
+D:\GitHub\EMS_0.2_Revisited\EMS_0.2_Client\obj\Debug\net6.0-windows\EMS_0.2_Client.csproj.CopyComplete
+D:\GitHub\EMS_0.2_Revisited\EMS_0.2_Client\obj\Debug\net6.0-windows\EMS_0.2_Client.dll
+D:\GitHub\EMS_0.2_Revisited\EMS_0.2_Client\obj\Debug\net6.0-windows\refint\EMS_0.2_Client.dll
+D:\GitHub\EMS_0.2_Revisited\EMS_0.2_Client\obj\Debug\net6.0-windows\EMS_0.2_Client.pdb
+D:\GitHub\EMS_0.2_Revisited\EMS_0.2_Client\obj\Debug\net6.0-windows\EMS_0.2_Client.genruntimeconfig.cache
+D:\GitHub\EMS_0.2_Revisited\EMS_0.2_Client\obj\Debug\net6.0-windows\ref\EMS_0.2_Client.dll

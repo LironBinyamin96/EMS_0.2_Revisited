@@ -143,3 +143,36 @@ C:\Users\levkh\Documents\GitHub\EMS_0.2_Revisited\EMS_0.2_Server\bin\Debug\net6.
 C:\Users\liron\Desktop\EMS\EMS_0.2_Server\bin\Debug\net6.0-windows\IdentifyAndUpdateHours.py
 C:\Users\liron\Desktop\EMS\EMS_0.2_Server\bin\Debug\net6.0-windows\Is_Face.py
 C:\Users\levkh\Documents\GitHub\EMS_0.2_Revisited\EMS_0.2_Server\bin\Debug\net6.0-windows\Is_Face.py
+D:\GitHub\EMS_0.2_Revisited\EMS_0.2_Server\bin\Debug\net6.0-windows\Python libraries.txt
+D:\GitHub\EMS_0.2_Revisited\EMS_0.2_Server\bin\Debug\net6.0-windows\Recreate DB.sql
+D:\GitHub\EMS_0.2_Revisited\EMS_0.2_Server\bin\Debug\net6.0-windows\EMS_0.2_Server.exe
+D:\GitHub\EMS_0.2_Revisited\EMS_0.2_Server\bin\Debug\net6.0-windows\Config.cs
+D:\GitHub\EMS_0.2_Revisited\EMS_0.2_Server\bin\Debug\net6.0-windows\IdentifyAndUpdateHours.py
+D:\GitHub\EMS_0.2_Revisited\EMS_0.2_Server\bin\Debug\net6.0-windows\Is_Face.py
+D:\GitHub\EMS_0.2_Revisited\EMS_0.2_Server\bin\Debug\net6.0-windows\EMS_0.2_Server.deps.json
+D:\GitHub\EMS_0.2_Revisited\EMS_0.2_Server\bin\Debug\net6.0-windows\EMS_0.2_Server.runtimeconfig.json
+D:\GitHub\EMS_0.2_Revisited\EMS_0.2_Server\bin\Debug\net6.0-windows\EMS_0.2_Server.dll
+D:\GitHub\EMS_0.2_Revisited\EMS_0.2_Server\bin\Debug\net6.0-windows\EMS_0.2_Server.pdb
+D:\GitHub\EMS_0.2_Revisited\EMS_0.2_Server\bin\Debug\net6.0-windows\System.Data.SqlClient.dll
+D:\GitHub\EMS_0.2_Revisited\EMS_0.2_Server\bin\Debug\net6.0-windows\runtimes\win-arm64\native\sni.dll
+D:\GitHub\EMS_0.2_Revisited\EMS_0.2_Server\bin\Debug\net6.0-windows\runtimes\win-x64\native\sni.dll
+D:\GitHub\EMS_0.2_Revisited\EMS_0.2_Server\bin\Debug\net6.0-windows\runtimes\win-x86\native\sni.dll
+D:\GitHub\EMS_0.2_Revisited\EMS_0.2_Server\bin\Debug\net6.0-windows\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
+D:\GitHub\EMS_0.2_Revisited\EMS_0.2_Server\bin\Debug\net6.0-windows\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
+D:\GitHub\EMS_0.2_Revisited\EMS_0.2_Server\bin\Debug\net6.0-windows\EMS_0.2_Library.dll
+D:\GitHub\EMS_0.2_Revisited\EMS_0.2_Server\bin\Debug\net6.0-windows\EMS_0.2_Library.pdb
+D:\GitHub\EMS_0.2_Revisited\EMS_0.2_Server\obj\Debug\net6.0-windows\EMS_0.2_Server.csproj.AssemblyReference.cache
+D:\GitHub\EMS_0.2_Revisited\EMS_0.2_Server\obj\Debug\net6.0-windows\EMS_0.2_Server.csproj.ResolveComReference.cache
+D:\GitHub\EMS_0.2_Revisited\EMS_0.2_Server\obj\Debug\net6.0-windows\EMS_Server.EMS_ServerMainScreen.resources
+D:\GitHub\EMS_0.2_Revisited\EMS_0.2_Server\obj\Debug\net6.0-windows\EMS_0._2_Server.Properties.Resources.resources
+D:\GitHub\EMS_0.2_Revisited\EMS_0.2_Server\obj\Debug\net6.0-windows\EMS_0.2_Server.csproj.GenerateResource.cache
+D:\GitHub\EMS_0.2_Revisited\EMS_0.2_Server\obj\Debug\net6.0-windows\EMS_0.2_Server.GeneratedMSBuildEditorConfig.editorconfig
+D:\GitHub\EMS_0.2_Revisited\EMS_0.2_Server\obj\Debug\net6.0-windows\EMS_0.2_Server.AssemblyInfoInputs.cache
+D:\GitHub\EMS_0.2_Revisited\EMS_0.2_Server\obj\Debug\net6.0-windows\EMS_0.2_Server.AssemblyInfo.cs
+D:\GitHub\EMS_0.2_Revisited\EMS_0.2_Server\obj\Debug\net6.0-windows\EMS_0.2_Server.csproj.CoreCompileInputs.cache
+D:\GitHub\EMS_0.2_Revisited\EMS_0.2_Server\obj\Debug\net6.0-windows\EMS_0.2_Server.csproj.CopyComplete
+D:\GitHub\EMS_0.2_Revisited\EMS_0.2_Server\obj\Debug\net6.0-windows\EMS_0.2_Server.dll
+D:\GitHub\EMS_0.2_Revisited\EMS_0.2_Server\obj\Debug\net6.0-windows\refint\EMS_0.2_Server.dll
+D:\GitHub\EMS_0.2_Revisited\EMS_0.2_Server\obj\Debug\net6.0-windows\EMS_0.2_Server.pdb
+D:\GitHub\EMS_0.2_Revisited\EMS_0.2_Server\obj\Debug\net6.0-windows\EMS_0.2_Server.genruntimeconfig.cache
+D:\GitHub\EMS_0.2_Revisited\EMS_0.2_Server\obj\Debug\net6.0-windows\ref\EMS_0.2_Server.dll
