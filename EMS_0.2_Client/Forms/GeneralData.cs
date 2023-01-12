@@ -105,7 +105,8 @@ namespace EMS_Client.Forms
                             //  סך שעות העבודה / (מקסימום שעות עבודה בחודש / 100 %)
                             double value = (data[i].Total.TotalHours / (Config.MaxShiftLength.TotalHours * Config.WorkDaysInWeek.Length * (DateTime.DaysInMonth(data[i].Year, data[i].Month) / 7) / 100));
                             progressBars[i].Value = (int)value > 100 ? 100 : (int)value;
-                            labels[i].Text = $"{value:F2}";
+                            //labels[i].Text = $"{value:F2}";
+                            labels[i].Text = $"{data[i].Total.TotalHours:F2} / {value:F2} %";
                         }
                         else { progressBars[i].Value = 0; labels[i].Text = "0"; }
                     }

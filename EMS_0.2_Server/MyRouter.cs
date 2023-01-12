@@ -31,8 +31,10 @@ namespace EMS_Server
                 /*Get all emails*/    case 9: { return new DataPacket(SQLBridge.TwoWayCommand("select _email from Employees;")); }
                 /*Save image sent*/   case 10: { return new DataPacket(await SavePucture(data.ByteData)); }
                 /*Get yearly log*/    case 11: { return new DataPacket(SQLBridge.TwoWayCommand(SQLBridge.GetYearLog(data.StringData))); }
-               
-                /*Get free ID*/       case 252: { return new DataPacket(SQLBridge.GetFreeID(), 255); }
+                /* Delete picture */  case 12: { return new DataPacket(DeletePicture(data.StringData)); }
+
+                /*Get free ID*/
+                case 252: { return new DataPacket(SQLBridge.GetFreeID(), 255); }
                 /*Direct querry One*/ case 253: { return new DataPacket(SQLBridge.OneWayCommand(data.StringData)); }
                 /*Direct querry Two*/ case 254: { return new DataPacket(SQLBridge.TwoWayCommand(data.StringData)); }
                 /*Return recieved*/   case 255: { return data; }
@@ -85,6 +87,20 @@ namespace EMS_Server
                     else return "Could not convert data recieved to image.";
                 }
                 catch (Exception ex) { return ex.Message; }
+            }
+            string DeletePicture(string picData)
+            {
+                if (int.TryParse(picData.Split('#').Last(), out int intId))
+                {
+                    try
+                    {
+                        string path = Config.RootDirectory + $"\\{intId}.{Config.ImageFormat}";
+                        if (File.Exists(path)) File.Delete(path);
+                        return "Picture deleted.";
+                    }
+                    catch (Exception ex) { return "Failed to delete the image.\n" + ex.Message; }
+                }
+                else return $"Command {picData} wasn't recognized";
             }
 
             //Used for differentiating between faces and not faces

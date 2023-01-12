@@ -35,12 +35,15 @@ namespace EMS_Client.Forms
         Bitmap empPicture;
         public UpdatePersonalDetails()
         {
+            
             InitializeComponent();
             activeControls = new Control[] {
                 txtID, txtFirstName , txtLastName, txtMiddleName,
                 txtGender,txtDateOfBirth,txtAddres,txtPhone,
                 txtBaseSalary,txtSalaryModifire,txtEmail,positionBox,pictureBox1
             };
+            if (EMS_ClientMainScreen.CurEmployee is EMS_Library.MyEmployee.IAccess.IRootAccess)
+                btnDelete.Visible = true;
         }
 
         #region Buttons
@@ -156,6 +159,7 @@ namespace EMS_Client.Forms
         {
             if (EMS_ClientMainScreen.employee != null)
             {
+                btnUnemploy.Visible = EMS_ClientMainScreen.employee.EmploymentStatus != "0";
                 txtID.Text = EMS_ClientMainScreen.employee.StateId.ToString();
                 txtFirstName.Text = EMS_ClientMainScreen.employee.FName.ToString();
                 txtLastName.Text = EMS_ClientMainScreen.employee.LName.ToString();
@@ -274,6 +278,16 @@ namespace EMS_Client.Forms
             videoCapture?.SignalToStop();
             btnCamera.Visible = true;
             btnTakePicture.Visible = false;
+        }
+
+        private void btnUnemploy_Click(object sender, EventArgs e)
+        {
+            if (Requests.DeleteImage(EMS_ClientMainScreen.employee.IntId)[0] == "Picture deleted." &&
+            Requests.RequestFromServer(Requests.UpdateEmployee(new Dictionary<string, string> { { "_employmentStatus", "0" } }, new Dictionary<string, string> { { "_intId", EMS_ClientMainScreen.employee.IntId.ToString() } }),3)[0] == "1") 
+            {
+                MessageBox.Show("Employee has bee sent to fuck himself :)");
+            }
+            
         }
     }
 }

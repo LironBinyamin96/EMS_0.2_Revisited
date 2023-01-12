@@ -39,6 +39,8 @@ namespace EMS_Client
         public static string GetYearlyHourLog(int _intId, int year) => $"get log #{_intId}, {year}";
         public static string GetAllExceptions() => "get all exceptions #";
         public static string GetAllOfStatus(byte status) => SelectEmployee(new string[][] { new string[] { "_employmentStatus", status.ToString() } });
+        public static string[] DeleteImage(int intId) => RequestFromServer("delete image #" + intId, 12);
+
 
 
         /// <summary>

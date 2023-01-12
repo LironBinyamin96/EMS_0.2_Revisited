@@ -78,6 +78,7 @@
             this.btnSave = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.btnUnemploy = new System.Windows.Forms.Button();
             this.panelUpdatePersonalDetails.SuspendLayout();
             this.gUpdatePersonalDetails.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -222,7 +223,7 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(452, 93);
+            this.pictureBox1.Location = new System.Drawing.Point(459, 84);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(164, 164);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -585,7 +586,7 @@
             this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCancel.Font = new System.Drawing.Font("Bahnschrift SemiLight", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btnCancel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
-            this.btnCancel.Location = new System.Drawing.Point(363, 412);
+            this.btnCancel.Location = new System.Drawing.Point(381, 412);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.btnCancel.Size = new System.Drawing.Size(98, 26);
@@ -599,7 +600,7 @@
             this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSave.Font = new System.Drawing.Font("Bahnschrift SemiLight", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btnSave.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
-            this.btnSave.Location = new System.Drawing.Point(228, 412);
+            this.btnSave.Location = new System.Drawing.Point(247, 412);
             this.btnSave.Name = "btnSave";
             this.btnSave.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.btnSave.Size = new System.Drawing.Size(98, 26);
@@ -613,18 +614,34 @@
             this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDelete.Font = new System.Drawing.Font("Bahnschrift SemiLight", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btnDelete.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
-            this.btnDelete.Location = new System.Drawing.Point(13, 412);
+            this.btnDelete.Location = new System.Drawing.Point(104, 399);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.btnDelete.Size = new System.Drawing.Size(129, 26);
+            this.btnDelete.Size = new System.Drawing.Size(118, 26);
             this.btnDelete.TabIndex = 42;
             this.btnDelete.Text = "Delete Employee";
             this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Visible = false;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
+            // 
+            // btnUnemploy
+            // 
+            this.btnUnemploy.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnUnemploy.Font = new System.Drawing.Font("Bahnschrift SemiLight", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btnUnemploy.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
+            this.btnUnemploy.Location = new System.Drawing.Point(12, 399);
+            this.btnUnemploy.Name = "btnUnemploy";
+            this.btnUnemploy.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.btnUnemploy.Size = new System.Drawing.Size(86, 26);
+            this.btnUnemploy.TabIndex = 43;
+            this.btnUnemploy.Text = "Unemploy";
+            this.btnUnemploy.UseVisualStyleBackColor = true;
+            this.btnUnemploy.Visible = false;
+            this.btnUnemploy.Click += new System.EventHandler(this.btnUnemploy_Click);
             // 
             // UpdatePersonalDetails
             // 
@@ -632,6 +649,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
             this.ClientSize = new System.Drawing.Size(708, 450);
+            this.Controls.Add(this.btnUnemploy);
             this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnSave);
@@ -703,5 +721,6 @@
         private ComboBox positionBox;
         private Button btnTakePicture;
         private Button btnCamera;
+        private Button btnUnemploy;
     }
 }
