@@ -31,11 +31,11 @@
             this.panelEditHours = new System.Windows.Forms.Panel();
             this.btnX = new System.Windows.Forms.Button();
             this.lblEditHours = new System.Windows.Forms.Label();
-            this.btnSave = new System.Windows.Forms.Button();
             this.dateTimeEntey = new System.Windows.Forms.DateTimePicker();
             this.dateTimeExit = new System.Windows.Forms.DateTimePicker();
             this.radioEntry = new System.Windows.Forms.RadioButton();
             this.radioExit = new System.Windows.Forms.RadioButton();
+            this.btnSave = new RJCodeAdvance.RJControls.RJButton();
             this.panelEditHours.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -75,20 +75,6 @@
             this.lblEditHours.Size = new System.Drawing.Size(151, 35);
             this.lblEditHours.TabIndex = 0;
             this.lblEditHours.Text = "Edit Hours";
-            // 
-            // btnSave
-            // 
-            this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSave.Font = new System.Drawing.Font("Bahnschrift SemiLight", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btnSave.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
-            this.btnSave.Location = new System.Drawing.Point(209, 308);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.btnSave.Size = new System.Drawing.Size(98, 26);
-            this.btnSave.TabIndex = 41;
-            this.btnSave.Text = "Save";
-            this.btnSave.UseVisualStyleBackColor = true;
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // dateTimeEntey
             // 
@@ -140,17 +126,40 @@
             this.radioExit.Text = "Exit";
             this.radioExit.UseVisualStyleBackColor = true;
             // 
+            // btnSave
+            // 
+            this.btnSave.BackColor = System.Drawing.Color.Transparent;
+            this.btnSave.BackgroundColor = System.Drawing.Color.Transparent;
+            this.btnSave.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
+            this.btnSave.BorderRadius = 17;
+            this.btnSave.BorderSize = 2;
+            this.btnSave.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
+            this.btnSave.FlatAppearance.BorderSize = 2;
+            this.btnSave.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightGray;
+            this.btnSave.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightGray;
+            this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSave.Font = new System.Drawing.Font("Bahnschrift SemiCondensed", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnSave.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
+            this.btnSave.Location = new System.Drawing.Point(210, 268);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(105, 38);
+            this.btnSave.TabIndex = 52;
+            this.btnSave.Text = "Save";
+            this.btnSave.TextColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
+            this.btnSave.UseVisualStyleBackColor = false;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            // 
             // EditHours
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
             this.ClientSize = new System.Drawing.Size(515, 369);
+            this.Controls.Add(this.btnSave);
             this.Controls.Add(this.radioExit);
             this.Controls.Add(this.radioEntry);
             this.Controls.Add(this.dateTimeExit);
             this.Controls.Add(this.dateTimeEntey);
-            this.Controls.Add(this.btnSave);
             this.Controls.Add(this.panelEditHours);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "EditHours";
@@ -167,10 +176,10 @@
         private Panel panelEditHours;
         private Label lblEditHours;
         private Button btnX;
-        private Button btnSave;
         private DateTimePicker dateTimeEntey;
         private DateTimePicker dateTimeExit;
         private RadioButton radioEntry;
         private RadioButton radioExit;
+        private RJCodeAdvance.RJControls.RJButton btnSave;
     }
 }

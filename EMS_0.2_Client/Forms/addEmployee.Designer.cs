@@ -32,13 +32,13 @@
             this.btnX = new System.Windows.Forms.Button();
             this.lblAddEmployee = new System.Windows.Forms.Label();
             this.gBoxRegistration = new System.Windows.Forms.GroupBox();
+            this.btnCameraImage = new RJCodeAdvance.RJControls.RJButton();
+            this.btnPictureTakingImage = new RJCodeAdvance.RJControls.RJButton();
+            this.btnUploadImage = new RJCodeAdvance.RJControls.RJButton();
             this.panelPicture = new System.Windows.Forms.Panel();
             this.pictureBoxCamera = new System.Windows.Forms.PictureBox();
-            this.btnPictureTaking = new System.Windows.Forms.Button();
-            this.btnCamera = new System.Windows.Forms.Button();
             this.positionBox = new System.Windows.Forms.ComboBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.btnUpload = new System.Windows.Forms.Button();
             this.lblUploading = new System.Windows.Forms.Label();
             this.txtSalaryModifire = new System.Windows.Forms.TextBox();
             this.panelSalaryModifire = new System.Windows.Forms.Panel();
@@ -76,8 +76,8 @@
             this.txtID = new System.Windows.Forms.TextBox();
             this.panelID = new System.Windows.Forms.Panel();
             this.lblID = new System.Windows.Forms.Label();
-            this.btnSave = new System.Windows.Forms.Button();
-            this.btnClear = new System.Windows.Forms.Button();
+            this.btnSave = new RJCodeAdvance.RJControls.RJButton();
+            this.btnClear = new RJCodeAdvance.RJControls.RJButton();
             this.panelAddEmployee.SuspendLayout();
             this.gBoxRegistration.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCamera)).BeginInit();
@@ -126,13 +126,13 @@
             // 
             // gBoxRegistration
             // 
+            this.gBoxRegistration.Controls.Add(this.btnCameraImage);
+            this.gBoxRegistration.Controls.Add(this.btnPictureTakingImage);
+            this.gBoxRegistration.Controls.Add(this.btnUploadImage);
             this.gBoxRegistration.Controls.Add(this.panelPicture);
             this.gBoxRegistration.Controls.Add(this.pictureBoxCamera);
-            this.gBoxRegistration.Controls.Add(this.btnPictureTaking);
-            this.gBoxRegistration.Controls.Add(this.btnCamera);
             this.gBoxRegistration.Controls.Add(this.positionBox);
             this.gBoxRegistration.Controls.Add(this.pictureBox1);
-            this.gBoxRegistration.Controls.Add(this.btnUpload);
             this.gBoxRegistration.Controls.Add(this.lblUploading);
             this.gBoxRegistration.Controls.Add(this.txtSalaryModifire);
             this.gBoxRegistration.Controls.Add(this.panelSalaryModifire);
@@ -178,10 +178,79 @@
             this.gBoxRegistration.TabStop = false;
             this.gBoxRegistration.Text = "Registration";
             // 
+            // btnCameraImage
+            // 
+            this.btnCameraImage.BackColor = System.Drawing.Color.Transparent;
+            this.btnCameraImage.BackgroundColor = System.Drawing.Color.Transparent;
+            this.btnCameraImage.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
+            this.btnCameraImage.BorderRadius = 15;
+            this.btnCameraImage.BorderSize = 1;
+            this.btnCameraImage.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
+            this.btnCameraImage.FlatAppearance.BorderSize = 2;
+            this.btnCameraImage.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightGray;
+            this.btnCameraImage.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btnCameraImage.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCameraImage.Font = new System.Drawing.Font("Bahnschrift SemiLight", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btnCameraImage.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
+            this.btnCameraImage.Location = new System.Drawing.Point(511, 37);
+            this.btnCameraImage.Name = "btnCameraImage";
+            this.btnCameraImage.Size = new System.Drawing.Size(94, 29);
+            this.btnCameraImage.TabIndex = 49;
+            this.btnCameraImage.Text = "Camera";
+            this.btnCameraImage.TextColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
+            this.btnCameraImage.UseVisualStyleBackColor = false;
+            this.btnCameraImage.Click += new System.EventHandler(this.btnCameraImage_Click);
+            // 
+            // btnPictureTakingImage
+            // 
+            this.btnPictureTakingImage.BackColor = System.Drawing.Color.Transparent;
+            this.btnPictureTakingImage.BackgroundColor = System.Drawing.Color.Transparent;
+            this.btnPictureTakingImage.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
+            this.btnPictureTakingImage.BorderRadius = 15;
+            this.btnPictureTakingImage.BorderSize = 1;
+            this.btnPictureTakingImage.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
+            this.btnPictureTakingImage.FlatAppearance.BorderSize = 2;
+            this.btnPictureTakingImage.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightGray;
+            this.btnPictureTakingImage.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btnPictureTakingImage.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPictureTakingImage.Font = new System.Drawing.Font("Bahnschrift SemiLight", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btnPictureTakingImage.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
+            this.btnPictureTakingImage.Location = new System.Drawing.Point(512, 37);
+            this.btnPictureTakingImage.Name = "btnPictureTakingImage";
+            this.btnPictureTakingImage.Size = new System.Drawing.Size(93, 29);
+            this.btnPictureTakingImage.TabIndex = 50;
+            this.btnPictureTakingImage.Text = "Take picture";
+            this.btnPictureTakingImage.TextColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
+            this.btnPictureTakingImage.UseVisualStyleBackColor = false;
+            this.btnPictureTakingImage.Click += new System.EventHandler(this.btnPictureTakingImage_Click);
+            // 
+            // btnUploadImage
+            // 
+            this.btnUploadImage.BackColor = System.Drawing.Color.Transparent;
+            this.btnUploadImage.BackgroundColor = System.Drawing.Color.Transparent;
+            this.btnUploadImage.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
+            this.btnUploadImage.BorderRadius = 15;
+            this.btnUploadImage.BorderSize = 1;
+            this.btnUploadImage.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
+            this.btnUploadImage.FlatAppearance.BorderSize = 2;
+            this.btnUploadImage.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightGray;
+            this.btnUploadImage.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btnUploadImage.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnUploadImage.Font = new System.Drawing.Font("Bahnschrift SemiLight", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btnUploadImage.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
+            this.btnUploadImage.Location = new System.Drawing.Point(415, 37);
+            this.btnUploadImage.Name = "btnUploadImage";
+            this.btnUploadImage.Size = new System.Drawing.Size(90, 29);
+            this.btnUploadImage.TabIndex = 48;
+            this.btnUploadImage.Text = "Upload";
+            this.btnUploadImage.TextColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
+            this.btnUploadImage.UseVisualStyleBackColor = false;
+            this.btnUploadImage.Click += new System.EventHandler(this.btnUploadImage_Click);
+            // 
             // panelPicture
             // 
             this.panelPicture.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
-            this.panelPicture.Location = new System.Drawing.Point(416, 68);
+            this.panelPicture.Location = new System.Drawing.Point(413, 68);
             this.panelPicture.Name = "panelPicture";
             this.panelPicture.Size = new System.Drawing.Size(205, 1);
             this.panelPicture.TabIndex = 47;
@@ -194,35 +263,6 @@
             this.pictureBoxCamera.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBoxCamera.TabIndex = 46;
             this.pictureBoxCamera.TabStop = false;
-            // 
-            // btnPictureTaking
-            // 
-            this.btnPictureTaking.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPictureTaking.Font = new System.Drawing.Font("Bahnschrift SemiLight", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btnPictureTaking.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
-            this.btnPictureTaking.Location = new System.Drawing.Point(520, 40);
-            this.btnPictureTaking.Name = "btnPictureTaking";
-            this.btnPictureTaking.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.btnPictureTaking.Size = new System.Drawing.Size(98, 26);
-            this.btnPictureTaking.TabIndex = 45;
-            this.btnPictureTaking.Text = "Take picture";
-            this.btnPictureTaking.UseVisualStyleBackColor = true;
-            this.btnPictureTaking.Visible = false;
-            this.btnPictureTaking.Click += new System.EventHandler(this.btnPictureTaking_Click);
-            // 
-            // btnCamera
-            // 
-            this.btnCamera.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCamera.Font = new System.Drawing.Font("Bahnschrift SemiLight", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btnCamera.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
-            this.btnCamera.Location = new System.Drawing.Point(520, 40);
-            this.btnCamera.Name = "btnCamera";
-            this.btnCamera.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.btnCamera.Size = new System.Drawing.Size(98, 26);
-            this.btnCamera.TabIndex = 44;
-            this.btnCamera.Text = "Camera";
-            this.btnCamera.UseVisualStyleBackColor = true;
-            this.btnCamera.Click += new System.EventHandler(this.btnCamera_Click);
             // 
             // positionBox
             // 
@@ -251,24 +291,10 @@
             this.pictureBox1.TabIndex = 38;
             this.pictureBox1.TabStop = false;
             // 
-            // btnUpload
-            // 
-            this.btnUpload.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnUpload.Font = new System.Drawing.Font("Bahnschrift SemiLight", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btnUpload.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
-            this.btnUpload.Location = new System.Drawing.Point(416, 40);
-            this.btnUpload.Name = "btnUpload";
-            this.btnUpload.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.btnUpload.Size = new System.Drawing.Size(98, 26);
-            this.btnUpload.TabIndex = 37;
-            this.btnUpload.Text = "Upload";
-            this.btnUpload.UseVisualStyleBackColor = true;
-            this.btnUpload.Click += new System.EventHandler(this.btnUpload_Click);
-            // 
             // lblUploading
             // 
             this.lblUploading.AutoSize = true;
-            this.lblUploading.Location = new System.Drawing.Point(462, 20);
+            this.lblUploading.Location = new System.Drawing.Point(446, 18);
             this.lblUploading.Name = "lblUploading";
             this.lblUploading.Size = new System.Drawing.Size(134, 17);
             this.lblUploading.TabIndex = 36;
@@ -599,30 +625,48 @@
             // 
             // btnSave
             // 
+            this.btnSave.BackColor = System.Drawing.Color.Transparent;
+            this.btnSave.BackgroundColor = System.Drawing.Color.Transparent;
+            this.btnSave.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
+            this.btnSave.BorderRadius = 15;
+            this.btnSave.BorderSize = 1;
+            this.btnSave.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
+            this.btnSave.FlatAppearance.BorderSize = 2;
+            this.btnSave.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightGray;
+            this.btnSave.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightGray;
             this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSave.Font = new System.Drawing.Font("Bahnschrift SemiLight", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btnSave.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
             this.btnSave.Location = new System.Drawing.Point(247, 387);
             this.btnSave.Name = "btnSave";
-            this.btnSave.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.btnSave.Size = new System.Drawing.Size(98, 26);
-            this.btnSave.TabIndex = 38;
+            this.btnSave.Size = new System.Drawing.Size(103, 29);
+            this.btnSave.TabIndex = 49;
             this.btnSave.Text = "Save";
-            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.TextColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
+            this.btnSave.UseVisualStyleBackColor = false;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // btnClear
             // 
+            this.btnClear.BackColor = System.Drawing.Color.Transparent;
+            this.btnClear.BackgroundColor = System.Drawing.Color.Transparent;
+            this.btnClear.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
+            this.btnClear.BorderRadius = 15;
+            this.btnClear.BorderSize = 1;
+            this.btnClear.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
+            this.btnClear.FlatAppearance.BorderSize = 2;
+            this.btnClear.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightGray;
+            this.btnClear.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightGray;
             this.btnClear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnClear.Font = new System.Drawing.Font("Bahnschrift SemiLight", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btnClear.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
-            this.btnClear.Location = new System.Drawing.Point(382, 387);
+            this.btnClear.Location = new System.Drawing.Point(374, 387);
             this.btnClear.Name = "btnClear";
-            this.btnClear.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.btnClear.Size = new System.Drawing.Size(98, 26);
-            this.btnClear.TabIndex = 39;
+            this.btnClear.Size = new System.Drawing.Size(106, 29);
+            this.btnClear.TabIndex = 50;
             this.btnClear.Text = "Clear";
-            this.btnClear.UseVisualStyleBackColor = true;
+            this.btnClear.TextColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
+            this.btnClear.UseVisualStyleBackColor = false;
             this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
             // addEmployee
@@ -694,14 +738,14 @@
         private Label lblDateOfBirth;
         private Button btnX;
         private PictureBox pictureBox1;
-        private Button btnUpload;
-        private Button btnSave;
-        private Button btnClear;
         private ComboBox positionBox;
         private PictureBox PBpictureTaking;
-        private Button btnCamera;
-        private Button btnPictureTaking;
         private PictureBox pictureBoxCamera;
         private Panel panelPicture;
+        private RJCodeAdvance.RJControls.RJButton btnUploadImage;
+        private RJCodeAdvance.RJControls.RJButton btnCameraImage;
+        private RJCodeAdvance.RJControls.RJButton btnPictureTakingImage;
+        private RJCodeAdvance.RJControls.RJButton btnSave;
+        private RJCodeAdvance.RJControls.RJButton btnClear;
     }
 }

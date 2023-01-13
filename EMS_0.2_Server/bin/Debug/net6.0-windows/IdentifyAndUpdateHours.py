@@ -141,6 +141,7 @@ def findEncodings (images):
         ImageForIdentification = cv2.cvtColor(ImageForIdentification, cv2.COLOR_BGR2RGB)
         try:
             encodeImageForIdentification = face_recognition.face_encodings(ImageForIdentification)[0]
+            print(encodeImageForIdentification)
             encodingList.append(encodeImageForIdentification)
         finally: continue
     return encodingList

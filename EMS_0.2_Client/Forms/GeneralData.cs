@@ -42,7 +42,6 @@ namespace EMS_Client.Forms
             select_Employee.Show();
             employeeChanged = true;
         }
-
         /// <summary>
         /// Triggered when selecting a year.
         /// מילוי השדות כאשר בוחרים שנה

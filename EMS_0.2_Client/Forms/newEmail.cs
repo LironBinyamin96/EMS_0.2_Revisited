@@ -96,19 +96,20 @@ namespace EMS_Client.Forms
             }
             Smtp.EnableSsl = true;
             Smtp.Credentials = new NetworkCredential(Config.EMS_EmailAddress, Config.EMA_EmailPassword);
-            try {
+            try
+            {
                 Smtp.Send(mail);
                 txtTo.Clear();
                 txtSubject.Clear();
                 richTextBody.Clear();
                 lblFile.Text = "";
                 EMS_ClientMainScreen.PrimaryForms.Pop().Close();
-            
-            } 
-            catch  {
-                MessageBox.Show("Oops.. something went wrong. \n If you have attached a file - check that it does not contain code."); 
+
+            }
+            catch
+            {
+                MessageBox.Show("Oops.. something went wrong. \n If you have attached a file - check that it does not contain code.");
             };
-           
         }
 
         /// <summary>
@@ -124,6 +125,9 @@ namespace EMS_Client.Forms
             else
                 MessageBox.Show("Invalid file");
         }
+           /// <summary>
+           /// Select employee | בחירת עובד
+           /// </summary>
         private void btnSelect_Click(object sender, EventArgs e)
         {
             selectEmployee se = new selectEmployee(this);
@@ -158,6 +162,12 @@ namespace EMS_Client.Forms
         public static extern bool ReleaseCapture();
         private void panelNewMail_MouseDown(object sender, MouseEventArgs e) => Drag(e);
         private void lblNewMail_MouseDown(object sender, MouseEventArgs e) => Drag(e);
+
+
+
+
         #endregion
+
+     
     }
 }

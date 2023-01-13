@@ -31,7 +31,6 @@
             this.panelMail = new System.Windows.Forms.Panel();
             this.btnX = new System.Windows.Forms.Button();
             this.lblMail = new System.Windows.Forms.Label();
-            this.btnReply = new System.Windows.Forms.Button();
             this.panel6 = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
@@ -44,6 +43,7 @@
             this.txtForm = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.lblForm = new System.Windows.Forms.Label();
+            this.btnReply = new RJCodeAdvance.RJControls.RJButton();
             this.panelMail.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -84,20 +84,6 @@
             this.lblMail.TabIndex = 0;
             this.lblMail.Text = "Email";
             this.lblMail.MouseDown += new System.Windows.Forms.MouseEventHandler(this.lblMail_MouseDown_1);
-            // 
-            // btnReply
-            // 
-            this.btnReply.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnReply.Font = new System.Drawing.Font("Bahnschrift SemiCondensed", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btnReply.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
-            this.btnReply.Location = new System.Drawing.Point(423, 444);
-            this.btnReply.Name = "btnReply";
-            this.btnReply.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.btnReply.Size = new System.Drawing.Size(122, 32);
-            this.btnReply.TabIndex = 27;
-            this.btnReply.Text = "Reply";
-            this.btnReply.UseVisualStyleBackColor = true;
-            this.btnReply.Click += new System.EventHandler(this.btnReply_Click);
             // 
             // panel6
             // 
@@ -214,6 +200,29 @@
             this.lblForm.TabIndex = 15;
             this.lblForm.Text = "Form :";
             // 
+            // btnReply
+            // 
+            this.btnReply.BackColor = System.Drawing.Color.Transparent;
+            this.btnReply.BackgroundColor = System.Drawing.Color.Transparent;
+            this.btnReply.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
+            this.btnReply.BorderRadius = 17;
+            this.btnReply.BorderSize = 2;
+            this.btnReply.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
+            this.btnReply.FlatAppearance.BorderSize = 2;
+            this.btnReply.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightGray;
+            this.btnReply.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightGray;
+            this.btnReply.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnReply.Font = new System.Drawing.Font("Bahnschrift SemiCondensed", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnReply.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
+            this.btnReply.Location = new System.Drawing.Point(482, 437);
+            this.btnReply.Name = "btnReply";
+            this.btnReply.Size = new System.Drawing.Size(121, 39);
+            this.btnReply.TabIndex = 50;
+            this.btnReply.Text = "Reply";
+            this.btnReply.TextColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
+            this.btnReply.UseVisualStyleBackColor = false;
+            this.btnReply.Click += new System.EventHandler(this.btnReply_Click);
+            // 
             // showMail
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -249,7 +258,6 @@
 
         private Panel panelMail;
         private Label lblMail;
-        private Button btnReply;
         private Panel panel6;
         private Panel panel5;
         private Panel panel4;
@@ -263,5 +271,6 @@
         private Panel panel1;
         private Label lblForm;
         private Button btnX;
+        private RJCodeAdvance.RJControls.RJButton btnReply;
     }
 }

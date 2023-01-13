@@ -60,9 +60,10 @@ namespace EMS_Client
             {
                 File.WriteAllBytes(Config.RootDirectory + "\\test.jpg", buffer);
                 File.WriteAllBytes(Config.RootDirectory + "\\test.txt", buffer);
-                userPicture.Image = new ImageConverter().ConvertFrom(buffer) as Bitmap;
+                UserPictureBox.Image = new ImageConverter().ConvertFrom(buffer) as Bitmap;
             }
         }
+        
 
         #region Subscreens
         //This region contains methods needed for the subscreens rendering
@@ -161,7 +162,7 @@ namespace EMS_Client
         }
         #endregion
 
-        private void btnViewOnSite_Click(object sender, EventArgs e)
+        private void btnView_Click(object sender, EventArgs e)
         {
             EmpsByStatus empsByStatus = new EmpsByStatus();
             empsByStatus.Location = new Point(Location.X + Size.Width, Location.Y);
@@ -173,5 +174,7 @@ namespace EMS_Client
             activeForm?.Close();
             panelDesktop.BackgroundImage = Properties.Resources.HR1;
         }
+
+
     }
 }

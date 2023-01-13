@@ -12,7 +12,7 @@
         /// Opens Add Worker screen
         /// פתח מסך הוספת עובד
         /// </summary>
-        private void btnAddWorker_Click(object sender, EventArgs e)
+       private void btnNewWorker_Click(object sender, EventArgs e)
         {
             addEmployee ae = new addEmployee();
             ae.Show();
@@ -22,11 +22,14 @@
         /// Opens Update Personal Details screen
         /// פתח מסך עדכון פרטים אישיים של עובד
         /// </summary>
-        private void btnUpdatePersonalDetails_Click(object sender, EventArgs e)
+        private void rjbtnUpdatePersonalDetails_Click(object sender, EventArgs e)
         {
             UpdatePersonalDetails upd = new UpdatePersonalDetails();
             upd.Show();
         }
+
         #endregion
+
+
     }
 }

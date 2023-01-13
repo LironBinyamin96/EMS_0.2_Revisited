@@ -31,14 +31,13 @@
         private void btnX_Click(object sender, EventArgs e) => Close();
 
         // Reply to sender | השב לשולח
+        
         private void btnReply_Click(object sender, EventArgs e)
         {
             newEmail newEmail = new newEmail(form, sub);
             newEmail.Show();
         }
         #endregion
-
-
         #region Drag Window
         /// <summary>
         /// Controlls form movement during drag.
@@ -57,6 +56,9 @@
         public static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
         [System.Runtime.InteropServices.DllImportAttribute("user32.dll")]
         public static extern bool ReleaseCapture();
+
+
+
         private void panelMail_MouseDown_1(object sender, MouseEventArgs e) => Drag(e);
         private void lblMail_MouseDown_1(object sender, MouseEventArgs e) => Drag(e);
         #endregion

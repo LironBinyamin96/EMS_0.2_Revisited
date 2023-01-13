@@ -89,16 +89,22 @@ namespace EMS_Client.Forms
             selectEmployee select_Employee = new selectEmployee(this);
             select_Employee.ShowDialog();
         }
+
         // Deleting an employee | מחיקת עובד
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            DialogResult delete = MessageBox.Show("Are you sure?", "", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
-            if (delete == DialogResult.OK)
-            {
-                Requests.RequestFromServer(Requests.DeleteEmployee(EMS_ClientMainScreen.employee.IntId), 4);
-                Clear();
+            if (EMS_ClientMainScreen.employee != null)
+            { 
+                DialogResult delete = MessageBox.Show("Are you sure?", "", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+                if (delete == DialogResult.OK)
+                {
+                    Requests.RequestFromServer(Requests.DeleteEmployee(EMS_ClientMainScreen.employee.IntId), 4);
+                    Clear();
+                }
             }
+            else MessageBox.Show("Please select a employee");
         }
+
         // Upload a picture | העלאת תמונה
         private void btnUpload_Click(object sender, EventArgs e)
         {
@@ -111,6 +117,7 @@ namespace EMS_Client.Forms
                 pictureBox1.Image = empPicture;
             }
         }
+
         private void btnX_Click(object sender, EventArgs e)
         {
             EMS_ClientMainScreen.employee = null;
@@ -126,6 +133,7 @@ namespace EMS_Client.Forms
             foreach (Panel panel in panelArr)
                 panel.BackColor = Color.FromArgb(0, 126, 249);
         }
+
         #endregion
 
         #region Supplimental
@@ -236,8 +244,8 @@ namespace EMS_Client.Forms
             unchecked { frameCount++; }
             if (frameCount % 10 == 0) GC.Collect();
         }
-
-        private void btnCamera_Click_1(object sender, EventArgs e)
+        // פתיחת מצלמה
+        private void btnCamera_Click(object sender, EventArgs e)
         {
             if (StartCamera())
             {
@@ -262,7 +270,9 @@ namespace EMS_Client.Forms
             }
         }
 
-        private void btnTakePicture_Click(object sender, EventArgs e)
+
+        //צילום תמונה
+        private void btnPictureTakingImage_Click(object sender, EventArgs e)
         {
             videoCapture?.SignalToStop();
             btnCamera.Visible = true;
@@ -270,7 +280,6 @@ namespace EMS_Client.Forms
             try { empPicture = new Bitmap(pictureBox1.Image).Rescale(Config.FRImmageWidth, Config.FRImmageHeight); }
             catch { MessageBox.Show("Image could not be captured!"); }
         }
-
         #endregion
 
         private void UpdatePersonalDetails_FormClosing(object sender, FormClosingEventArgs e)
@@ -282,12 +291,17 @@ namespace EMS_Client.Forms
 
         private void btnUnemploy_Click(object sender, EventArgs e)
         {
-            if (Requests.DeleteImage(EMS_ClientMainScreen.employee.IntId)[0] == "Picture deleted." &&
-            Requests.RequestFromServer(Requests.UpdateEmployee(new Dictionary<string, string> { { "_employmentStatus", "0" } }, new Dictionary<string, string> { { "_intId", EMS_ClientMainScreen.employee.IntId.ToString() } }),3)[0] == "1") 
+            if (EMS_ClientMainScreen.employee != null)
             {
-                MessageBox.Show("Employee has bee sent to fuck himself :)");
-            }
-            
+                if (Requests.DeleteImage(EMS_ClientMainScreen.employee.IntId)[0] == "Picture deleted." &&
+                    Requests.RequestFromServer(Requests.UpdateEmployee(new Dictionary<string, string> { { "_employmentStatus", "0" } }, new Dictionary<string, string> { { "_intId", EMS_ClientMainScreen.employee.IntId.ToString() } }), 3)[0] == "1")
+                {
+                    MessageBox.Show("Employee has bee sent to fuck himself :)");
+                }
+            }  
+            else MessageBox.Show("Please select a employee");
         }
+
+      
     }
 }

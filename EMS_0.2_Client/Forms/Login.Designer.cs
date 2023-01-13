@@ -35,13 +35,8 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.txtPasscode = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.panelPasscode = new System.Windows.Forms.Panel();
-            this.btnSendAgain = new System.Windows.Forms.Button();
-            this.panelPasscodeText = new System.Windows.Forms.Panel();
-            this.pictureBox3 = new System.Windows.Forms.PictureBox();
-            this.lblPasscode = new System.Windows.Forms.Label();
-            this.btnLoginPasscode = new System.Windows.Forms.Button();
             this.panelLogin = new System.Windows.Forms.Panel();
+            this.btnLogin = new RJCodeAdvance.RJControls.RJButton();
             this.panelPassword = new System.Windows.Forms.Panel();
             this.pictureBoxEye = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
@@ -49,18 +44,23 @@
             this.pictureBoxUser = new System.Windows.Forms.PictureBox();
             this.txtIntId = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.btnLogin = new System.Windows.Forms.Button();
+            this.panelPasscode = new System.Windows.Forms.Panel();
+            this.btnLoginPasscode = new RJCodeAdvance.RJControls.RJButton();
+            this.btnSendAgain = new System.Windows.Forms.Button();
+            this.panelPasscodeText = new System.Windows.Forms.Panel();
+            this.pictureBox3 = new System.Windows.Forms.PictureBox();
+            this.lblPasscode = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
-            this.panelPasscode.SuspendLayout();
-            this.panelPasscodeText.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             this.panelLogin.SuspendLayout();
             this.panelPassword.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxEye)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.panelUser.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxUser)).BeginInit();
+            this.panelPasscode.SuspendLayout();
+            this.panelPasscodeText.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             this.SuspendLayout();
             // 
             // txtPassword
@@ -132,101 +132,46 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.White;
-            this.panel1.Controls.Add(this.panelPasscode);
             this.panel1.Controls.Add(this.panelLogin);
+            this.panel1.Controls.Add(this.panelPasscode);
             this.panel1.Controls.Add(this.pictureBox1);
             this.panel1.Location = new System.Drawing.Point(12, 12);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(273, 373);
+            this.panel1.Size = new System.Drawing.Size(273, 405);
             this.panel1.TabIndex = 9;
-            // 
-            // panelPasscode
-            // 
-            this.panelPasscode.BackColor = System.Drawing.Color.Transparent;
-            this.panelPasscode.Controls.Add(this.btnSendAgain);
-            this.panelPasscode.Controls.Add(this.panelPasscodeText);
-            this.panelPasscode.Controls.Add(this.lblPasscode);
-            this.panelPasscode.Controls.Add(this.btnLoginPasscode);
-            this.panelPasscode.Location = new System.Drawing.Point(11, 157);
-            this.panelPasscode.Name = "panelPasscode";
-            this.panelPasscode.Size = new System.Drawing.Size(247, 211);
-            this.panelPasscode.TabIndex = 10;
-            this.panelPasscode.Visible = false;
-            // 
-            // btnSendAgain
-            // 
-            this.btnSendAgain.BackColor = System.Drawing.Color.Transparent;
-            this.btnSendAgain.FlatAppearance.BorderSize = 0;
-            this.btnSendAgain.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSendAgain.Font = new System.Drawing.Font("Century Gothic", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btnSendAgain.ForeColor = System.Drawing.Color.White;
-            this.btnSendAgain.Location = new System.Drawing.Point(158, 120);
-            this.btnSendAgain.Name = "btnSendAgain";
-            this.btnSendAgain.Size = new System.Drawing.Size(86, 28);
-            this.btnSendAgain.TabIndex = 14;
-            this.btnSendAgain.Text = "Send again";
-            this.btnSendAgain.UseVisualStyleBackColor = false;
-            this.btnSendAgain.Click += new System.EventHandler(this.btnSendAgain_Click);
-            // 
-            // panelPasscodeText
-            // 
-            this.panelPasscodeText.BackColor = System.Drawing.Color.LightGray;
-            this.panelPasscodeText.Controls.Add(this.pictureBox3);
-            this.panelPasscodeText.Controls.Add(this.txtPasscode);
-            this.panelPasscodeText.Location = new System.Drawing.Point(0, 82);
-            this.panelPasscodeText.Name = "panelPasscodeText";
-            this.panelPasscodeText.Size = new System.Drawing.Size(247, 35);
-            this.panelPasscodeText.TabIndex = 13;
-            // 
-            // pictureBox3
-            // 
-            this.pictureBox3.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox3.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox3.Image")));
-            this.pictureBox3.Location = new System.Drawing.Point(4, 3);
-            this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(30, 28);
-            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox3.TabIndex = 13;
-            this.pictureBox3.TabStop = false;
-            // 
-            // lblPasscode
-            // 
-            this.lblPasscode.AutoSize = true;
-            this.lblPasscode.BackColor = System.Drawing.Color.Transparent;
-            this.lblPasscode.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblPasscode.ForeColor = System.Drawing.Color.LightCyan;
-            this.lblPasscode.Location = new System.Drawing.Point(8, 21);
-            this.lblPasscode.Name = "lblPasscode";
-            this.lblPasscode.Size = new System.Drawing.Size(236, 34);
-            this.lblPasscode.TabIndex = 10;
-            this.lblPasscode.Text = "The verification code has been sent\r\nto your email address.";
-            // 
-            // btnLoginPasscode
-            // 
-            this.btnLoginPasscode.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
-            this.btnLoginPasscode.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.btnLoginPasscode.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnLoginPasscode.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btnLoginPasscode.ForeColor = System.Drawing.Color.White;
-            this.btnLoginPasscode.Location = new System.Drawing.Point(58, 166);
-            this.btnLoginPasscode.Name = "btnLoginPasscode";
-            this.btnLoginPasscode.Size = new System.Drawing.Size(117, 38);
-            this.btnLoginPasscode.TabIndex = 9;
-            this.btnLoginPasscode.Text = "Login";
-            this.btnLoginPasscode.UseVisualStyleBackColor = false;
-            this.btnLoginPasscode.Click += new System.EventHandler(this.btnLoginPasscode_Click);
             // 
             // panelLogin
             // 
             this.panelLogin.BackColor = System.Drawing.Color.Transparent;
+            this.panelLogin.Controls.Add(this.btnLogin);
             this.panelLogin.Controls.Add(this.panelPassword);
             this.panelLogin.Controls.Add(this.panelUser);
             this.panelLogin.Controls.Add(this.label1);
-            this.panelLogin.Controls.Add(this.btnLogin);
-            this.panelLogin.Location = new System.Drawing.Point(11, 156);
+            this.panelLogin.Location = new System.Drawing.Point(15, 172);
             this.panelLogin.Name = "panelLogin";
-            this.panelLogin.Size = new System.Drawing.Size(247, 214);
+            this.panelLogin.Size = new System.Drawing.Size(247, 227);
             this.panelLogin.TabIndex = 6;
+            // 
+            // btnLogin
+            // 
+            this.btnLogin.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
+            this.btnLogin.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
+            this.btnLogin.BorderColor = System.Drawing.Color.WhiteSmoke;
+            this.btnLogin.BorderRadius = 17;
+            this.btnLogin.BorderSize = 2;
+            this.btnLogin.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btnLogin.FlatAppearance.BorderSize = 2;
+            this.btnLogin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnLogin.Font = new System.Drawing.Font("Bahnschrift SemiLight", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btnLogin.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.btnLogin.Location = new System.Drawing.Point(55, 179);
+            this.btnLogin.Name = "btnLogin";
+            this.btnLogin.Size = new System.Drawing.Size(120, 43);
+            this.btnLogin.TabIndex = 11;
+            this.btnLogin.Text = "LOGIN";
+            this.btnLogin.TextColor = System.Drawing.Color.WhiteSmoke;
+            this.btnLogin.UseVisualStyleBackColor = false;
+            this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
             // 
             // panelPassword
             // 
@@ -310,19 +255,87 @@
             this.label1.TabIndex = 11;
             this.label1.Text = "Login to your account";
             // 
-            // btnLogin
+            // panelPasscode
             // 
-            this.btnLogin.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
-            this.btnLogin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnLogin.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btnLogin.ForeColor = System.Drawing.Color.White;
-            this.btnLogin.Location = new System.Drawing.Point(57, 169);
-            this.btnLogin.Name = "btnLogin";
-            this.btnLogin.Size = new System.Drawing.Size(118, 38);
-            this.btnLogin.TabIndex = 2;
-            this.btnLogin.Text = "Login";
-            this.btnLogin.UseVisualStyleBackColor = false;
-            this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
+            this.panelPasscode.BackColor = System.Drawing.Color.Transparent;
+            this.panelPasscode.Controls.Add(this.btnLoginPasscode);
+            this.panelPasscode.Controls.Add(this.btnSendAgain);
+            this.panelPasscode.Controls.Add(this.panelPasscodeText);
+            this.panelPasscode.Controls.Add(this.lblPasscode);
+            this.panelPasscode.Location = new System.Drawing.Point(15, 172);
+            this.panelPasscode.Name = "panelPasscode";
+            this.panelPasscode.Size = new System.Drawing.Size(247, 230);
+            this.panelPasscode.TabIndex = 10;
+            this.panelPasscode.Visible = false;
+            // 
+            // btnLoginPasscode
+            // 
+            this.btnLoginPasscode.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
+            this.btnLoginPasscode.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
+            this.btnLoginPasscode.BorderColor = System.Drawing.Color.WhiteSmoke;
+            this.btnLoginPasscode.BorderRadius = 17;
+            this.btnLoginPasscode.BorderSize = 2;
+            this.btnLoginPasscode.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btnLoginPasscode.FlatAppearance.BorderSize = 2;
+            this.btnLoginPasscode.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnLoginPasscode.Font = new System.Drawing.Font("Bahnschrift SemiLight", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btnLoginPasscode.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.btnLoginPasscode.Location = new System.Drawing.Point(58, 187);
+            this.btnLoginPasscode.Name = "btnLoginPasscode";
+            this.btnLoginPasscode.Size = new System.Drawing.Size(120, 40);
+            this.btnLoginPasscode.TabIndex = 10;
+            this.btnLoginPasscode.Text = "LOGIN";
+            this.btnLoginPasscode.TextColor = System.Drawing.Color.WhiteSmoke;
+            this.btnLoginPasscode.UseVisualStyleBackColor = false;
+            this.btnLoginPasscode.Click += new System.EventHandler(this.btnLoginPasscode_Click);
+            // 
+            // btnSendAgain
+            // 
+            this.btnSendAgain.BackColor = System.Drawing.Color.Transparent;
+            this.btnSendAgain.FlatAppearance.BorderSize = 0;
+            this.btnSendAgain.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSendAgain.Font = new System.Drawing.Font("Century Gothic", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btnSendAgain.ForeColor = System.Drawing.Color.White;
+            this.btnSendAgain.Location = new System.Drawing.Point(158, 120);
+            this.btnSendAgain.Name = "btnSendAgain";
+            this.btnSendAgain.Size = new System.Drawing.Size(86, 28);
+            this.btnSendAgain.TabIndex = 14;
+            this.btnSendAgain.Text = "Send again";
+            this.btnSendAgain.UseVisualStyleBackColor = false;
+            this.btnSendAgain.Click += new System.EventHandler(this.btnSendAgain_Click);
+            // 
+            // panelPasscodeText
+            // 
+            this.panelPasscodeText.BackColor = System.Drawing.Color.LightGray;
+            this.panelPasscodeText.Controls.Add(this.pictureBox3);
+            this.panelPasscodeText.Controls.Add(this.txtPasscode);
+            this.panelPasscodeText.Location = new System.Drawing.Point(0, 82);
+            this.panelPasscodeText.Name = "panelPasscodeText";
+            this.panelPasscodeText.Size = new System.Drawing.Size(247, 35);
+            this.panelPasscodeText.TabIndex = 13;
+            // 
+            // pictureBox3
+            // 
+            this.pictureBox3.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBox3.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox3.Image")));
+            this.pictureBox3.Location = new System.Drawing.Point(4, 3);
+            this.pictureBox3.Name = "pictureBox3";
+            this.pictureBox3.Size = new System.Drawing.Size(30, 28);
+            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox3.TabIndex = 13;
+            this.pictureBox3.TabStop = false;
+            // 
+            // lblPasscode
+            // 
+            this.lblPasscode.AutoSize = true;
+            this.lblPasscode.BackColor = System.Drawing.Color.Transparent;
+            this.lblPasscode.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblPasscode.ForeColor = System.Drawing.Color.LightCyan;
+            this.lblPasscode.Location = new System.Drawing.Point(8, 21);
+            this.lblPasscode.Name = "lblPasscode";
+            this.lblPasscode.Size = new System.Drawing.Size(236, 34);
+            this.lblPasscode.TabIndex = 10;
+            this.lblPasscode.Text = "The verification code has been sent\r\nto your email address.";
             // 
             // Login
             // 
@@ -344,11 +357,6 @@
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Login_MouseDown);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel1.ResumeLayout(false);
-            this.panelPasscode.ResumeLayout(false);
-            this.panelPasscode.PerformLayout();
-            this.panelPasscodeText.ResumeLayout(false);
-            this.panelPasscodeText.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             this.panelLogin.ResumeLayout(false);
             this.panelLogin.PerformLayout();
             this.panelPassword.ResumeLayout(false);
@@ -358,6 +366,11 @@
             this.panelUser.ResumeLayout(false);
             this.panelUser.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxUser)).EndInit();
+            this.panelPasscode.ResumeLayout(false);
+            this.panelPasscode.PerformLayout();
+            this.panelPasscodeText.ResumeLayout(false);
+            this.panelPasscodeText.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -372,10 +385,8 @@
         private Panel panel1;
         private Panel panelLogin;
         private Panel panelPasscode;
-        private Button btnLoginPasscode;
         private Label label1;
         private TextBox txtIntId;
-        private Button btnLogin;
         private Label lblPasscode;
         private Panel panelPassword;
         private Panel panelUser;
@@ -385,5 +396,7 @@
         private Panel panelPasscodeText;
         private PictureBox pictureBox3;
         private Button btnSendAgain;
+        private RJCodeAdvance.RJControls.RJButton btnLoginPasscode;
+        private RJCodeAdvance.RJControls.RJButton btnLogin;
     }
 }

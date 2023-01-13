@@ -31,7 +31,6 @@ namespace EMS_Client.Forms
         {
             this.panelGeneralData = new System.Windows.Forms.Panel();
             this.lblGeneralData = new System.Windows.Forms.Label();
-            this.btnSelect = new System.Windows.Forms.Button();
             this.lblJan = new System.Windows.Forms.Label();
             this.lblFeb = new System.Windows.Forms.Label();
             this.lblMar = new System.Windows.Forms.Label();
@@ -74,6 +73,7 @@ namespace EMS_Client.Forms
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.yearPicker = new System.Windows.Forms.ComboBox();
             this.lblDilyAvgHours = new System.Windows.Forms.Label();
+            this.btnSelect = new RJCodeAdvance.RJControls.RJButton();
             this.panelGeneralData.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -99,20 +99,6 @@ namespace EMS_Client.Forms
             this.lblGeneralData.Size = new System.Drawing.Size(183, 35);
             this.lblGeneralData.TabIndex = 0;
             this.lblGeneralData.Text = "General Data";
-            // 
-            // btnSelect
-            // 
-            this.btnSelect.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSelect.Font = new System.Drawing.Font("Bahnschrift SemiLight", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btnSelect.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
-            this.btnSelect.Location = new System.Drawing.Point(5, 91);
-            this.btnSelect.Name = "btnSelect";
-            this.btnSelect.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.btnSelect.Size = new System.Drawing.Size(193, 40);
-            this.btnSelect.TabIndex = 3;
-            this.btnSelect.Text = "Select an employee";
-            this.btnSelect.UseVisualStyleBackColor = true;
-            this.btnSelect.Click += new System.EventHandler(this.btnSelect_Click);
             // 
             // lblJan
             // 
@@ -605,17 +591,40 @@ namespace EMS_Client.Forms
             this.lblDilyAvgHours.TabIndex = 23;
             this.lblDilyAvgHours.Text = "Total hours worked";
             // 
+            // btnSelect
+            // 
+            this.btnSelect.BackColor = System.Drawing.Color.Transparent;
+            this.btnSelect.BackgroundColor = System.Drawing.Color.Transparent;
+            this.btnSelect.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
+            this.btnSelect.BorderRadius = 17;
+            this.btnSelect.BorderSize = 2;
+            this.btnSelect.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
+            this.btnSelect.FlatAppearance.BorderSize = 2;
+            this.btnSelect.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightGray;
+            this.btnSelect.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightGray;
+            this.btnSelect.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSelect.Font = new System.Drawing.Font("Bahnschrift SemiLight", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btnSelect.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
+            this.btnSelect.Location = new System.Drawing.Point(10, 91);
+            this.btnSelect.Name = "btnSelect";
+            this.btnSelect.Size = new System.Drawing.Size(195, 40);
+            this.btnSelect.TabIndex = 51;
+            this.btnSelect.Text = "Select an employee";
+            this.btnSelect.TextColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
+            this.btnSelect.UseVisualStyleBackColor = false;
+            this.btnSelect.Click += new System.EventHandler(this.btnSelect_Click);
+            // 
             // GeneralData
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
             this.ClientSize = new System.Drawing.Size(800, 562);
+            this.Controls.Add(this.btnSelect);
             this.Controls.Add(this.lblDilyAvgHours);
             this.Controls.Add(this.yearPicker);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.lblEmpData);
-            this.Controls.Add(this.btnSelect);
             this.Controls.Add(this.panelGeneralData);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.lblAvgText);
@@ -636,7 +645,6 @@ namespace EMS_Client.Forms
 
         private Panel panelGeneralData;
         private Label lblGeneralData;
-        private Button btnSelect;
         private System.Windows.Forms.DataVisualization.Charting.Chart dataChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
         System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
         System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
@@ -683,5 +691,6 @@ namespace EMS_Client.Forms
         private ProgressBar monthBar1;
         private ProgressBar monthBar0;
         private Label lblDilyAvgHours;
+        private RJCodeAdvance.RJControls.RJButton btnSelect;
     }
 }

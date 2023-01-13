@@ -50,6 +50,15 @@
           "lib/net35/System.Windows.Forms.DataVisualization.dll": {}
         }
       },
+      "RJCodeAdvance.RJControls/1.0.0": {
+        "type": "package",
+        "compile": {
+          "lib/net45/RJCodeAdvance.RJControls.dll": {}
+        },
+        "runtime": {
+          "lib/net45/RJCodeAdvance.RJControls.dll": {}
+        }
+      },
       "S22.Imap/3.6.0": {
         "type": "package",
         "compile": {
@@ -130,6 +139,18 @@
         "microsoft.chart.controls.nuspec"
       ]
     },
+    "RJCodeAdvance.RJControls/1.0.0": {
+      "sha512": "O+drkZ7lKfMdRRgXKiy2Z/ENhU5Ee2j2mXSzHWwEN2thtRDrWjoUpUvUm9gSFX8susKj1yeVmtMG3qYeNBvmBw==",
+      "type": "package",
+      "path": "rjcodeadvance.rjcontrols/1.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net45/RJCodeAdvance.RJControls.dll",
+        "rjcodeadvance.rjcontrols.1.0.0.nupkg.sha512",
+        "rjcodeadvance.rjcontrols.nuspec"
+      ]
+    },
     "S22.Imap/3.6.0": {
       "sha512": "QtSnxLwbqjcN2AXKXBPlSBpGXWhtnyuXqoOcRjRlAduwgeHidgNI/527gcS6/x6JLHtGrySn1do0ADxgCdqAjg==",
       "type": "package",
@@ -157,6 +178,7 @@
       "AForge.Video.DirectShow >= 2.2.5",
       "EMS_0.2_Library >= 1.0.0",
       "Microsoft.Chart.Controls >= 4.7.2046",
+      "RJCodeAdvance.RJControls >= 1.0.0",
       "S22.Imap >= 3.6.0"
     ]
   },
@@ -214,6 +236,10 @@
           "Microsoft.Chart.Controls": {
             "target": "Package",
             "version": "[4.7.2046, )"
+          },
+          "RJCodeAdvance.RJControls": {
+            "target": "Package",
+            "version": "[1.0.0, )"
           },
           "S22.Imap": {
             "target": "Package",
@@ -279,6 +305,16 @@
       "warningLevel": 1,
       "message": "Package 'Microsoft.Chart.Controls 4.7.2046' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework 'net6.0-windows7.0'. This package may not be fully compatible with your project.",
       "libraryId": "Microsoft.Chart.Controls",
+      "targetGraphs": [
+        "net6.0-windows7.0"
+      ]
+    },
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'RJCodeAdvance.RJControls 1.0.0' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework 'net6.0-windows7.0'. This package may not be fully compatible with your project.",
+      "libraryId": "RJCodeAdvance.RJControls",
       "targetGraphs": [
         "net6.0-windows7.0"
       ]

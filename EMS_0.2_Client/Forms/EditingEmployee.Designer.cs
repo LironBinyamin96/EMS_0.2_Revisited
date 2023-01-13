@@ -30,8 +30,8 @@
         {
             this.panelEditingEmployee = new System.Windows.Forms.Panel();
             this.lblEditingEmployee = new System.Windows.Forms.Label();
-            this.btnAddWorker = new System.Windows.Forms.Button();
-            this.btnUpdatePersonalDetails = new System.Windows.Forms.Button();
+            this.btnNewWorker = new RJCodeAdvance.RJControls.RJButton();
+            this.rjbtnUpdatePersonalDetails = new RJCodeAdvance.RJControls.RJButton();
             this.panelEditingEmployee.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -56,33 +56,51 @@
             this.lblEditingEmployee.TabIndex = 0;
             this.lblEditingEmployee.Text = "Editing Employee";
             // 
-            // btnAddWorker
+            // btnNewWorker
             // 
-            this.btnAddWorker.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAddWorker.Font = new System.Drawing.Font("Bahnschrift SemiLight", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btnAddWorker.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
-            this.btnAddWorker.Location = new System.Drawing.Point(228, 152);
-            this.btnAddWorker.Name = "btnAddWorker";
-            this.btnAddWorker.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.btnAddWorker.Size = new System.Drawing.Size(295, 46);
-            this.btnAddWorker.TabIndex = 1;
-            this.btnAddWorker.Text = "Add New Worker";
-            this.btnAddWorker.UseVisualStyleBackColor = true;
-            this.btnAddWorker.Click += new System.EventHandler(this.btnAddWorker_Click);
+            this.btnNewWorker.BackColor = System.Drawing.Color.Transparent;
+            this.btnNewWorker.BackgroundColor = System.Drawing.Color.Transparent;
+            this.btnNewWorker.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
+            this.btnNewWorker.BorderRadius = 20;
+            this.btnNewWorker.BorderSize = 2;
+            this.btnNewWorker.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
+            this.btnNewWorker.FlatAppearance.BorderSize = 2;
+            this.btnNewWorker.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightGray;
+            this.btnNewWorker.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btnNewWorker.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnNewWorker.Font = new System.Drawing.Font("Bahnschrift SemiLight", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btnNewWorker.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
+            this.btnNewWorker.Location = new System.Drawing.Point(235, 161);
+            this.btnNewWorker.Name = "btnNewWorker";
+            this.btnNewWorker.Size = new System.Drawing.Size(266, 46);
+            this.btnNewWorker.TabIndex = 3;
+            this.btnNewWorker.Text = "Add New Worker";
+            this.btnNewWorker.TextColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
+            this.btnNewWorker.UseVisualStyleBackColor = false;
+            this.btnNewWorker.Click += new System.EventHandler(this.btnNewWorker_Click);
             // 
-            // btnUpdatePersonalDetails
+            // rjbtnUpdatePersonalDetails
             // 
-            this.btnUpdatePersonalDetails.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnUpdatePersonalDetails.Font = new System.Drawing.Font("Bahnschrift SemiLight", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btnUpdatePersonalDetails.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
-            this.btnUpdatePersonalDetails.Location = new System.Drawing.Point(228, 251);
-            this.btnUpdatePersonalDetails.Name = "btnUpdatePersonalDetails";
-            this.btnUpdatePersonalDetails.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.btnUpdatePersonalDetails.Size = new System.Drawing.Size(295, 46);
-            this.btnUpdatePersonalDetails.TabIndex = 2;
-            this.btnUpdatePersonalDetails.Text = "Update Personal Details";
-            this.btnUpdatePersonalDetails.UseVisualStyleBackColor = true;
-            this.btnUpdatePersonalDetails.Click += new System.EventHandler(this.btnUpdatePersonalDetails_Click);
+            this.rjbtnUpdatePersonalDetails.BackColor = System.Drawing.Color.Transparent;
+            this.rjbtnUpdatePersonalDetails.BackgroundColor = System.Drawing.Color.Transparent;
+            this.rjbtnUpdatePersonalDetails.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
+            this.rjbtnUpdatePersonalDetails.BorderRadius = 20;
+            this.rjbtnUpdatePersonalDetails.BorderSize = 2;
+            this.rjbtnUpdatePersonalDetails.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
+            this.rjbtnUpdatePersonalDetails.FlatAppearance.BorderSize = 2;
+            this.rjbtnUpdatePersonalDetails.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightGray;
+            this.rjbtnUpdatePersonalDetails.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.rjbtnUpdatePersonalDetails.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.rjbtnUpdatePersonalDetails.Font = new System.Drawing.Font("Bahnschrift SemiLight", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.rjbtnUpdatePersonalDetails.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
+            this.rjbtnUpdatePersonalDetails.Location = new System.Drawing.Point(235, 266);
+            this.rjbtnUpdatePersonalDetails.Name = "rjbtnUpdatePersonalDetails";
+            this.rjbtnUpdatePersonalDetails.Size = new System.Drawing.Size(266, 46);
+            this.rjbtnUpdatePersonalDetails.TabIndex = 4;
+            this.rjbtnUpdatePersonalDetails.Text = "Update Personal Details";
+            this.rjbtnUpdatePersonalDetails.TextColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
+            this.rjbtnUpdatePersonalDetails.UseVisualStyleBackColor = false;
+            this.rjbtnUpdatePersonalDetails.Click += new System.EventHandler(this.rjbtnUpdatePersonalDetails_Click);
             // 
             // EditingEmployee
             // 
@@ -90,8 +108,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.btnUpdatePersonalDetails);
-            this.Controls.Add(this.btnAddWorker);
+            this.Controls.Add(this.rjbtnUpdatePersonalDetails);
+            this.Controls.Add(this.btnNewWorker);
             this.Controls.Add(this.panelEditingEmployee);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "EditingEmployee";
@@ -106,7 +124,7 @@
 
         private Panel panelEditingEmployee;
         private Label lblEditingEmployee;
-        private Button btnAddWorker;
-        private Button btnUpdatePersonalDetails;
+        private RJCodeAdvance.RJControls.RJButton btnNewWorker;
+        private RJCodeAdvance.RJControls.RJButton rjbtnUpdatePersonalDetails;
     }
 }

@@ -28,15 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panelMail = new System.Windows.Forms.Panel();
             this.lblMail = new System.Windows.Forms.Label();
-            this.btnNewEmail = new System.Windows.Forms.Button();
             this.inbox = new System.Windows.Forms.DataGridView();
             this.Form = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Subject = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Body = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnNewEmail = new RJCodeAdvance.RJControls.RJButton();
             this.panelMail.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.inbox)).BeginInit();
             this.SuspendLayout();
@@ -62,47 +62,33 @@
             this.lblMail.TabIndex = 0;
             this.lblMail.Text = "Email";
             // 
-            // btnNewEmail
-            // 
-            this.btnNewEmail.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnNewEmail.Font = new System.Drawing.Font("Bahnschrift SemiLight", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btnNewEmail.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
-            this.btnNewEmail.Location = new System.Drawing.Point(284, 91);
-            this.btnNewEmail.Name = "btnNewEmail";
-            this.btnNewEmail.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.btnNewEmail.Size = new System.Drawing.Size(193, 40);
-            this.btnNewEmail.TabIndex = 2;
-            this.btnNewEmail.Text = "New Email";
-            this.btnNewEmail.UseVisualStyleBackColor = true;
-            this.btnNewEmail.Click += new System.EventHandler(this.btnNewEmail_Click);
-            // 
             // inbox
             // 
             this.inbox.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.inbox.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
             this.inbox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.inbox.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.inbox.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.inbox.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.inbox.ColumnHeadersHeight = 30;
             this.inbox.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Form,
             this.Subject,
             this.Body});
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.inbox.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.inbox.DefaultCellStyle = dataGridViewCellStyle2;
             this.inbox.EnableHeadersVisualStyles = false;
             this.inbox.GridColor = System.Drawing.SystemColors.Control;
             this.inbox.Location = new System.Drawing.Point(0, 137);
@@ -133,14 +119,37 @@
             this.Body.Name = "Body";
             this.Body.ReadOnly = true;
             // 
+            // btnNewEmail
+            // 
+            this.btnNewEmail.BackColor = System.Drawing.Color.Transparent;
+            this.btnNewEmail.BackgroundColor = System.Drawing.Color.Transparent;
+            this.btnNewEmail.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
+            this.btnNewEmail.BorderRadius = 15;
+            this.btnNewEmail.BorderSize = 2;
+            this.btnNewEmail.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
+            this.btnNewEmail.FlatAppearance.BorderSize = 2;
+            this.btnNewEmail.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightGray;
+            this.btnNewEmail.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightGray;
+            this.btnNewEmail.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnNewEmail.Font = new System.Drawing.Font("Bahnschrift SemiLight", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btnNewEmail.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
+            this.btnNewEmail.Location = new System.Drawing.Point(278, 91);
+            this.btnNewEmail.Name = "btnNewEmail";
+            this.btnNewEmail.Size = new System.Drawing.Size(205, 40);
+            this.btnNewEmail.TabIndex = 51;
+            this.btnNewEmail.Text = "New Email";
+            this.btnNewEmail.TextColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
+            this.btnNewEmail.UseVisualStyleBackColor = false;
+            this.btnNewEmail.Click += new System.EventHandler(this.btnNewEmail_Click);
+            // 
             // Mail
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.inbox);
             this.Controls.Add(this.btnNewEmail);
+            this.Controls.Add(this.inbox);
             this.Controls.Add(this.panelMail);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Mail";
@@ -157,10 +166,10 @@
 
         private Panel panelMail;
         private Label lblMail;
-        private Button btnNewEmail;
         private DataGridView inbox;
         private DataGridViewTextBoxColumn Form;
         private DataGridViewTextBoxColumn Subject;
         private DataGridViewTextBoxColumn Body;
+        private RJCodeAdvance.RJControls.RJButton btnNewEmail;
     }
 }

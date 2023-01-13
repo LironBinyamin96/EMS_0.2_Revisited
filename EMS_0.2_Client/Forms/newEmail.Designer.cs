@@ -43,11 +43,11 @@
             this.panel4 = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
             this.panel6 = new System.Windows.Forms.Panel();
-            this.btnSend = new System.Windows.Forms.Button();
-            this.btnAddFile = new System.Windows.Forms.Button();
             this.lblFile = new System.Windows.Forms.Label();
-            this.btnSelect = new System.Windows.Forms.Button();
-            this.btnSendToAll = new System.Windows.Forms.Button();
+            this.btnSend = new RJCodeAdvance.RJControls.RJButton();
+            this.btnSendToAll = new RJCodeAdvance.RJControls.RJButton();
+            this.btnSelect = new RJCodeAdvance.RJControls.RJButton();
+            this.btnAddFile = new RJCodeAdvance.RJControls.RJButton();
             this.panelNewMail.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -204,34 +204,6 @@
             this.panel6.Size = new System.Drawing.Size(1, 190);
             this.panel6.TabIndex = 9;
             // 
-            // btnSend
-            // 
-            this.btnSend.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSend.Font = new System.Drawing.Font("Bahnschrift SemiCondensed", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btnSend.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
-            this.btnSend.Location = new System.Drawing.Point(414, 474);
-            this.btnSend.Name = "btnSend";
-            this.btnSend.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.btnSend.Size = new System.Drawing.Size(122, 32);
-            this.btnSend.TabIndex = 12;
-            this.btnSend.Text = "Send";
-            this.btnSend.UseVisualStyleBackColor = true;
-            this.btnSend.Click += new System.EventHandler(this.btnSend_Click);
-            // 
-            // btnAddFile
-            // 
-            this.btnAddFile.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAddFile.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btnAddFile.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
-            this.btnAddFile.Location = new System.Drawing.Point(155, 419);
-            this.btnAddFile.Name = "btnAddFile";
-            this.btnAddFile.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.btnAddFile.Size = new System.Drawing.Size(76, 28);
-            this.btnAddFile.TabIndex = 13;
-            this.btnAddFile.Text = "Add File";
-            this.btnAddFile.UseVisualStyleBackColor = true;
-            this.btnAddFile.Click += new System.EventHandler(this.btnAddFile_Click);
-            // 
             // lblFile
             // 
             this.lblFile.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
@@ -241,33 +213,97 @@
             this.lblFile.Size = new System.Drawing.Size(59, 18);
             this.lblFile.TabIndex = 14;
             // 
-            // btnSelect
+            // btnSend
             // 
-            this.btnSelect.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSelect.Font = new System.Drawing.Font("Bahnschrift SemiLight", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btnSelect.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
-            this.btnSelect.Location = new System.Drawing.Point(565, 143);
-            this.btnSelect.Name = "btnSelect";
-            this.btnSelect.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.btnSelect.Size = new System.Drawing.Size(79, 38);
-            this.btnSelect.TabIndex = 15;
-            this.btnSelect.Text = "Select an employee";
-            this.btnSelect.UseVisualStyleBackColor = true;
-            this.btnSelect.Click += new System.EventHandler(this.btnSelect_Click);
+            this.btnSend.BackColor = System.Drawing.Color.Transparent;
+            this.btnSend.BackgroundColor = System.Drawing.Color.Transparent;
+            this.btnSend.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
+            this.btnSend.BorderRadius = 17;
+            this.btnSend.BorderSize = 2;
+            this.btnSend.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
+            this.btnSend.FlatAppearance.BorderSize = 2;
+            this.btnSend.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightGray;
+            this.btnSend.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightGray;
+            this.btnSend.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSend.Font = new System.Drawing.Font("Bahnschrift SemiCondensed", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnSend.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
+            this.btnSend.Location = new System.Drawing.Point(448, 466);
+            this.btnSend.Name = "btnSend";
+            this.btnSend.Size = new System.Drawing.Size(121, 39);
+            this.btnSend.TabIndex = 51;
+            this.btnSend.Text = "Send";
+            this.btnSend.TextColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
+            this.btnSend.UseVisualStyleBackColor = false;
+            this.btnSend.Click += new System.EventHandler(this.btnSend_Click);
             // 
             // btnSendToAll
             // 
+            this.btnSendToAll.BackColor = System.Drawing.Color.Transparent;
+            this.btnSendToAll.BackgroundColor = System.Drawing.Color.Transparent;
+            this.btnSendToAll.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
+            this.btnSendToAll.BorderRadius = 15;
+            this.btnSendToAll.BorderSize = 1;
+            this.btnSendToAll.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
+            this.btnSendToAll.FlatAppearance.BorderSize = 2;
+            this.btnSendToAll.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightGray;
+            this.btnSendToAll.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.btnSendToAll.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSendToAll.Font = new System.Drawing.Font("Bahnschrift SemiLight", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btnSendToAll.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
-            this.btnSendToAll.Location = new System.Drawing.Point(565, 99);
+            this.btnSendToAll.Location = new System.Drawing.Point(561, 109);
             this.btnSendToAll.Name = "btnSendToAll";
-            this.btnSendToAll.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.btnSendToAll.Size = new System.Drawing.Size(79, 38);
-            this.btnSendToAll.TabIndex = 16;
+            this.btnSendToAll.Size = new System.Drawing.Size(90, 29);
+            this.btnSendToAll.TabIndex = 52;
             this.btnSendToAll.Text = "Send to all";
-            this.btnSendToAll.UseVisualStyleBackColor = true;
+            this.btnSendToAll.TextColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
+            this.btnSendToAll.UseVisualStyleBackColor = false;
             this.btnSendToAll.Click += new System.EventHandler(this.btnSendToAll_Click);
+            // 
+            // btnSelect
+            // 
+            this.btnSelect.BackColor = System.Drawing.Color.Transparent;
+            this.btnSelect.BackgroundColor = System.Drawing.Color.Transparent;
+            this.btnSelect.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
+            this.btnSelect.BorderRadius = 22;
+            this.btnSelect.BorderSize = 1;
+            this.btnSelect.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
+            this.btnSelect.FlatAppearance.BorderSize = 2;
+            this.btnSelect.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightGray;
+            this.btnSelect.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btnSelect.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSelect.Font = new System.Drawing.Font("Bahnschrift SemiLight", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btnSelect.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
+            this.btnSelect.Location = new System.Drawing.Point(561, 144);
+            this.btnSelect.Name = "btnSelect";
+            this.btnSelect.Size = new System.Drawing.Size(90, 42);
+            this.btnSelect.TabIndex = 53;
+            this.btnSelect.Text = "Select an employee";
+            this.btnSelect.TextColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
+            this.btnSelect.UseVisualStyleBackColor = false;
+            this.btnSelect.Click += new System.EventHandler(this.btnSelect_Click);
+            // 
+            // btnAddFile
+            // 
+            this.btnAddFile.BackColor = System.Drawing.Color.Transparent;
+            this.btnAddFile.BackgroundColor = System.Drawing.Color.Transparent;
+            this.btnAddFile.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
+            this.btnAddFile.BorderRadius = 15;
+            this.btnAddFile.BorderSize = 1;
+            this.btnAddFile.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
+            this.btnAddFile.FlatAppearance.BorderSize = 2;
+            this.btnAddFile.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightGray;
+            this.btnAddFile.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btnAddFile.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAddFile.Font = new System.Drawing.Font("Bahnschrift SemiLight", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btnAddFile.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
+            this.btnAddFile.Location = new System.Drawing.Point(149, 417);
+            this.btnAddFile.Name = "btnAddFile";
+            this.btnAddFile.Size = new System.Drawing.Size(90, 29);
+            this.btnAddFile.TabIndex = 54;
+            this.btnAddFile.Text = "Add File";
+            this.btnAddFile.TextColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
+            this.btnAddFile.UseVisualStyleBackColor = false;
+            this.btnAddFile.Click += new System.EventHandler(this.btnAddFile_Click);
             // 
             // newEmail
             // 
@@ -275,11 +311,11 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
             this.ClientSize = new System.Drawing.Size(656, 537);
-            this.Controls.Add(this.btnSendToAll);
-            this.Controls.Add(this.btnSelect);
-            this.Controls.Add(this.lblFile);
             this.Controls.Add(this.btnAddFile);
+            this.Controls.Add(this.btnSelect);
+            this.Controls.Add(this.btnSendToAll);
             this.Controls.Add(this.btnSend);
+            this.Controls.Add(this.lblFile);
             this.Controls.Add(this.panel6);
             this.Controls.Add(this.panel5);
             this.Controls.Add(this.panel4);
@@ -320,11 +356,11 @@
         private Panel panel4;
         private Panel panel5;
         private Panel panel6;
-        private Button btnSend;
-        private Button btnAddFile;
         private Label lblFile;
         private Button btnX;
-        private Button btnSelect;
-        private Button btnSendToAll;
+        private RJCodeAdvance.RJControls.RJButton btnSend;
+        private RJCodeAdvance.RJControls.RJButton btnSendToAll;
+        private RJCodeAdvance.RJControls.RJButton btnSelect;
+        private RJCodeAdvance.RJControls.RJButton btnAddFile;
     }
 }

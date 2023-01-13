@@ -29,12 +29,11 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panelAttendance = new System.Windows.Forms.Panel();
             this.lblAttendance = new System.Windows.Forms.Label();
-            this.btnSelect = new System.Windows.Forms.Button();
             this.GridViewAttrndance = new System.Windows.Forms.DataGridView();
             this.date = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Day = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -56,13 +55,14 @@
             this.lblID = new System.Windows.Forms.Label();
             this.hoursLogMonthBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.dateTime = new System.Windows.Forms.DateTimePicker();
-            this.btnShowHours = new System.Windows.Forms.Button();
             this.hoursLogMonthBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.hoursLogMonthBindingSource2 = new System.Windows.Forms.BindingSource(this.components);
             this.hoursLogMonthBindingSource3 = new System.Windows.Forms.BindingSource(this.components);
-            this.button1 = new System.Windows.Forms.Button();
             this.lblNoData = new System.Windows.Forms.Label();
-            this.btnExceptions = new System.Windows.Forms.Button();
+            this.btnSelect = new RJCodeAdvance.RJControls.RJButton();
+            this.btnHoursReport = new RJCodeAdvance.RJControls.RJButton();
+            this.btnExceptions = new RJCodeAdvance.RJControls.RJButton();
+            this.btnShowHours = new RJCodeAdvance.RJControls.RJButton();
             this.panelAttendance.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GridViewAttrndance)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.getDaysBindingSource)).BeginInit();
@@ -93,40 +93,26 @@
             this.lblAttendance.TabIndex = 0;
             this.lblAttendance.Text = "Attendance";
             // 
-            // btnSelect
-            // 
-            this.btnSelect.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSelect.Font = new System.Drawing.Font("Bahnschrift SemiLight", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btnSelect.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
-            this.btnSelect.Location = new System.Drawing.Point(271, 102);
-            this.btnSelect.Name = "btnSelect";
-            this.btnSelect.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.btnSelect.Size = new System.Drawing.Size(172, 30);
-            this.btnSelect.TabIndex = 4;
-            this.btnSelect.Text = "Select an employee";
-            this.btnSelect.UseVisualStyleBackColor = true;
-            this.btnSelect.Click += new System.EventHandler(this.btnSelect_Click);
-            // 
             // GridViewAttrndance
             // 
             this.GridViewAttrndance.AllowUserToAddRows = false;
             this.GridViewAttrndance.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
-            this.GridViewAttrndance.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
+            this.GridViewAttrndance.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.GridViewAttrndance.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.GridViewAttrndance.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
             this.GridViewAttrndance.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.GridViewAttrndance.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.GridViewAttrndance.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.GridViewAttrndance.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.GridViewAttrndance.ColumnHeadersHeight = 30;
             this.GridViewAttrndance.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.date,
@@ -138,14 +124,14 @@
             this.dataGridViewTextBoxColumn3,
             this.dataGridViewTextBoxColumn4,
             this.total_hours});
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.GridViewAttrndance.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.GridViewAttrndance.DefaultCellStyle = dataGridViewCellStyle3;
             this.GridViewAttrndance.EnableHeadersVisualStyles = false;
             this.GridViewAttrndance.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
             this.GridViewAttrndance.Location = new System.Drawing.Point(12, 185);
@@ -312,21 +298,7 @@
             this.dateTime.ShowUpDown = true;
             this.dateTime.Size = new System.Drawing.Size(78, 25);
             this.dateTime.TabIndex = 19;
-            this.dateTime.Value = DateTime.Now;
-            // 
-            // btnShowHours
-            // 
-            this.btnShowHours.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnShowHours.Font = new System.Drawing.Font("Bahnschrift SemiLight", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btnShowHours.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
-            this.btnShowHours.Location = new System.Drawing.Point(640, 148);
-            this.btnShowHours.Name = "btnShowHours";
-            this.btnShowHours.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.btnShowHours.Size = new System.Drawing.Size(106, 30);
-            this.btnShowHours.TabIndex = 20;
-            this.btnShowHours.Text = "Show hours";
-            this.btnShowHours.UseVisualStyleBackColor = true;
-            this.btnShowHours.Click += new System.EventHandler(this.btnShowHours_Click);
+            this.dateTime.Value = new System.DateTime(2023, 1, 13, 23, 36, 49, 128);
             // 
             // hoursLogMonthBindingSource1
             // 
@@ -340,20 +312,6 @@
             // 
             this.hoursLogMonthBindingSource3.DataSource = typeof(EMS_Library.MyEmployee.HoursLog.HoursLogMonth);
             // 
-            // button1
-            // 
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Bahnschrift SemiLight", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.button1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
-            this.button1.Location = new System.Drawing.Point(575, 101);
-            this.button1.Name = "button1";
-            this.button1.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.button1.Size = new System.Drawing.Size(171, 30);
-            this.button1.TabIndex = 21;
-            this.button1.Text = "View hours report";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
             // lblNoData
             // 
             this.lblNoData.AutoSize = true;
@@ -366,18 +324,97 @@
             this.lblNoData.Text = "No data found";
             this.lblNoData.Visible = false;
             // 
+            // btnSelect
+            // 
+            this.btnSelect.BackColor = System.Drawing.Color.Transparent;
+            this.btnSelect.BackgroundColor = System.Drawing.Color.Transparent;
+            this.btnSelect.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
+            this.btnSelect.BorderRadius = 17;
+            this.btnSelect.BorderSize = 2;
+            this.btnSelect.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
+            this.btnSelect.FlatAppearance.BorderSize = 2;
+            this.btnSelect.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightGray;
+            this.btnSelect.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightGray;
+            this.btnSelect.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSelect.Font = new System.Drawing.Font("Bahnschrift SemiLight", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btnSelect.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
+            this.btnSelect.Location = new System.Drawing.Point(271, 99);
+            this.btnSelect.Name = "btnSelect";
+            this.btnSelect.Size = new System.Drawing.Size(185, 37);
+            this.btnSelect.TabIndex = 51;
+            this.btnSelect.Text = "Select an employee";
+            this.btnSelect.TextColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
+            this.btnSelect.UseVisualStyleBackColor = false;
+            this.btnSelect.Click += new System.EventHandler(this.btnSelect_Click);
+            // 
+            // btnHoursReport
+            // 
+            this.btnHoursReport.BackColor = System.Drawing.Color.Transparent;
+            this.btnHoursReport.BackgroundColor = System.Drawing.Color.Transparent;
+            this.btnHoursReport.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
+            this.btnHoursReport.BorderRadius = 17;
+            this.btnHoursReport.BorderSize = 2;
+            this.btnHoursReport.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
+            this.btnHoursReport.FlatAppearance.BorderSize = 2;
+            this.btnHoursReport.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightGray;
+            this.btnHoursReport.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightGray;
+            this.btnHoursReport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnHoursReport.Font = new System.Drawing.Font("Bahnschrift SemiLight", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btnHoursReport.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
+            this.btnHoursReport.Location = new System.Drawing.Point(561, 99);
+            this.btnHoursReport.Name = "btnHoursReport";
+            this.btnHoursReport.Size = new System.Drawing.Size(185, 37);
+            this.btnHoursReport.TabIndex = 52;
+            this.btnHoursReport.Text = "View hours report";
+            this.btnHoursReport.TextColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
+            this.btnHoursReport.UseVisualStyleBackColor = false;
+            this.btnHoursReport.Click += new System.EventHandler(this.btnHoursReport_Click);
+            // 
             // btnExceptions
             // 
             this.btnExceptions.BackColor = System.Drawing.Color.Transparent;
+            this.btnExceptions.BackgroundColor = System.Drawing.Color.Transparent;
+            this.btnExceptions.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
+            this.btnExceptions.BorderRadius = 17;
+            this.btnExceptions.BorderSize = 2;
+            this.btnExceptions.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
+            this.btnExceptions.FlatAppearance.BorderSize = 2;
+            this.btnExceptions.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightGray;
+            this.btnExceptions.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightGray;
             this.btnExceptions.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnExceptions.Font = new System.Drawing.Font("Bahnschrift SemiLight", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btnExceptions.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
-            this.btnExceptions.Location = new System.Drawing.Point(14, 109);
+            this.btnExceptions.Location = new System.Drawing.Point(8, 100);
             this.btnExceptions.Name = "btnExceptions";
-            this.btnExceptions.Size = new System.Drawing.Size(106, 23);
-            this.btnExceptions.TabIndex = 23;
+            this.btnExceptions.Size = new System.Drawing.Size(142, 32);
+            this.btnExceptions.TabIndex = 53;
             this.btnExceptions.Text = "View exceptions";
+            this.btnExceptions.TextColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
             this.btnExceptions.UseVisualStyleBackColor = false;
             this.btnExceptions.Click += new System.EventHandler(this.btnExceptions_Click);
+            // 
+            // btnShowHours
+            // 
+            this.btnShowHours.BackColor = System.Drawing.Color.Transparent;
+            this.btnShowHours.BackgroundColor = System.Drawing.Color.Transparent;
+            this.btnShowHours.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
+            this.btnShowHours.BorderRadius = 15;
+            this.btnShowHours.BorderSize = 2;
+            this.btnShowHours.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
+            this.btnShowHours.FlatAppearance.BorderSize = 2;
+            this.btnShowHours.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightGray;
+            this.btnShowHours.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightGray;
+            this.btnShowHours.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnShowHours.Font = new System.Drawing.Font("Bahnschrift SemiLight", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btnShowHours.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
+            this.btnShowHours.Location = new System.Drawing.Point(632, 147);
+            this.btnShowHours.Name = "btnShowHours";
+            this.btnShowHours.Size = new System.Drawing.Size(114, 32);
+            this.btnShowHours.TabIndex = 54;
+            this.btnShowHours.Text = "Show hours";
+            this.btnShowHours.TextColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
+            this.btnShowHours.UseVisualStyleBackColor = false;
+            this.btnShowHours.Click += new System.EventHandler(this.btnShowHours_Click);
             // 
             // AttendanceTable
             // 
@@ -385,10 +422,11 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
             this.ClientSize = new System.Drawing.Size(758, 575);
-            this.Controls.Add(this.btnExceptions);
-            this.Controls.Add(this.lblNoData);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.btnShowHours);
+            this.Controls.Add(this.btnExceptions);
+            this.Controls.Add(this.btnHoursReport);
+            this.Controls.Add(this.btnSelect);
+            this.Controls.Add(this.lblNoData);
             this.Controls.Add(this.dateTime);
             this.Controls.Add(this.txtID);
             this.Controls.Add(this.panel4);
@@ -399,7 +437,6 @@
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.lblEmployeename);
             this.Controls.Add(this.GridViewAttrndance);
-            this.Controls.Add(this.btnSelect);
             this.Controls.Add(this.panelAttendance);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "AttendanceTable";
@@ -421,7 +458,6 @@
 
         private Panel panelAttendance;
         private Label lblAttendance;
-        private Button btnSelect;
         private DataGridView GridViewAttrndance;
         private TextBox txtName;
         private Panel panel1;
@@ -434,7 +470,6 @@
         private BindingSource getDaysBindingSource;
         private BindingSource hoursLogMonthBindingSource;
         public DateTimePicker dateTime;
-        private Button btnShowHours;
         private BindingSource hoursLogMonthBindingSource1;
         private BindingSource hoursLogMonthBindingSource2;
         private BindingSource hoursLogMonthBindingSource3;
@@ -447,8 +482,10 @@
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
         private DataGridViewTextBoxColumn total_hours;
-        private Button button1;
         private Label lblNoData;
-        private Button btnExceptions;
+        private RJCodeAdvance.RJControls.RJButton btnSelect;
+        private RJCodeAdvance.RJControls.RJButton btnHoursReport;
+        private RJCodeAdvance.RJControls.RJButton btnExceptions;
+        private RJCodeAdvance.RJControls.RJButton btnShowHours;
     }
 }

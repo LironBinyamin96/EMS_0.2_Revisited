@@ -67,13 +67,13 @@ namespace EMS_Client.Forms
 
             GridViewAttrndance.Rows.Clear();
             BuildLog();
-           
+
             if (log != null)
             {
-              hoursLogTableStructure = log.GetHoursLogTableStructure();
-              if (hoursLogTableStructure != null)
-               foreach (string[] item in hoursLogTableStructure)
-               GridViewAttrndance.Rows.Add(item);
+                hoursLogTableStructure = log.GetHoursLogTableStructure();
+                if (hoursLogTableStructure != null)
+                    foreach (string[] item in hoursLogTableStructure)
+                        GridViewAttrndance.Rows.Add(item);
             }
         }
 
@@ -81,7 +81,7 @@ namespace EMS_Client.Forms
         /// Creates and opens the log in PDF format
         /// PDF יצירה ופתיחה של דוח נוכחות בפורמט 
         /// </summary>
-        private void button1_Click(object sender, EventArgs e)
+        private void btnHoursReport_Click(object sender, EventArgs e)
         {
             if (EMS_ClientMainScreen.employee == null)
             { MessageBox.Show("Please select a employee"); return; }
@@ -169,7 +169,11 @@ namespace EMS_Client.Forms
             });
             xlsxBuilder.Start();
         }
+
+
+
         #endregion
+
 
     }
 }

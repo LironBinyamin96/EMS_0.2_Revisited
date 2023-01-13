@@ -30,7 +30,8 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EMS_ClientMainScreen));
             this.panel1 = new System.Windows.Forms.Panel();
-            this.userPicture = new System.Windows.Forms.PictureBox();
+            this.UserPictureBox = new RJCodeAdvance.RJControls.RJCircularPictureBox();
+            this.btnHome = new System.Windows.Forms.Button();
             this.panelStyle = new System.Windows.Forms.Panel();
             this.btnExit = new System.Windows.Forms.Button();
             this.btnAttendence = new System.Windows.Forms.Button();
@@ -39,19 +40,18 @@
             this.btnEditingEmployee = new System.Windows.Forms.Button();
             this.panelForUser = new System.Windows.Forms.Panel();
             this.panelDesktop = new System.Windows.Forms.Panel();
-            this.btnViewOnSite = new System.Windows.Forms.Button();
+            this.btnView = new RJCodeAdvance.RJControls.RJButton();
             this.lblCurrentOnShift = new System.Windows.Forms.Label();
-            this.btnHome = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.userPicture)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.UserPictureBox)).BeginInit();
             this.panelDesktop.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(30)))), ((int)(((byte)(54)))));
+            this.panel1.Controls.Add(this.UserPictureBox);
             this.panel1.Controls.Add(this.btnHome);
-            this.panel1.Controls.Add(this.userPicture);
             this.panel1.Controls.Add(this.panelStyle);
             this.panel1.Controls.Add(this.btnExit);
             this.panel1.Controls.Add(this.btnAttendence);
@@ -65,14 +65,36 @@
             this.panel1.Size = new System.Drawing.Size(178, 594);
             this.panel1.TabIndex = 0;
             // 
-            // userPicture
+            // UserPictureBox
             // 
-            this.userPicture.Location = new System.Drawing.Point(12, 364);
-            this.userPicture.Name = "userPicture";
-            this.userPicture.Size = new System.Drawing.Size(149, 165);
-            this.userPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.userPicture.TabIndex = 6;
-            this.userPicture.TabStop = false;
+            this.UserPictureBox.BorderCapStyle = System.Drawing.Drawing2D.DashCap.Flat;
+            this.UserPictureBox.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
+            this.UserPictureBox.BorderColor2 = System.Drawing.Color.Fuchsia;
+            this.UserPictureBox.BorderLineStyle = System.Drawing.Drawing2D.DashStyle.Solid;
+            this.UserPictureBox.BorderSize = 2;
+            this.UserPictureBox.GradientAngle = 50F;
+            this.UserPictureBox.Location = new System.Drawing.Point(12, 384);
+            this.UserPictureBox.Name = "UserPictureBox";
+            this.UserPictureBox.Size = new System.Drawing.Size(149, 149);
+            this.UserPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.UserPictureBox.TabIndex = 25;
+            this.UserPictureBox.TabStop = false;
+            // 
+            // btnHome
+            // 
+            this.btnHome.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btnHome.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.btnHome.FlatAppearance.BorderSize = 0;
+            this.btnHome.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnHome.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnHome.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnHome.Location = new System.Drawing.Point(0, 539);
+            this.btnHome.Name = "btnHome";
+            this.btnHome.Size = new System.Drawing.Size(178, 29);
+            this.btnHome.TabIndex = 7;
+            this.btnHome.Text = "Home";
+            this.btnHome.UseVisualStyleBackColor = true;
+            this.btnHome.Click += new System.EventHandler(this.btnHome_Click);
             // 
             // panelStyle
             // 
@@ -189,7 +211,7 @@
             // 
             this.panelDesktop.BackgroundImage = global::EMS_Client.Properties.Resources.HR11;
             this.panelDesktop.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.panelDesktop.Controls.Add(this.btnViewOnSite);
+            this.panelDesktop.Controls.Add(this.btnView);
             this.panelDesktop.Controls.Add(this.lblCurrentOnShift);
             this.panelDesktop.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelDesktop.Location = new System.Drawing.Point(178, 0);
@@ -198,21 +220,28 @@
             this.panelDesktop.TabIndex = 1;
             this.panelDesktop.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panelDesktop_MouseDown);
             // 
-            // btnViewOnSite
+            // btnView
             // 
-            this.btnViewOnSite.BackColor = System.Drawing.Color.Transparent;
-            this.btnViewOnSite.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.btnViewOnSite.FlatAppearance.BorderColor = System.Drawing.Color.DodgerBlue;
-            this.btnViewOnSite.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnViewOnSite.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btnViewOnSite.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnViewOnSite.Location = new System.Drawing.Point(6, 94);
-            this.btnViewOnSite.Name = "btnViewOnSite";
-            this.btnViewOnSite.Size = new System.Drawing.Size(70, 28);
-            this.btnViewOnSite.TabIndex = 7;
-            this.btnViewOnSite.Text = "View";
-            this.btnViewOnSite.UseVisualStyleBackColor = false;
-            this.btnViewOnSite.Click += new System.EventHandler(this.btnViewOnSite_Click);
+            this.btnView.BackColor = System.Drawing.Color.Transparent;
+            this.btnView.BackgroundColor = System.Drawing.Color.Transparent;
+            this.btnView.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
+            this.btnView.BorderRadius = 15;
+            this.btnView.BorderSize = 1;
+            this.btnView.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
+            this.btnView.FlatAppearance.BorderSize = 2;
+            this.btnView.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightGray;
+            this.btnView.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btnView.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnView.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnView.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
+            this.btnView.Location = new System.Drawing.Point(62, 74);
+            this.btnView.Name = "btnView";
+            this.btnView.Size = new System.Drawing.Size(101, 29);
+            this.btnView.TabIndex = 50;
+            this.btnView.Text = "View";
+            this.btnView.TextColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
+            this.btnView.UseVisualStyleBackColor = false;
+            this.btnView.Click += new System.EventHandler(this.btnView_Click);
             // 
             // lblCurrentOnShift
             // 
@@ -224,22 +253,6 @@
             this.lblCurrentOnShift.Size = new System.Drawing.Size(528, 53);
             this.lblCurrentOnShift.TabIndex = 24;
             this.lblCurrentOnShift.Text = "Current employees on site:";
-            // 
-            // btnHome
-            // 
-            this.btnHome.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.btnHome.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.btnHome.FlatAppearance.BorderSize = 0;
-            this.btnHome.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnHome.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btnHome.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnHome.Location = new System.Drawing.Point(0, 542);
-            this.btnHome.Name = "btnHome";
-            this.btnHome.Size = new System.Drawing.Size(178, 26);
-            this.btnHome.TabIndex = 7;
-            this.btnHome.Text = "Home";
-            this.btnHome.UseVisualStyleBackColor = true;
-            this.btnHome.Click += new System.EventHandler(this.btnHome_Click);
             // 
             // EMS_ClientMainScreen
             // 
@@ -256,7 +269,7 @@
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.EMS_ClientMainScreen_FormClosing);
             this.Load += new System.EventHandler(this.EMS_ClientMainScreen_Load);
             this.panel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.userPicture)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.UserPictureBox)).EndInit();
             this.panelDesktop.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -273,9 +286,9 @@
         private Panel panelDesktop;
         private Button btnExit;
         private Panel panelStyle;
-        private PictureBox userPicture;
-        private Button btnViewOnSite;
         private Label lblCurrentOnShift;
         private Button btnHome;
+        private RJCodeAdvance.RJControls.RJCircularPictureBox UserPictureBox;
+        private RJCodeAdvance.RJControls.RJButton btnView;
     }
 }

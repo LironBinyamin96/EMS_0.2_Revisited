@@ -54,7 +54,6 @@ namespace EMS_Client.Forms
             newEmail ne = new newEmail();
             ne.Show();
         }
-
         /// <summary>
         /// Opening an email to read
         /// פתיחת מייל לקריאה
@@ -73,8 +72,6 @@ namespace EMS_Client.Forms
                 ShowMAil.Show();
             }
         }
-
-
 
 
     }

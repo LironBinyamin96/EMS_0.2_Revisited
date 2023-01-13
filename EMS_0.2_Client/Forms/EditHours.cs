@@ -27,7 +27,7 @@ namespace EMS_Client.Forms
         {
             if (_changingEntry)
             {
-                if (dateTimeEntey.Value>Config.MinDate && dateTimeEntey.Value<_entry.End)
+                if (dateTimeEntey.Value > Config.MinDate && dateTimeEntey.Value < _entry.End)
                 {
                     string temp = Requests.UpdateEntry(_entry.IntId.ToString(), dateTimeEntey.Value, _entry.End);
                     Requests.RequestFromServer(temp, 7);
@@ -86,8 +86,10 @@ namespace EMS_Client.Forms
         [DllImportAttribute("user32.dll")]
         public static extern bool ReleaseCapture();
         private void panelEditHours_MouseDown(object sender, MouseEventArgs e) => Drag(e);
+
+
         #endregion
 
-       
+ 
     }
 }

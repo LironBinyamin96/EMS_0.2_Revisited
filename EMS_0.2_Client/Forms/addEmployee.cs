@@ -24,6 +24,102 @@ namespace EMS_Client.Forms
 
         #region Buttons
         //Methods called by Click events.
+
+
+
+        //Returning the panels to blue color and cleaning the text
+        // החזרת הפאנלים לצבע כחול וניקוי הטקסט
+        private void ClearValues()
+        {
+            Panel[] panelArr = new Panel[] { panelID, panelFname, panelLname, panelDate, panelAddres, panelPhone, panelEmail, panelBaseSalary
+                ,panelSalaryModifire,panelPosition,panelPicture};
+            foreach (Panel panel in panelArr)
+                panel.BackColor = Color.FromArgb(0, 126, 249);
+
+            foreach (Control control in activeControls)
+            {
+                if (control is TextBox) ((TextBox)control).Text = "";
+                else if (control is ComboBox) ((ComboBox)control).Text = "";
+                else if (control is PictureBox) ((PictureBox)control).Image = null;
+            }
+        }
+        //Upload a picture | העלאת תמונה
+        private void btnUploadImage_Click(object sender, EventArgs e)
+        {
+            pictureBoxCamera.Visible = false;
+            OpenFileDialog openGalery = new OpenFileDialog();
+            if (openGalery.ShowDialog() == DialogResult.OK)
+                try
+                {
+                    string file = openGalery.FileName;
+                    employeeImage = new Bitmap(file);
+                    pictureBox1.Image = employeeImage;
+                }
+                catch { MessageBox.Show("Failed"); }
+        }
+        private void btnX_Click(object sender, EventArgs e) { EMS_ClientMainScreen.PrimaryForms.Remove(this); Close(); Dispose(); }
+        #endregion
+
+        #region Camera
+        // Activating the camera to take a picture of the employee
+        // הפעלת המצלמה לצילום תמונה של העובד
+
+        VideoCaptureDevice videoCapture;
+        FilterInfoCollection filterInfo;
+        byte frameCount = 0;
+
+        private void Camera_on(object sender, NewFrameEventArgs eventArgs)
+        {
+            pictureBoxCamera.Image = (Bitmap)eventArgs.Frame.Clone();
+            unchecked { frameCount++; }
+            if (frameCount % 10 == 0) GC.Collect();
+        }
+        private void btnCameraImage_Click(object sender, EventArgs e)
+        {
+            if (StartCamera())
+            {
+                btnCameraImage.Visible = false;
+                pictureBoxCamera.Visible = true;
+                btnPictureTakingImage.Visible = true;
+            }
+
+
+            bool StartCamera()
+            {
+                bool success = true;
+                filterInfo = new FilterInfoCollection(FilterCategory.VideoInputDevice);
+                success &= filterInfo.Capacity > 0;
+                if (success) videoCapture = new VideoCaptureDevice(filterInfo[0].MonikerString);
+                success &= videoCapture != null;
+                if (success)
+                {
+                    videoCapture.NewFrame += new NewFrameEventHandler(Camera_on);
+                    videoCapture.Start();
+                    return true;
+                }
+                else { MessageBox.Show("Coudn't find a camera!\n"); return false; }
+            }
+        }
+        private void btnPictureTakingImage_Click(object sender, EventArgs e)
+        {
+            pictureBox1.Image = pictureBoxCamera.Image;
+            videoCapture?.SignalToStop();
+            btnCameraImage.Visible = true;
+            pictureBoxCamera.Visible = false;
+            btnPictureTakingImage.Visible = false;
+            try
+            {
+                employeeImage = new Bitmap(pictureBox1.Image);
+                pictureBox1.Image = employeeImage;
+            }
+            catch { MessageBox.Show("Image could not be captured!"); }
+        }
+        #endregion
+
+        /// <summary>
+        /// Prefforms validation of data provided by the user.
+        /// אימות הנתונים שהוקלדו על ידי המשתמש
+        /// </summary>
         private void btnSave_Click(object sender, EventArgs e)
         {
             //Format validation | אימות פורמט
@@ -72,104 +168,11 @@ namespace EMS_Client.Forms
             }
             else MessageBox.Show("Incorrect format!");
         }
+
         private void btnClear_Click(object sender, EventArgs e)
         {
             ClearValues();
         }
-
-        //Returning the panels to blue color and cleaning the text
-        // החזרת הפאנלים לצבע כחול וניקוי הטקסט
-        private void ClearValues()
-        {
-            Panel[] panelArr = new Panel[] { panelID, panelFname, panelLname, panelDate, panelAddres, panelPhone, panelEmail, panelBaseSalary
-                ,panelSalaryModifire,panelPosition};
-            foreach (Panel panel in panelArr)
-                panel.BackColor = Color.FromArgb(0, 126, 249);
-
-            foreach (Control control in activeControls)
-            {
-                if (control is TextBox) ((TextBox)control).Text = "";
-                else if (control is ComboBox) ((ComboBox)control).Text = "";
-                else if (control is PictureBox) ((PictureBox)control).Image = null;
-            }
-        }
-        //Upload a picture | העלאת תמונה
-        private void btnUpload_Click(object sender, EventArgs e)
-        {
-            pictureBoxCamera.Visible = false;
-            OpenFileDialog openGalery = new OpenFileDialog();
-            if (openGalery.ShowDialog() == DialogResult.OK)
-                try
-                {
-                    string file = openGalery.FileName;
-                    employeeImage = new Bitmap(file);
-                    pictureBox1.Image = employeeImage;
-                }
-                catch { MessageBox.Show("Failed"); }
-        }
-        private void btnX_Click(object sender, EventArgs e) { EMS_ClientMainScreen.PrimaryForms.Remove(this); Close(); Dispose(); }
-        #endregion
-
-        #region Camera
-        // Activating the camera to take a picture of the employee
-        // הפעלת המצלמה לצילום תמונה של העובד
-
-        VideoCaptureDevice videoCapture;
-        FilterInfoCollection filterInfo;
-        byte frameCount = 0;
-
-        private void Camera_on(object sender, NewFrameEventArgs eventArgs)
-        {
-            pictureBoxCamera.Image = (Bitmap)eventArgs.Frame.Clone();
-            unchecked { frameCount++; }
-            if (frameCount % 10 == 0) GC.Collect();
-        }
-        private void btnCamera_Click(object sender, EventArgs e)
-        {
-            if (StartCamera())
-            {
-                btnCamera.Visible = false;
-                pictureBoxCamera.Visible = true;
-                btnPictureTaking.Visible = true;
-            }
-
-
-            bool StartCamera()
-            {
-                bool success = true;
-                filterInfo = new FilterInfoCollection(FilterCategory.VideoInputDevice);
-                success &= filterInfo.Capacity > 0;
-                if (success) videoCapture = new VideoCaptureDevice(filterInfo[0].MonikerString);
-                success &= videoCapture != null;
-                if (success)
-                {
-                    videoCapture.NewFrame += new NewFrameEventHandler(Camera_on);
-                    videoCapture.Start();
-                    return true;
-                }
-                else { MessageBox.Show("Coudn't find a camera!\n"); return false; }
-            }
-        }
-        private void btnPictureTaking_Click(object sender, EventArgs e)
-        {
-            pictureBox1.Image = pictureBoxCamera.Image;
-            videoCapture?.SignalToStop();
-            btnCamera.Visible = true;
-            pictureBoxCamera.Visible = false;
-            btnPictureTaking.Visible = false;
-            try
-            {
-                employeeImage = new Bitmap(pictureBox1.Image);
-                pictureBox1.Image = employeeImage;
-            }
-            catch { MessageBox.Show("Image could not be captured!"); }
-        }
-        #endregion
-
-        /// <summary>
-        /// Prefforms validation of data provided by the user.
-        /// אימות הנתונים שהוקלדו על ידי המשתמש
-        /// </summary>
         private bool CheckingDataFields()
         {
             //Aggrigation of the controlls and their vilidity status into singular collection.
@@ -215,9 +218,9 @@ namespace EMS_Client.Forms
         private void addEmployee_FormClosing(object sender, FormClosingEventArgs e)
         {
             videoCapture?.SignalToStop();
-            btnCamera.Visible = true;
+            btnCameraImage.Visible = true;
             pictureBoxCamera.Visible = false;
-            btnPictureTaking.Visible = false;
+            btnPictureTakingImage.Visible = false;
         }
 
         #region Drag Window
@@ -246,6 +249,12 @@ namespace EMS_Client.Forms
 
 
 
+
+
+
+
         #endregion
+
+    
     }
 }
