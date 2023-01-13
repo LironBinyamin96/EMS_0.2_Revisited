@@ -248,6 +248,7 @@ namespace EMS_Client.Forms
             // 
             // lblEmpData
             // 
+            this.lblEmpData.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lblEmpData.ForeColor = System.Drawing.Color.DodgerBlue;
             this.lblEmpData.Location = new System.Drawing.Point(157, 418);
             this.lblEmpData.Name = "lblEmpData";
@@ -314,9 +315,9 @@ namespace EMS_Client.Forms
             // lblMonthData11
             // 
             this.lblMonthData11.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.lblMonthData11.Location = new System.Drawing.Point(72, 226);
+            this.lblMonthData11.Location = new System.Drawing.Point(49, 226);
             this.lblMonthData11.Name = "lblMonthData11";
-            this.lblMonthData11.Size = new System.Drawing.Size(74, 20);
+            this.lblMonthData11.Size = new System.Drawing.Size(126, 20);
             this.lblMonthData11.TabIndex = 33;
             this.lblMonthData11.Text = "0";
             // 
@@ -349,9 +350,9 @@ namespace EMS_Client.Forms
             // lblMonthData10
             // 
             this.lblMonthData10.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.lblMonthData10.Location = new System.Drawing.Point(72, 206);
+            this.lblMonthData10.Location = new System.Drawing.Point(49, 206);
             this.lblMonthData10.Name = "lblMonthData10";
-            this.lblMonthData10.Size = new System.Drawing.Size(74, 20);
+            this.lblMonthData10.Size = new System.Drawing.Size(126, 20);
             this.lblMonthData10.TabIndex = 32;
             this.lblMonthData10.Text = "0";
             // 
@@ -371,9 +372,9 @@ namespace EMS_Client.Forms
             // lblMonthData9
             // 
             this.lblMonthData9.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.lblMonthData9.Location = new System.Drawing.Point(72, 186);
+            this.lblMonthData9.Location = new System.Drawing.Point(49, 186);
             this.lblMonthData9.Name = "lblMonthData9";
-            this.lblMonthData9.Size = new System.Drawing.Size(76, 20);
+            this.lblMonthData9.Size = new System.Drawing.Size(126, 20);
             this.lblMonthData9.TabIndex = 31;
             this.lblMonthData9.Text = "0";
             // 
@@ -406,9 +407,9 @@ namespace EMS_Client.Forms
             // lblMonthData8
             // 
             this.lblMonthData8.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.lblMonthData8.Location = new System.Drawing.Point(72, 166);
+            this.lblMonthData8.Location = new System.Drawing.Point(49, 166);
             this.lblMonthData8.Name = "lblMonthData8";
-            this.lblMonthData8.Size = new System.Drawing.Size(74, 20);
+            this.lblMonthData8.Size = new System.Drawing.Size(126, 20);
             this.lblMonthData8.TabIndex = 30;
             this.lblMonthData8.Text = "0";
             // 
@@ -454,9 +455,9 @@ namespace EMS_Client.Forms
             // lblMonthData7
             // 
             this.lblMonthData7.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.lblMonthData7.Location = new System.Drawing.Point(72, 146);
+            this.lblMonthData7.Location = new System.Drawing.Point(49, 146);
             this.lblMonthData7.Name = "lblMonthData7";
-            this.lblMonthData7.Size = new System.Drawing.Size(74, 20);
+            this.lblMonthData7.Size = new System.Drawing.Size(126, 20);
             this.lblMonthData7.TabIndex = 29;
             this.lblMonthData7.Text = "0";
             // 
@@ -489,9 +490,9 @@ namespace EMS_Client.Forms
             // lblMonthData6
             // 
             this.lblMonthData6.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.lblMonthData6.Location = new System.Drawing.Point(72, 126);
+            this.lblMonthData6.Location = new System.Drawing.Point(49, 126);
             this.lblMonthData6.Name = "lblMonthData6";
-            this.lblMonthData6.Size = new System.Drawing.Size(74, 20);
+            this.lblMonthData6.Size = new System.Drawing.Size(126, 20);
             this.lblMonthData6.TabIndex = 28;
             this.lblMonthData6.Text = "0";
             // 
@@ -511,66 +512,67 @@ namespace EMS_Client.Forms
             // lblMonthData5
             // 
             this.lblMonthData5.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.lblMonthData5.Location = new System.Drawing.Point(72, 106);
+            this.lblMonthData5.Location = new System.Drawing.Point(49, 106);
             this.lblMonthData5.Name = "lblMonthData5";
-            this.lblMonthData5.Size = new System.Drawing.Size(76, 20);
+            this.lblMonthData5.Size = new System.Drawing.Size(126, 20);
             this.lblMonthData5.TabIndex = 27;
             this.lblMonthData5.Text = "0";
             // 
             // lblMonthData4
             // 
             this.lblMonthData4.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.lblMonthData4.Location = new System.Drawing.Point(72, 86);
+            this.lblMonthData4.Location = new System.Drawing.Point(49, 86);
             this.lblMonthData4.Name = "lblMonthData4";
-            this.lblMonthData4.Size = new System.Drawing.Size(74, 20);
+            this.lblMonthData4.Size = new System.Drawing.Size(126, 20);
             this.lblMonthData4.TabIndex = 26;
             this.lblMonthData4.Text = "0";
             // 
             // lblMonthData3
             // 
             this.lblMonthData3.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.lblMonthData3.Location = new System.Drawing.Point(72, 66);
+            this.lblMonthData3.Location = new System.Drawing.Point(49, 66);
             this.lblMonthData3.Name = "lblMonthData3";
-            this.lblMonthData3.Size = new System.Drawing.Size(74, 20);
+            this.lblMonthData3.Size = new System.Drawing.Size(126, 20);
             this.lblMonthData3.TabIndex = 25;
             this.lblMonthData3.Text = "0";
             // 
             // lblMonthData2
             // 
             this.lblMonthData2.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.lblMonthData2.Location = new System.Drawing.Point(72, 46);
+            this.lblMonthData2.Location = new System.Drawing.Point(49, 46);
             this.lblMonthData2.Name = "lblMonthData2";
-            this.lblMonthData2.Size = new System.Drawing.Size(74, 20);
+            this.lblMonthData2.Size = new System.Drawing.Size(126, 20);
             this.lblMonthData2.TabIndex = 24;
             this.lblMonthData2.Text = "0";
             // 
             // lblMonthData1
             // 
             this.lblMonthData1.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.lblMonthData1.Location = new System.Drawing.Point(72, 26);
+            this.lblMonthData1.Location = new System.Drawing.Point(49, 26);
             this.lblMonthData1.Name = "lblMonthData1";
-            this.lblMonthData1.Size = new System.Drawing.Size(74, 20);
+            this.lblMonthData1.Size = new System.Drawing.Size(126, 20);
             this.lblMonthData1.TabIndex = 23;
             this.lblMonthData1.Text = "0";
             // 
             // lblMonthData0
             // 
             this.lblMonthData0.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.lblMonthData0.Location = new System.Drawing.Point(72, 6);
+            this.lblMonthData0.Location = new System.Drawing.Point(49, 6);
             this.lblMonthData0.Name = "lblMonthData0";
-            this.lblMonthData0.Size = new System.Drawing.Size(74, 20);
+            this.lblMonthData0.Size = new System.Drawing.Size(126, 20);
             this.lblMonthData0.TabIndex = 22;
             this.lblMonthData0.Text = "0";
             // 
             // lblAvgText
             // 
             this.lblAvgText.AutoSize = true;
+            this.lblAvgText.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lblAvgText.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.lblAvgText.Location = new System.Drawing.Point(34, 143);
+            this.lblAvgText.Location = new System.Drawing.Point(10, 139);
             this.lblAvgText.Name = "lblAvgText";
-            this.lblAvgText.Size = new System.Drawing.Size(50, 15);
+            this.lblAvgText.Size = new System.Drawing.Size(111, 17);
             this.lblAvgText.TabIndex = 21;
-            this.lblAvgText.Text = "In hours";
+            this.lblAvgText.Text = "Hours  /  Precent ";
             // 
             // pictureBox1
             // 
@@ -595,10 +597,11 @@ namespace EMS_Client.Forms
             // lblDilyAvgHours
             // 
             this.lblDilyAvgHours.AutoSize = true;
+            this.lblDilyAvgHours.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lblDilyAvgHours.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.lblDilyAvgHours.Location = new System.Drawing.Point(278, 143);
+            this.lblDilyAvgHours.Location = new System.Drawing.Point(291, 136);
             this.lblDilyAvgHours.Name = "lblDilyAvgHours";
-            this.lblDilyAvgHours.Size = new System.Drawing.Size(107, 15);
+            this.lblDilyAvgHours.Size = new System.Drawing.Size(135, 20);
             this.lblDilyAvgHours.TabIndex = 23;
             this.lblDilyAvgHours.Text = "Total hours worked";
             // 
