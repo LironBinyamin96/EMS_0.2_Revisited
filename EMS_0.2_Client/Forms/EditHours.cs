@@ -11,11 +11,13 @@ namespace EMS_Client.Forms
         public EditHours(HoursLogEntry entry)
         {
             InitializeComponent();
+            dateTimeEntey.MaxDate = DateTime.Now;
+            dateTimeExit.MaxDate = DateTime.Now;
             _entry = entry;
-            dateTimeEntey.Value = entry.Start>DateTime.MinValue&&entry.Start<DateTime.MaxValue?entry.Start: DateTimePicker.MinimumDateTime;
+            dateTimeEntey.Value = entry.Start > DateTime.MinValue && entry.Start < DateTime.MaxValue ? entry.Start : DateTimePicker.MinimumDateTime;
             dateTimeExit.Value = entry.End > DateTime.MinValue && entry.End < DateTime.MaxValue ? entry.End : DateTimePicker.MinimumDateTime;
             radioEntry.Checked = true;
-            
+
         }
 
         #region Buttons
@@ -45,6 +47,9 @@ namespace EMS_Client.Forms
                 }
                 else radioExit.ForeColor = Color.Red;
             }
+            EMS_ClientMainScreen.PrimaryForms.Pop();
+            if (EMS_ClientMainScreen.PrimaryForms is ExceptionsScreen)
+                (EMS_ClientMainScreen.PrimaryForms.Pop() as ExceptionsScreen).PopulateExceptionsTable();
         }
 
         /// <summary>
@@ -52,7 +57,7 @@ namespace EMS_Client.Forms
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void radioEntry_CheckedChanged(object sender, EventArgs e) 
+        private void radioEntry_CheckedChanged(object sender, EventArgs e)
         {
             _changingEntry = (sender as RadioButton).Checked;
             if (_changingEntry) { dateTimeExit.Enabled = false; dateTimeEntey.Enabled = true; }
@@ -88,8 +93,13 @@ namespace EMS_Client.Forms
         private void panelEditHours_MouseDown(object sender, MouseEventArgs e) => Drag(e);
 
 
+
+
+
         #endregion
 
- 
+
+
+
     }
 }

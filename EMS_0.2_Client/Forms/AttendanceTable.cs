@@ -17,6 +17,11 @@ namespace EMS_Client.Forms
             InitializeComponent();
         }
 
+        private void AttendanceTable_Load(object sender, EventArgs e)
+        {
+            EMS_ClientMainScreen.employee = null;
+        }
+
         // בדאבל קליל - נפתח חלון עריכת שעות עבודה
         public void GridViewAttrndance_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
@@ -172,8 +177,9 @@ namespace EMS_Client.Forms
 
 
 
+
         #endregion
 
-
+        
     }
 }

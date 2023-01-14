@@ -9,6 +9,7 @@ namespace EMS_Client.Forms
         public ExceptionsScreen()
         {
             InitializeComponent();
+            EMS_ClientMainScreen.PrimaryForms.Push(this);
         }
 
         /// <summary>
@@ -31,6 +32,7 @@ namespace EMS_Client.Forms
             {
                 Point cellCoordinates = exceptionsTable.CurrentCellAddress;
                 EditHours editHours = new EditHours(new EMS_Library.MyEmployee.HoursLog.HoursLogEntry(_data[cellCoordinates.Y]));
+                EMS_ClientMainScreen.PrimaryForms.Push(editHours);
                 editHours.ShowDialog();
                 PopulateExceptionsTable();
             }
@@ -39,7 +41,7 @@ namespace EMS_Client.Forms
         /// <summary>
         /// Pupulates table of exceptions.
         /// </summary>
-        void PopulateExceptionsTable()
+        public void PopulateExceptionsTable()
         {
             //Request all entries with invalid data from DB
             // בקש את כל הערכים עם נתונים לא חוקיים מבסיס הנתונים
@@ -65,6 +67,8 @@ namespace EMS_Client.Forms
                     }
                     catch { }
             }
+            else
+                exceptionsTable.Rows.Clear();
         }
 
 

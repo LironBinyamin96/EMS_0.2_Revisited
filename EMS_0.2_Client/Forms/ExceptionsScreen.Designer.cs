@@ -30,13 +30,13 @@
         {
             this.lblExceptions = new System.Windows.Forms.Label();
             this.exceptionsTable = new System.Windows.Forms.DataGridView();
-            this.btnClose = new System.Windows.Forms.Button();
             this.LastName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FirstName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Divison = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this._intId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this._entry = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this._exit = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnClose = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.exceptionsTable)).BeginInit();
             this.SuspendLayout();
             // 
@@ -74,18 +74,6 @@
             this.exceptionsTable.Size = new System.Drawing.Size(570, 743);
             this.exceptionsTable.TabIndex = 44;
             this.exceptionsTable.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.exceptionsTable_CellMouseDoubleClick);
-            // 
-            // btnClose
-            // 
-            this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnClose.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
-            this.btnClose.Location = new System.Drawing.Point(558, 9);
-            this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(23, 23);
-            this.btnClose.TabIndex = 45;
-            this.btnClose.Text = "X";
-            this.btnClose.UseVisualStyleBackColor = true;
-            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
             // LastName
             // 
@@ -128,6 +116,18 @@
             this._exit.Name = "_exit";
             this._exit.ReadOnly = true;
             this._exit.Width = 90;
+            // 
+            // btnClose
+            // 
+            this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnClose.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
+            this.btnClose.Location = new System.Drawing.Point(558, 9);
+            this.btnClose.Name = "btnClose";
+            this.btnClose.Size = new System.Drawing.Size(23, 23);
+            this.btnClose.TabIndex = 45;
+            this.btnClose.Text = "X";
+            this.btnClose.UseVisualStyleBackColor = true;
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
             // ExceptionsScreen
             // 

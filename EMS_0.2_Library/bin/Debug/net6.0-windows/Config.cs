@@ -60,7 +60,7 @@ namespace EMS_Library
         public const int FRImmageHeight = 164;
         public const int FRImmageWidth = 164;
         public const string ImageFormat = ".jpg";
-        public const bool AutoStartFR = false;
+        public const bool AutoStartFR = true;
         #endregion
 
         #region Email config

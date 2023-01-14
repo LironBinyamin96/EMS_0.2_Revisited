@@ -33,9 +33,9 @@
             this.lblEditHours = new System.Windows.Forms.Label();
             this.dateTimeEntey = new System.Windows.Forms.DateTimePicker();
             this.dateTimeExit = new System.Windows.Forms.DateTimePicker();
-            this.radioEntry = new System.Windows.Forms.RadioButton();
-            this.radioExit = new System.Windows.Forms.RadioButton();
             this.btnSave = new RJCodeAdvance.RJControls.RJButton();
+            this.radioEntry = new RJCodeAdvance.RJControls.RJRadioButton();
+            this.radioExit = new RJCodeAdvance.RJControls.RJRadioButton();
             this.panelEditHours.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -101,31 +101,6 @@
             this.dateTimeExit.Size = new System.Drawing.Size(158, 23);
             this.dateTimeExit.TabIndex = 43;
             // 
-            // radioEntry
-            // 
-            this.radioEntry.AutoSize = true;
-            this.radioEntry.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.radioEntry.Location = new System.Drawing.Point(140, 149);
-            this.radioEntry.Name = "radioEntry";
-            this.radioEntry.Size = new System.Drawing.Size(52, 19);
-            this.radioEntry.TabIndex = 44;
-            this.radioEntry.TabStop = true;
-            this.radioEntry.Text = "Entry";
-            this.radioEntry.UseVisualStyleBackColor = true;
-            this.radioEntry.CheckedChanged += new System.EventHandler(this.radioEntry_CheckedChanged);
-            // 
-            // radioExit
-            // 
-            this.radioExit.AutoSize = true;
-            this.radioExit.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.radioExit.Location = new System.Drawing.Point(140, 191);
-            this.radioExit.Name = "radioExit";
-            this.radioExit.Size = new System.Drawing.Size(44, 19);
-            this.radioExit.TabIndex = 45;
-            this.radioExit.TabStop = true;
-            this.radioExit.Text = "Exit";
-            this.radioExit.UseVisualStyleBackColor = true;
-            // 
             // btnSave
             // 
             this.btnSave.BackColor = System.Drawing.Color.Transparent;
@@ -149,15 +124,50 @@
             this.btnSave.UseVisualStyleBackColor = false;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
+            // radioEntry
+            // 
+            this.radioEntry.AutoSize = true;
+            this.radioEntry.CheckedColor = System.Drawing.Color.Cyan;
+            this.radioEntry.Font = new System.Drawing.Font("Bahnschrift", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.radioEntry.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
+            this.radioEntry.Location = new System.Drawing.Point(126, 148);
+            this.radioEntry.MinimumSize = new System.Drawing.Size(0, 21);
+            this.radioEntry.Name = "radioEntry";
+            this.radioEntry.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            this.radioEntry.Size = new System.Drawing.Size(70, 21);
+            this.radioEntry.TabIndex = 53;
+            this.radioEntry.TabStop = true;
+            this.radioEntry.Text = "Entry";
+            this.radioEntry.UnCheckedColor = System.Drawing.Color.Gray;
+            this.radioEntry.UseVisualStyleBackColor = true;
+            this.radioEntry.CheckedChanged += new System.EventHandler(this.radioEntry_CheckedChanged);
+            // 
+            // radioExit
+            // 
+            this.radioExit.AutoSize = true;
+            this.radioExit.CheckedColor = System.Drawing.Color.Cyan;
+            this.radioExit.Font = new System.Drawing.Font("Bahnschrift", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.radioExit.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
+            this.radioExit.Location = new System.Drawing.Point(126, 187);
+            this.radioExit.MinimumSize = new System.Drawing.Size(0, 21);
+            this.radioExit.Name = "radioExit";
+            this.radioExit.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            this.radioExit.Size = new System.Drawing.Size(60, 21);
+            this.radioExit.TabIndex = 54;
+            this.radioExit.TabStop = true;
+            this.radioExit.Text = "Exit";
+            this.radioExit.UnCheckedColor = System.Drawing.Color.Gray;
+            this.radioExit.UseVisualStyleBackColor = true;
+            // 
             // EditHours
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
             this.ClientSize = new System.Drawing.Size(515, 369);
-            this.Controls.Add(this.btnSave);
             this.Controls.Add(this.radioExit);
             this.Controls.Add(this.radioEntry);
+            this.Controls.Add(this.btnSave);
             this.Controls.Add(this.dateTimeExit);
             this.Controls.Add(this.dateTimeEntey);
             this.Controls.Add(this.panelEditHours);
@@ -178,8 +188,8 @@
         private Button btnX;
         private DateTimePicker dateTimeEntey;
         private DateTimePicker dateTimeExit;
-        private RadioButton radioEntry;
-        private RadioButton radioExit;
         private RJCodeAdvance.RJControls.RJButton btnSave;
+        private RJCodeAdvance.RJControls.RJRadioButton radioEntry;
+        private RJCodeAdvance.RJControls.RJRadioButton radioExit;
     }
 }

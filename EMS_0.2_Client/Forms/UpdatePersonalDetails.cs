@@ -293,11 +293,13 @@ namespace EMS_Client.Forms
         {
             if (EMS_ClientMainScreen.employee != null)
             {
-                if (Requests.DeleteImage(EMS_ClientMainScreen.employee.IntId)[0] == "Picture deleted." &&
-                    Requests.RequestFromServer(Requests.UpdateEmployee(new Dictionary<string, string> { { "_employmentStatus", "0" } }, new Dictionary<string, string> { { "_intId", EMS_ClientMainScreen.employee.IntId.ToString() } }), 3)[0] == "1")
-                {
-                    MessageBox.Show("Employee has bee sent to fuck himself :)");
-                }
+                DialogResult unemploy = MessageBox.Show("Are you sure?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (unemploy == DialogResult.No) return;
+                string[] responce = Requests.DeleteImage(EMS_ClientMainScreen.employee.IntId);
+                if (responce[0] != "Picture deleted.") { MessageBox.Show(responce[0]); return; }
+                responce = Requests.RequestFromServer(Requests.UpdateEmployee(new Dictionary<string, string> { { "_employmentStatus", "0" } }, new Dictionary<string, string> { { "_intId", EMS_ClientMainScreen.employee.IntId.ToString() } }), 3);
+                if (responce[0] != "1") { MessageBox.Show(responce[0]); return; } 
+                    MessageBox.Show("Unemployed");
             }  
             else MessageBox.Show("Please select a employee");
         }
