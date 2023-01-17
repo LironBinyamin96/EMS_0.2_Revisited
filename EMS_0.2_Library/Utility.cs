@@ -112,6 +112,7 @@ namespace EMS_Library
                 return ms.ToArray();
             }
         }
+        
 
         /// <summary>
         /// Prefoms "bit by bit" comparison between two objects.
@@ -346,6 +347,47 @@ namespace EMS_Library
             if (hold.Equals(item)) return;
             Remove(stack, item);
             stack.Push(hold);
+        }
+
+        /// <summary>
+        /// Password Encode 
+        /// הצפנת סיסמא
+        /// </summary>
+        public static string EncodePasswordToBase64(string password)
+        {
+            try
+            {
+                byte[] encData_byte = new byte[password.Length];
+                encData_byte = System.Text.Encoding.UTF8.GetBytes(password);
+                string encodedData = Convert.ToBase64String(encData_byte);
+                return encodedData;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error in Encode Password" + ex.Message);
+            }
+        }
+        /// <summary>
+        /// password decryption
+        /// פיענוח סיסמא
+        /// </summary>
+        public static string decryptionPassword(string password)
+        {
+            try
+            {
+                System.Text.UTF8Encoding decryption = new System.Text.UTF8Encoding();
+                System.Text.Decoder utf8Decode = decryption.GetDecoder();
+                byte[] todecode_byte = Convert.FromBase64String(password);
+                int charCount = utf8Decode.GetCharCount(todecode_byte, 0, todecode_byte.Length);
+                char[] decoded_char = new char[charCount];
+                utf8Decode.GetChars(todecode_byte, 0, todecode_byte.Length, decoded_char, 0);
+                string result = new String(decoded_char);
+                return result;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error in decryption Password" + ex.Message);
+            }
         }
     }
 }
