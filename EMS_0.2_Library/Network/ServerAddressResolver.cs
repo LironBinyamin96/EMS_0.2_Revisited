@@ -36,6 +36,7 @@ namespace EMS_Library.Network
                 IPInterfaceProperties x = netFace.GetIPProperties();
                 var temp = Array.Find(x.UnicastAddresses.ToArray(), x => x.Address.ToString().Contains("192.168."));
                 if (temp != null) Config.ServerIP = temp.Address.ToString();
+                else throw new ApplicationException("Couldn't find viable network.");
             }
             else //I'm a client! | זה לקוח
             {
@@ -75,7 +76,7 @@ namespace EMS_Library.Network
                         }
                     }
                 }
-                throw new Exception("Could not find the server in local network");
+                throw new Exception("Could not find the server on local network");
             }
         }
     }

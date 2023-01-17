@@ -235,3 +235,4 @@ D:\GitHub\EMS_0.2_Revisited\EMS_0.2_Client\obj\Debug\net6.0-windows\EMS_0.2_Clie
 D:\GitHub\EMS_0.2_Revisited\EMS_0.2_Client\obj\Debug\net6.0-windows\EMS_0.2_Client.genruntimeconfig.cache
 D:\GitHub\EMS_0.2_Revisited\EMS_0.2_Client\obj\Debug\net6.0-windows\ref\EMS_0.2_Client.dll
 C:\Users\liron\Desktop\EMS\EMS_0.2_Client\bin\Debug\net6.0-windows\RJCodeAdvance.RJControls.dll
+D:\GitHub\EMS_0.2_Revisited\EMS_0.2_Client\bin\Debug\net6.0-windows\RJCodeAdvance.RJControls.dll

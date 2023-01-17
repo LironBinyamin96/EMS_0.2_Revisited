@@ -63,7 +63,7 @@ namespace EMS_Client
                 UserPictureBox.Image = new ImageConverter().ConvertFrom(buffer) as Bitmap;
             }
         }
-        
+
 
         #region Subscreens
         //This region contains methods needed for the subscreens rendering
@@ -158,6 +158,7 @@ namespace EMS_Client
 
             try { File.Delete($"{Config.RootDirectory}\\log.json"); } catch { }
             try { File.Delete(Directory.GetCurrentDirectory() + "\\TempClientConfig.txt"); } catch { }
+            try { File.Delete($"{Config.RootDirectory}\\Config.txt"); } catch { }
 
         }
         #endregion

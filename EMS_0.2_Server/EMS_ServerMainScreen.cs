@@ -3,6 +3,7 @@ using EMS_Library.Network;
 using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Security.Cryptography.X509Certificates;
+using System.Text;
 
 namespace EMS_Server
 {
@@ -160,7 +161,7 @@ namespace EMS_Server
                                     break;
                                 }
 
-                                DateTime curDate = DateTime.Now;
+                                DateTime curDate = DateTime.Now - TimeSpan.FromDays(365);
                                 int count = 0;
                                 for (int j = 1; j <= 12; j++)
                                     for (int i = 1; i <= DateTime.DaysInMonth(curDate.Year, j); i++)
@@ -184,10 +185,36 @@ namespace EMS_Server
                                     $"where  _intId=(SELECT TOP 1 _intId FROM {Config.EmployeeDataTable} ORDER BY _created DESC);"));
                                 break;
                             }
+                        case "generate ids":
+                            {
+                                Random random = new Random();
+                                int[] firstDigits = new int[8];
+                                for (int i = 0; i < firstDigits.Length; i++)
+                                    firstDigits[i] = random.Next(0, 10);
+                                int sum = 0;
+                                for (int i = 0; i < firstDigits.Length; i++)
+                                {
+                                    if (i % 2 == 0)
+                                    {
+                                        if (firstDigits[i] * 2 > 10)
+                                            sum += firstDigits[i] * 2 % 10 + firstDigits[i] * 2 / 10;
+                                        else sum += firstDigits[i] * 2;
+                                    }
+                                    else sum += firstDigits[i];
+                                }
+                                StringBuilder id = new StringBuilder();
+                                foreach (int didgit in firstDigits)
+                                    id.Append(didgit);
+                                id.Append(10 - sum % 10);
+                                WriteToServerConsole("Internal ID: "+SQLBridge.GetFreeID());
+                                WriteToServerConsole("State ID: "+id.ToString());
+                                
+                                break;
+                            }
                     }
             }
 
-           
+
 
 
         }
