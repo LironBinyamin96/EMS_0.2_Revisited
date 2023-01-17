@@ -57,11 +57,7 @@ namespace EMS_Client
             EMS_Library.Network.DataPacket packet = new EMS_Library.Network.DataPacket($"get image #{CurEmployee.IntId}", 6);
             byte[] buffer = Requests.GetImage(packet);
             if (!buffer.IsEmpty(10))
-            {
-                File.WriteAllBytes(Config.RootDirectory + "\\test.jpg", buffer);
-                File.WriteAllBytes(Config.RootDirectory + "\\test.txt", buffer);
                 UserPictureBox.Image = new ImageConverter().ConvertFrom(buffer) as Bitmap;
-            }
         }
 
 

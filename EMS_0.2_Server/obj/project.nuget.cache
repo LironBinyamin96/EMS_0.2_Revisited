@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "EMc/cRxO94BPwigWIlc5QEh/adKPOK1SY1P4e3gOlGyqS57xirBFsap8owqn0iQGqEK3z+YzDTDQdKvPKPVWTw==",
+  "dgSpecHash": "MWqy8iFe9DLe+fzU2tgKfBTMtu42RutXtqVCyZbY4RxW/lSbpbvYDrCrLGmHxkKl/d2+1K3ukG/IifqUmfs6vw==",
   "success": true,
-  "projectFilePath": "D:\\GitHub\\EMS_0.2_Revisited\\EMS_0.2_Server\\EMS_0.2_Server.csproj",
+  "projectFilePath": "C:\\Users\\levkh\\Documents\\GitHub\\EMS_0.2_Revisited\\EMS_0.2_Server\\EMS_0.2_Server.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\levkh\\.nuget\\packages\\microsoft.netcore.platforms\\3.1.0\\microsoft.netcore.platforms.3.1.0.nupkg.sha512",
     "C:\\Users\\levkh\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",

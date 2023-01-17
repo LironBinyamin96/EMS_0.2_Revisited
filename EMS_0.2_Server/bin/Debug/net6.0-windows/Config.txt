@@ -1,11 +1,11 @@
 ServerIP#127.0.0.1
 ServerPort#13000
 
-RootDirectory#C:\Users\levkh\OneDrive\Desktop\EMS_Root
+RootDirectory#C:\Users\levkh\Desktop\EMS_Root
 
-FR_Location#C:\Users\levkh\OneDrive\Desktop\EMS_Root\FR_Boot.cmd
+FR_Location#C:\Users\levkh\Desktop\EMS_Root\FR_Boot.cmd
 
-PythonDBConnection#Driver={SQL Server Native Client 11.0};|Server=DESKTOP-64NCL5S\SQL_LEVLAPTOP;|Database=EmployeeManagmentDataBase;|Trusted_Connection=yes;
+PythonDBConnection#Driver={SQL Server Native Client 11.0};|Server=LEV-STATPC\LEVPCMSSQLSERVER;|Database=EmployeeManagmentDataBase;|Trusted_Connection=yes;
 
 NormalShiftLength#08:00:00
 
