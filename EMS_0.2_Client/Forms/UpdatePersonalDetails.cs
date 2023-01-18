@@ -42,7 +42,7 @@ namespace EMS_Client.Forms
                 txtGender,txtDateOfBirth,txtAddres,txtPhone,
                 txtBaseSalary,txtSalaryModifire,txtEmail,positionBox,pictureBox1
             };
-            if (EMS_ClientMainScreen.CurEmployee is EMS_Library.MyEmployee.IAccess.IRootAccess)
+            if (EMS_ClientMainScreen.CurEmployee is EMS_Library.MyEmployee.IAccess.IExtendedAccess)
                 btnDelete.Visible = true;
         }
 
@@ -131,7 +131,8 @@ namespace EMS_Client.Forms
             Panel[] panelArr = new Panel[] { panelID, panelFname, panelLname, panelDate, panelAddres, panelPhone, panelEmail, panelBaseSalary
                 ,panelSalaryModifire,panelPosition };
             foreach (Panel panel in panelArr)
-                panel.BackColor = Color.FromArgb(0, 126, 249);
+                panel.BackColor = Color.DodgerBlue;
+            btnUpload.ForeColor = Color.DodgerBlue;
         }
 
         #endregion
@@ -168,6 +169,8 @@ namespace EMS_Client.Forms
             if (EMS_ClientMainScreen.employee != null)
             {
                 btnUnemploy.Visible = EMS_ClientMainScreen.employee.EmploymentStatus != "0";
+                if (EMS_ClientMainScreen.employee.EmploymentStatus == "0") { btnUnemploy.Visible = false; btnEmploy.Visible = true; }
+                else { btnUnemploy.Visible = true; btnEmploy.Visible = false; }
                 txtID.Text = EMS_ClientMainScreen.employee.StateId.ToString();
                 txtFirstName.Text = EMS_ClientMainScreen.employee.FName.ToString();
                 txtLastName.Text = EMS_ClientMainScreen.employee.LName.ToString();
@@ -304,6 +307,39 @@ namespace EMS_Client.Forms
             else MessageBox.Show("Please select a employee");
         }
 
-      
+        private void btnEmploy_Click(object sender, EventArgs e)
+        {
+            if (CheckingDataFields())
+            {
+                Employee tempEmp = Employee.ActivateEmployee(new object[] {
+                    positionBox.Text,
+                    EMS_ClientMainScreen.employee.IntId,
+                    txtID.Text,
+                    txtFirstName.Text,
+                    txtLastName.Text,
+                    txtMiddleName.Text,
+                    txtEmail.Text,
+                    EMS_ClientMainScreen.employee.Password,
+                    txtGender.Text,
+                    txtDateOfBirth.Text,
+                    EMS_ClientMainScreen.employee.Created,
+                    2,
+                    txtBaseSalary.Text,
+                    txtSalaryModifire.Text,
+                    txtPhone.Text,
+                    txtAddres.Text
+                    });
+
+                string querry = Requests.UpdateEmployee(tempEmp.ProvideFieldsAndValues(), new Dictionary<string, string> {
+                        { "_intId", EMS_ClientMainScreen.employee.IntId.ToString() } });
+                bool validation = Requests.RequestFromServer(querry, 3)[0] == "1";
+                if (!validation) { MessageBox.Show("Failed to update employee data!"); return; }
+                string[] picBuffer = Requests.SaveImmage(pictureBox1.Image as Bitmap, tempEmp.IntId);
+                validation &= picBuffer[0].ToLower() == "saved";
+                if (!validation) { MessageBox.Show(picBuffer[0]); return; }
+                MessageBox.Show("Updaded!");
+            }
+            else MessageBox.Show("Incorrect format!");
+        }
     }
 }

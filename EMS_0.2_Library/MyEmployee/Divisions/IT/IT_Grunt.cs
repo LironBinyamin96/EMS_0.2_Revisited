@@ -1,6 +1,6 @@
 ﻿namespace EMS_Library.MyEmployee.Divisions
 {
-    public class IT_Grunt : IT, IAccess.IRootAccess
+    public class IT_Grunt : IT, IAccess.IBasicAccess
     {
         public IT_Grunt(string data) : base(data)
         {

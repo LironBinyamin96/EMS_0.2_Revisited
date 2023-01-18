@@ -79,6 +79,7 @@
             this.btnDelete = new RJCodeAdvance.RJControls.RJButton();
             this.btnSave = new RJCodeAdvance.RJControls.RJButton();
             this.btnCancel = new RJCodeAdvance.RJControls.RJButton();
+            this.btnEmploy = new RJCodeAdvance.RJControls.RJButton();
             this.panelUpdatePersonalDetails.SuspendLayout();
             this.gUpdatePersonalDetails.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -634,13 +635,14 @@
             this.btnUnemploy.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnUnemploy.Font = new System.Drawing.Font("Bahnschrift SemiLight", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btnUnemploy.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
-            this.btnUnemploy.Location = new System.Drawing.Point(9, 396);
+            this.btnUnemploy.Location = new System.Drawing.Point(9, 409);
             this.btnUnemploy.Name = "btnUnemploy";
             this.btnUnemploy.Size = new System.Drawing.Size(89, 29);
             this.btnUnemploy.TabIndex = 51;
             this.btnUnemploy.Text = "Unemploy";
             this.btnUnemploy.TextColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
             this.btnUnemploy.UseVisualStyleBackColor = false;
+            this.btnUnemploy.Visible = false;
             this.btnUnemploy.Click += new System.EventHandler(this.btnUnemploy_Click);
             // 
             // btnDelete
@@ -657,7 +659,7 @@
             this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDelete.Font = new System.Drawing.Font("Bahnschrift SemiLight", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btnDelete.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
-            this.btnDelete.Location = new System.Drawing.Point(103, 397);
+            this.btnDelete.Location = new System.Drawing.Point(104, 409);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(110, 29);
             this.btnDelete.TabIndex = 52;
@@ -712,12 +714,37 @@
             this.btnCancel.UseVisualStyleBackColor = false;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
+            // btnEmploy
+            // 
+            this.btnEmploy.BackColor = System.Drawing.Color.Transparent;
+            this.btnEmploy.BackgroundColor = System.Drawing.Color.Transparent;
+            this.btnEmploy.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
+            this.btnEmploy.BorderRadius = 15;
+            this.btnEmploy.BorderSize = 1;
+            this.btnEmploy.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
+            this.btnEmploy.FlatAppearance.BorderSize = 2;
+            this.btnEmploy.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightGray;
+            this.btnEmploy.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btnEmploy.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnEmploy.Font = new System.Drawing.Font("Bahnschrift SemiLight", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btnEmploy.ForeColor = System.Drawing.Color.DodgerBlue;
+            this.btnEmploy.Location = new System.Drawing.Point(9, 409);
+            this.btnEmploy.Name = "btnEmploy";
+            this.btnEmploy.Size = new System.Drawing.Size(89, 29);
+            this.btnEmploy.TabIndex = 55;
+            this.btnEmploy.Text = "Employ";
+            this.btnEmploy.TextColor = System.Drawing.Color.DodgerBlue;
+            this.btnEmploy.UseVisualStyleBackColor = false;
+            this.btnEmploy.Visible = false;
+            this.btnEmploy.Click += new System.EventHandler(this.btnEmploy_Click);
+            // 
             // UpdatePersonalDetails
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
             this.ClientSize = new System.Drawing.Size(708, 450);
+            this.Controls.Add(this.btnEmploy);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.btnDelete);
@@ -791,5 +818,6 @@
         private RJCodeAdvance.RJControls.RJButton btnUpload;
         private RJCodeAdvance.RJControls.RJButton btnCamera;
         private RJCodeAdvance.RJControls.RJButton btnTakePicture;
+        private RJCodeAdvance.RJControls.RJButton btnEmploy;
     }
 }

@@ -24,8 +24,6 @@ namespace EMS_Library
         {
             "DESKTOP-BVFPCJ9\\SQLEXPRESS",
             "LEV-STATPC\\LEVPCMSSQLSERVER",
-            "DESKTOP-A6E5597\\SQLEXPRESS",
-            "DESKTOP-LL8D68S",
             "DESKTOP-64NCL5S\\SQL_LEVLAPTOP"
         };
 

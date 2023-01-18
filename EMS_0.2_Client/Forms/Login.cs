@@ -46,7 +46,7 @@ namespace EMS_Client.Forms
             string querry = Requests.SelectEmployee(new string[][]
             {
                 new string[]{"_intId", txtIntId.Text},
-                new string[]{"_password",$"'{txtPassword.Text}'" }
+                new string[]{"_password",$"'{ Utility.EncodePasswordToBase64(txtPassword.Text)}'" }
             }, "and");
             string[] buffer = Requests.RequestFromServer(querry, 1);
 
@@ -61,7 +61,7 @@ namespace EMS_Client.Forms
             }
 
             //Checking if the employee has access to the system. | בדיקת הרשאות התחברות
-            if (!(logingInEmp is EMS_Library.MyEmployee.IAccess.IExtendedAccess))
+            if (!(logingInEmp is IExtendedAccess))
             {
                 MessageBox.Show("You do not have propper access to use this software.\nAccess denied.");
                 return;

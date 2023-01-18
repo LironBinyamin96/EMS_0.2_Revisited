@@ -19,25 +19,41 @@ namespace EMS_Server
             if (data.ByteData == null) return new DataPacket("Data recieved by the server was empty!");
             switch (data._header.Act)
             {
-                /*Exception handling*/default: { return new DataPacket(new ArgumentException($"Requested action was not found! Check DataPacket._header.Act!\n_header={data._header}\nAct={data._header.Act}").Message); }
-                /*Select employee*/   case 1: { return new DataPacket(SQLBridge.TwoWayCommand(SQLBridge.Select(data.StringData))); }
-                /*Add employee*/      case 2: { return new DataPacket(SQLBridge.OneWayCommand(SQLBridge.Add(data.StringData))); }
-                /*Update employee*/   case 3: { return new DataPacket(SQLBridge.OneWayCommand(SQLBridge.Update(data.StringData))); }
-                /*Delete employee*/   case 4: { return new DataPacket(SQLBridge.OneWayCommand(SQLBridge.DeleteEmployee(data.StringData))); }
-                /*Get employee log*/  case 5: { return new DataPacket(SQLBridge.TwoWayCommand(SQLBridge.GetMonthLog(data.StringData))); }
-                /*Get Picture*/       case 6: { return new DataPacket(GetPicture()); }
-                /*Update entry*/      case 7: { return new DataPacket(SQLBridge.UpdateEntry(data.StringData)); };
-                /*Get Exceptions*/    case 8: { return new DataPacket(SQLBridge.TwoWayCommand(SQLBridge.GetAllExceptions(data.StringData))); }
-                /*Get all emails*/    case 9: { return new DataPacket(SQLBridge.TwoWayCommand("select _email from Employees;")); }
-                /*Save image sent*/   case 10: { return new DataPacket(await SavePucture(data.ByteData)); }
-                /*Get yearly log*/    case 11: { return new DataPacket(SQLBridge.TwoWayCommand(SQLBridge.GetYearLog(data.StringData))); }
-                /* Delete picture */  case 12: { return new DataPacket(DeletePicture(data.StringData)); }
+                /*Exception handling*/
+                default: { return new DataPacket(new ArgumentException($"Requested action was not found! Check DataPacket._header.Act!\n_header={data._header}\nAct={data._header.Act}").Message); }
+                /*Select employee*/
+                case 1: { return new DataPacket(SQLBridge.TwoWayCommand(SQLBridge.Select(data.StringData))); }
+                /*Add employee*/
+                case 2: { return new DataPacket(SQLBridge.OneWayCommand(SQLBridge.Add(data.StringData))); }
+                /*Update employee*/
+                case 3: { return new DataPacket(SQLBridge.OneWayCommand(SQLBridge.Update(data.StringData))); }
+                /*Delete employee*/
+                case 4: { return new DataPacket(SQLBridge.OneWayCommand(SQLBridge.DeleteEmployee(data.StringData))); }
+                /*Get employee log*/
+                case 5: { return new DataPacket(SQLBridge.TwoWayCommand(SQLBridge.GetMonthLog(data.StringData))); }
+                /*Get Picture*/
+                case 6: { return new DataPacket(GetPicture()); }
+                /*Update entry*/
+                case 7: { return new DataPacket(SQLBridge.UpdateEntry(data.StringData)); };
+                /*Get Exceptions*/
+                case 8: { return new DataPacket(SQLBridge.TwoWayCommand(SQLBridge.GetAllExceptions(data.StringData))); }
+                /*Get all emails*/
+                case 9: { return new DataPacket(SQLBridge.TwoWayCommand("select _email from Employees;")); }
+                /*Save image sent*/
+                case 10: { return new DataPacket(await SavePucture(data.ByteData)); }
+                /*Get yearly log*/
+                case 11: { return new DataPacket(SQLBridge.TwoWayCommand(SQLBridge.GetYearLog(data.StringData))); }
+                /* Delete picture */
+                case 12: { return new DataPacket(DeletePicture(data.StringData)); }
 
                 /*Get free ID*/
                 case 252: { return new DataPacket(SQLBridge.GetFreeID(), 255); }
-                /*Direct querry One*/ case 253: { return new DataPacket(SQLBridge.OneWayCommand(data.StringData)); }
-                /*Direct querry Two*/ case 254: { return new DataPacket(SQLBridge.TwoWayCommand(data.StringData)); }
-                /*Return recieved*/   case 255: { return data; }
+                /*Direct querry One*/
+                case 253: { return new DataPacket(SQLBridge.OneWayCommand(data.StringData)); }
+                /*Direct querry Two*/
+                case 254: { return new DataPacket(SQLBridge.TwoWayCommand(data.StringData)); }
+                /*Return recieved*/
+                case 255: { return data; }
             }
 
 
@@ -79,9 +95,12 @@ namespace EMS_Server
                     {
                         if (await IsFace(image))
                         {
-                            image.Save(Config.FR_Images + $"\\{intID}{Config.ImageFormat}");
-                            EMS_ServerMainScreen.serverForm.FRProcess.Kill();
-                            EMS_ServerMainScreen.serverForm.FRProcess.Start();
+                            image.Save(Config.FR_Images + $"\\{intID}.{Config.ImageFormat}");
+                            if (EMS_ServerMainScreen.serverForm.FRProcess != null)
+                            {
+                                EMS_ServerMainScreen.serverForm.FRProcess.Kill();
+                                EMS_ServerMainScreen.serverForm.FRProcess.Start();
+                            }
                             return "saved";
                         }
                         else return "Provided picture was not recognized as a valid picture of a face";

@@ -1,6 +1,6 @@
 ﻿namespace EMS_Library.MyEmployee.Divisions
 {
-    public abstract class HumanResources : Employee, IAccess.IExtendedAccess
+    public abstract class HumanResources : Employee, IAccess.IBasicAccess
     {
         protected HumanResources(string data) : base(data)
         {
