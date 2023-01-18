@@ -1,24 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\levkh\\Documents\\GitHub\\EMS_0.2_Revisited\\EMS_0.2_Client\\EMS_0.2_Client.csproj": {}
+    "C:\\Users\\liron\\Desktop\\EMS\\EMS_0.2_Client\\EMS_0.2_Client.csproj": {}
   },
   "projects": {
-    "C:\\Users\\levkh\\Documents\\GitHub\\EMS_0.2_Revisited\\EMS_0.2_Client\\EMS_0.2_Client.csproj": {
+    "C:\\Users\\liron\\Desktop\\EMS\\EMS_0.2_Client\\EMS_0.2_Client.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\levkh\\Documents\\GitHub\\EMS_0.2_Revisited\\EMS_0.2_Client\\EMS_0.2_Client.csproj",
+        "projectUniqueName": "C:\\Users\\liron\\Desktop\\EMS\\EMS_0.2_Client\\EMS_0.2_Client.csproj",
         "projectName": "EMS_0.2_Client",
-        "projectPath": "C:\\Users\\levkh\\Documents\\GitHub\\EMS_0.2_Revisited\\EMS_0.2_Client\\EMS_0.2_Client.csproj",
-        "packagesPath": "C:\\Users\\levkh\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\levkh\\Documents\\GitHub\\EMS_0.2_Revisited\\EMS_0.2_Client\\obj\\",
+        "projectPath": "C:\\Users\\liron\\Desktop\\EMS\\EMS_0.2_Client\\EMS_0.2_Client.csproj",
+        "packagesPath": "C:\\Users\\liron\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\liron\\Desktop\\EMS\\EMS_0.2_Client\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\levkh\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\liron\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "net6.0-windows"
+          "net6.0-windows7.0"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
@@ -28,8 +28,8 @@
           "net6.0-windows7.0": {
             "targetAlias": "net6.0-windows",
             "projectReferences": {
-              "C:\\Users\\levkh\\Documents\\GitHub\\EMS_0.2_Revisited\\EMS_0.2_Library\\EMS_0.2_Library.csproj": {
-                "projectPath": "C:\\Users\\levkh\\Documents\\GitHub\\EMS_0.2_Revisited\\EMS_0.2_Library\\EMS_0.2_Library.csproj"
+              "C:\\Users\\liron\\Desktop\\EMS\\EMS_0.2_Library\\EMS_0.2_Library.csproj": {
+                "projectPath": "C:\\Users\\liron\\Desktop\\EMS\\EMS_0.2_Library\\EMS_0.2_Library.csproj"
               }
             }
           }
@@ -71,8 +71,7 @@
             "net47",
             "net471",
             "net472",
-            "net48",
-            "net481"
+            "net48"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -84,25 +83,25 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.308\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\levkh\\Documents\\GitHub\\EMS_0.2_Revisited\\EMS_0.2_Library\\EMS_0.2_Library.csproj": {
+    "C:\\Users\\liron\\Desktop\\EMS\\EMS_0.2_Library\\EMS_0.2_Library.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\levkh\\Documents\\GitHub\\EMS_0.2_Revisited\\EMS_0.2_Library\\EMS_0.2_Library.csproj",
+        "projectUniqueName": "C:\\Users\\liron\\Desktop\\EMS\\EMS_0.2_Library\\EMS_0.2_Library.csproj",
         "projectName": "EMS_0.2_Library",
-        "projectPath": "C:\\Users\\levkh\\Documents\\GitHub\\EMS_0.2_Revisited\\EMS_0.2_Library\\EMS_0.2_Library.csproj",
-        "packagesPath": "C:\\Users\\levkh\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\levkh\\Documents\\GitHub\\EMS_0.2_Revisited\\EMS_0.2_Library\\obj\\",
+        "projectPath": "C:\\Users\\liron\\Desktop\\EMS\\EMS_0.2_Library\\EMS_0.2_Library.csproj",
+        "packagesPath": "C:\\Users\\liron\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\liron\\Desktop\\EMS\\EMS_0.2_Library\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\levkh\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\liron\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "net6.0-windows"
+          "net6.0-windows7.0"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
@@ -129,8 +128,7 @@
             "net47",
             "net471",
             "net472",
-            "net48",
-            "net481"
+            "net48"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -142,7 +140,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.308\\RuntimeIdentifierGraph.json"
         }
       }
     }
