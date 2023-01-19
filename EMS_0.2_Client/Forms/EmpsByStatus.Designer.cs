@@ -30,7 +30,6 @@
         {
             this.lblSearchByStatus = new System.Windows.Forms.Label();
             this.btnClose = new System.Windows.Forms.Button();
-            this.statusBox = new System.Windows.Forms.ComboBox();
             this.employeesTable = new System.Windows.Forms.DataGridView();
             this.Type = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.intID = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -46,6 +45,7 @@
             this.SalaryModifire = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Phone = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Address = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.statusBox = new RJCodeAdvance.RJControls.RJComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.employeesTable)).BeginInit();
             this.SuspendLayout();
             // 
@@ -73,22 +73,6 @@
             this.btnClose.Text = "X";
             this.btnClose.UseVisualStyleBackColor = true;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
-            // 
-            // statusBox
-            // 
-            this.statusBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
-            this.statusBox.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.statusBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
-            this.statusBox.FormattingEnabled = true;
-            this.statusBox.Items.AddRange(new object[] {
-            "On site",
-            "At home",
-            "Not employed"});
-            this.statusBox.Location = new System.Drawing.Point(253, 9);
-            this.statusBox.Name = "statusBox";
-            this.statusBox.Size = new System.Drawing.Size(102, 23);
-            this.statusBox.TabIndex = 47;
-            this.statusBox.SelectedIndexChanged += new System.EventHandler(this.statusBox_SelectedIndexChanged);
             // 
             // employeesTable
             // 
@@ -200,14 +184,40 @@
             this.Address.Name = "Address";
             this.Address.ReadOnly = true;
             // 
+            // statusBox
+            // 
+            this.statusBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.statusBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.statusBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
+            this.statusBox.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
+            this.statusBox.BorderSize = 1;
+            this.statusBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDown;
+            this.statusBox.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.statusBox.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.statusBox.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
+            this.statusBox.Items.AddRange(new object[] {
+            "On site",
+            "At home",
+            "Not employed"});
+            this.statusBox.ListBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
+            this.statusBox.ListTextColor = System.Drawing.Color.WhiteSmoke;
+            this.statusBox.Location = new System.Drawing.Point(209, 7);
+            this.statusBox.MinimumSize = new System.Drawing.Size(200, 30);
+            this.statusBox.Name = "statusBox";
+            this.statusBox.Padding = new System.Windows.Forms.Padding(1);
+            this.statusBox.Size = new System.Drawing.Size(200, 30);
+            this.statusBox.TabIndex = 49;
+            this.statusBox.Texts = "Select a category";
+            this.statusBox.OnSelectedIndexChanged += new System.EventHandler(this.statusBox_OnSelectedIndexChanged);
+            // 
             // EmpsByStatus
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
             this.ClientSize = new System.Drawing.Size(593, 802);
-            this.Controls.Add(this.employeesTable);
             this.Controls.Add(this.statusBox);
+            this.Controls.Add(this.employeesTable);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.lblSearchByStatus);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -223,7 +233,6 @@
 
         private Label lblSearchByStatus;
         private Button btnClose;
-        private ComboBox statusBox;
         private DataGridView employeesTable;
         private DataGridViewTextBoxColumn Type;
         private DataGridViewTextBoxColumn intID;
@@ -239,5 +248,6 @@
         private DataGridViewTextBoxColumn SalaryModifire;
         private DataGridViewTextBoxColumn Phone;
         private DataGridViewTextBoxColumn Address;
+        private RJCodeAdvance.RJControls.RJComboBox statusBox;
     }
 }

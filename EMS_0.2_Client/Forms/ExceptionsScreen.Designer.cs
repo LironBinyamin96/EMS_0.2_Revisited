@@ -57,6 +57,7 @@
             // 
             this.exceptionsTable.AllowUserToAddRows = false;
             this.exceptionsTable.AllowUserToDeleteRows = false;
+            this.exceptionsTable.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.RaisedHorizontal;
             this.exceptionsTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.exceptionsTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.LastName,

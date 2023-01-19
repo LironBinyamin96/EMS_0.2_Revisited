@@ -28,6 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panelSelectEmployee = new System.Windows.Forms.Panel();
             this.btnX = new System.Windows.Forms.Button();
             this.lblSelectEmployee = new System.Windows.Forms.Label();
@@ -51,7 +55,7 @@
             this.SalaryModifire = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Phone = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Address = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.comboBoxSelect = new System.Windows.Forms.ComboBox();
+            this.comboBoxSelect = new RJCodeAdvance.RJControls.RJComboBox();
             this.panelSelectEmployee.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.employeesTable)).BeginInit();
             this.SuspendLayout();
@@ -101,10 +105,10 @@
             this.btnSaerch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSaerch.Font = new System.Drawing.Font("Bahnschrift SemiLight", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btnSaerch.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
-            this.btnSaerch.Location = new System.Drawing.Point(548, 91);
+            this.btnSaerch.Location = new System.Drawing.Point(548, 89);
             this.btnSaerch.Name = "btnSaerch";
             this.btnSaerch.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.btnSaerch.Size = new System.Drawing.Size(31, 25);
+            this.btnSaerch.Size = new System.Drawing.Size(31, 29);
             this.btnSaerch.TabIndex = 3;
             this.btnSaerch.UseVisualStyleBackColor = true;
             this.btnSaerch.Click += new System.EventHandler(this.btnSaerch_Click);
@@ -114,7 +118,7 @@
             this.txtSaerch.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
             this.txtSaerch.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtSaerch.ForeColor = System.Drawing.SystemColors.Menu;
-            this.txtSaerch.Location = new System.Drawing.Point(411, 96);
+            this.txtSaerch.Location = new System.Drawing.Point(411, 99);
             this.txtSaerch.Name = "txtSaerch";
             this.txtSaerch.Size = new System.Drawing.Size(136, 16);
             this.txtSaerch.TabIndex = 21;
@@ -122,7 +126,7 @@
             // lblUpload
             // 
             this.lblUpload.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
-            this.lblUpload.Location = new System.Drawing.Point(409, 115);
+            this.lblUpload.Location = new System.Drawing.Point(409, 117);
             this.lblUpload.Name = "lblUpload";
             this.lblUpload.Size = new System.Drawing.Size(170, 1);
             this.lblUpload.TabIndex = 40;
@@ -130,7 +134,7 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
-            this.panel1.Location = new System.Drawing.Point(409, 91);
+            this.panel1.Location = new System.Drawing.Point(409, 89);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(170, 1);
             this.panel1.TabIndex = 41;
@@ -138,13 +142,31 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
-            this.panel2.Location = new System.Drawing.Point(408, 91);
+            this.panel2.Location = new System.Drawing.Point(408, 90);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1, 25);
+            this.panel2.Size = new System.Drawing.Size(1, 28);
             this.panel2.TabIndex = 42;
             // 
             // employeesTable
             // 
+            this.employeesTable.AllowUserToResizeColumns = false;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
+            this.employeesTable.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            this.employeesTable.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
+            this.employeesTable.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.employeesTable.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.RaisedHorizontal;
+            this.employeesTable.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.employeesTable.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.employeesTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.employeesTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Type,
@@ -161,9 +183,29 @@
             this.SalaryModifire,
             this.Phone,
             this.Address});
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.employeesTable.DefaultCellStyle = dataGridViewCellStyle3;
+            this.employeesTable.EnableHeadersVisualStyles = false;
+            this.employeesTable.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
             this.employeesTable.Location = new System.Drawing.Point(9, 122);
             this.employeesTable.Name = "employeesTable";
             this.employeesTable.ReadOnly = true;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.employeesTable.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            this.employeesTable.RowHeadersVisible = false;
+            this.employeesTable.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.employeesTable.RowTemplate.Height = 25;
             this.employeesTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.employeesTable.Size = new System.Drawing.Size(855, 402);
@@ -257,21 +299,27 @@
             // comboBoxSelect
             // 
             this.comboBoxSelect.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
-            this.comboBoxSelect.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.comboBoxSelect.Font = new System.Drawing.Font("Bahnschrift", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.comboBoxSelect.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
-            this.comboBoxSelect.FormattingEnabled = true;
+            this.comboBoxSelect.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
+            this.comboBoxSelect.BorderSize = 1;
+            this.comboBoxSelect.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDown;
+            this.comboBoxSelect.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.comboBoxSelect.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.comboBoxSelect.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
             this.comboBoxSelect.Items.AddRange(new object[] {
             "All",
             "ID",
             "First Name",
             "Last Name",
             "Type"});
-            this.comboBoxSelect.Location = new System.Drawing.Point(241, 92);
+            this.comboBoxSelect.ListBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
+            this.comboBoxSelect.ListTextColor = System.Drawing.Color.WhiteSmoke;
+            this.comboBoxSelect.Location = new System.Drawing.Point(203, 88);
+            this.comboBoxSelect.MinimumSize = new System.Drawing.Size(200, 30);
             this.comboBoxSelect.Name = "comboBoxSelect";
-            this.comboBoxSelect.Size = new System.Drawing.Size(147, 24);
-            this.comboBoxSelect.TabIndex = 44;
-            this.comboBoxSelect.Text = "Selection by details";
+            this.comboBoxSelect.Padding = new System.Windows.Forms.Padding(1);
+            this.comboBoxSelect.Size = new System.Drawing.Size(200, 30);
+            this.comboBoxSelect.TabIndex = 45;
+            this.comboBoxSelect.Texts = "Selection by details";
             // 
             // selectEmployee
             // 
@@ -310,7 +358,6 @@
         private Panel panel2;
         private Button btnX;
         private DataGridView employeesTable;
-        private ComboBox comboBoxSelect;
         private DataGridViewTextBoxColumn Type;
         private DataGridViewTextBoxColumn intID;
         private DataGridViewTextBoxColumn StateID;
@@ -325,5 +372,6 @@
         private DataGridViewTextBoxColumn SalaryModifire;
         private DataGridViewTextBoxColumn Phone;
         private DataGridViewTextBoxColumn Address;
+        private RJCodeAdvance.RJControls.RJComboBox comboBoxSelect;
     }
 }

@@ -7,10 +7,10 @@
             InitializeComponent();
         }
 
-        private void statusBox_SelectedIndexChanged(object sender, EventArgs e)
+        private void statusBox_OnSelectedIndexChanged(object sender, EventArgs e)
         {
             byte status;
-            switch (statusBox.Text)
+            switch (statusBox.Texts)
             {
                 default: { return; }
                 case "Not employed": { status = 0; break; }
@@ -52,5 +52,7 @@
         private void lblSearchByStatus_MouseDown(object sender, MouseEventArgs e) => Drag(e);
         private void EmpsByStatus_MouseDown(object sender, MouseEventArgs e) => Drag(e);
         #endregion
+
+
     }
 }

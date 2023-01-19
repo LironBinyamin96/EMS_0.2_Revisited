@@ -34,7 +34,7 @@ namespace EMS_Client.Forms
                 }
             }
         }
-
+        
         /// <summary>
         /// Requests chosen employee from the server and stores in as global variable.
         /// מבקש את העובד הנבחר מהשרת ומאחסן אותו כמשתנה גלובלי.
@@ -127,5 +127,6 @@ namespace EMS_Client.Forms
         private void lblSelectEmployee_MouseDown(object sender, MouseEventArgs e) => Drag(e);
 
         #endregion
+
     }
 }
