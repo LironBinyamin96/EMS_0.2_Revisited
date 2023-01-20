@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
+    <OutputType>WinExe</OutputType>
     <TargetFramework>net6.0-windows</TargetFramework>
     <RootNamespace>EMS_0._2_Server</RootNamespace>
     <Nullable>enable</Nullable>
@@ -11,6 +11,8 @@
 
   <ItemGroup>
     <None Remove="EMS_FacialRecognition.py" />
+    <None Remove="Resources\AntiMatterSphere.gif" />
+    <None Remove="Resources\its-not-a-tumor.jpg" />
   </ItemGroup>
 
   <ItemGroup>

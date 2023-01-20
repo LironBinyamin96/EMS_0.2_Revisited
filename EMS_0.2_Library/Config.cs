@@ -68,7 +68,7 @@ namespace EMS_Library
         #endregion
 
         //Development Mode | מצב פיתוח
-        public const bool DevelopmentMode = false;
+        public const bool DevelopmentMode = true;
         public const bool PresentationMode = false;
     }
 }

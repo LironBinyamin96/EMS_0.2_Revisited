@@ -63,16 +63,6 @@ namespace EMS_Client.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap AntiMatterSphere {
-            get {
-                object obj = ResourceManager.GetObject("AntiMatterSphere", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap Black_circle {
             get {
                 object obj = ResourceManager.GetObject("Black circle", resourceCulture);
@@ -166,16 +156,6 @@ namespace EMS_Client.Properties {
         internal static System.Drawing.Bitmap imgEdit {
             get {
                 object obj = ResourceManager.GetObject("imgEdit", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap its_not_a_tumor {
-            get {
-                object obj = ResourceManager.GetObject("its-not-a-tumor", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
