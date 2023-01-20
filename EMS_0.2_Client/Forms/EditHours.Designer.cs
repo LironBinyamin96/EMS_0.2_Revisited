@@ -127,7 +127,7 @@
             // radioEntry
             // 
             this.radioEntry.AutoSize = true;
-            this.radioEntry.CheckedColor = System.Drawing.Color.Cyan;
+            this.radioEntry.CheckedColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
             this.radioEntry.Font = new System.Drawing.Font("Bahnschrift", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.radioEntry.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
             this.radioEntry.Location = new System.Drawing.Point(126, 148);
@@ -145,7 +145,7 @@
             // radioExit
             // 
             this.radioExit.AutoSize = true;
-            this.radioExit.CheckedColor = System.Drawing.Color.Cyan;
+            this.radioExit.CheckedColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
             this.radioExit.Font = new System.Drawing.Font("Bahnschrift", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.radioExit.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
             this.radioExit.Location = new System.Drawing.Point(126, 187);

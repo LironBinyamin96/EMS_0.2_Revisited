@@ -58,7 +58,7 @@ namespace EMS_Library
         public const int FRImmageHeight = 164;
         public const int FRImmageWidth = 164;
         public const string ImageFormat = ".jpg";
-        public const bool AutoStartFR = false;
+        public const bool AutoStartFR = true;
         #endregion
 
         #region Email config
@@ -68,7 +68,7 @@ namespace EMS_Library
         #endregion
 
         //Development Mode | מצב פיתוח
-        public const bool DevelopmentMode = true;
+        public const bool DevelopmentMode = false;
         public const bool PresentationMode = false;
     }
 }
