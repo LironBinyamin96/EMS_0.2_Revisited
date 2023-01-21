@@ -169,6 +169,7 @@ namespace EMS_Server
             int responce = 0;
             if (querryData.Length != 3)
                 return new ArgumentException("Invalid querry format.").Message;
+            querryData = Array.ConvertAll(querryData, x => x.Trim());
             {
                 string res = OneWayCommand($"delete from {Config.EmployeeHourLogsTable} where _intId={querryData[0]} and (_entry='{querryData[1]}' or _exit='{querryData[2]}');");
                 if (int.TryParse(res, out int resInt))
@@ -196,8 +197,7 @@ namespace EMS_Server
         public static string GetYearLog(string clientQuerry) //get log #_intId, year
         {
             string[] data = clientQuerry.Substring(clientQuerry.IndexOf('#') + 1).Split(',');
-            data[0].Trim();
-            data[1].Trim();
+            data = Array.ConvertAll(data, x => x.Trim());
             return $"select * from {Config.EmployeeHourLogsTable} where " +
                    $"((_entry between '{data[1]}-01-01' and '{int.Parse(data[1]) + 1}-01-01') or " +
                    $"(_exit between '{data[1]}-01-01' and '{int.Parse(data[1]) + 1}-01-01'))" +

@@ -91,10 +91,14 @@ namespace EMS_Client.Forms
             if (EMS_ClientMainScreen.employee == null)
             { MessageBox.Show("Please select a employee"); return; }
 
-            BuildLog();
-            if (log != null)
-                File.WriteAllText(Config.RootDirectory + "\\log.json", log.JSON());
-            GenerateXlsxLog();
+            try
+            {
+                BuildLog();
+                if (log != null)
+                    File.WriteAllText(Config.RootDirectory + "\\log.json", log.JSON());
+                GenerateXlsxLog();
+            }
+            catch { }
         }
 
         /// <summary>

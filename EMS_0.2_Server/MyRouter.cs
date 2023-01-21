@@ -95,7 +95,7 @@ namespace EMS_Server
                     {
                         if (await IsFace(image))
                         {
-                            image.Save(Config.FR_Images + $"\\{intID}.{Config.ImageFormat}");
+                            image.Save(Config.FR_Images + $"\\{intID}{Config.ImageFormat}");
                             if (EMS_ServerMainScreen.serverForm.FRProcess != null)
                             {
                                 EMS_ServerMainScreen.serverForm.FRProcess.Kill();
