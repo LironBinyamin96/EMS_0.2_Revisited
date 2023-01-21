@@ -42,7 +42,7 @@
         public double SalaryModifire { get => _salaryModifire; set => _salaryModifire = value; }
         public string PhoneNumber { get => _phoneNumber; set => _phoneNumber = value; }
         public string Address { get => _address; set => _address = value; }
-        public string PlainPassword => Utility.DecryptPassword(Password);
+        public string PlainPassword => Password;
 
         public EmployeeDirectory GetDirectory => new EmployeeDirectory(_intId);
         #endregion
@@ -55,7 +55,7 @@
             _lName = lName.CapitalizeFirst().Replace(" ", "_");
             _mName = mName.CapitalizeFirst().Replace(" ", "_");
             _email = email;
-            _password = Utility.EncodePasswordToBase64(password);
+            _password = password;
             _gender = gender.Replace(" ", "_");
             _birthDate = birthDate;
             _created = created;
@@ -76,7 +76,7 @@
             _lName = temp[counter++];
             _mName = temp[counter++];
             _email = temp[counter++];
-            _password = Utility.EncodePasswordToBase64(temp[counter++]);
+            _password = temp[counter++];
             _gender = temp[counter++];
             _birthDate = DateTime.Parse(temp[counter++]);
             _created = DateTime.Parse(temp[counter++]);
@@ -96,7 +96,7 @@
             _lName = hold[4];
             _mName = hold[5];
             _email = hold[6];
-            _password = Utility.EncodePasswordToBase64(hold[7]);
+            _password = hold[7];
             _gender = hold[8];
             _birthDate = DateTime.Parse(hold[9]);
             _created = DateTime.Parse(hold[10]);

@@ -489,19 +489,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\levkh\\.nuget\\packages\\": {}
+    "C:\\Users\\levkh\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\levkh\\Documents\\GitHub\\EMS_0.2_Revisited\\EMS_0.2_Server\\EMS_0.2_Server.csproj",
+      "projectUniqueName": "D:\\GitHub\\EMS_0.2_Revisited\\EMS_0.2_Server\\EMS_0.2_Server.csproj",
       "projectName": "EMS_0.2_Server",
-      "projectPath": "C:\\Users\\levkh\\Documents\\GitHub\\EMS_0.2_Revisited\\EMS_0.2_Server\\EMS_0.2_Server.csproj",
+      "projectPath": "D:\\GitHub\\EMS_0.2_Revisited\\EMS_0.2_Server\\EMS_0.2_Server.csproj",
       "packagesPath": "C:\\Users\\levkh\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\levkh\\Documents\\GitHub\\EMS_0.2_Revisited\\EMS_0.2_Server\\obj\\",
+      "outputPath": "D:\\GitHub\\EMS_0.2_Revisited\\EMS_0.2_Server\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
         "C:\\Users\\levkh\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -509,14 +514,15 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net6.0-windows7.0": {
           "targetAlias": "net6.0-windows",
           "projectReferences": {
-            "C:\\Users\\levkh\\Documents\\GitHub\\EMS_0.2_Revisited\\EMS_0.2_Library\\EMS_0.2_Library.csproj": {
-              "projectPath": "C:\\Users\\levkh\\Documents\\GitHub\\EMS_0.2_Revisited\\EMS_0.2_Library\\EMS_0.2_Library.csproj"
+            "D:\\GitHub\\EMS_0.2_Revisited\\EMS_0.2_Library\\EMS_0.2_Library.csproj": {
+              "projectPath": "D:\\GitHub\\EMS_0.2_Revisited\\EMS_0.2_Library\\EMS_0.2_Library.csproj"
             }
           }
         }
@@ -555,7 +561,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
       }
     }
   }

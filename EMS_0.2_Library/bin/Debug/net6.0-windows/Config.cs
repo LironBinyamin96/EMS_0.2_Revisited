@@ -11,7 +11,7 @@ namespace EMS_Library
         //Do not forget to open thouse ports in server side firewall settings!
         public const int ServerPort = 13000;
 
-        public static string ServerIP = "127.0.0.1";
+        public static string ServerIP = "192.168.202.253";
         public static readonly string RootDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\EMS_Root";
         public static readonly string FR_Location = RootDirectory + "\\FR_Boot.cmd";
         public static readonly string FR_Images = RootDirectory + "\\Images";

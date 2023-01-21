@@ -46,7 +46,7 @@ namespace EMS_Client.Forms
             string querry = Requests.SelectEmployee(new string[][]
             {
                 new string[]{"_intId", txtIntId.Text},
-                new string[]{"_password",$"'{ Utility.EncodePasswordToBase64(txtPassword.Text)}'" }
+                new string[]{"_password",$"'{ txtPassword.Text}'" }
             }, "and");
             string[] buffer = Requests.RequestFromServer(querry, 1);
 
